@@ -6,7 +6,7 @@
     <title>회원가입</title>
     <link rel="stylesheet" type="text/css" href="resources/css/member.css">
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>     
-<script type="text/javascript">
+	<script type="text/javascript">
 	//jquery는 버튼하나당 함수하나!, 요청하나당 함수하나!
 	//특정한 이벤트가 발생하기를 기다렸다가
 	//이벤트가 발생하면 
@@ -52,7 +52,7 @@
 </script>
 </head>
 <body>
- <%@ include file="header.jsp" %>
+ <%@ include file="../header.jsp" %>
 	<div class="container">
     <h2>회원가입</h2>
 
