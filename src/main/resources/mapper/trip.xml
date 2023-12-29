@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="trip">
+	<insert id="create" parameterType="tripVO">
+		insert into trip values
+		(#{trip_id},#{trip_title},#{trip_content},#{trip_country},#{trip_start_date},#{trip_end_date},
+		#{trip_writer}, now(), #{trip_count},#{trip_like},#{trip_img})
+	</insert>
+
+	<update id="update" parameterType="tripVO">
+		update trip set trip_title =
+		#{trip_title}, trip_content = #{trip_content} where trip_id =
+		#{trip_id}
+	</update>
+
+	<delete id="delete" parameterType="tripVO">
+		delete from trip where
+		trip_id
+		= #{trip_id}
+	</delete>
+
+	<select id="one" parameterType="tripVO" resultType="tripVO">
+		SELECT * FROM trip WHERE trip_id = #{trip_id};
+	</select>
+
+	<select id="list" resultType="tripVO">
+		select * from trip order by trip_id desc
+	</select>
+</mapper>
