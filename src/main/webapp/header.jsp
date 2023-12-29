@@ -12,15 +12,15 @@
 <header>
         <div class="all">
         	<div class="logo">
-  <a href=""><img src="resources/img/로고.png"></a>
+  <a href=""><img src="/werin/resources/img/로고.png"></a>
 </div>
 <div class="title">
-  <a href=""><img src="resources/img/제목.png"></a>
+  <a href=""><img src="/werin/resources/img/제목.png"></a>
 </div>
             <div class="right">
             	<div>
             		<button class="lens">
-            			<img src="resources/img/돋보기2.png">
+            			<img src="/werin/resources/img/돋보기2.png">
             		</button>
             	</div>
             	<div class="but">
