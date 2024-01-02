@@ -5,22 +5,22 @@
 <head>
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
 <title>Insert title here</title>
 </head>
 <body>
 <header>
         <div class="all">
         	<div class="logo">
-  <a href=""><img src="/werin/resources/img/로고.png"></a>
+  <a href=""><img src="${pageContext.request.contextPath}/resources/img/로고.png"></a>
 </div>
 <div class="title">
-  <a href=""><img src="/werin/resources/img/제목.png"></a>
+  <a href=""><img src="${pageContext.request.contextPath}/resources/img/제목.png"></a>
 </div>
             <div class="right">
             	<div>
             		<button class="lens">
-            			<img src="/werin/resources/img/돋보기2.png">
+            			<img src="${pageContext.request.contextPath}/resources/img/돋보기2.png">
             		</button>
             	</div>
             	<div class="but">
@@ -46,6 +46,5 @@
     	}
     </script>
 </div>
-테스트임니다
 </body>
 </html>
