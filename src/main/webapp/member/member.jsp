@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/member.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member.css">
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>     
 	<script type="text/javascript">
 	//jquery는 버튼하나당 함수하나!, 요청하나당 함수하나!
