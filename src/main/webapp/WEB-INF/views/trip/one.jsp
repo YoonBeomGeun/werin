@@ -8,7 +8,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/style4.css">
     <title>여행기 상세 정보</title>
     <%@ include file = "../../../header.jsp" %>
 </head>
@@ -23,7 +22,7 @@
             <p><strong>내용:</strong> ${vo.trip_content}</p>
         </div>
         <button onclick="remove()">삭제 </button>
-        <button onclick="update_bbs()">수정</button>
+        <button onclick="update()">수정</button>
         
   
 <script>
@@ -33,9 +32,9 @@
         } 
     }
     
-    function update_bbs() {
+    function update() {
         if (confirm("게시글을 수정하시겠습니까?")) {
-            location.href = "update_bbs?Trip_id=<%=bag.getTrip_id()%>";           
+            location.href = "update?Trip_id=<%=bag.getTrip_id()%>";           
         } 
     }
 </script>
