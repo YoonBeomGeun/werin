@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/style3.css">
     <title>여행게시글 목록</title>
     <%@ include file = "../../../header.jsp" %>
 </head>
@@ -24,13 +23,15 @@
                 <!-- 여행게시글 목록을 반복하고 각 행을 표시 -->
                 <c:forEach items="${list}" var="post" >
                     <tr>
-                        <td><a href="trip/one?no=${post.trip_id}">${post.trip_title}</a></td>
+                        <td><a href="one?trip_id=${post.trip_id}">${post.trip_title}</a></td>
                         <td>${post.trip_writer}</td>
                         <td>${post.trip_writedate}</td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
+        <a href = "tripwrite.jsp"><button onclick="insert()">작성</button></a>
+        
     </div>
 </body>
 </html>

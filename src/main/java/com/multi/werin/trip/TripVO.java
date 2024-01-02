@@ -5,7 +5,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class TripVO {
-	private int trip_id;
+	private Integer trip_id;
 	private String trip_title;
 	private String trip_content;
 	private String trip_country;
@@ -21,7 +21,7 @@ public class TripVO {
 	public int getTrip_id() {
 		return trip_id;
 	}
-	public void setTrip_id(int trip_id) {
+	public void setTrip_id(Integer trip_id) {
 		this.trip_id = trip_id;
 	}
 	public String getTrip_title() {

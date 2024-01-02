@@ -27,7 +27,7 @@ public class TripDAO {
 		return my.selectList("trip.list");
 	}
 
-	public TripVO one(int trip_id) {
+	public TripVO one(Integer trip_id) {
 		return my.selectOne("trip.one", trip_id);
 	}
 }
