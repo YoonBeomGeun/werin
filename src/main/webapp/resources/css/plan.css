@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+
+#map {
+    width: 40%;
+    height: 500px;
+    margin-left:20px;
+}
+
+
+#travel-info #travelTitle {
+	width: 15%;
+	margin-bottom: 15px;
+	margin-left:20px;
+	padding: 10px;
+}
+
+#travel-info #travelWith {
+	width: 5%;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+#travel-info #datepicker1 {
+	width: 8%;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+#travel-info #datepicker2 {
+	width: 8%;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+

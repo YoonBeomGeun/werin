@@ -26,15 +26,15 @@
         	</div>
             <div class="right">
             	<div class="but">
-            		<button onclick="member()">회원가입</button>
-            		<button>로그인</button>
+            		<button onclick="window.location.href='../member/member.jsp'">회원가입</button>
+            		<button onclick="window.location.href='../member/login.jsp'">로그인</button>
             	</div>
             </div>
         </div>
     <br>
 	<div class="menubar">
 	<a href=""><button id="menu">관광지 소개</button></a>
-	<a href=""><button id="menu">일정 만들기</button></a>
+	<a href="${pageContext.request.contextPath}/plan/plan.jsp"><button id="menu">일정 만들기</button></a>
 	<a href=""><button id="menu">여행기 작성</button></a>
 	<a href=""><button id="menu">커뮤니티</button></a>
 	<a href=""><button id="menu">나의 여행</button></a>
@@ -42,11 +42,6 @@
 </div>
     </header>
     
-    <script>
-    	function member() {
-    		alert("실행..........");
-    	}
-    </script>
 </div>
 </body>
 </html>
