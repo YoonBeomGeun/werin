@@ -5,37 +5,26 @@
 <head>
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
-=======
-    <link rel="stylesheet" href="/werin/resources/css/header.css">
->>>>>>> 15d970f59a0a35e988b89edd14c11a9a32ecc2dc
 <title>Insert title here</title>
 </head>
 <body>
 <header>
         <div class="all">
         	<div class="logo">
-<<<<<<< HEAD
-  <a href=""><img src="${pageContext.request.contextPath}/resources/img/로고.png"></a>
-</div>
-<div class="title">
-  <a href=""><img src="${pageContext.request.contextPath}/resources/img/제목.png"></a>
-</div>
+ 			 	<a href=""><img src="${pageContext.request.contextPath}/resources/img/로고.png"></a>
+			</div>
+			<div class="title">
+  				<a href=""><img src="${pageContext.request.contextPath}/resources/img/제목.png"></a>
+			</div>
             <div class="right">
             	<div>
             		<button class="lens">
             			<img src="${pageContext.request.contextPath}/resources/img/돋보기2.png">
             		</button>
             	</div>
-=======
-	            <a href=""><img src="/werin/resources/img/로고.png"></a>
         	</div>
-        	<div class="title">
-            	<a href=""><img src="/werin/resources/img/제목.png"></a>
-            </div>
             <div class="right">
->>>>>>> 15d970f59a0a35e988b89edd14c11a9a32ecc2dc
             	<div class="but">
             		<button onclick="member()">회원가입</button>
             		<button>로그인</button>
