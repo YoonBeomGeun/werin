@@ -5,14 +5,14 @@
 <mapper namespace="member">
 	<insert id = "create" parameterType="memberVO">
 		insert into member
-		values (#{member_id},#{member_pw},#{member_name},#{member_tel},#{member_addr},#{member_email},#{member_gender})
+		values (#{member_id},#{member_pw},#{member_name},#{member_nickname},#{member_tel},#{member_email},#{member_gender},0)
 	</insert>
 	
 	<select id="login" parameterType="memberVO" resultType="memberVO">
-        SELECT * FROM member WHERE member_id = #{member_id} AND member_pw = #{member_pw}
+         SELECT * FROM member WHERE member_id = #{member_id} AND member_pw = #{member_pw}
     </select>
     
-    <select id="idChk" resultType="int"> 
+    <select id="idChk" resultType="int" parameterType="memberVO"> 
 	SELECT COUNT(*) FROM member
 	WHERE member_id = #{member_id}
 	</select>

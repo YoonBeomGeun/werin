@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/member.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member.css">
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>     
 	<script type="text/javascript">
 	//jquery는 버튼하나당 함수하나!, 요청하나당 함수하나!
@@ -14,7 +14,6 @@
 	//콜백함수
 	//body를 먼저 브라우저가 읽도록 하는 코드를 넣어주어야함.
 	$(function() {
-		
 		$('#idChk').click(function() {
 			$.ajax({
 				type : "post", 
@@ -32,9 +31,7 @@
 			})
 		})
 	})
-	function fn_idChk(){
-			
-	}
+
 	
 	function passConfirm() {
 			var password = document.getElementById('pw');	
@@ -67,7 +64,7 @@ ID : <input name="member_id" id="member_id">
 전화번호 : <input name="member_tel"><br>
 이메일 : <input name="member_email"><br>
 <div class="label-container">
-성별 : <br>
+성별 :
       <input type="radio" name="member_gender" value="남자" id="male"><label for="male">남자</label>
       <input type="radio" name="member_gender" value="여자" id="female">
       <label for="female">여자</label><br>

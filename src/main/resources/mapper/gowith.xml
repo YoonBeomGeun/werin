@@ -4,4 +4,31 @@
 
 <mapper namespace="gowith">
 
+	<insert id="create" parameterType="gowithVO">
+		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), null, null, null)
+	</insert>
+
+	<select id="count" resultType="int">
+		select count(*) from gowith
+	</select>
+	
+	<select id="one" parameterType="gowithVO" resultType="gowithVO">
+		select *
+		from
+			(select 
+				ROW_NUMBER() over(order by gowith_id desc) as num_id,
+				gowith_id, gowith_title, gowith_content, gowith_writer, gowith_created_at, gowith_like, gowith_view, gowith_img
+			from gowith g) g2
+		where g2.gowith_id = #{gowith_id}
+	</select>
+
+	<select id="list" parameterType="pageVO" resultType="gowithVO">
+		select * 
+		from 
+			(select 
+				ROW_NUMBER() over(order by gowith_id desc) as num_id,
+				gowith_id, gowith_title, gowith_content, gowith_writer, gowith_created_at, gowith_like, gowith_view, gowith_img
+			from gowith g) g2
+		where g2.num_id BETWEEN ${start} and ${end}
+	</select>
 </mapper>

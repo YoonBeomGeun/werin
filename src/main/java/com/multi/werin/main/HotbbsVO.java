@@ -1,5 +1,5 @@
 package com.multi.werin.main;
 
-public class BbsVO {
+public class HotbbsVO {
 
 }

@@ -1,6 +1,4 @@
 @charset "UTF-8";
-
-
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -14,12 +12,6 @@ body {
     text-align: center;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 form input {
     margin-bottom: 10px;
     padding: 10px;
@@ -28,12 +20,26 @@ form input {
     border-radius: 5px;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .label-container {
     margin-bottom: 15px;
 }
+#male {
+    width: auto;
+}
+
+#female {
+    width: auto;
+}
 
 .label-container input {
-    margin-right: 5px;
+    width: 10px;
+    padding: 0px;
 }
 
 #massage {
