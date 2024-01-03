@@ -72,7 +72,7 @@ public class TripController {
 		System.out.println("Tripvo =>" + vo);
 		model.addAttribute("vo", vo);
 		if(vo.getTrip_id()!= 0) {
-			return "one";
+			return "trip/one";
 		}else {
 			return "redirect:main.jsp";
 		}
