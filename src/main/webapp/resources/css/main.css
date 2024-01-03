@@ -1,0 +1,389 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+}
+
+button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+body {
+	width: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    background-color: white;
+    width: 100%;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.all img{
+    width: 250px; 
+    height: auto;
+    margin-right: 10px;
+}
+
+.all {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin: 5px;
+	margin-top:-20px;
+}
+
+.title img{
+	width: 350px;
+	margin-right:70px;
+}
+
+.title{
+	margin:0 auto;
+}
+
+.right {
+	display: flex;
+	align-items: center;
+}
+
+.but button{
+	background: lightgray;
+	display: block;
+	margin-top: 10px;
+	width:180px;
+	height:50px;	
+	font: 18px 궁서 bold;
+	border-radius: 10px;
+	margin-left: 20px
+
+}
+
+.logo{
+	margin-top: 25px;
+}
+
+a {
+	text-decoration: none;
+}
+
+#menu {
+	color: white;
+	font: 20px 궁서 bold;
+}
+
+.menubar {
+	width: 100%;
+	height: 70px;
+	background: #285D45;
+	margin-top: -20px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	gap: 30px;
+	position: relative;
+}
+
+.button-container {
+	float: right;
+	margin-right: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.button-container a {
+    margin: 5px 0; /* 각 버튼 위아래 여백 설정 */
+}
+
+
+.menubar button {
+    background-color: rgb(251, 176,18); /* 노란색으로 변경 */
+    color: black; /* 텍스트 색상은 필요에 따라 설정 */
+    padding: 10px 20px; /* 버튼 패딩 설정 */
+    border-radius: 5px; /* 버튼 모서리를 둥글게 만들기 */
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* 텍스트 크기 설정 */
+}
+
+.menubar button:hover {
+    background-color: gold; /* 마우스 오버 시 색상 변경 */
+}
+
+#recommendlandmark{ /* 관광지가 들어올곳 */
+	width: 1200px;
+	height: 300px;
+	background-color: yellow;
+	top:270px;
+	left:365px;
+	position: absolute; /* 고정위치 사용 */
+}
+
+#mainserch{ /* 통합검색이 들어올 곳 */
+	width: 700px;
+	height: 70px;
+	background-color: yellow;
+	top:600px;
+	left:600px;
+	position: absolute;
+}
+
+.hottravel{ /* 높은 추천을 받은 여행기가 들어올 곳 */
+	width: 1550px;
+	height: 350px;
+	background-color: yellow;
+	top:700px;
+	left:200px;
+	position: absolute;
+}
+
+.hottravel-1{ /* 첫번째 여행기 */
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:100px;
+	position: absolute;
+}
+
+#hottravel-image1{ /* 첫번째 여행기의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hottravel-text1{ /* 첫번째 여행기의 제목 */
+	width: 210px;
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;	
+}
+
+.hottravel-2{ /* 두번째 여행기*/
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:473.75px;
+	position: absolute;
+}
+
+#hottravel-image2{ /* 두번째 여행기의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hottravel-text2{ /* 두번째 여행기의 제목 */
+	width: 210px;
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;	
+}
+
+.hottravel-3{ /* 세번째 여행기 */
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:847.5px;
+	position: absolute;
+}
+
+#hottravel-image3{ /* 세번째 여행기의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hottravel-text3{ /* 세번째 여행기의 제목 */
+	width: 210px;
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;	
+}
+
+.hottravel-4{ /* 네번째 여행기 */
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:1240px;
+	position: absolute;
+}
+
+#hottravel-image4{ /* 네번째 여행기의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hottravel-text4{ /* 네번째 여행기의 제목 */
+	width: 210px;
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;	
+}
+
+.hotshop{ /* 착한가게가 들어올 곳 */
+	width: 1550px;
+	height: 350px;
+	background-color: yellow;
+	top:1100px;
+	left:200px;
+	position: absolute;	
+}
+
+.hotshop-1{ /* 첫번째 착한가게 */
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:100px;
+	position: absolute;
+}
+
+#hotshop-image1{ /* 첫번째 착한가게의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hotshop-text1{ /* 첫번째 착한가게의 제목 */
+	width: 210px;
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;		
+}
+
+.hotshop-2{ /* 두번째 착한가게 */
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:473.75px;
+	position: absolute;
+}
+
+#hotshop-image2{ /* 두번째 착한가게의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hotshop-text2{ /* 두번째 착한가게의 제목 */
+	width: 210px;
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;		
+}
+
+.hotshop-3{ /* 세번째 착한가게 */
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:847.5px;
+	position: absolute;
+}
+
+#hotshop-image3{ /* 세번째 착한가게의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hotshop-text3{ /* 세번째 착한가게의 제목 */
+	width: 210px;
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;		
+}
+
+.hotshop-4{ /* 네번째 착한가게 */
+	width: 230px;
+	height: 280px;
+	background-color: green;
+	top:60px;
+	left:1240px;
+	position: absolute;
+}
+
+#hotshop-image4{ /* 네번째 착한가게의 사진 */
+	width: 210px;
+	height: 210px;
+	background-color: lime;
+	top:10px;
+	left:10px;
+	position: absolute;	
+}
+
+#hotshop-text4{ /* 네번째 착한가게의 제목 */
+	width: 210px; 
+	height: 50px;
+	background-color: lime;
+	top:225px;
+	left:10px;
+	position: absolute;		
+}
+
+#hotboard{ /* 자유게시판에서 추천수 높은 것들이 들어올 곳 */
+	width: 700px;
+	height: 250px;
+	background-color: yellow;
+	top:1500px;
+	left:200px;
+	position: absolute;		
+}
+
+#weather{ /* 제주도 날씨 관련 정보가 들어갈 곳 */
+	width: 700px;
+	height: 250px;
+	background-color: yellow;
+	top:1500px;
+	left:1050px;
+	position: absolute;	
+}
