@@ -13,6 +13,7 @@ public class GowithController {
 	@Autowired
 	GowithDAO dao;
 	
+	@RequestMapping("gowith/insert")
 	public String insert(GowithVO gowithVO) {
 		int result = dao.insert(gowithVO);
 		String str = "";
@@ -21,6 +22,12 @@ public class GowithController {
 		}
 		return str;
 	}
+	
+	/*
+	 * @RequestMapping("gowith/delete") public void delete(int gowith_id) {
+	 * 
+	 * }
+	 */
 	
 	@RequestMapping("gowith/one")
 	public void one(GowithVO gowithVO, Model model) {

@@ -70,7 +70,7 @@
 	<div>추천순</div>
 	<div>조회순</div>
 	<div>조회기간</div>
-	<button onclick="insert">글쓰기</button>
+	<a href="insertGowith.jsp"><button>글쓰기</button></a>
 	<br><br>
 	
 	<div id="result">
