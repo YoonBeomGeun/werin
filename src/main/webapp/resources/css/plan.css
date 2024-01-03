@@ -2,34 +2,57 @@
 
 
 #map {
-    width: 40%;
+    width: auto;
     height: 500px;
     margin-left:20px;
 }
 
+#all {
+	display:flex;
+}
+
+#left {
+	width: 45%;
+}
 
 #travel-info #travelTitle {
-	width: 15%;
+	width: 30%;
 	margin-bottom: 15px;
 	margin-left:20px;
 	padding: 10px;
 }
 
 #travel-info #travelWith {
-	width: 5%;
+	width: 15%;
 	margin-bottom: 15px;
 	padding: 10px;
 }
 
 #travel-info #datepicker1 {
-	width: 8%;
+	width: 20%;
 	margin-bottom: 15px;
 	padding: 10px;
 }
 
 #travel-info #datepicker2 {
-	width: 8%;
+	width: 20%;
 	margin-bottom: 15px;
 	padding: 10px;
+}
+
+#dayButtons button {
+    background-color: #000054;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    display: block;
+}
+
+#dayButtons {
+	overflow : auto;
+	height: 500px;
+    align-items: center;
+    margin-top: 50px;
 }
 
