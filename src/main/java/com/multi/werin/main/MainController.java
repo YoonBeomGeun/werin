@@ -14,23 +14,35 @@
  * 
  * @Autowired MainDAO maindao;
  * 
- * @RequestMapping() public void recommendlandmark(MainVO mainVO, Model model) {
- * List<MainVO> recommendlandmark = maindao.recommendlandmark(mainVO);
+ * @RequestMapping("main/recommendlandmark") public void
+ * recommendlandmark(MainlandmarkVO mainlandmarkVO, Model model) {
+ * List<MainlandmarkVO> recommendlandmark =
+ * maindao.recommendlandmark(mainlandmarkVO);
  * model.addAttribute("recommendlandmark", recommendlandmark); }
  * 
- * @RequestMapping() public void mainsearch(MainVO mainVO, Model model) {
- * List<MainVO> mainsearch = maindao.mainsearch(mainVO);
- * model.addAttribute("mainsearch", mainsearch); }
+ * @RequestMapping("main/mainsearch") search 아얘 싹다 고쳐야함 public void
+ * mainsearch(MainlandmarkVO mainVO, Model model) { List<MainlandmarkVO>
+ * mainsearch = maindao.mainsearch(mainVO); model.addAttribute("mainsearch",
+ * mainsearch); }
  * 
- * @RequestMapping() public void hottravel(MainVO mainVO, Model model) {
- * List<MainVO> hottravel = maindao.hottravel(mainVO);
- * model.addAttribute("hottravel", hottravel); }
+ * @RequestMapping("main/hottravel") public void hottravel(MaintripVO
+ * maintripVO, Model model) { List<MainlandmarkVO> hottravel =
+ * maindao.hottravel(maintripVO); model.addAttribute("hottravel", hottravel); }
  * 
- * @RequestMapping() public void hotshop(MainVO mainVO, Model model) {
- * List<MainVO> hotshop = maindao.hotshop(mainVO); model.addAttribute("hotshop",
+ * @RequestMapping("main/hotshop") public void hotshop(MainintroducestoreVO
+ * mainintroducestoreVO, Model model) { List<MainlandmarkVO> hotshop =
+ * maindao.hotshop(mainintroducestoreVO); model.addAttribute("hotshop",
  * hotshop); }
  * 
- * @RequestMapping() public void hotboard(MainVO mainVO, Model model) {
- * List<MainVO> hotboard = maindao.hotboard(mainVO);
- * model.addAttribute("hotboard", hotboard); } }
+ * @RequestMapping("main/hotboard") public void hotboard(MainbbsVO mainbbsVO,
+ * Model model) { List<MainlandmarkVO> hotboard = maindao.hotboard(mainbbsVO);
+ * model.addAttribute("hotboard", hotboard); }
+ * 
+ * 
+ * @RequestMapping("main/hottravel") 다시 재호출하는방법 public String name() {
+ * return"redirect:main.jsp"; }
+ * 
+ * 
+ * 
+ * }
  */

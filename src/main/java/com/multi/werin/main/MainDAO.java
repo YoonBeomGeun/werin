@@ -14,18 +14,19 @@
  * 
  * @Autowired SqlSessionTemplate my;
  * 
- * public List<MainVO> recommendlandmark(MainVO mainVO) { return
- * my.selectList("main.hotlandmark", mainVO); }
+ * public List<MainlandmarkVO> recommendlandmark(MainlandmarkVO mainlandmarkVO)
+ * { return my.selectList("main.hotlandmark", mainlandmarkVO); }
  * 
- * public List<MainVO> mainsearch(MainVO mainVO) { return
+ * public List<MainlandmarkVO> mainsearch(MainlandmarkVO mainVO) { return
  * my.selectList("main.mainsearch", mainVO); }
  * 
- * public List<MainVO> hottravel(MainVO mainVO) { return
- * my.selectList("main.hottravel", mainVO); }
+ * public List<MainlandmarkVO> hottravel(MaintripVO maintripVO) { return
+ * my.selectList("main.hottravel", maintripVO); }
  * 
- * public List<MainVO> hotshop(MainVO mainVO) { return
- * my.selectList("main.hotshop", mainVO); }
+ * public List<MainlandmarkVO> hotshop(MainintroducestoreVO
+ * mainintroducestoreVO) { return my.selectList("main.hotshop",
+ * mainintroducestoreVO); }
  * 
- * public List<MainVO> hotboard(MainVO mainVO) { return
- * my.selectList("main.hotboard", mainVO); } }
+ * public List<MainlandmarkVO> hotboard(MainbbsVO mainbbsVO) { return
+ * my.selectList("main.hotboard", mainbbsVO); } }
  */

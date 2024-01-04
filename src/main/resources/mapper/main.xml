@@ -6,19 +6,23 @@
 
 <mapper namespace="main">
 	
-	<select id="hotlandmark" resultType="mainVO"> <!-- 랜드마크 추천을 가져오는 sql -->
+	<select id="hotlandmark" resultType="mainlandmarkVO"> <!-- 랜드마크 추천을 가져오는 sql -->
+		select landmarkinfo_id,landmarkinfo_pic from landmarkinfo where landmarkinfo_id=1
 	</select>
 	
 	<select id="mainsearch" resultType="mainVO"> <!-- 검색결과를 찾는 sql -->
 	</select>
 	
-	<select id="hottravel" resultType="mainVO">
+	<select id="hottravel" resultType="maintripVO">
+		select trip_img, trip_title, trip_id from trip order by trip_like desc limit 4
 	</select>
 	
-	<select id="hotshop" resultType="mainVO">
+	<select id="hotshop" resultType="mainintroducestoreVO">
+		select introducestore_img, introducestore_title, introducestore_id from introducestore order by introducestore_like desc limit 4
 	</select>
 	
-	<select id="hotboard" resultType="mainVO">
+	<select id="hotboard" resultType="mainbbsVO">
+		select bbs_title, bbs_id from bbs order by bbs_like limit 5
 	</select>
 	
 </mapper>
