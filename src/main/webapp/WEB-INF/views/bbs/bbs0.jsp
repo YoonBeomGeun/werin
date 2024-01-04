@@ -22,4 +22,4 @@
     </tr>
 	</c:forEach>
 </table>
-<a href="insertPost.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
+<a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>

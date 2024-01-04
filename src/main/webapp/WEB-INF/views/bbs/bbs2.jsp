@@ -27,6 +27,8 @@
 				<td>작성자</td>
 				<td><%= bag.getWriter() %></td>
 			</tr>
+			
 		</table>
+		<button class="btn btn-warning">추천하기<%= bag.getBbs_like() %></button>
 </body>
 </html>

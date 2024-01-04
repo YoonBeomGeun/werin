@@ -2,29 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.multi.werin.bbs.BbsMapper">
+<mapper namespace="bbs">
 
-    <select id="getBbsList" resultType="com.multi.werin.bbs.BbsVO">
-        SELECT * FROM bbs;
-    </select>
+	<insert id="create" parameterType="bbsVO">
+		insert into bbs values(null, #{bbs_cate}, #{bbs_title}, #{bbs_content}, #{bbs_writer}, now())
+	</insert>
+	
+	<update id="update" parameterType="bbsVO">
+		update bbs set title = #{bbs_title}, content = #{bbs_content} where bbs_id = #{bbs_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from bbs where bbs_id = #{bbs_id}
+	</delete>
 
-    <select id="getBbsById" parameterType="int" resultType="com.multi.werin.bbs.BbsVO">
-        SELECT * FROM bbs WHERE bbs_id = #{bbsId};
-    </select>
-
-    <insert id="createBbs" parameterType="com.multi.werin.bbs.BbsVO">
-        INSERT INTO bbs (cate, title, content, writer, created_at, bbs_like, bbs_view, bbs_img)
-        VALUES (#{cate}, #{title}, #{content}, #{writer}, #{created_at}, #{bbs_like}, #{bbs_view}, #{bbs_img});
-    </insert>
-
-    <update id="updateBbs" parameterType="com.multi.werin.bbs.BbsVO">
-        UPDATE bbs SET cate = #{cate}, title = #{title}, content = #{content},
-        writer = #{writer}, created_at = #{created_at}, bbs_like = #{bbs_like}, bbs_view = #{bbs_view}, bbs_img = #{bbs_img}
-        WHERE bbs_id = #{bbs_id};
-    </update>
-
-    <delete id="deleteBbs" parameterType="int">
-        DELETE FROM bbs WHERE bbs_id = #{bbsId};
-    </delete>
-
+<!-- 전체 페이지개수 계산할 때 전체 게시물 개수가 필요함. 
+	total / 한페이지당개수 = pages -->
+	<select id="count" resultType="int">
+		select count(*) from bbs
+	</select>
+	
+	<select id="list" parameterType="pageVO" resultType="bbsVO">
+		select * 
+		from 
+			(select 
+				ROW_NUMBER() over(order by bbs_id desc) as num_id,
+				bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
+			from bbs p) p2
+		where p2.num_id BETWEEN ${start} and ${end}
+	</select>
+	
+	<select id="one" parameterType="bbsVO" resultType="bbsVO">
+		select *
+		from 
+			(select 
+				ROW_NUMBER() over(order by bbs_id desc) as num_id,
+				bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
+			from bbs p) p2
+		where p2.bbs_id = #{bbs_id}
+	</select>
 </mapper>
