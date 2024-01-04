@@ -3,49 +3,55 @@ package com.multi.werin.bbs;
 public class BbsVO {
 	private int num_id;
 	private int bbs_id;
-	private String cate;
-	private String title;
-	private String content;
-	private String writer;
-	private String created_at;
+	private String bbs_cate;
+	private String bbs_title;
+	private String bbs_content;
+	private String bbs_writer;
+	private String bbs_created_at;
 	private int bbs_like;
 	private int bbs_view;
 	private String bbs_img;
+	public int getNum_id() {
+		return num_id;
+	}
+	public void setNum_id(int num_id) {
+		this.num_id = num_id;
+	}
 	public int getBbs_id() {
 		return bbs_id;
 	}
 	public void setBbs_id(int bbs_id) {
 		this.bbs_id = bbs_id;
 	}
-	public String getCate() {
-		return cate;
+	public String getBbs_cate() {
+		return bbs_cate;
 	}
-	public void setCate(String cate) {
-		this.cate = cate;
+	public void setBbs_cate(String bbs_cate) {
+		this.bbs_cate = bbs_cate;
 	}
-	public String getTitle() {
-		return title;
+	public String getBbs_title() {
+		return bbs_title;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBbs_title(String bbs_title) {
+		this.bbs_title = bbs_title;
 	}
-	public String getContent() {
-		return content;
+	public String getBbs_content() {
+		return bbs_content;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setBbs_content(String bbs_content) {
+		this.bbs_content = bbs_content;
 	}
-	public String getWriter() {
-		return writer;
+	public String getBbs_writer() {
+		return bbs_writer;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setBbs_writer(String bbs_writer) {
+		this.bbs_writer = bbs_writer;
 	}
-	public String getCreated_at() {
-		return created_at;
+	public String getBbs_created_at() {
+		return bbs_created_at;
 	}
-	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
+	public void setBbs_created_at(String bbs_created_at) {
+		this.bbs_created_at = bbs_created_at;
 	}
 	public int getBbs_like() {
 		return bbs_like;
@@ -65,19 +71,14 @@ public class BbsVO {
 	public void setBbs_img(String bbs_img) {
 		this.bbs_img = bbs_img;
 	}
-	
-	public int getNum_id() {
-		return num_id;
-	}
-	public void setNum_id(int num_id) {
-		this.num_id = num_id;
-	}
 	@Override
 	public String toString() {
-		return "BbsVO [num_id=" + num_id + ", bbs_id=" + bbs_id + ", cate=" + cate + ", title=" + title + ", content="
-				+ content + ", writer=" + writer + ", created_at=" + created_at + ", bbs_like=" + bbs_like
-				+ ", bbs_view=" + bbs_view + ", bbs_img=" + bbs_img + "]";
+		return "BbsVO [num_id=" + num_id + ", bbs_id=" + bbs_id + ", bbs_cate=" + bbs_cate + ", bbs_title=" + bbs_title
+				+ ", bbs_content=" + bbs_content + ", bbs_writer=" + bbs_writer + ", bbs_created_at=" + bbs_created_at
+				+ ", bbs_like=" + bbs_like + ", bbs_view=" + bbs_view + ", bbs_img=" + bbs_img + "]";
 	}
+	
+	
 	
 	
 	

@@ -46,16 +46,24 @@
 			<c:forEach items="${list}" var="vo">
 		    <tr>
 		        <td>${vo.num_id}</td>
-		        <td>${vo.cate}</td>
-		        <!--   <td><a href="one?post_id=${vo.post_id}">${vo.title}</a></td>-->
-		        <td><a href="bb2?bbs_id=${vo.bbs_id}">${vo.title}</a></td>
-		        <td>${vo.content}</td>
-		        <td width=200>${vo.writer}</td>
+		        <td>${vo.bbs_cate}</td>
+		        <td><a href="bb2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a></td>
+		        <td>${vo.bbs_content}</td>
+		        <td width=200>${vo.bbs_writer}</td>
 		        <td width=200>${vo.bbs_like}</td>
 		    </tr>
 			</c:forEach>
 		</table>
 		<a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
+		<%
+			int pages = (int)request.getAttribute("pages");//int(작) <--- Object(큰)
+			for(int p = 1; p <= pages; p++){
+		%>
+			<button style="background:pink;" class="pages"><%=p%></button>&nbsp;
+		<%		
+		}
+		%>
 	</div>
+	
 </body>
 </html>

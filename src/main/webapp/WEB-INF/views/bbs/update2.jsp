@@ -7,13 +7,13 @@
  %>
  		<script>
  			alert('수정성공@@@');
- 			location.href='list2?page=1';
+ 			location.href='bbs?page=1';
  		</script>
  <%
  	}else{
  %>	
  		<script>
  			alert('수정실패@@@');
- 			location.href='list2?page=1';
+ 			location.href='bbs?page=1';
  		</script>
  <%	} %>
