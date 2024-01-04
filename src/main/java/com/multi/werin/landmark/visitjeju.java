@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class visitjeju {
     public StringBuilder jeju(String ko) {
         // API 키를 여기에 추가하세요
-        String apiKey = "";
+        String apiKey = "gRjisabrZIfabIjre8qnZIy4ig724PgKzbxWE5KdbOHL4SD%2FneKsnNw2phKHIowgD5NXuBRaTpMEvSAY2uTA1Q%3D%3D";
 
         // 엔드포인트 http 요청 --> 응답(xml) (JSON 형식으로 요청하려면 &_type=json 파라미터 추가) 이러면 JSON이 되는 것 같음
         String apiUrl = "https://apis.data.go.kr/B551011/KorService1/areaBasedList1?MobileOS=ETC&MobileApp=Test&ServiceKey=" + apiKey + "&_type=json";

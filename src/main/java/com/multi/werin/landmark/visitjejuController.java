@@ -11,7 +11,7 @@ public class visitjejuController {
 	@Autowired
 	visitjeju jeju;
 	
-	@RequestMapping("visitjeju")
+	@RequestMapping("landmark/visitjeju")
 	public void one(String ko, Model model) throws Exception {
 		StringBuilder json = jeju.jeju(ko);
 		
