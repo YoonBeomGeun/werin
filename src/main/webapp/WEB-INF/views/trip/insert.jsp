@@ -5,8 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file = "../../../header.jsp" %>
 </head>
 <body>
-	게시글 작성이 완료되었습니다.
+	<script>
+    alert("게시글을 작성했습니다!");
+    location.href = "list.jsp";
+    </script>
+	
 </body>
 </html>
