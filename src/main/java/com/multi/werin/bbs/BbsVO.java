@@ -1,7 +1,7 @@
 package com.multi.werin.bbs;
 
 public class BbsVO {
-	
+	private int num_id;
 	private int bbs_id;
 	private String cate;
 	private String title;
@@ -65,12 +65,20 @@ public class BbsVO {
 	public void setBbs_img(String bbs_img) {
 		this.bbs_img = bbs_img;
 	}
+	
+	public int getNum_id() {
+		return num_id;
+	}
+	public void setNum_id(int num_id) {
+		this.num_id = num_id;
+	}
 	@Override
 	public String toString() {
-		return "BbsVO [bbs_id=" + bbs_id + ", cate=" + cate + ", title=" + title + ", content=" + content + ", writer="
-				+ writer + ", created_at=" + created_at + ", bbs_like=" + bbs_like + ", bbs_view=" + bbs_view
-				+ ", bbs_img=" + bbs_img + "]";
+		return "BbsVO [num_id=" + num_id + ", bbs_id=" + bbs_id + ", cate=" + cate + ", title=" + title + ", content="
+				+ content + ", writer=" + writer + ", created_at=" + created_at + ", bbs_like=" + bbs_like
+				+ ", bbs_view=" + bbs_view + ", bbs_img=" + bbs_img + "]";
 	}
+	
 	
 	
 	
