@@ -15,10 +15,10 @@
         <td>${vo.num_id}</td>
         <td>${vo.cate}</td>
         <!--   <td><a href="one?post_id=${vo.post_id}">${vo.title}</a></td>-->
-         <td><a href="one?post_id=${vo.post_id}">${vo.title}</a></td>
+         <td><a href="one?bbs_id=${vo.bbs_id}">${vo.title}</a></td>
         <td>${vo.content}</td>
         <td width=200>${vo.writer}</td>
-        <td width=200>${vo.good}</td>
+        <td width=200>${vo.bbs_like}</td>
     </tr>
 	</c:forEach>
 </table>

@@ -1,19 +1,20 @@
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="com.multi.werin.bbs.BbsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<title>자유게시판 글 목록</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bbs.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>     
 <script type="text/javascript">
 	$(function() {
 		$(".pages").click(function() {
 			$.ajax({
-				url: "list0",
+				url: "bbs0",
 				data: {
 					page: $(this).text()
 				},
@@ -26,21 +27,12 @@
 </script>
 </head>
 <body>
+	<jsp:include page="/header.jsp"></jsp:include>
+	
 	<hr color="red">
 	전체 게시물 수 : ${count}개 <br>
 	전체 페이지 수 : ${pages}개 <br><br>
-	<%
-		int pages = (int)request.getAttribute("pages");//int(작) <--- Object(큰)
-		for(int p = 1; p <= pages; p++){
-	%>
-		<%-- <a href="list2?page=<%= p %>">
-			<button style="background:lime;"><%= p %></button>
-		</a> --%>
-		<button style="background:pink;" class="pages"><%=p%></button>&nbsp;
-	<%		
-		}
-	%>
-	<hr color="red">
+	
 	<div id="result">
 		<table border="1" class="table table-bordered table tabel-hover">
 		    <tr bgcolor="lime">
@@ -56,14 +48,14 @@
 		        <td>${vo.num_id}</td>
 		        <td>${vo.cate}</td>
 		        <!--   <td><a href="one?post_id=${vo.post_id}">${vo.title}</a></td>-->
-		         <td><a href="one?post_id=${vo.post_id}">${vo.title}</a></td>
+		        <td><a href="bb2?bbs_id=${vo.bbs_id}">${vo.title}</a></td>
 		        <td>${vo.content}</td>
 		        <td width=200>${vo.writer}</td>
-		        <td width=200>${vo.good}</td>
+		        <td width=200>${vo.bbs_like}</td>
 		    </tr>
 			</c:forEach>
 		</table>
-		<a href="insertPost.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
+		<a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
 	</div>
 </body>
 </html>
