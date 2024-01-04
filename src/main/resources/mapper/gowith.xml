@@ -7,6 +7,10 @@
 	<insert id="create" parameterType="gowithVO">
 		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), null, null, null)
 	</insert>
+	
+	<delete id="delete" parameterType="int">
+		delete from gowith where gowith_id = #{gowith_id}
+	</delete>
 
 	<select id="count" resultType="int">
 		select count(*) from gowith
