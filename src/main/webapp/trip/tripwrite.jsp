@@ -63,7 +63,7 @@
 	<input type="date" id="end_date" name="trip_end_date" type="date" value="2023-12-13"><br> 
 	<label for="content">내용 : </label>
 	<input type="text" id="content" name="trip_content" required><br> 
-<button type="submit">게시글 작성 완료</button>
+<button type="submit">게시글 작성 완료!</button>
 </form>
 </div>
 </body>
