@@ -5,6 +5,10 @@
 <head>
     <meta charset="utf-8">
     <title>키워드로 장소검색하고 목록으로 표출하기</title>
+     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/plan.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -45,23 +49,109 @@
 </style>
 </head>
 <body>
-<div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+<script>
+$(function() {
+    // input을 datepicker로 선언
+    $("#datepicker1, #datepicker2").datepicker({
+        dateFormat: 'yy-mm-dd',
+        showOtherMonths: true,
+        showMonthAfterYear: true,
+        changeYear: true,
+        changeMonth: true,
+        showOn: "both",
+        buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+        buttonImageOnly: true,
+        buttonText: "선택",
+        yearSuffix: "년",
+        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNamesMin: ['일','월','화','수','목','금','토'],
+        dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
+        minDate: "-5Y",
+        maxDate: "+5y",
+        onSelect: function() {
+            generateDayButtons();
+        }
+    });                    
 
-    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
+    // 초기값을 오늘 날짜로 설정
+    $('#datepicker1, #datepicker2').datepicker('setDate', 'today');
+
+    // 버튼 생성 함수
+    function generateDayButtons() {
+        var startDate = $("#datepicker1").datepicker("getDate");
+        var endDate = $("#datepicker2").datepicker("getDate");
+
+        if (startDate && endDate) {
+            var diffDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+
+            // 기존 버튼 삭제
+            $("#dayButtons").empty();
+
+            // 새로운 버튼 생성
+            for (var i = 1; i <= diffDays + 1; i++) {
+                var button = $("<button>").attr("id", "dayButton" + i);
+                var dayText = $("<span>").text("Day" + i);
+                var dateText = $("<span>").text(formatDate(startDate, i - 1));
+
+                button.append(dayText, "<br>", dateText);
+
+                $("#dayButtons").append(button);
+            }
+        }
+    }
+
+    // 날짜 포맷 변환 함수
+    function formatDate(startDate, addDays) {
+        var currentDate = new Date(startDate);
+        currentDate.setDate(currentDate.getDate() + addDays);
+
+        var dd = String(currentDate.getDate()).padStart(2, '0');
+        var mm = String(currentDate.getMonth() + 1).padStart(2, '0');
+        var yyyy = currentDate.getFullYear();
+
+        return yyyy + '-' + mm + '-' + dd;
+    }
+});
+</script>
+<%@ include file="../header.jsp" %>
+    <div id="all">
+        <div id="left">
+            <div id="travel-info">
+                <label for="travelTitle"></label>
+                <input type="text" id="travelTitle" placeholder="일정 제목을 입력하세요.">
+                <label for="travelWith"></label>
+                <select class="form-control" id="travelWith">
+                    <option value="none" disabled selected hidden>누구랑?</option>
+                    <option value="alone">혼자</option>
+                    <option value="couple">연인과</option>
+                    <option value="family">가족과</option>
+                    <option value="parents">부모님과</option>
+                    <option value="group">단체로</option>
+                </select>
+                <input type="text" id="datepicker1" placeholder="여행시작날짜">
+                ~ <input type="text" id="datepicker2" placeholder="여행종료날짜">
             </div>
+
+            <div id="map"></div>
         </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
+        <!-- 여행 일수를 표시할 공간 -->
+        <div id="dayButtons"></div>
+
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+                <div>
+                    <form onsubmit="searchPlaces(); return false;">
+                        키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
+                          <button type="submit">검색하기</button> 
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+        </div>
     </div>
-</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9899fbb01f84efd28d3c0f68eefe49d0&libraries=services"></script>
 <script>
