@@ -19,10 +19,10 @@ public class TripController {
 				
 		int result = dao.insert(vo);
 		if (result == 1) {
-			return "trip/insert";
+			return "insert";
 		} else {
 
-			return "redirect:trip/insert.jsp"; // 여행글 게시판 목록
+			return "redirect:insert.jsp"; // 여행글 게시판 목록
 
 		}
 	}
