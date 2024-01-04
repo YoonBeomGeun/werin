@@ -15,11 +15,11 @@ public class TripController {
 
 	@RequestMapping("trip/insert")
 	public String insert(TripVO vo) {
-		System.out.println("bbsvo =>" + vo);
+		System.out.println("tripvo =>" + vo);
 				
 		int result = dao.insert(vo);
 		if (result == 1) {
-			return "insert";
+			return "trip/insert"; // 작성이 완료되면 여행기 리스트로 돌아가기
 		} else {
 
 			return "redirect:insert.jsp"; // 여행글 게시판 목록
@@ -45,11 +45,11 @@ public class TripController {
 	}
 	
 	
-	@RequestMapping("trip/delete")
+	@RequestMapping("trip/remove")
 	public String delete(TripVO vo) {
 		int result = dao.delete(vo);
 		if(result == 1) {
-			return "trip/delete";
+			return "trip/remove";
 		}else { // 삭제X 일때 돌아갈 페이지
 			return "redirect:index_bbs.jsp";
 		}

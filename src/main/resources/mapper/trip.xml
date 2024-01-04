@@ -5,8 +5,8 @@
 <mapper namespace="trip">
 	<insert id="create" parameterType="tripVO">
 		insert into trip values
-		(#{trip_id},#{trip_title},#{trip_content},#{trip_country},#{trip_start_date},#{trip_end_date},
-		#{trip_writer}, now(), #{trip_count},#{trip_like},#{trip_img})
+		(#{trip_id},#{trip_title},#{trip_content},#{trip_start_date},#{trip_end_date},
+		#{trip_writer}, now(), 0,0,#{trip_img})
 	</insert>
 
 	<update id="update" parameterType="tripVO">
