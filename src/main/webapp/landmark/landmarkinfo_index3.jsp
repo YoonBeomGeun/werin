@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-테스트
+<%@ include file="../header.jsp"%>
+상세페이지 구현구현
 </body>
 </html>
