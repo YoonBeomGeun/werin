@@ -16,6 +16,14 @@ public class GowithDAO {
 		return my.insert("gowith.create", gowithVO);
 	}
 	
+	public int update(GowithVO gowithVO) {
+		return my.update("gowith.update", gowithVO);		
+	}
+	
+	public int delete(int gowith_id) {
+		return my.delete("gowith.delete", gowith_id);
+	}
+	
 	public GowithVO one(GowithVO gowithVO) {
 		return my.selectOne("gowith.one", gowithVO);
 	}

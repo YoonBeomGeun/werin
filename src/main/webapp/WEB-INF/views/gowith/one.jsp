@@ -40,6 +40,7 @@
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
 	<h1 style="margin-top:50px;"><%= vo.getGowith_title()%></h1>
+	<p style="margin-left:225px; font-weight: bold;">작성자: <%= vo.getGowith_writer()%></p>
 	<table class="info" style="margin-left:225px;">
 		<tr>
 			<td>조회수 I</td>
@@ -60,8 +61,8 @@
 	<h2 style="margin-left:225px; margin-top:30px;">내용</h2>
 	<p style="margin-left:225px;"><%= vo.getGowith_content()%></p>
 	<div class="edit" style="text-align: right; margin-right: 225px;">
-		<a href=""><button style="background:#33CC99;">수정</button></a>
-		<a href=""><button style="background:#FF5555;">삭제</button></a>
+		<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#33CC99;">수정</button></a>
+		<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#FF5555;">삭제</button></a>
 	</div>
 	<br>
 	<hr color="green">
