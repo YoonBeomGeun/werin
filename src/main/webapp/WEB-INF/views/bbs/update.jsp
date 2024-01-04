@@ -1,4 +1,5 @@
-<%@page import="com.multi.werin.bbs.BbsVO"%>
+<%@page import="com.multi.mini7.PostVO"%>
+<%@page import="com.multi.mini7.PostDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -16,7 +17,7 @@
 <body>
 	<div id="container">
 		<form action="update2">
-			<input name="post_id" value="<%=bag.getBbs_id()%>" type="hidden">
+			<input name="post_id" value="<%=bag.getPost_id()%>" type="hidden">
 			<table class="table table-bordered table table-hover">
 				<tr>
 					<td class="table table-warning">제목</td>
