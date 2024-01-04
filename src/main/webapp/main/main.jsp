@@ -13,6 +13,10 @@
 	$(function(){
 		$.ajax({
 			url: 'weather.jsp', //url 연결해야함
+			data: {
+				key : ,
+				
+			},
 			success: function(x){
 				$('#weather') //성공했을때 어떻게 해야할지 결정해야함
 			}
@@ -24,10 +28,10 @@
 <header>
         <div class="all">
         	<div class="logo">
-	            <a href=""><img src="/werin/resources/img/로고.png"></a>
+	            <a href=""><img src="${pageContext.request.contextPath}/resources/img/로고.png"></a>
         	</div>
         	<div class="title">
-            	<a href=""><img src="/werin/resources/img/제목.png"></a>
+            	<a href=""><img src="${pageContext.request.contextPath}/resources/img/제목.png"></a>
             </div>
             <div class="right">
             	<div class="but">
@@ -54,8 +58,10 @@
 	<div id="recommendlandmark">
 		관광지 추천
 	</div>
-	<div id="mainserch">
-	검색
+	<div id="mainserch"> <!-- 검색칸 -->
+		<form action="search">
+			<input name="searching"> <!-- searching으로 검색내용을 받음 -->
+		</form>
 	</div>
 	<div class="hottravel">
 	HOT 여행기
@@ -103,3 +109,7 @@
 	</div>
 </body>
 </html>
+
+<!-- dbProperties 수정해야함
+mybatis 맞는지 확인해볼것
+ -->

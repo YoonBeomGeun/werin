@@ -4,8 +4,8 @@
     pageEncoding="UTF-8"%>
     
     <%
-	BbsVO bag = (BbsVO)request.getAttribute("bag");
-	%>
+        	HotbbsVO bag = (HotbbsVO)request.getAttribute("bag");
+        %>
 <!DOCTYPE html>
 <html>
 <head>
