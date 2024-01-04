@@ -2,6 +2,7 @@
 
 
 #map {
+	position: relative;
     width: auto;
     height: 500px;
     margin-left:20px;
@@ -12,7 +13,7 @@
 }
 
 #left {
-	width: 45%;
+	width: 60%;
 }
 
 #travel-info #travelTitle {
@@ -57,3 +58,17 @@
 }
 
 
+#menuwrap {
+	position: absolute;
+	height:500px;
+}
+
+ #placesList {
+    max-height: 500px; /* 필요에 따라 최대 높이를 조정하세요 */
+    overflow-y: auto;
+  }
+
+#lb {
+	width:40%;
+	backgroung-color:grey;
+}
