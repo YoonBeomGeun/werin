@@ -1,5 +1,7 @@
-package com.multi.werin.main;
-
-public class MainVO {
-
-}
+/*
+ * package com.multi.werin.main;
+ * 
+ * public class MainVO {
+ * 
+ * }
+ */
