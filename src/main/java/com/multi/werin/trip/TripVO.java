@@ -2,13 +2,13 @@ package com.multi.werin.trip;
 
 import java.util.Date;
 
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class TripVO {
 	private Integer trip_id;
 	private String trip_title;
 	private String trip_content;
-	private String trip_country;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date trip_start_date;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -18,7 +18,7 @@ public class TripVO {
 	private int trip_count;
 	private int trip_like;
 	private String trip_img;
-	public int getTrip_id() {
+	public Integer getTrip_id() {
 		return trip_id;
 	}
 	public void setTrip_id(Integer trip_id) {
@@ -35,12 +35,6 @@ public class TripVO {
 	}
 	public void setTrip_content(String trip_content) {
 		this.trip_content = trip_content;
-	}
-	public String getTrip_country() {
-		return trip_country;
-	}
-	public void setTrip_country(String trip_country) {
-		this.trip_country = trip_country;
 	}
 	public Date getTrip_start_date() {
 		return trip_start_date;
@@ -87,10 +81,13 @@ public class TripVO {
 	@Override
 	public String toString() {
 		return "TripVO [trip_id=" + trip_id + ", trip_title=" + trip_title + ", trip_content=" + trip_content
-				+ ", trip_country=" + trip_country + ", trip_start_date=" + trip_start_date + ", trip_end_date="
-				+ trip_end_date + ", trip_writer=" + trip_writer + ", trip_writedate=" + trip_writedate
-				+ ", trip_count=" + trip_count + ", trip_like=" + trip_like + ", trip_img=" + trip_img + "]";
+				+ ", trip_start_date=" + trip_start_date + ", trip_end_date=" + trip_end_date + ", trip_writer="
+				+ trip_writer + ", trip_writedate=" + trip_writedate + ", trip_count=" + trip_count + ", trip_like="
+				+ trip_like + ", trip_img=" + trip_img + "]";
 	}
+	
+	
+	
 	
 	
 	
