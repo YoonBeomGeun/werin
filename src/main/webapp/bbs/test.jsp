@@ -5,13 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-
-</body>
-게시판 글쓰기 요청됨.
-왼료
-<hr>
-<a href="test.jsp">게시판 목록으로 go!</a>
+<jsp:include page="../header.jsp"></jsp:include>
+<div class="center">
+  <a href="bbs?page=1">
+    <button>목록보기</button>
+  </a>
+</div>
 </body>
 </html>
