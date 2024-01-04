@@ -2,6 +2,8 @@ package com.multi.werin.gowith;
 
 import java.util.List;
 
+import javax.security.auth.callback.ConfirmationCallback;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +25,30 @@ public class GowithController {
 		return str;
 	}
 	
-	/*
-	 * @RequestMapping("gowith/delete") public void delete(int gowith_id) {
-	 * 
-	 * }
-	 */
+	@RequestMapping("gowith/update")
+	public void update(GowithVO gowithVO, Model model) {
+		GowithVO vo = dao.one(gowithVO);		
+		model.addAttribute("vo", vo);
+	}
+	
+	@RequestMapping("gowith/update2")
+	public void update2(GowithVO gowithVO, Model model) {
+		System.out.println(gowithVO);
+		int result = dao.update(gowithVO);
+		System.out.println(result);
+		model.addAttribute("result", result);
+	}
+	
+	@RequestMapping("gowith/deleteConfirmed")
+	public void deleteConfirmed(int gowith_id, Model model) {
+		model.addAttribute("gowith_id", gowith_id);
+	}
+	
+	@RequestMapping("gowith/delete")
+	public void delete(int gowith_id, Model model) {
+		int result = dao.delete(gowith_id);
+		model.addAttribute("result", result);
+	}
 	
 	@RequestMapping("gowith/one")
 	public void one(GowithVO gowithVO, Model model) {
