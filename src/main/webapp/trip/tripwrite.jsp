@@ -5,21 +5,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
 <title>Insert title here</title>
 <%@ include file = "../../../header.jsp" %>
 </head>
 <body>
 
-<!-- <h3>게시글 검색</h3>
-<form action="one">
-아이디 : <input type="text" name="id"><br>
-<button type="submit">서버로 전송</button>
-</form>
-<hr>
-
-<h3>게시글 전체검색</h3>
-<a href="list"><button>전체 검색 요청</button></a>
-<hr> -->
 <div class="container">
 <h3>게시글 추가</h3>
 <form action="trip/insert">
