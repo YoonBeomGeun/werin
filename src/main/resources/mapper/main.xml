@@ -1,1 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper설정 완료. sql문 작성해야함 -->
+
+<mapper namespace="main">
+	
+	<select id="hotlandmark" resultType="mainVO"> <!-- 랜드마크 추천을 가져오는 sql -->
+	</select>
+	
+	<select id="mainsearch" resultType="mainVO"> <!-- 검색결과를 찾는 sql -->
+	</select>
+	
+	<select id="hottravel" resultType="mainVO">
+	</select>
+	
+	<select id="hotshop" resultType="mainVO">
+	</select>
+	
+	<select id="hotboard" resultType="mainVO">
+	</select>
+	
+</mapper>
