@@ -10,8 +10,8 @@
 		select landmarkinfo_id,landmarkinfo_pic from landmarkinfo where landmarkinfo_id=1
 	</select>
 	
-	<select id="mainsearch" resultType="mainVO"> <!-- 검색결과를 찾는 sql -->
-	</select>
+<!-- 	<select id="mainsearch" resultType="mainVO"> 검색결과를 찾는 sql
+	</select> -->
 	
 	<select id="hottravel" resultType="maintripVO">
 		select trip_img, trip_title, trip_id from trip order by trip_like desc limit 4
