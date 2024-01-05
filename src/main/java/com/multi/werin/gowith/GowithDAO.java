@@ -35,4 +35,8 @@ public class GowithDAO {
 	public List<GowithVO> list1(PageVO pageVO) {
 		return my.selectList("gowith.list", pageVO);
 	}
+	
+	public int increaseView(int gowith_id) {
+		return my.update("gowith.increaseView", gowith_id);
+	}
 }
