@@ -21,24 +21,24 @@
 			</a>
 		<% } %> --%>
 		<hr color="blue">
-		<form action="insert2">
+		<form action="insert">
 			<table border="1"  class="table table-hover">
 				<tr class="table-warning">
 					<td width="200">카테고리</td>
-					<td width="300"><input name="cate"></td>
+					<td width="300"><input name="bbs_cate"></td>
 				</tr>
 				<tr class="table-warning">
 					<td width="200">제목</td>
-					<td width="300"><input name="title"></td>
+					<td width="300"><input name="bbs_title"></td>
 				</tr>
 				<tr class="table-warning">
 					<td width="200">내용</td>
-					<td width="300"><input name="content"></td>
+					<td width="300"><input name="bbs_content"></td>
 				</tr>
 				<tr class="table-warning">
 					<td width="200">작성자</td>
 					<td width="300">
-						<input name="writer" value="${bbs_id}">
+						<input name="bbs_writer" value="${bbs_id}">
 					</td>
 					<%-- ${id} == <%= session.getAttribute("bbs_id}") %> --%>
 				</tr>
