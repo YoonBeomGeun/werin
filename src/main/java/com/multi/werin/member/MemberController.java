@@ -42,11 +42,11 @@ public class MemberController {
 	        if (member != null) {
 	            // 로그인 성공
 	            session.setAttribute("loginId", member.getMember_id());
-	            return "redirect:/main.jsp"; // 로그인 후 이동할 페이지 경로
+	            return "redirect:/header.jsp"; // 로그인 후 이동할 페이지 경로
 	        } else {
 	            // 로그인 실패
 	        	model.addAttribute("state", 0);
-	            return "redirect:/login.jsp"; // 로그인 실패 시 이동할 페이지 경로 (에러 메시지를 전달할 수도 있음)
+	            return "redirect:/member/login.jsp"; // 로그인 실패 시 이동할 페이지 경로 (에러 메시지를 전달할 수도 있음)
 	        }
 	    }
 	 
