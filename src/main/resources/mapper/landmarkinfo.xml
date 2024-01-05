@@ -5,6 +5,8 @@
 <mapper namespace="landmarkInfo">
 	<insert id = "insert" parameterType="landmarkInfoVO"></insert>
 	
-	<select id="list" parameterType="landmarkInfoVO" resultType="landmarkInfoVO"></select>
+	<select id="list" parameterType="landmarkInfoVO" resultType="landmarkInfoVO">
+		select * from landmarkInfo
+	</select>
 	
 </mapper>

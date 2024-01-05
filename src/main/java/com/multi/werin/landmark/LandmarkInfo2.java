@@ -9,13 +9,14 @@ import java.net.URL;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class visitjeju {
-    public StringBuilder jeju(String ko) {
+public class LandmarkInfo2 {
+	
+    public static void main(String[] args) {
         // API 키를 여기에 추가하세요
         String apiKey = "gRjisabrZIfabIjre8qnZIy4ig724PgKzbxWE5KdbOHL4SD%2FneKsnNw2phKHIowgD5NXuBRaTpMEvSAY2uTA1Q%3D%3D";
 
         // 엔드포인트 http 요청 --> 응답(xml) (JSON 형식으로 요청하려면 &_type=json 파라미터 추가) 이러면 JSON이 되는 것 같음
-        String apiUrl = "https://apis.data.go.kr/B551011/KorService1/areaBasedList1?MobileOS=ETC&MobileApp=Test&ServiceKey=" + apiKey + "&_type=json";
+        String apiUrl = "http://apis.data.go.kr/B551011/KorService1/areaBasedList1?numOfRows=12&pageNo=1&MobileOS=ETC&MobileApp=AppTest&ServiceKey=" + apiKey + "&listYN=Y&arrange=A&contentTypeId=&areaCode=39&sigunguCode=&cat1=&cat2=&cat3=&_type=json";
         
         StringBuilder content = new StringBuilder();
         try {
@@ -46,14 +47,13 @@ public class visitjeju {
                 System.out.println("API 응답: " + content.toString());
             } else {
                 System.out.println("API 호출 실패. 응답 코드: " + responseCode);
-            }
+            } 
 
             // 연결 해제
             connection.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return content;
         
     }
     

@@ -12,7 +12,7 @@
 		
 		$('#b1').click(function () { // api java로 가져오기
 			$.ajax({
-				url: "visitjeju",
+				url: "LandmarkInfo",
 				success: function (x) {
 					console.log(x);
 					$(".result").html(x);
