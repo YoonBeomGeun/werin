@@ -7,18 +7,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../resources/css/main.css">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-3.6.4.js"></script>
-<script type="text/javascript">
+<script type="text/javascript" src="../resources/js/jquery-3.7.1.js"></script>
+<script type="text/javascript"> /* 뭔가 오류가 생긴다면 jquery 경로랑 이름 확인해볼것 */
 
 	$(function(){
+		
+		//관광지추천
 		$.ajax({
-			url: 'weather.jsp', //url 연결해야함
-			data: {
-				key : ,
-				
-			},
+			url: 'recommendlandmark',
 			success: function(x){
-				$('#weather') //성공했을때 어떻게 해야할지 결정해야함
+				$('#recommendlandmark').append(x) /* 클래스인지 id인지 확인해보기! */
+			}
+		})
+		
+		//핫여행
+		$.ajax({
+			url: 'hottravel',
+			success: function(x){
+				$('.hottravel').append(x) 
+			}
+		})
+		
+		//착한가게소개해요
+		$.ajax({
+			url: 'hotshop',
+			success: function(x){
+				$('.hotshop').append(x) 
+			}
+		})
+		
+		//자유게시판
+		$.ajax({
+			url: 'hotboard',
+			success: function(x){ /* 잘 안되면 alert로 데이터를 가져오는지 확인해보기 */
+				$('#hotboard').append(x) 
+			}
+		})
+		
+		//날씨 api
+		$.ajax({
+			url: 'weather.jsp',
+			
+			success: function(x){
+				$('#weather') 
 			}
 		})
 	})
@@ -55,56 +86,30 @@
 			alert("실행..........");
 		}
 	</script>
-	<div id="recommendlandmark">
+	
+	<div id="recommendlandmark"> <!-- 일단은 한개만 넣어놔서 id를 썻지만 필요시 class로 변경 -->
 		관광지 추천
 	</div>
+	
 	<div id="mainserch"> <!-- 검색칸 -->
 		<form action="search">
 			<input name="searching"> <!-- searching으로 검색내용을 받음 -->
 		</form>
 	</div>
+	
 	<div class="hottravel">
 	HOT 여행기
-		<div class="hottravel-1">
-			<div id="hottravel-image1"></div>
-			<div id="hottravel-text1"></div>
-		</div>
-		<div class="hottravel-2">
-			<div id="hottravel-image2"></div>
-			<div id="hottravel-text2"></div>
-		</div>
-		<div class="hottravel-3">
-			<div id="hottravel-image3"></div>
-			<div id="hottravel-text3"></div>
-		</div>
-		<div class="hottravel-4">
-			<div id="hottravel-image4"></div>
-			<div id="hottravel-text4"></div>
-		</div>
 	</div>
+	
 	<div class="hotshop">
-	착한가게 소개해요
-		<div class="hotshop-1">
-			<div id="hotshop-image1"></div>
-			<div id="hotshop-text1"></div>
-		</div>
-		<div class="hotshop-2">
-			<div id="hotshop-image2"></div>
-			<div id="hotshop-text2"></div>
-		</div>
-		<div class="hotshop-3">
-			<div id="hotshop-image3"></div>
-			<div id="hotshop-text3"></div>
-		</div>
-		<div class="hotshop-4">
-			<div id="hotshop-image4"></div>
-			<div id="hotshop-text4"></div>
-		</div>
+	착한가게 소개해요	
 	</div>
+	
 	<div id="hotboard">
 	HOT 게시글
 	</div>
-	<div id="weather">	
+	
+	<div id="weather">
 	오늘의 제주날씨
 	</div>
 </body>
