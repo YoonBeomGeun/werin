@@ -30,6 +30,9 @@
 	#result {
 	  display: flex;
 	  flex-wrap: wrap;
+	  gap: 50px;
+	  width: 1300px;
+	  margin: 0 auto;
 	  justify-content: center; /* 내부 요소들을 수평으로 가운데 정렬 */
 	  align-items: center; /* 내부 요소들을 수직으로 가운데 정렬 */
 	}
@@ -37,15 +40,30 @@
 	.content {
 		margin: 10px;
 		padding: 10px;
-		width: 300px;
-		height: 250px;
+		width: 350px;
+		height: 300px;
 		background: lightgray;
 		border-radius: 10px;
+	}
+	
+	.content p {
+		margin: 10px 0;
+	}
+	
+	.content mit {
+		position: fixed;	/* 어떻게 수정해야 할지 모르겠음 */
+	}
+	
+	.bottom {
+		background: lightgray;
+		height: 300px;
+		margin-top: 50px;
 	}
 </style>
 
 
 <script type="text/javascript">
+
 	$(function() {
 		$(".pages").click(function() {
 			$.ajax({
@@ -73,15 +91,19 @@
 	<a href="insertGowith.jsp"><button>글쓰기</button></a>
 	<br><br>
 	
+	<% if(session.getAttribute("member_id")==null) { %>
 	<div id="result">
-		<c:forEach items="${list}" var="vo">
+		<c:forEach items="${list}" var="vo" varStatus="loop">
 			<a href="one?gowith_id=${vo.gowith_id}">
 				<div class="content">
-					${vo.gowith_writer}<br>
-					${vo.gowith_title}<br>
-					${vo.gowith_content}<br>
-					여행일 수<br>
-					${vo.gowith_like}, ${vo.gowith_view}
+					작성자 ${vo.gowith_writer}<br>
+					<p style="font-size: 20px;">${vo.gowith_title}</p><br>
+					<p>${vo.gowith_content}</p><br>
+					<div class="mit">
+						여행일 수<br>
+						좋아요 ${vo.gowith_like}<br>
+						조회수 ${vo.gowith_view}
+					</div>
 				</div>
 			</a>
 		</c:forEach>
@@ -102,6 +124,12 @@
 			}
 		}
 		%>
+	</div>
+	<% } %>
+	
+	<div class="bottom">
+		<h2 style="margin-left:225px;">werin</h2>
+		
 	</div>
 	
 </body>
