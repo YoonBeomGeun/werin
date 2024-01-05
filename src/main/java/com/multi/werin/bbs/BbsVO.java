@@ -53,10 +53,10 @@ public class BbsVO {
 	public void setBbs_created_at(String bbs_created_at) {
 		this.bbs_created_at = bbs_created_at;
 	}
-	public int getBbs_like() {
+	public int  getBbs_like() {
 		return bbs_like;
 	}
-	public void setBbs_like(int bbs_like) {
+	public void setBbs_like(int  bbs_like) {
 		this.bbs_like = bbs_like;
 	}
 	public int getBbs_view() {
