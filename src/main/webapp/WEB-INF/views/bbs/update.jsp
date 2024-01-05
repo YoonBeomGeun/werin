@@ -1,4 +1,5 @@
 <%@page import="com.multi.werin.bbs.BbsVO"%>
+<%@page import="com.multi.werin.bbs.BbsDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -16,21 +17,21 @@
 <body>
 	<div id="container">
 		<form action="update2">
-			<input name="post_id" value="<%=bag.getBbs_id()%>" type="hidden">
+			<input name="bbs_id" value="<%=bag.getBbs_id()%>" type="hidden">
 			<table class="table table-bordered table table-hover">
 				<tr>
 					<td class="table table-warning">제목</td>
-					<td><input name="title"	value="<%=bag.getTitle()%>"></td>
+					<td><input name="bbs_title"	value="<%=bag.getBbs_title()%>"></td>
 				</tr>
 				<tr>
 					<td class="table-warning">내용</td>
 					<td>
-						<textarea name="content" rows="5" cols="100"><%=bag.getContent()%></textarea>
+						<textarea name="bbs_content" rows="5" cols="100"><%=bag.getBbs_content()%></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td class=" table table-warning">작성자</td>
-					<td><input name="writer" value="<%=bag.getWriter()%>" readonly="readonly"></td>
+					<td><input name="bbs_writer" value="<%=bag.getBbs_writer()%>" readonly="readonly"></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center;">

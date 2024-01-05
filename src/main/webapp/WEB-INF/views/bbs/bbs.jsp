@@ -45,9 +45,9 @@
 		    </tr>
 			<c:forEach items="${list}" var="vo">
 		    <tr>
-		        <td>${vo.num_id}</td>
+		        <td>${vo.bbs_id}</td>
 		        <td>${vo.bbs_cate}</td>
-		        <td><a href="bb2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a></td>
+		        <td><a href="bbs2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a></td>
 		        <td>${vo.bbs_content}</td>
 		        <td width=200>${vo.bbs_writer}</td>
 		        <td width=200>${vo.bbs_like}</td>

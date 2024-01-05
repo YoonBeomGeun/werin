@@ -5,11 +5,11 @@
 <mapper namespace="bbs">
 
 	<insert id="create" parameterType="bbsVO">
-		insert into bbs values(null, #{bbs_cate}, #{bbs_title}, #{bbs_content}, #{bbs_writer}, now())
+		insert into bbs values(null, #{bbs_cate}, #{bbs_title}, #{bbs_content}, #{bbs_writer}, now(),0,0,null)
 	</insert>
 	
 	<update id="update" parameterType="bbsVO">
-		update bbs set title = #{bbs_title}, content = #{bbs_content} where bbs_id = #{bbs_id}
+		update bbs set bbs_title = #{bbs_title}, bbs_content = #{bbs_content} where bbs_id = #{bbs_id}
 	</update>
 	
 	<delete id="delete" parameterType="int">
@@ -41,4 +41,12 @@
 			from bbs p) p2
 		where p2.bbs_id = #{bbs_id}
 	</select>
+	
+	<update id="bbs.increaseView">
+    	update bbs set bbs_view = bbs_view + 1 WHERE bbs_id = #{bbs_id}
+	</update>
+	
+	
+	
+	
 </mapper>
