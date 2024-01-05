@@ -32,11 +32,12 @@ public class GowithController {
 	}
 	
 	@RequestMapping("gowith/update2")
-	public void update2(GowithVO gowithVO, Model model) {
+	public void update2(GowithVO gowithVO, int gowith_id, Model model) {
 		System.out.println(gowithVO);
+		System.out.println(gowith_id);
 		int result = dao.update(gowithVO);
-		System.out.println(result);
 		model.addAttribute("result", result);
+		model.addAttribute("gowith_id", gowith_id);
 	}
 	
 	@RequestMapping("gowith/deleteConfirmed")
@@ -52,6 +53,7 @@ public class GowithController {
 	
 	@RequestMapping("gowith/one")
 	public void one(GowithVO gowithVO, Model model) {
+		dao.increaseView(gowithVO.getGowith_id());
 		GowithVO vo = dao.one(gowithVO);
 		model.addAttribute("vo", vo);
 	}

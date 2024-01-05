@@ -5,11 +5,11 @@
 <mapper namespace="gowith">
 
 	<insert id="create" parameterType="gowithVO">
-		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), null, null, null)
+		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, null)
 	</insert>
 	
 	<update id="update">
-		update gowith set gowith_title=#{gowith_title}, gowith_content=#{gowith_content} where gowith_writer=#{gowith_writer}
+		update gowith set gowith_title=#{gowith_title}, gowith_content=#{gowith_content} where gowith_id=#{gowith_id}
 	</update>
 	
 	<delete id="delete" parameterType="int">
@@ -39,4 +39,8 @@
 			from gowith g) g2
 		where g2.num_id BETWEEN ${start} and ${end}
 	</select>
+	
+	<update id="increaseView" parameterType="int">
+		update gowith set gowith_view = gowith_view + 1 where gowith_id=#{gowith_id}
+	</update>
 </mapper>

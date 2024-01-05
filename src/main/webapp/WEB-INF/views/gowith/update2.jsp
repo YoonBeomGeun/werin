@@ -7,7 +7,7 @@
 %>
 		<script type="text/javascript">
 			alert("수정이 완료되었습니다.");
-			window.history.go(-2);
+			location.href="one?gowith_id=" + ${gowith_id};
 		</script>
 <%
 	} else {

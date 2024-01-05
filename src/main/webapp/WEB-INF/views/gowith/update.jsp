@@ -49,7 +49,7 @@
 		    </select> -->
 		    <input type="hidden" name="gowith_id" value="<%=vo.getGowith_id()%>">
 			<h3>작성자</h3>
-			<input type="text" name="gowith_writer" value="<%=vo.getGowith_writer()%>" disabled>
+			<input type="text" name="gowith_writer" value="<%=vo.getGowith_writer()%>" disabled="disabled">
 			<h3>제목 입력</h3>
 			<input type="text" name="gowith_title" value="<%=vo.getGowith_title()%>">
 			<h3>내용</h3>
