@@ -8,5 +8,7 @@
 </head>
 <body>
 ${json}
+<hr>
+db에 넣기 성공
 </body>
 </html>
