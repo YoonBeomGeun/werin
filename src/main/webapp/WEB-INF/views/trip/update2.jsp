@@ -7,13 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	게시글 수정이 완료됐습니다.
-
 	<%
 	int result = (int) request.getAttribute("result");
 if (result == 1) {
 %>
-	성공했습니다.
+	여행기 수정이 완료됐습니다.
+	<a href = "list.jsp">여행기 목록으로 돌아가기</a>
 	<%
 	} else {
 %>

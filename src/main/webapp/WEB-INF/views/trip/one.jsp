@@ -65,6 +65,7 @@
             <p><strong>제목:</strong> ${vo.trip_title}</p>
             <p><strong>작성 날짜:</strong> <%= formattedDate %></p>
             <p><strong>조회수:</strong> ${vo.trip_count}</p>
+            <p><strong>추천:</strong> ${vo.trip_like}</p>
             <p><strong>작성자:</strong> ${vo.trip_writer}</p>
             <p><strong>내용:</strong> ${vo.trip_content}</p>
         </div>
@@ -74,13 +75,13 @@
         <script>
             function remove() {
                 if (confirm("게시글을 삭제하시겠습니까?")) {
-                    location.href = "remove?Trip_id=<%=bag.getTrip_id()%>";           
+                    location.href = "remove?trip_id=<%=bag.getTrip_id()%>";           
                 } 
             }
 
             function update() {
                 if (confirm("게시글을 수정하시겠습니까?")) {
-                    location.href = "update?Trip_id=<%=bag.getTrip_id()%>";           
+                    location.href = "update?trip_id=<%=bag.getTrip_id()%>";           
                 } 
             }
         </script>

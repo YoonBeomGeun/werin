@@ -14,6 +14,7 @@ public class TripVO {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date trip_end_date;
 	private String trip_writer;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date trip_writedate;
 	private int trip_count;
 	private int trip_like;
