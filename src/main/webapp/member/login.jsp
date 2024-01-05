@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,20 +10,24 @@
     <title>Login Page</title>
 </head>
 <body>
-    <%@ include file="../header.jsp" %>
+    <%@ include file="../header.jsp"%>
     <div class="container">
         <h2>로그인</h2>
         <form id="loginForm" action="loginProcess" method="post">
             <label for="id">ID:</label>
-            <input type="text" id="id" name="id" required>
-
+            <input type="text" id="id" name="member_id" required> <!-- 변경된 부분 -->
+            
             <label for="pw">Password:</label>
-            <input type="password" id="pw" name="pw" required>
+            <input type="password" id="pw" name="member_pw" required> <!-- 변경된 부분 -->
+
+            <c:if test="${not empty requestScope.error}">
+                <p class="error">${requestScope.error}</p>
+            </c:if>
 
             <button type="submit">로그인</button>
         </form>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="your_script.js"></script>
 </body>
