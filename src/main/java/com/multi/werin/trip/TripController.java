@@ -19,7 +19,7 @@ public class TripController {
 				
 		int result = dao.insert(vo);
 		if (result == 1) {
-			return "trip/insert"; // 작성이 완료되면 여행기 리스트로 돌아가기
+			return "forward:/trip/list"; // 
 		} else {
 
 			return "redirect:insert.jsp"; // 여행글 게시판 목록
@@ -57,7 +57,9 @@ public class TripController {
 	
 	@RequestMapping("trip/list")
 	public String list(Model model) {
+		System.out.println("list");
 		List<TripVO> list = dao.list();
+		System.out.println(list.size());
 		model.addAttribute("list", list);
 		if(list.size()>0) {
 			return "trip/list";
