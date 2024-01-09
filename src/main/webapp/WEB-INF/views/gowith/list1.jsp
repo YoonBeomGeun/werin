@@ -91,7 +91,6 @@
 	<a href="insertGowith.jsp"><button>글쓰기</button></a>
 	<br><br>
 	
-	<% if(session.getAttribute("member_id")==null) { %>
 	<div id="result">
 		<c:forEach items="${list}" var="vo" varStatus="loop">
 			<a href="one?gowith_id=${vo.gowith_id}">
@@ -125,7 +124,6 @@
 		}
 		%>
 	</div>
-	<% } %>
 	
 	<div class="bottom">
 		<h2 style="margin-left:225px;">werin</h2>

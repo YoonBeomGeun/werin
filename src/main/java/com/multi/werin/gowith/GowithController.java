@@ -15,6 +15,9 @@ public class GowithController {
 	@Autowired
 	GowithDAO dao;
 	
+	@Autowired
+	GowithcmtDAO gowithcmtDAO;
+	
 	@RequestMapping("gowith/insert")
 	public String insert(GowithVO gowithVO) {
 		int result = dao.insert(gowithVO);
@@ -55,7 +58,9 @@ public class GowithController {
 	public void one(GowithVO gowithVO, Model model) {
 		dao.increaseView(gowithVO.getGowith_id());
 		GowithVO vo = dao.one(gowithVO);
+		List<GowithcmtVO> list = gowithcmtDAO.list(gowithVO.getGowith_id());
 		model.addAttribute("vo", vo);
+		model.addAttribute("list", list);
 	}
 	
 	@RequestMapping("gowith/list1")
