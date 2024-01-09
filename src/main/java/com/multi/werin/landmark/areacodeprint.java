@@ -1,7 +1,7 @@
 package com.multi.werin.landmark;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode; // 주석 관리 부분
+import com.fasterxml.jackson.databind.ObjectMapper;  // 주석 관리 부분
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class areacodeprint {
 
     public static void main(String[] args) {
         // API 키를 여기에 추가하세요
-        String apiKey = "gRjisabrZIfabIjre8qnZIy4ig724PgKzbxWE5KdbOHL4SD%2FneKsnNw2phKHIowgD5NXuBRaTpMEvSAY2uTA1Q%3D%3D";
+        String apiKey = "";
 
         // 첫 페이지의 totalCount를 확인하여 전체 페이지를 가져옴
         int numOfRows = 10;
