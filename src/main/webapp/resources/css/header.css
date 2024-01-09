@@ -115,3 +115,25 @@ a {
 .menubar button:hover {
     background-color: gold; /* 마우스 오버 시 색상 변경 */
 }
+
+/* 로그인 상태일 때의 스타일 */
+.logged-in .but button.login,
+.logged-in .but button.signup {
+    display: none;
+}
+
+.logged-in .but button.mypage,
+.logged-in .but button.logout {
+    display: block;
+}
+
+/* 로그인되지 않은 상태일 때의 스타일 */
+.not-logged-in .but button.mypage,
+.not-logged-in .but button.logout {
+    display: none;
+}
+
+.not-logged-in .but button.login,
+.not-logged-in .but button.signup {
+    display: block;
+}
