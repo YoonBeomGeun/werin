@@ -56,14 +56,6 @@
             resize: none;
         }
 
-        button {
-            background-color: #3498db;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
         
     </style>
     <title>게시글 추가</title>

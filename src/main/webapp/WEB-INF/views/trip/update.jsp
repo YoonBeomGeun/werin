@@ -92,6 +92,7 @@
             <input type = "hidden" name = "trip_id" value = ${vo.trip_id}>
         <button id = "update">수정</button>
         </form>
+        <a href = "${pageContext.request.contextPath}/trip/list"><button>돌아가기</button></a>
         </div>
 </div>
 </body>

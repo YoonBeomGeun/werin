@@ -71,6 +71,7 @@
         </div>
         <button onclick="remove()">삭제</button>
         <button onclick="update()">수정</button>
+        <a href = "${pageContext.request.contextPath}/trip/list"><button>돌아가기</button></a>
 
         <script>
             function remove() {
