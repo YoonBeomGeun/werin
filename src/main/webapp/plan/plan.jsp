@@ -308,18 +308,21 @@
 	<div id="all">
 		<div id="left">
 			<div id="travel-info">
-				<label for="travelTitle"></label> <input type="text"
-					id="travelTitle" placeholder="일정 제목을 입력하세요."> <label
-					for="travelWith"></label> <select class="form-control"
-					id="travelWith">
-					<option value="none" disabled selected hidden>누구랑?</option>
-					<option value="alone">혼자</option>
-					<option value="couple">연인과</option>
-					<option value="family">가족과</option>
-					<option value="parents">부모님과</option>
-					<option value="group">단체로</option>
-				</select> <input type="text" id="datepicker1" placeholder="여행시작날짜"> ~
-				<input type="text" id="datepicker2" placeholder="여행종료날짜">
+				<form action="insert">
+					<label for="travelTitle"></label> <input type="text"
+						id="travelTitle" placeholder="일정 제목을 입력하세요."> <label
+						for="travelWith"></label> <select class="form-control"
+						id="travelWith">
+						<option value="none" disabled selected hidden>누구랑?</option>
+						<option value="alone">혼자</option>
+						<option value="couple">연인과</option>
+						<option value="family">가족과</option>
+						<option value="parents">부모님과</option>
+						<option value="group">단체로</option>
+					</select> <input type="text" id="datepicker1" placeholder="여행시작날짜">
+					~ <input type="text" id="datepicker2" placeholder="여행종료날짜">
+					<button type="submit">저장</button>
+				</form>
 			</div>
 
 			<div id="map"></div>
