@@ -11,7 +11,7 @@ public class whenFinalMerge {
 	</dependency>
 	*/
 	
-	/*
+	/* 아직 미정 들어갈 수도 빠질 수도 있음
 	<!-- api에서 받아온 json 데이터를 처리하는 라이브러리 -->
 	<dependency>
 		<groupId>org.json</groupId>
