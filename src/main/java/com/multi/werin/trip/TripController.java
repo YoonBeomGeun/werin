@@ -2,6 +2,8 @@ package com.multi.werin.trip;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,20 +30,28 @@ public class TripController {
 	}
 	
 	@RequestMapping("trip/update")
-	public String update(int trip_id, Model model) {
+	public String update(int trip_id, Model model, HttpServletRequest request) {
 		TripVO vo = dao.one(trip_id);
+		request.setAttribute("trip_id", trip_id); // update2에서 실패했을 때 다시 수정값들을 불러오기 위해 trip_id set하기
 		model.addAttribute("vo", vo);
 		if(vo.getTrip_id()!= 0) {
 			return "trip/update";
 		}else {
-			return "redirect:main.jsp";
+			return "redirect:main.jsp"; // 수정 상세페이지로 못갈 경우 
 		}
 	}
 	
 	@RequestMapping("trip/update2")
-	public void update2(TripVO vo, Model model) {
+	public String update2(TripVO vo, Model model, HttpServletRequest request) {
 		int result = dao.update(vo);
 		model.addAttribute("result", result);
+		if (result == 1) {
+			return "forward:/trip/list";
+		}
+		else {
+			int trip_id = (int)request.getAttribute("trip_id");
+			return "forward:/trip/update"; // 수정에 실패했을 경우 다시 수정페이지로 이동시키기
+		}
 	}
 	
 	
@@ -49,12 +59,12 @@ public class TripController {
 	public String delete(TripVO vo) {
 		int result = dao.delete(vo);
 		if(result == 1) {
-			return "trip/remove";
+			return "forward:/trip/list";
 		}else { // 삭제X 일때 돌아갈 페이지
 			return "redirect:index_bbs.jsp";
 		}
 	}
-	
+
 	@RequestMapping("trip/list")
 	public String list(Model model) {
 		System.out.println("list");

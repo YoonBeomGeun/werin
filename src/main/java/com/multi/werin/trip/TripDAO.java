@@ -18,6 +18,10 @@ public class TripDAO {
 	public int update(TripVO vo) {
 		return my.update("trip.update", vo);
 	}
+	
+	/*
+	 * public int update(int trip_id) { return my.update(statement, parameter) }
+	 */
 
 	public int delete(TripVO vo) {
 		return my.delete("trip.delete", vo);
