@@ -97,7 +97,41 @@ public class BbsController{
 		
 	}
 	
+//	@RequestMapping("bbs/getSearchList")
+//	@ResponseBody
+//	public String getSearchList(PageVO pageVO, Model model) {
+//	    pageVO.setPage(1);
+//		pageVO.setStartEnd();
+//	    System.out.println("getSerchList");
+//	    System.out.println("pageVO  "+ pageVO);
+//	    List<BbsVO> result = dao.getSearchList(pageVO);
+//	    System.out.println("result.size()"+ result.size());
+//	    int count= 
+//	    
+//	    model.addAttribute("list", result);
+//	    model.addAttribute("pages", pages);
+//	    model.addAttribute("count", count);
+//	    return "bbs/bbs0";  // bbs0.jsp로 forward
 	
+	
+	
+//		pageVO.setStartEnd();// start, end계산해주는 메서드
+//		System.out.println(pageVO);
+//		List<BbsVO> list = dao.(pageVO);
+//		// 전체 페이지수 구하기
+//		int count = dao.count(); // 전체게시물 수
+//		System.out.println("전체 게시물수>> " + count);
+//		int pages = count / 10;
+//		if (count % 10 != 0) {
+//			pages = count / 10 + 1;
+//		}
+//		// 모델로 views까지 페이지수를 넘겨야 페이지수 버튼을 만들 수 있음.
+//		System.out.println("페이지당 가지고 온 게시물수>> " + list.size());
+//		// views의 list1.jsp로 전달
+//		model.addAttribute("list", list);
+//		model.addAttribute("pages", pages);
+//		model.addAttribute("count", count);
+//	}
 
 	
 }
