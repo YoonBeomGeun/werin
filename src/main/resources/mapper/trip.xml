@@ -15,11 +15,23 @@
 		#{trip_id}
 	</update>
 
-	<!-- <update id="viewCount">
+	<update id="viewCount" parameterType="int">
 		update trip 
 		set trip_count = trip_count + 1 
 		where trip_id = #{trip_id}
-	</update> -->
+	</update>
+	
+	<update id = "updateLike" parameterType="int">
+		update trip 
+		set trip_like = trip_like + 1 
+		where trip_id = #{trip_id}
+	</update>
+	
+	<update id = "updateLikeCancel" parameterType="int">
+		update trip 
+		set trip_like = trip_like - 1 
+		where trip_id = #{trip_id}
+	</update>
 
 	<delete id="delete" parameterType="tripVO">
 		delete from trip where
