@@ -11,6 +11,8 @@ public class BbsVO {
 	private int bbs_like;
 	private int bbs_view;
 	private String bbs_img;
+	private String type;
+	private String keyword;
 	public int getNum_id() {
 		return num_id;
 	}
@@ -71,13 +73,28 @@ public class BbsVO {
 	public void setBbs_img(String bbs_img) {
 		this.bbs_img = bbs_img;
 	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	@Override
 	public String toString() {
 		return "BbsVO [num_id=" + num_id + ", bbs_id=" + bbs_id + ", bbs_cate=" + bbs_cate + ", bbs_title=" + bbs_title
 				+ ", bbs_content=" + bbs_content + ", bbs_writer=" + bbs_writer + ", bbs_created_at=" + bbs_created_at
-				+ ", bbs_like=" + bbs_like + ", bbs_view=" + bbs_view + ", bbs_img=" + bbs_img + "]";
+				+ ", bbs_like=" + bbs_like + ", bbs_view=" + bbs_view + ", bbs_img=" + bbs_img + ", type=" + type
+				+ ", keyword=" + keyword + "]";
 	}
-	
+
+
 	
 	
 	

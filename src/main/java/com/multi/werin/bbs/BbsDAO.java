@@ -57,6 +57,8 @@ public class BbsDAO{
 //	}//추천수(수정중..)
 //	
 	
-	
+	public List<BbsVO> getSearchList(PageVO pageVO) {
+	    return my.selectList("bbs.selectSearchList", pageVO);
+	}//검색기능
 	
 }
