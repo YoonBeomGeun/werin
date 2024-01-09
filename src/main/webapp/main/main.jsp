@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="../resources/js/jquery-3.7.1.js"></script>
 <script type="text/javascript"> /* 뭔가 오류가 생긴다면 jquery 경로랑 이름 확인해볼것 */
-
+var xhr = new XMLHttpRequest();
 	$(function(){
 		
 		//관광지추천
@@ -45,13 +45,22 @@
 		})
 		
 		//날씨 api
-		$.ajax({
-			url: 'weather.jsp',
-			
+/*  		$.ajax({
+			url: 'http://data.jeju.go.kr/rest/JejuLdapsDataService/getForecastPointDataXY',
+			data: {
+				servicekey : 'aPfEjmyFEWldT%2F6swKYEIBeFnHViz0HDF7F4rZb%2FO4C927BQ5p8c1aI1Ai1G%2B%2BO%2BtcQu%2BFPg1X18vZee4I5RXg%3D%3D',
+				baseDate: '20211017',
+				baseTime: '0300',
+				nx: '53',
+				ny: '4',
+				hgtLevel: '0',
+				pageSize: '1',
+				startPage: '1'
+			},
 			success: function(x){
-				$('#weather') 
+				alert(x)
 			}
-		})
+		}) */
 	})
 </script>
 </head>
