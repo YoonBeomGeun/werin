@@ -46,7 +46,30 @@
     	update bbs set bbs_view = bbs_view + 1 WHERE bbs_id = #{bbs_id}
 	</update>
 	
-	
-	
+	<select id="selectSearchList" parameterType="pageVO" resultType="bbsVO">
+	    SELECT * FROM (
+	        SELECT 
+	            ROW_NUMBER() OVER (ORDER BY bbs_id DESC) AS num_id,
+	            bbs.*
+	        FROM bbs
+	        WHERE
+	            <!-- 수정: 작성자로 검색하는 경우 -->
+	            <choose>
+	                <when test="type != null and type != '' and type == 'writer'">
+	                    bbs_writer LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <!-- 다른 검색 조건들 추가 -->
+	                <when test="type != null and type != '' and type == 'title'">
+	                    <!-- 기본적으로 제목으로 검색 -->
+	                    bbs_title LIKE '%' || #{keyword} || '%'
+	                </when>
+	                <when test="type != null and type != '' and type == 'content'">
+	                    <!-- 기본적으로 내용으로 검색 -->
+	                    bbs_content LIKE '%' || #{keyword} || '%'
+	                </when>
+	            </choose>
+	    ) AS temp
+	    WHERE temp.num_id BETWEEN #{start} AND #{end}
+	</select>	
 	
 </mapper>

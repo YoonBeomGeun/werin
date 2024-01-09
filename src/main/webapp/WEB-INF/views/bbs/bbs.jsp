@@ -12,18 +12,60 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>     
 <script type="text/javascript">
 	$(function() {
-		$(".pages").click(function() {
-			$.ajax({
-				url: "bbs0",
-				data: {
-					page: $(this).text()
-				},
-				success: function(table) {
-					$("#result").html(table)
+    $(".pages").click(function() {
+        // 첫 번째 AJAX 호출
+        $.ajax({
+            url: "bbs0",
+            data: {
+                page: $(this).text()
+            },
+            success: function(table) {
+                $("#result").html(table);
+            }
+        });
+
+        // 두 번째 AJAX 호출
+        $.ajax({
+            url: "getSearchList",
+            data: {
+                page: $(this).text(),
+                type: $("select[name=type]").val(),
+                keyword: $("input[name=keyword]").val()
+            },
+            success: function(table) {
+                $("#result").html(table);
+            }
+        });
+    });
+});
+	
+	function getSearchList() {
+		$.ajax({
+			type: 'GET',
+			url: "getSearchList",
+			data: $("form[name=search-form]").serialize(),
+			success: function(result) {
+				$('#result > table > tbody').empty();
+				if (result.length >= 1) {
+					result.forEach(function(item) {
+						var str = '<tr>';
+						str += "<td>" + item.num_id + "</td>";
+						str += "<td>" + item.bbs_cate + "</td>";
+						str += "<td><a href='/bbs/bbs2?bbs_id=" + item.bbs_id + "'>" + item.bbs_title + "</a></td>";
+						str += "<td>" + item.bbs_content + "</td>";
+						str += "<td width=200>" + item.bbs_writer + "</td>";
+						str += "<td width=200>" + item.bbs_like + "</td>";
+						str += "</tr>";
+						$("#result").append(str);
+						//$('#result > table > tbody').append(str);
+						console.log(result);
+					});
 				}
-			})
-		})
-	})
+			}
+		});
+	} 
+	
+	
 </script>
 </head>
 <body>
@@ -54,7 +96,19 @@
 		    </tr>
 			</c:forEach>
 		</table>
-		<a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
+		<a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>	
+		<diV>
+			<form name="search-form" autocomplete="off">
+				<select name="type">
+					<option value="">검색 내용 선택</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="writer">작성자</option>
+				</select>
+				<input type="text" name="keyword" value=""></input>
+				<input type="button" onclick="getSearchList()" class="btn btn-outline-primary" value="검색" id="boardtable"></input>
+			</form>
+		</div>
 		<%
 			int pages = (int)request.getAttribute("pages");//int(작) <--- Object(큰)
 			for(int p = 1; p <= pages; p++){
