@@ -4,4 +4,32 @@
 
 <mapper namespace="gowithcmt">
 
+	<insert id="create" parameterType="gowithcmtVO">
+		insert into gowithcmt values
+		(null, #{gowith_id}, #{gowithcmt_writer}, #{gowithcmt_content}, now(), now())
+	</insert>
+	
+	<update id="update" parameterType="gowithcmtVO">
+		update gowithcmt
+		set gowithcmt_content = #{gowithcmt_content}, gowithcmt_updated_at = now()
+		where gowithcmt_id = #{gowithcmt_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from gowithcmt
+		where gowithcmt_id = #{gowithcmt_id}
+	</delete>
+	
+	<!-- <select id="one" parameterType="int" resultType="GowithcmtVO">
+		select *
+		from gowithcmt
+		where gowithcmt_id = #{gowithcmt_id}
+	</select> -->
+	
+	<select id="list" parameterType="int" resultType="gowithcmtVO">
+		select *
+		from gowithcmt
+		where gowith_id = #{gowith_id}
+	</select>
+	
 </mapper>
