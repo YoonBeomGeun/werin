@@ -1,7 +1,7 @@
 package com.multi.werin.landmark;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;  // 주석 관리 부분
+import com.fasterxml.jackson.databind.ObjectMapper;  // 주석 관리 부분
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public class categorycodeprint {
 
     public static void main(String[] args) {
-        String apiKey = "gRjisabrZIfabIjre8qnZIy4ig724PgKzbxWE5KdbOHL4SD%2FneKsnNw2phKHIowgD5NXuBRaTpMEvSAY2uTA1Q%3D%3D";
+        String apiKey = "";
         int numOfRows = 10; // 한 페이지에 표시할 항목의 수
 
         // 첫 페이지부터 마지막 페이지까지 반복해서 호출
