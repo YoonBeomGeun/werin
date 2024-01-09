@@ -15,6 +15,12 @@
 		#{trip_id}
 	</update>
 
+	<!-- <update id="viewCount">
+		update trip 
+		set trip_count = trip_count + 1 
+		where trip_id = #{trip_id}
+	</update> -->
+
 	<delete id="delete" parameterType="tripVO">
 		delete from trip where
 		trip_id
@@ -22,10 +28,12 @@
 	</delete>
 
 	<select id="one" parameterType="tripVO" resultType="tripVO">
-		SELECT * FROM trip WHERE trip_id = #{trip_id};
+		SELECT * FROM
+		trip WHERE trip_id = #{trip_id};
 	</select>
 
 	<select id="list" resultType="tripVO">
-		select * from trip order by trip_id desc
+		select * from trip order by trip_id
+		desc
 	</select>
 </mapper>
