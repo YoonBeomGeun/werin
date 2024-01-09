@@ -42,12 +42,21 @@ public class MemberController {
 	        if (member != null) {
 	            // 로그인 성공
 	            session.setAttribute("loginId", member.getMember_id());
+	            session.setAttribute("loggedInUser", member); 
 	            return "redirect:/header.jsp"; // 로그인 후 이동할 페이지 경로
 	        } else {
 	            // 로그인 실패
 	        	model.addAttribute("state", 0);
-	            return "redirect:/member/login.jsp"; // 로그인 실패 시 이동할 페이지 경로 (에러 메시지를 전달할 수도 있음)
+	            return "forward:/member/login.jsp"; // 로그인 실패 시 이동할 페이지 경로 (에러 메시지를 전달할 수도 있음)
 	        }
 	    }
+	 
+	 @RequestMapping(value = "member/logout")
+	    public String logout(HttpSession session) {
+	        // 세션 무효화하여 사용자 로그아웃
+	        session.invalidate();
+	        return "redirect:/member/login.jsp"; // 로그인 페이지 또는 원하는 다른 페이지로 리다이렉트
+	    }
+	 
 	 
 }

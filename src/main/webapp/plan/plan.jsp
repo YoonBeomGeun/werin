@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -321,7 +323,7 @@
 						<option value="group">단체로</option>
 					</select> <input type="text" id="datepicker1" placeholder="여행시작날짜">
 					~ <input type="text" id="datepicker2" placeholder="여행종료날짜">
-					<button type="submit">저장</button>
+					<button id="save" type="submit">저장</button>
 				</form>
 			</div>
 
@@ -331,13 +333,14 @@
 		<div id="mid">
 			<ul id="dayButtons"></ul>
 			<div id="dayPlansContainer"></div>
+
 		</div>
 
 		<div id="menu_wrap" class="bg_white">
 			<div class="option">
 				<div>
 					<form onsubmit="searchPlaces(); return false;">
-						키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
+						키워드 : <input type="text" value="제주 공항" id="keyword" size="15">
 						<button type="submit">검색하기</button>
 					</form>
 				</div>
@@ -359,7 +362,7 @@
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
-			center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 			level : 3
 		// 지도의 확대 레벨
 		};
