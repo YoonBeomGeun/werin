@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TripController {
 
 	@Autowired
 	TripDAO dao;
+	
+	@Autowired
+	TripService service;
 
 	@RequestMapping("trip/insert")
 	public String insert(TripVO vo) {
@@ -80,8 +84,15 @@ public class TripController {
 	
 	@RequestMapping("trip/one")
 	public String one(int trip_id, Model model) {
+		
+		service.incrementCount(trip_id);
+		
 		TripVO vo = dao.one(trip_id);
 		System.out.println("Tripvo =>" + vo);
+		
+		
+		System.out.println("Tripvo =>" + vo);
+		
 		model.addAttribute("vo", vo);
 		if(vo.getTrip_id()!= 0) {
 			return "trip/one";
@@ -89,4 +100,5 @@ public class TripController {
 			return "redirect:main.jsp";
 		}
 	}
+	
 }

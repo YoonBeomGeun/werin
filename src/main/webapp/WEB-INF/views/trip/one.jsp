@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>여행기 상세 정보</title>
     <%@ include file="../../../header.jsp" %>
-    <style>
+     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
@@ -48,14 +48,34 @@
         }
 
         button {
-            background-color: #e74c3c;
-            color: #fff;
             padding: 10px 20px;
             font-size: 16px;
-            border: none;
             cursor: pointer;
             margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
         }
+
+        /* 버튼에 대한 클래스 스타일 지정 */
+        .remove-btn {
+            background-color: #e74c3c;
+        }
+
+        .update-btn {
+            background-color: #3498db;
+            margin-right: 150px;
+        }
+
+        .return-btn {
+            background-color: #2ecc71;
+        }
+
+        .like-btn {
+            background-color: #27ae60;
+            margin-right: 220px;
+        }
+
     </style>
 </head>
 <body>
@@ -69,8 +89,12 @@
             <p><strong>작성자:</strong> ${vo.trip_writer}</p>
             <p><strong>내용:</strong> ${vo.trip_content}</p>
         </div>
-        <button onclick="remove()">삭제</button>
-        <button onclick="update()">수정</button>
+        <button class="remove-btn" onclick="remove()">삭제</button>
+        <button class="update-btn" onclick="update()">수정</button>
+        <button class="like-btn" onclick="like()" id = "like">추천 ${vo.trip_like}</button>
+        <a href="${pageContext.request.contextPath}/trip/list"><button class="return-btn">돌아가기</button></a>
+        
+        
         <a href = "${pageContext.request.contextPath}/trip/list"><button>돌아가기</button></a>
 
         <script>
@@ -85,6 +109,44 @@
                     location.href = "update?trip_id=<%=bag.getTrip_id()%>";           
                 } 
             }
+            
+        /*     function like() {
+                // 추천 동작 처리 (AJAX 등을 사용하여 서버에 전송)
+                $(function()){
+                	$("#like").click(function() {
+                		//1. 로그인 여부 확인
+                		if(){ // 로그인 X일 경우
+                		 alert ("로그인 후 추천할 수 있습니다")
+                		}
+                		else{
+                			
+                    		if(){//2. 추천을 이미 눌렀다면 다시 눌렀을 때 추천 수 -1
+                    			let like = ${vo.trip_like} - 1;
+                    		}
+                    		else{//3. 추천을 누르지 않은 상태라면 추천 + 1
+                    			let like = ${vo.trip_like} + 1;
+                    		}
+                		}
+                		
+                		
+                		
+					})
+                }
+                alert("게시글을 추천했습니다.");
+            } */
+
+           function like(){
+            	$.ajax({
+            		type: 'POST',
+                    url: '${pageContext.request.contextPath}/trip/one',
+                    success: function(result){
+                    	
+                    }
+            	})
+            }
+                
+                
+            
         </script>
     </div>
 </body>

@@ -19,9 +19,11 @@ public class TripDAO {
 		return my.update("trip.update", vo);
 	}
 	
-	/*
-	 * public int update(int trip_id) { return my.update(statement, parameter) }
-	 */
+	
+	public int incrementCount(int trip_id) { 
+		return my.update("trip.viewCount", trip_id);
+	}
+	 
 
 	public int delete(TripVO vo) {
 		return my.delete("trip.delete", vo);

@@ -16,9 +16,10 @@ public class TripVO {
 	private String trip_writer;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date trip_writedate;
-	private int trip_count;
+	private Integer trip_count;
 	private int trip_like;
 	private String trip_img;
+	
 	public Integer getTrip_id() {
 		return trip_id;
 	}
@@ -64,7 +65,7 @@ public class TripVO {
 	public int getTrip_count() {
 		return trip_count;
 	}
-	public void setTrip_count(int trip_count) {
+	public void setTrip_count(Integer trip_count) {
 		this.trip_count = trip_count;
 	}
 	public int getTrip_like() {
