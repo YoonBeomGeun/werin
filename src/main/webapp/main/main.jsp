@@ -45,22 +45,13 @@ var xhr = new XMLHttpRequest();
 		})
 		
 		//날씨 api
-/*  		$.ajax({
-			url: 'http://data.jeju.go.kr/rest/JejuLdapsDataService/getForecastPointDataXY',
-			data: {
-				servicekey : 'aPfEjmyFEWldT%2F6swKYEIBeFnHViz0HDF7F4rZb%2FO4C927BQ5p8c1aI1Ai1G%2B%2BO%2BtcQu%2BFPg1X18vZee4I5RXg%3D%3D',
-				baseDate: '20211017',
-				baseTime: '0300',
-				nx: '53',
-				ny: '4',
-				hgtLevel: '0',
-				pageSize: '1',
-				startPage: '1'
-			},
+		$.ajax({
+			url: 'http://api.openweathermap.org/data/2.5/weather?q=jeju&APPID=ddc5dcd1b8ef74ebe5bf8438a715ab1a&units=metric',
 			success: function(x){
-				alert(x)
+				console.log(x);
+				$('#weather').append(x)
 			}
-		}) */
+		})
 	})
 </script>
 </head>
@@ -118,8 +109,8 @@ var xhr = new XMLHttpRequest();
 	HOT 게시글
 	</div>
 	
-	<div id="weather">
-	오늘의 제주날씨
+	<div id="weather">     
+	      
 	</div>
 </body>
 </html>
