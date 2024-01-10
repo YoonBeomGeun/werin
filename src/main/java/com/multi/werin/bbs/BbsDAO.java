@@ -35,7 +35,7 @@ public class BbsDAO{
 	
 	public int count() {
 		return my.selectOne("bbs.count");
-	}
+	}//전체 게시물 카운트
 	
 	public BbsVO one(BbsVO bbsVO) {
 		return my.selectOne("bbs.one", bbsVO);
@@ -61,4 +61,12 @@ public class BbsDAO{
 	    return my.selectList("bbs.selectSearchList", pageVO);
 	}//검색기능
 	
+	public int count2() {
+		return my.selectOne("bbs.count2");
+	}//검색기능에서 쓰는거
+	
+	
+	public List<BbsVO> list2(PageVO pageVO) {
+		return my.selectList("bbs.list", pageVO);
+	}//검색기능에서 쓰는거
 }

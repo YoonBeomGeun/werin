@@ -23,17 +23,25 @@
                 $("#result").html(table);
             }
         });
+        searchData = {
+                page: $(this).text(),
+                type: $("select[name=type]").val(),
+                keyword: $("input[name=keyword]").val()
+            };
 
         // 두 번째 AJAX 호출
         $.ajax({
             url: "getSearchList",
-            data: {
-                page: $(this).text(),
-                type: $("select[name=type]").val(),
-                keyword: $("input[name=keyword]").val()
-            },
-            success: function(table) {
-                $("#result").html(table);
+            data: searchData,
+            success: function() {
+            	result.forEach(function(item)){
+            		$("select[name=type]").val(searchData.type);
+                    $("input[name=keyword]").val(searchData.keyword);
+            	}else{
+            		console.error('Received data is not an array.');
+            	}
+             	// 검색 타입, keyword 다시 셋팅
+            	
             }
         });
     });
@@ -97,7 +105,7 @@
 			</c:forEach>
 		</table>
 		<a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>	
-		<diV>
+		<diV id="result2">
 			<form name="search-form" autocomplete="off">
 				<select name="type">
 					<option value="">검색 내용 선택</option>
@@ -106,6 +114,7 @@
 					<option value="writer">작성자</option>
 				</select>
 				<input type="text" name="keyword" value=""></input>
+				<input type="text" name="page" value="1"></input>
 				<input type="button" onclick="getSearchList()" class="btn btn-outline-primary" value="검색" id="boardtable"></input>
 			</form>
 		</div>
@@ -120,4 +129,4 @@
 	</div>
 	
 </body>
-</html>
+</html> 
