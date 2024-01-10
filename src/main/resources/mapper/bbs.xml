@@ -28,7 +28,8 @@
 			(select 
 				ROW_NUMBER() over(order by bbs_id desc) as num_id,
 				bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
-			from bbs p) p2
+			from bbs p
+			) p2
 		where p2.num_id BETWEEN ${start} and ${end}
 	</select>
 	
@@ -72,4 +73,24 @@
 	    WHERE temp.num_id BETWEEN #{start} AND #{end}
 	</select>	
 	
+	<select id="count2" parameterType="pageVO" resultType="int">
+    	SELECT COUNT(*) FROM bbs
+    <where>
+        <!-- 수정: 작성자로 검색하는 경우 -->
+        <choose>
+            <when test="type != null and type != '' and type == 'writer'">
+                AND bbs_writer LIKE '%' || #{keyword} || '%'
+            </when>
+            <!-- 다른 검색 조건들 추가 -->
+            <when test="type != null and type != '' and type == 'title'">
+                <!-- 기본적으로 제목으로 검색 -->
+                AND bbs_title LIKE '%' || #{keyword} || '%'
+            </when>
+            <when test="type != null and type != '' and type == 'content'">
+                <!-- 기본적으로 내용으로 검색 -->
+                AND bbs_content LIKE '%' || #{keyword} || '%'
+            </when>
+        </choose>
+    </where>
+</select>
 </mapper>
