@@ -272,7 +272,7 @@
 									});
 							this.classList.add('selected');
 
-							// 선택된 날짜의 일정을 표시
+							// 선택된 날짜의 일정만 표시
 							var selectedDay = this;
 							document.querySelectorAll('.plan-list').forEach(
 									function(planList) {
@@ -281,6 +281,14 @@
 							var planList = selectedDay
 									.querySelector('.plan-list');
 							planList.style.display = 'block';
+
+							// 선택된 날짜의 일정을 lb에 표시
+							var lb = document.getElementById('lb');
+							lb.innerHTML = '';
+							var planItems = planList.querySelectorAll('li');
+							planItems.forEach(function(item) {
+								lb.appendChild(item.cloneNode(true));
+							});
 						});
 
 						// 새로운 day의 일정 목록을 생성
@@ -513,14 +521,12 @@
 		}
 
 		function planInsert(placeName, latitude, longitude, contextPath, phone) {
-			// 선택된 날짜를 가져옵니다.
 			var selectedDay = document.querySelector('.day-button.selected');
 			if (!selectedDay) {
 				alert('일정을 저장할 "Day"를 선택하세요.');
 				return;
 			}
 
-			// 선택된 날짜의 일정 목록을 가져옵니다.
 			var planList = selectedDay.querySelector('.plan-list');
 
 			// 새로운 일정 항목을 생성합니다.
@@ -532,6 +538,10 @@
 
 			// 새로운 일정 항목을 일정 목록에 추가합니다.
 			planList.appendChild(newPlanItem);
+
+			// 새로운 일정 항목을 lb 영역에 추가합니다.
+			var lb = document.getElementById('lb');
+			lb.appendChild(newPlanItem.cloneNode(true));
 		}
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 		function addMarker(position, idx, title) {
