@@ -174,6 +174,7 @@
 				}
 			})
 		})
+		
 	})
 </script>
 </head>
@@ -201,6 +202,8 @@
 	<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
 	<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
 	<div class="edit" style="text-align: right; margin-right: 300px;">
+		<a href="insertChat.jsp?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>"><button style="background:#33CC99;">채팅하기</button></a>
+		<!-- 세션으로 현재 로그인한 사람 정보 추가 -->
 		<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#33CC99;">수정</button></a>
 		<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#FF5555;">삭제</button></a>
 	</div>
