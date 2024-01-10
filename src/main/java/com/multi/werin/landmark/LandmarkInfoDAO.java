@@ -27,4 +27,6 @@ public class LandmarkInfoDAO {
 		List<LandmarkInfoVO> list = my.selectList("landmarkInfo.list");
 		return list;
 	}
+
+	
 }
