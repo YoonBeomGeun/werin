@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="room">
+
+	<insert id="create" parameterType="roomVO">
+		insert into room
+		values (null, #{room_name}, #{gowith_id}, #{room_member}, now(), 'a')
+	</insert>
+</mapper>
