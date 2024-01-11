@@ -32,7 +32,7 @@
 
             $('#b3').click(function () {
                 // Define your API URL
-                var apiKey = "gRjisabrZIfabIjre8qnZIy4ig724PgKzbxWE5KdbOHL4SD%2FneKsnNw2phKHIowgD5NXuBRaTpMEvSAY2uTA1Q%3D%3D";
+                var apiKey = "";
                 var numOfRows = 10;
                 var pageNo = 1;
 
@@ -96,13 +96,14 @@
             transition: background-color 0.3s, color 0.3s;
         }
     </style>
+    <%@ include file="../header.jsp"%>
 </head>
 <body>
-    <%@ include file="../header.jsp"%>
+    
     <div>
         <a id="b1"><button>상세페이지</button></a>
         <a id="b2"><button>목록부르기</button></a>
-        <a id="b3"><button>목록부르기</button></a>
+        <a id="b3"><button>api부르기</button></a>
     </div>
     <hr>
     <div class="result"></div>
