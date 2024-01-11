@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*return타입 뭔지 확인해봐야함*/
-/*requestmapping  뭐 넣어야하는지 확인해봐야함*/
+/*Requestmapping에 똑같은게 있는 경우는 어떻게 되는지?*/
 
 @Controller
 public class MainController {
@@ -21,13 +20,20 @@ public class MainController {
 		List<MainlandmarkVO> recommendlandmark = maindao.recommendlandmark(mainlandmarkVO);
 		model.addAttribute("recommendlandmark", recommendlandmark);
 	}
-
-	@RequestMapping("main/mainsearch") /* search 아얘 싹다 고쳐야함 */
-	public void mainsearch(MainlandmarkVO mainVO, Model model) {
-		List<MainlandmarkVO> mainsearch = maindao.mainsearch(mainVO);
-		model.addAttribute("mainsearch", mainsearch);
+	
+	@RequestMapping("main/search")
+	public void mainsearch(SearchLandmarkVO searchlandmarkVO, SearchBbsVO searchbbsVO, SearchTripVO searchtripVO, Model model) {
+		List<SearchLandmarkVO> searchlandmark = maindao.searchlandmark(searchlandmarkVO);
+		model.addAttribute("searchlandmark", searchlandmark);
+		
+		List<SearchBbsVO> searchbbs = maindao.searchbbs(searchbbsVO);
+		model.addAttribute("searchbbs", searchbbs);
+		
+		List<SearchTripVO> searchtrip = maindao.searchtrip(searchtripVO);
+		model.addAttribute("searchtrip", searchtrip); 
+		//views/main/serarch.jsp
 	}
-
+	
 	@RequestMapping("main/hottravel")
 	public void hottravel(MaintripVO maintripVO, Model model) {
 		List<MaintripVO> hottravel = maindao.hottravel(maintripVO);
