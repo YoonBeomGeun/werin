@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<%@ include file="../../header.jsp" %>
 <meta charset="UTF-8">
+<%-- <%@ include file="../header.jsp" %> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../resources/css/main.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 <title>Insert title here</title>
 <script type="text/javascript" src="../resources/js/jquery-3.7.1.js"></script>
 <script type="text/javascript"> /* 뭔가 오류가 생긴다면 jquery 경로랑 이름 확인해볼것 */
@@ -56,37 +58,6 @@ var xhr = new XMLHttpRequest();
 </script>
 </head>
 <body>
-<header>
-        <div class="all">
-        	<div class="logo">
-	            <a href=""><img src="${pageContext.request.contextPath}/resources/img/로고.png"></a>
-        	</div>
-        	<div class="title">
-            	<a href=""><img src="${pageContext.request.contextPath}/resources/img/제목.png"></a>
-            </div>
-            <div class="right">
-            	<div class="but">
-            		<button onclick="member()">회원가입</button>
-            		<button>로그인</button>
-            	</div>
-            </div>
-        </div>
-    <br>
-	<div class="menubar">
-	<a href=""><button id="menu">관광지 소개</button></a>
-	<a href=""><button id="menu">일정 만들기</button></a>
-	<a href=""><button id="menu">여행기 작성</button></a>
-	<a href=""><button id="menu">커뮤니티</button></a>
-	<a href=""><button id="menu">나의 여행</button></a>
-	<a href=""><button id="menu">공지 / 건의</button></a>
-</div>
-    </header>
-	<script>
-		function member() {
-			alert("실행..........");
-		}
-	</script>
-	
 	<div id="recommendlandmark"> <!-- 일단은 한개만 넣어놔서 id를 썻지만 필요시 class로 변경 -->
 		관광지 추천
 	</div>
@@ -94,6 +65,7 @@ var xhr = new XMLHttpRequest();
 	<div id="mainserch"> <!-- 검색칸 -->
 		<form action="search">
 			<input name="searching"> <!-- searching으로 검색내용을 받음 -->
+			<button>검색하기</button>
 		</form>
 	</div>
 	
@@ -110,7 +82,7 @@ var xhr = new XMLHttpRequest();
 	</div>
 	
 	<div id="weather">     
-	      
+	날씨정보
 	</div>
 </body>
 </html>
