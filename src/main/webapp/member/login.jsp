@@ -14,6 +14,7 @@
 <body>
 	<%@ include file="../header.jsp"%>
 	<div class="container">
+
 		<h2>로그인</h2>
 		<form id="loginForm" action="loginProcess" method="post">
 			<label for="id">ID:</label> <input type="text" id="id"
@@ -24,7 +25,6 @@
 			<c:if test="${not empty requestScope.error}">
 				<p class="error">${requestScope.error}</p>
 			</c:if>
-
 
 			<button type="submit">로그인</button>
 		</form>
@@ -44,14 +44,17 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="your_script.js"></script>
 	<script>
-		// state 값이 0이면 alert 메시지를 띄움
-		var state = $
-		{
-			state
-		};
-		if (state === 0) {
-			alert("아이디 또는 비밀번호가 잘못되었습니다.");
-		}
+	$(document).ready(function() {
+        // 서버에서 전달된 상태 값 확인
+        var state = ${state};
+        // 콘솔에 상태 값 출력 (디버깅 용도)
+        console.log("State value:", state);
+
+        if (state === 0) {
+            // 아이디 또는 비밀번호가 잘못되었을 때 알림 창 표시
+            alert("아이디 또는 비밀번호가 잘못되었습니다.");
+        }
+    });
 	</script>
 </body>
 </html>

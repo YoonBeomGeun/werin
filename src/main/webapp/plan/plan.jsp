@@ -265,6 +265,7 @@
 						button.innerHTML = "Day" + (i + 1) + "<br>"
 								+ formatDate(currentDate);
 						button.className = 'day-button';
+						
 						button.addEventListener('click', function() {
 							document.querySelectorAll('.day-button').forEach(
 									function(btn) {
@@ -281,14 +282,6 @@
 							var planList = selectedDay
 									.querySelector('.plan-list');
 							planList.style.display = 'block';
-
-							// 선택된 날짜의 일정을 lb에 표시
-							var lb = document.getElementById('lb');
-							lb.innerHTML = '';
-							var planItems = planList.querySelectorAll('li');
-							planItems.forEach(function(item) {
-								lb.appendChild(item.cloneNode(true));
-							});
 						});
 
 						// 새로운 day의 일정 목록을 생성
@@ -521,27 +514,23 @@
 		}
 
 		function planInsert(placeName, latitude, longitude, contextPath, phone) {
+			// 현재 선택된 날짜 찾기
 			var selectedDay = document.querySelector('.day-button.selected');
 			if (!selectedDay) {
-				alert('일정을 저장할 "Day"를 선택하세요.');
+				alert('날짜를 먼저 선택해주세요.');
 				return;
 			}
 
+			// 선택된 날짜의 일정 목록 찾기
 			var planList = selectedDay.querySelector('.plan-list');
 
-			// 새로운 일정 항목을 생성합니다.
+			// 새로운 일정 아이템 생성
 			var newPlanItem = document.createElement('li');
-			newPlanItem.textContent = placeName + ' (' + phone + ')';
-			newPlanItem.onclick = function() {
-				alert('장소: ' + placeName);
-			};
+			newPlanItem.innerHTML = '<span>' + placeName
+					+ '</span><span class="tel">' + phone + '</span>';
 
-			// 새로운 일정 항목을 일정 목록에 추가합니다.
-			planList.appendChild(newPlanItem);
-
-			// 새로운 일정 항목을 lb 영역에 추가합니다.
-			var lb = document.getElementById('lb');
-			lb.appendChild(newPlanItem.cloneNode(true));
+			// 새로운 일정 목록에 추가
+			lb.appendChild(newPlanItem);
 		}
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 		function addMarker(position, idx, title) {
