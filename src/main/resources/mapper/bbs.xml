@@ -57,16 +57,16 @@
 	            <!-- 수정: 작성자로 검색하는 경우 -->
 	            <choose>
 	                <when test="type != null and type != '' and type == 'writer'">
-	                    bbs_writer LIKE '%' || #{keyword} || '%'
+                         bbs_writer LIKE concat('%', #{keyword}, '%')
 	                </when>
 	                <!-- 다른 검색 조건들 추가 -->
 	                <when test="type != null and type != '' and type == 'title'">
 	                    <!-- 기본적으로 제목으로 검색 -->
-	                    bbs_title LIKE '%' || #{keyword} || '%'
+	                    bbs_title LIKE concat('%', #{keyword}, '%') 
 	                </when>
 	                <when test="type != null and type != '' and type == 'content'">
 	                    <!-- 기본적으로 내용으로 검색 -->
-	                    bbs_content LIKE '%' || #{keyword} || '%'
+	                    bbs_content LIKE concat('%', #{keyword}, '%')
 	                </when>
 	            </choose>
 	    ) AS temp
@@ -75,22 +75,22 @@
 	
 	<select id="count2" parameterType="pageVO" resultType="int">
     	SELECT COUNT(*) FROM bbs
-    <where>
         <!-- 수정: 작성자로 검색하는 경우 -->
         <choose>
-            <when test="type != null and type != '' and type == 'writer'">
-                AND bbs_writer LIKE '%' || #{keyword} || '%'
-            </when>
             <!-- 다른 검색 조건들 추가 -->
             <when test="type != null and type != '' and type == 'title'">
                 <!-- 기본적으로 제목으로 검색 -->
-                AND bbs_title LIKE '%' || #{keyword} || '%'
+                WHERE  bbs_writer LIKE concat('%', #{keyword}, '%')
             </when>
-            <when test="type != null and type != '' and type == 'content'">
-                <!-- 기본적으로 내용으로 검색 -->
-                AND bbs_content LIKE '%' || #{keyword} || '%'
+            <when test="type != null and type != '' and type == 'title'">
+                <!-- 기본적으로 제목으로 검색 -->
+                WHERE  bbs_title LIKE concat('%', #{keyword}, '%')
+            </when>
+            <when test="type != null and type != '' and type == 'title'">
+                <!-- 기본적으로 제목으로 검색 -->
+                WHERE  bbs_content LIKE concat('%', #{keyword}, '%')
             </when>
         </choose>
-    </where>
+    
 </select>
 </mapper>
