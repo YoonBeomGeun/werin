@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,6 +64,7 @@ public class BbsController{
 	}
 	
 	
+
 	
 	@RequestMapping("bbs/bbs")
 	public void list2(PageVO pageVO, Model model) { // start, end
@@ -102,29 +103,29 @@ public class BbsController{
 		
 	}
 	
-//	@RequestMapping("bbs/getSearchList")
-//	@ResponseBody
-//	public String getSearchList(PageVO pageVO, Model model) {
-//		pageVO.setStartEnd();
-//		
-//	    System.out.println("getSerchList");
-//	    System.out.println("pageVO  "+ pageVO);
-//	    List<BbsVO> result = dao.getSearchList(pageVO);
-//	    System.out.println("result.size()"+ result.size());
-//	    
-//	    int count=  dao.count2(); // 전체게시물 수 
-//	    int pages = count / 10;
-//		if (count % 10 != 0) {
-//			pages = count / 10 + 1;
-//		}
-//	    model.addAttribute("list", result);
-//	    model.addAttribute("pages", pages);
-//	    model.addAttribute("count", count);
-//	    model.addAttribute("keyword", pageVO.getKeyword());
-//	    model.addAttribute("type", pageVO.getType());
-//	    return "bbs/bbs";  
-//	
-//	}
+	@RequestMapping("bbs/getSearchList")
+	public String getSearchList(PageVO pageVO, Model model) {
+		pageVO.setStartEnd();
+		
+	    System.out.println("getSerchList");
+	    System.out.println("pageVO  "+ pageVO);
+	    List<BbsVO> result = dao.getSearchList(pageVO);
+	    System.out.println("result.size()"+ result.size());
+	    
+	    int count=  dao.count2(); // 전체게시물 수 
+	    int pages = count / 10;
+		if (count % 10 != 0) {
+			pages = count / 10 + 1;
+		}
+		System.out.println("페이지" + pages +"게시물 수" + count);
+	    model.addAttribute("list", result);
+	    model.addAttribute("pages", pages);
+	    model.addAttribute("count", count);
+	    model.addAttribute("keyword", pageVO.getKeyword());
+	    model.addAttribute("type", pageVO.getType());
+	    return "bbs/bbs";  
+	
+	}
 	
 	
 //	@RequestMapping("bbs/getSearchList")
@@ -149,14 +150,14 @@ public class BbsController{
 //	    return  response;
 //	}
 //	
-//	@RequestMapping("bbs/bbs00")
-//	@ResponseBody
-//	public String list3(PageVO pageVO, Model model) {
-//		pageVO.setStartEnd();
-//		List<BbsVO> list = dao.list2(pageVO);
-//		model.addAttribute("list", list);
-//		return "bbs/bbs"; 
-//	}
+	@RequestMapping("bbs/bbs00")
+	@ResponseBody
+	public String list3(PageVO pageVO, Model model) {
+		pageVO.setStartEnd();
+		List<BbsVO> list = dao.list2(pageVO);
+		model.addAttribute("list", list);
+		return "bbs/bbs"; 
+	}
 
 	
 }

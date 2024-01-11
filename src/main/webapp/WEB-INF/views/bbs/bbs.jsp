@@ -3,6 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+	<%
+    BbsVO bag = (BbsVO)request.getAttribute("bag");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,22 +32,7 @@
                 type: $("select[name=type]").val(),
                 keyword: $("input[name=keyword]").val()
             };
-
-        // 두 번째 AJAX 호출
-        $.ajax({
-            url: "getSearchList",
-            data: searchData,
-            success: function() {
-            	result.forEach(function(item)){
-            		$("select[name=type]").val(searchData.type);
-                    $("input[name=keyword]").val(searchData.keyword);
-            	}else{
-            		console.error('Received data is not an array.');
-            	}
-             	// 검색 타입, keyword 다시 셋팅
-            	
-            }
-        });
+       
     });
 });
 	
@@ -84,6 +73,11 @@
 	전체 페이지 수 : ${pages}개 <br><br>
 	
 	<div id="result">
+		<!-- Check if the user is logged in -->
+        <c:if test="${not empty sessionScope.loginId}">
+            <a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
+        </c:if>
+        
 		<table border="1" class="table table-bordered table tabel-hover">
 		    <tr bgcolor="lime">
 		        <td width=70>행번호</td>
@@ -104,9 +98,14 @@
 		    </tr>
 			</c:forEach>
 		</table>
-		<a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>	
+		<!-- <a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a> -->	
+		<% 
+				if(session.getAttribute("loginId") != null){
+		%>
+        <a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
+        <% } %>
 		<diV id="result2">
-			<form name="search-form" autocomplete="off">
+			<form action="getSearchList" name="search-form" >
 				<select name="type">
 					<option value="">검색 내용 선택</option>
 					<option value="title">제목</option>
@@ -115,17 +114,21 @@
 				</select>
 				<input type="text" name="keyword" value=""></input>
 				<input type="text" name="page" value="1"></input>
-				<input type="button" onclick="getSearchList()" class="btn btn-outline-primary" value="검색" id="boardtable"></input>
+				<input type="submit" class="btn btn-outline-primary" value="검색" id="boardtable"></input>
 			</form>
 		</div>
+		
+		=======================
 		<%
 			int pages = (int)request.getAttribute("pages");//int(작) <--- Object(큰)
+			out.write(pages);
 			for(int p = 1; p <= pages; p++){
 		%>
 			<button style="background:pink;" class="pages"><%=p%></button>&nbsp;
 		<%		
 		}
 		%>
+		============================
 	</div>
 	
 </body>
