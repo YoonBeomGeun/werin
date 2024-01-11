@@ -45,7 +45,7 @@ public class MemberController {
 	            // 로그인 성공시
 	            session.setAttribute("loginId", member.getMember_id()); // 사용자 아이디 저장
 	            session.setAttribute("loggedInUser", member);  // 사용자 객체 저장
-	            return "redirect:/header.jsp"; // 로그인 후 이동할 페이지 경로
+	            return "redirect:/main/main.jsp"; // 로그인 후 이동할 페이지 경로
 	        } else {
 	            // 로그인 실패시
 	        	model.addAttribute("state", 0); // state값 0
