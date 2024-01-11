@@ -22,7 +22,7 @@
 	<form id="insertRoomForm" action="insertRoom">
 		<input type="hidden" name="gowith_id" value=<%=gowithId%>>
 		<input type="hidden" name="room_name" value=<%=roomName%>>
-		<input type="hidden" name="room_member" value="id7">
+		<input type="hidden" name="room_member" value="${sessionScope.loginId}">
 		<!-- <button type="submit" id="btnSubmit" >전송</button> -->
 	</form>
 	
