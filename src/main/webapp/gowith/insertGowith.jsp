@@ -46,7 +46,7 @@
 			<h3>여행 날짜를 선택해 주세요.</h3>
 			<input type="date"> ~ <input type="date"> -->
 			<h3>작성자</h3>
-			<input type="text" name="gowith_writer">
+			<input type="text" name="gowith_writer" value="${sessionScope.loginId}" readonly>
 			<h3>제목 입력</h3>
 			<input type="text" name="gowith_title">
 			<h3>내용</h3>
