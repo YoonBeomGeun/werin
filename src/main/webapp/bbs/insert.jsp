@@ -11,15 +11,10 @@
 </script>
 </head>
 <body>
+<%@ include file="../header.jsp"%>
 <div id="total">
 	<div id="center">
 	<br><br>
-		<%-- <% if(session.getAttribute("id") != null ) { %>
-			<%= session.getAttribute("id") %>님 환영합니다.
-			<a href="logout.jsp">
-				<button class="btn btn-outline-danger">로그아웃</button>
-			</a>
-		<% } %> --%>
 		<hr color="blue">
 		<form action="insert">
 			<table border="1"  class="table table-hover">
@@ -35,12 +30,11 @@
 					<td width="200">내용</td>
 					<td width="300"><input name="bbs_content"></td>
 				</tr>
-				<tr class="table-warning">
+				<tr class="table-warning" hidden>
 					<td width="200">작성자</td>
 					<td width="300">
-						<input name="bbs_writer" value="${bbs_id}">
+						<input name="bbs_writer" value="${sessionScope.loginId}" >
 					</td>
-					<%-- ${id} == <%= session.getAttribute("bbs_id}") %> --%>
 				</tr>
 				<tr class="table-primary">
 					<td colspan="2" width="200">

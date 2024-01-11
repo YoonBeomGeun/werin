@@ -15,6 +15,7 @@
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+<jsp:include page="/header.jsp"></jsp:include>
 	<div id="container">
 		<form action="update2">
 			<input name="bbs_id" value="<%=bag.getBbs_id()%>" type="hidden">
