@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.multi.werin.gowith.GowithcmtVO"%>
 <%@page import="com.multi.werin.gowith.GowithVO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -80,7 +81,7 @@
 				data: {
 					gowith_id: <%=vo.getGowith_id()%>,
 					gowithcmt_content: $("#comment").val(),
-					gowithcmt_writer: "<%=vo.getGowith_writer()%>",
+					gowithcmt_writer: "${sessionScope.loginId}",
 					gowithcmt_created_at: formattedDate,
 					gowithcmt_updated_at: formattedDate
 				},
@@ -199,14 +200,26 @@
 	<div class="schedule">
 		여행 일정 들어오기
 	</div>
-	<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
-	<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
-	<div class="edit" style="text-align: right; margin-right: 300px;">
-		<a href="insertChat.jsp?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>"><button style="background:#33CC99;">채팅하기</button></a>
-		<!-- 세션으로 현재 로그인한 사람 정보 추가 -->
-		<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#33CC99;">수정</button></a>
-		<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#FF5555;">삭제</button></a>
-	</div>
+	
+	<c:choose>
+		<c:when test="${vo.gowith_writer eq sessionScope.loginId}">
+			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
+			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
+			<div class="edit" style="text-align: right; margin-right: 300px;">
+				<!-- 세션으로 현재 로그인한 사람 정보 추가 -->
+				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#33CC99;">수정</button></a>
+				<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#FF5555;">삭제</button></a>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
+			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
+			<div class="edit" style="text-align: right; margin-right: 300px;">
+				<a href="insertChat.jsp?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>&room_member=${sessionScope.loginId}"><button style="background:#33CC99;">채팅하기</button></a>
+				<!-- 세션으로 현재 로그인한 사람 정보 추가 -->
+			</div>
+		</c:otherwise>
+	</c:choose>
 	<br>
 	<hr color="green">
 	<div style="margin-left:300px; margin-top:30px; height: 100%;">
@@ -217,16 +230,28 @@
 				if(list.size()>=1) {
 	            	for (GowithcmtVO vo2 : list) {
 	        %>
-		            <div class="comment" id="comment_<%=vo2.getGowithcmt_id()%>">
-		            	<span style="font-weight: bold;"><%= vo2.getGowithcmt_writer() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getGowithcmt_updated_at() %></span><br><br>
-		                <div class="comment-content" id="content_<%=vo2.getGowithcmt_id()%>">
-		                    <%=vo2.getGowithcmt_content()%>
-		                </div><br>
-		                <div class="comment-actions">
-		                    <button class="b2" data-comment-id="<%=vo2.getGowithcmt_id()%>">수정</button>
-		                    <button class="b3" data-comment-id="<%=vo2.getGowithcmt_id()%>">삭제</button>
-		                </div>
-		            </div>
+	        		<c:choose>
+	        			<c:when test="${vo2.gowithcmt_writer eq sessionScope.loginId}">
+				            <div class="comment" id="comment_<%=vo2.getGowithcmt_id()%>">
+				            	<span style="font-weight: bold;"><%= vo2.getGowithcmt_writer() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getGowithcmt_updated_at() %></span><br><br>
+				                <div class="comment-content" id="content_<%=vo2.getGowithcmt_id()%>">
+				                    <%=vo2.getGowithcmt_content()%>
+				                </div><br>
+				                <div class="comment-actions">
+				                    <button class="b2" data-comment-id="<%=vo2.getGowithcmt_id()%>">수정</button>
+				                    <button class="b3" data-comment-id="<%=vo2.getGowithcmt_id()%>">삭제</button>
+				                </div>
+				            </div>
+				    	</c:when>
+				    	<c:otherwise>
+				    		<div class="comment" id="comment_<%=vo2.getGowithcmt_id()%>">
+				            	<span style="font-weight: bold;"><%= vo2.getGowithcmt_writer() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getGowithcmt_updated_at() %></span><br><br>
+				                <div class="comment-content" id="content_<%=vo2.getGowithcmt_id()%>">
+				                    <%=vo2.getGowithcmt_content()%>
+				                </div>
+				            </div>
+				    	</c:otherwise>
+		            </c:choose>
 	        <%
 	            	}
 				}
