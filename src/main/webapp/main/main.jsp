@@ -86,7 +86,3 @@ var xhr = new XMLHttpRequest();
 	</div>
 </body>
 </html>
-
-<!-- dbProperties 수정해야함
-mybatis 맞는지 확인해볼것
- -->

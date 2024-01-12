@@ -3,7 +3,15 @@ package com.multi.werin.main;
 public class SearchTripVO {
 	private int trip_id;
 	private String trip_title;
+	private String searching;
 	
+	
+	public String getSearching() {
+		return searching;
+	}
+	public void setSearching(String searching) {
+		this.searching = searching;
+	}
 	public int getTrip_id() {
 		return trip_id;
 	}
@@ -16,9 +24,9 @@ public class SearchTripVO {
 	public void setTrip_title(String trip_title) {
 		this.trip_title = trip_title;
 	}
-	
 	@Override
 	public String toString() {
-		return "SearchTripVO [trip_id=" + trip_id + ", trip_title=" + trip_title + "]";
+		return "SearchTripVO [trip_id=" + trip_id + ", trip_title=" + trip_title + ", searching=" + searching + "]";
 	}
+	
 }

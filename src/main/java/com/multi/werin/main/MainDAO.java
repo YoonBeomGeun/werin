@@ -20,15 +20,15 @@ public class MainDAO {
 	}
 	
 	public List<SearchLandmarkVO> searchlandmark(SearchLandmarkVO searchlandmarkVO) {
-		return my.selectList("main.hotlandmark", searchlandmarkVO);
+		return my.selectList("main.mainsearch_landmark", searchlandmarkVO);
 	}
 	
 	public List<SearchBbsVO> searchbbs(SearchBbsVO searchbbsVO) {
-		return my.selectList("main.hotlandmark", searchbbsVO);
+		return my.selectList("main.mainsearch_trip", searchbbsVO);
 	}
 	
 	public List<SearchTripVO> searchtrip(SearchTripVO searchtripVO) {
-		return my.selectList("main.hotlandmark", searchtripVO);
+		return my.selectList("main.mainsearch_trip", searchtripVO);
 	}
 	
 	public List<MaintripVO> hottravel(MaintripVO maintripVO) {
