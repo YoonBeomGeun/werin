@@ -24,14 +24,24 @@ public class MainController {
 	@RequestMapping("main/search")
 	public void mainsearch(SearchLandmarkVO searchlandmarkVO, SearchBbsVO searchbbsVO, SearchTripVO searchtripVO, Model model) {
 		List<SearchLandmarkVO> searchlandmark = maindao.searchlandmark(searchlandmarkVO);
-		model.addAttribute("searchlandmark", searchlandmark);
-		
 		List<SearchBbsVO> searchbbs = maindao.searchbbs(searchbbsVO);
-		model.addAttribute("searchbbs", searchbbs);
-		
 		List<SearchTripVO> searchtrip = maindao.searchtrip(searchtripVO);
-		model.addAttribute("searchtrip", searchtrip); 
+		
+		//콘솔창에 0만 찍힘. 위에 어떤 값들이 들어가는지 확인해볼 필요가 있음
+		
+		 int result = 0;
+		 if(searchlandmark == null && searchbbs == null && searchtrip == null) { // 아무런 검색 결과가 없는 경우
+			 result = 1;
+		 }
+		 if(result==0) {
+			 model.addAttribute("searchlandmark", searchlandmark);
+			 model.addAttribute("searchbbs", searchbbs);
+			 model.addAttribute("searchtrip", searchtrip);			 
+		 }
+		 System.out.println(result);
+		 model.addAttribute("result", result);
 		//views/main/serarch.jsp
+		
 	}
 	
 	@RequestMapping("main/hottravel")
