@@ -1,1 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="plan">
+
+    <insert id="insert" parameterType="PlanVO">
+        <!-- Your SQL query for inserting into plan table -->
+        INSERT INTO plan (plan_title, plan_start_date, plan_end_date, plan_with, plan_writer)
+        VALUES (#{planTitle}, #{planStartDate}, #{planEndDate}, #{planWith}, #{planWriter})
+    </insert>
+
+    <!-- other plan-related queries -->
+
+</mapper>
