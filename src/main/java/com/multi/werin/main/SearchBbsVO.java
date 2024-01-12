@@ -4,7 +4,15 @@ public class SearchBbsVO {
 	
 	private int bbs_id;
 	private String bbs_title;
+	private String searching;
 	
+	
+	public String getSearching() {
+		return searching;
+	}
+	public void setSearching(String searching) {
+		this.searching = searching;
+	}
 	public int getBbs_id() {
 		return bbs_id;
 	}
@@ -20,6 +28,7 @@ public class SearchBbsVO {
 	
 	@Override
 	public String toString() {
-		return "SearchBbsVO [bbs_id=" + bbs_id + ", bbs_title=" + bbs_title + "]";
+		return "SearchBbsVO [bbs_id=" + bbs_id + ", bbs_title=" + bbs_title + ", searching=" + searching + "]";
 	}
+	
 }

@@ -5,7 +5,14 @@ public class SearchLandmarkVO {
 	private int landmarkinfo_id;
 	private String landmarkinfo_name;
 	private String landmarkinfo_info;
+	private String searching;
 	
+	public String getSearching() {
+		return searching;
+	}
+	public void setSearching(String searching) {
+		this.searching = searching;
+	}
 	public int getLandmarkinfo_id() {
 		return landmarkinfo_id;
 	}
@@ -24,10 +31,10 @@ public class SearchLandmarkVO {
 	public void setLandmarkinfo_info(String landmarkinfo_info) {
 		this.landmarkinfo_info = landmarkinfo_info;
 	}
-	
 	@Override
 	public String toString() {
-		return "SearchBbsVO [landmarkinfo_id=" + landmarkinfo_id + ", landmarkinfo_name=" + landmarkinfo_name
-				+ ", landmarkinfo_info=" + landmarkinfo_info + "]";
+		return "SearchLandmarkVO [landmarkinfo_id=" + landmarkinfo_id + ", landmarkinfo_name=" + landmarkinfo_name
+				+ ", landmarkinfo_info=" + landmarkinfo_info + ", searching=" + searching + "]";
 	}
+
 }
