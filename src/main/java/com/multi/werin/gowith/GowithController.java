@@ -3,6 +3,7 @@ package com.multi.werin.gowith;
 import java.util.List;
 
 import javax.security.auth.callback.ConfirmationCallback;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -8,4 +8,14 @@
 		insert into room
 		values (null, #{room_name}, #{gowith_id}, #{room_member}, now(), 'a')
 	</insert>
+	
+	<select id="one" parameterType="int" resultType="roomVO">
+		select *
+		from
+			(select 
+				ROW_NUMBER() over(order by room_id desc) as num_id,
+				room_id, room_name, gowith_id, room_member, room_created_at, room_flag
+			from room r) r2
+		where r2.room_id = #{room_id}
+	</select>
 </mapper>
