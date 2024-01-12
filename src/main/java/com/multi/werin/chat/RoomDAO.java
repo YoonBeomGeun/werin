@@ -14,4 +14,8 @@ public class RoomDAO {
 		return my.insert("room.create", roomVO);
 	}
 	
+	public RoomVO one(int room_id) {
+		return my.selectOne("room.one", room_id);
+	}
+	
 }

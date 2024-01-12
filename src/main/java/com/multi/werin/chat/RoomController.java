@@ -17,5 +17,11 @@ public class RoomController {
 		model.addAttribute("result", result);
 		model.addAttribute("roomVO", roomVO);
 	}
+	
+	@RequestMapping("gowith/oneRoom")
+	public void oneRoom(int room_id, Model model) {
+		RoomVO vo = roomDAO.one(room_id);
+		model.addAttribute("vo", vo);
+	}
 
 }
