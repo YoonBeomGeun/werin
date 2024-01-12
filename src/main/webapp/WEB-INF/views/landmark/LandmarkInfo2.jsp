@@ -38,24 +38,23 @@ th {
 }
 </style>
 
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=005bfbc5bcbcc0eed9e4aef20258b628"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
 	function loadKakaoMap() {
-		// ajax 호출
+
+		// Load landmarkinfo2map.jsp into the right-column
 		$.ajax({
-			url : 'kakaomap.jsp', // kakaomap.jsp 파일의 경로
-			type : 'GET',
-			dataType : 'html',
-			success : function(data) {
-				// 성공적으로 로드된 경우, mapContainer에 지도 표시
-				$('#mapContainer').html(data);
+			url: 'landmarkinfo2map.jsp', // landmarkinfo2map.jsp 파일의 경로
+			type: 'GET',
+			dataType: 'html',
+			success: function (data) {
+				// 성공적으로 로드된 경우, right-column에 내용 표시
+				$('.right-column').html(data);
 			},
-			error : function(xhr, status, error) {
+			error: function (xhr, status, error) {
 				// 오류가 발생한 경우 콘솔에 로그 출력
-				console.error('Error loading Kakao Map:', status, error);
+				console.error('Error loading landmarkinfo2map.jsp:', status, error);
 			}
 		});
 	}
@@ -94,16 +93,7 @@ th {
 		</div>
 
 		<div class="right-column">
-			<div id="map" style="width: 500px; height: 400px;"></div>
-			<script>
-				var container = document.getElementById('map');
-				var options = {
-					center : new kakao.maps.LatLng(33.450701, 126.570667),
-					level : 3
-				};
-
-				var map = new kakao.maps.Map(container, options);
-			</script>
+			
 		</div>
 
 
