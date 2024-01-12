@@ -113,7 +113,7 @@
 					<option value="writer">작성자</option>
 				</select>
 				<input type="text" name="keyword" value=""></input>
-				<input type="text" name="page" value="1"></input>
+				<input type="text" name="page" value="1" hidden></input>
 				<input type="submit" class="btn btn-outline-primary" value="검색" id="boardtable"></input>
 			</form>
 		</div>
