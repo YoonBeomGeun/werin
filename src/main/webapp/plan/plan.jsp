@@ -203,6 +203,8 @@
 </head>
 <body>
 	<script>
+		var travelPlans = {}; // 일정 정보를 저장할 전역변수
+
 		$(function() {
 			// input을 datepicker로 선언
 			$("#datepicker1, #datepicker2")
@@ -247,16 +249,13 @@
 					var diffDays = Math.ceil((endDate - startDate)
 							/ (1000 * 60 * 60 * 24));
 
-					// 기존의 day 버튼을 제거
-					var dayButtons = document.getElementById('dayButtons');
-					dayButtons.innerHTML = '';
+					// travelPlans 객체 초기화
+					travelPlans = {};
 
-					// 기존의 day 일정을 제거
-					var dayPlansContainer = document
-							.getElementById('dayPlansContainer');
-					dayPlansContainer.innerHTML = '';
+					var dayButtonsContainer = document
+							.getElementById('dayButtons');
+					dayButtonsContainer.innerHTML = ''; // 기존 버튼 제거
 
-					// 새로운 day 버튼 및 일정을 생성
 					for (var i = 0; i <= diffDays; i++) {
 						var currentDate = new Date(startDate);
 						currentDate.setDate(currentDate.getDate() + i);
@@ -265,7 +264,7 @@
 						button.innerHTML = "Day" + (i + 1) + "<br>"
 								+ formatDate(currentDate);
 						button.className = 'day-button';
-						
+
 						button.addEventListener('click', function() {
 							document.querySelectorAll('.day-button').forEach(
 									function(btn) {
@@ -273,16 +272,33 @@
 									});
 							this.classList.add('selected');
 
-							// 선택된 날짜의 일정만 표시
-							var selectedDay = this;
-							document.querySelectorAll('.plan-list').forEach(
-									function(planList) {
-										planList.style.display = 'none';
-									});
-							var planList = selectedDay
-									.querySelector('.plan-list');
-							planList.style.display = 'block';
+							// 선택된 날짜의 일정 업데이트
+							var selectedDay = this.innerText.trim().replace(
+									'Day', '');
+							
+							updatePlanList(selectedDay);
 						});
+
+						function updatePlanList(dateString) {
+							// 선택된 날짜에 해당하는 일정만 lb에 표시
+							var lb = document.getElementById('lb');
+							lb.innerHTML = ''; // 기존의 일정을 지우고 새로운 일정을 추가
+
+							// 해당 날짜의 일정 배열이 있다면 lb에 추가
+							if (travelPlans[dateString]) {
+								for (var i = 0; i < travelPlans[dateString].length; i++) {
+									var plan = travelPlans[dateString][i];
+									var newPlanItem = document
+											.createElement('div');
+									newPlanItem.innerHTML = '<span>'
+											+ dateString + ' - '
+											+ plan.placeName
+											+ '</span><span class="tel">'
+											+ plan.phone + '</span>';
+									lb.appendChild(newPlanItem);
+								}
+							}
+						}
 
 						// 새로운 day의 일정 목록을 생성
 						var planList = document.createElement('ul');
@@ -292,7 +308,14 @@
 						dayPlansContainer.appendChild(planList);
 
 						button.appendChild(planList);
-						dayButtons.appendChild(button);
+						dayButtonsContainer.appendChild(button);
+
+						// 날짜에 해당하는 일정이 이미 있다면 해당 일정 목록을 표시
+						var dateString = formatDate(currentDate);
+						if (travelPlans[dateString]
+								&& travelPlans[dateString].length > 0) {
+							updateUI(dateString);
+						}
 					}
 				}
 			}
@@ -514,24 +537,47 @@
 		}
 
 		function planInsert(placeName, latitude, longitude, contextPath, phone) {
-			// 현재 선택된 날짜 찾기
 			var selectedDay = document.querySelector('.day-button.selected');
 			if (!selectedDay) {
 				alert('날짜를 먼저 선택해주세요.');
 				return;
 			}
 
-			// 선택된 날짜의 일정 목록 찾기
-			var planList = selectedDay.querySelector('.plan-list');
+			var dateString = selectedDay.innerText.trim().replace('Day', '');
 
-			// 새로운 일정 아이템 생성
-			var newPlanItem = document.createElement('li');
-			newPlanItem.innerHTML = '<span>' + placeName
-					+ '</span><span class="tel">' + phone + '</span>';
+			// travelPlans 객체에 해당 날짜의 일정 배열이 없으면 생성
+			if (!travelPlans[dateString]) {
+				travelPlans[dateString] = [];
+			}
 
-			// 새로운 일정 목록에 추가
-			lb.appendChild(newPlanItem);
+			var newPlan = {
+				placeName : placeName,
+				latitude : latitude,
+				longitude : longitude,
+				contextPath : contextPath,
+				phone : phone
+			};
+			travelPlans[dateString].push(newPlan);
+
+			// AJAX 요청을 통해 서버에 일정 추가
+			$
+					.ajax({
+						type : 'POST',
+						url : '${pageContext.request.contextPath}/schedule/addSchedule',
+						contentType : 'application/json',
+						data : JSON.stringify(newPlan),
+						success : function(response) {
+							console.log(response);
+							// 성공적으로 추가되면 화면에 일정을 실시간으로 표시
+							updatePlanList(dateString);
+						},
+						error : function(error) {
+							console.error(error);
+							alert('일정 추가에 실패했습니다.');
+						}
+					});
 		}
+
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 		function addMarker(position, idx, title) {
 			var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
