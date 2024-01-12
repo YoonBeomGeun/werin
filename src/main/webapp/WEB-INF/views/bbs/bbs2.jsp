@@ -17,6 +17,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="resources/js/jquery-3.7.1.js"></script>
+	$(function(){
+	
+	})
 </head>
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
@@ -59,7 +62,10 @@
    			<% }} %>
 		</tr>
 		</table>
-		<button class="btn btn-warning">추천하기<%= bag.getBbs_like() %></button>
+		
+		<button class="btn btn-warning">추천하기</button>
+		<%= bag.getBbs_like() %>
+		<button class="btn btn-warning">비추천하기</button>	
 		
 </body>
 </html>
