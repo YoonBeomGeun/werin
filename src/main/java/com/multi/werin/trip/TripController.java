@@ -25,7 +25,7 @@ public class TripController {
 				
 		int result = dao.insert(vo);
 		if (result == 1) {
-			return "forward:/trip/list"; // 
+			return "forward:/trip/list?page=1"; // 
 		} else {
 
 			return "redirect:insert.jsp"; // 여행글 게시판 목록
@@ -50,7 +50,7 @@ public class TripController {
 		int result = dao.update(vo);
 		model.addAttribute("result", result);
 		if (result == 1) {
-			return "forward:/trip/list";
+			return "forward:/trip/list?page=1";
 		}
 		else {
 			int trip_id = (int)request.getAttribute("trip_id");
@@ -61,25 +61,40 @@ public class TripController {
 	
 	@RequestMapping("trip/remove")
 	public String delete(TripVO vo) {
+		System.out.println("remove vo 값>>>"+ vo);
 		int result = dao.delete(vo);
+		System.out.println(result);
 		if(result == 1) {
-			return "forward:/trip/list";
+			return "forward:/trip/list?page=1";
 		}else { // 삭제X 일때 돌아갈 페이지
 			return "redirect:index_bbs.jsp";
 		}
 	}
 
 	@RequestMapping("trip/list")
-	public String list(Model model) {
-		System.out.println("list");
-		List<TripVO> list = dao.list();
-		System.out.println(list.size());
-		model.addAttribute("list", list);
-		if(list.size()>0) {
-			return "trip/list";
-		}else {
-			return "redirect:main.jsp";
+	public void list(PageVO1 pageVO, Model model) {
+		System.out.println();
+		pageVO.setStartEnd();
+		System.out.println(pageVO);
+		List<TripVO> list = dao.list(pageVO);
+		int count = dao.count();
+		System.out.println("전체 게시물의 수 >>" + count);
+		int pages = count / 10;
+		if(count % 10 !=0) {
+			pages = count / 10 + 1;
 		}
+		System.out.println(list);
+		System.out.println(pageVO);
+		// views의 list.jsp로 전달
+		model.addAttribute("list", list);
+		model.addAttribute("pages", pages);
+		model.addAttribute("count", count);
+		
+		
+		/*
+		 * if(count > 0) { return "trip/list?page=1"; }else { return
+		 * "redirect:main.jsp"; // 게시된 글이 없을때 }
+		 */		 
 	}
 	
 	@RequestMapping("trip/one")
@@ -100,5 +115,15 @@ public class TripController {
 			return "redirect:main.jsp";
 		}
 	}
-	
+	@RequestMapping("trip/updateLike")
+	public void updateLike(TripVO vo, Model model) {
+		
+		int result = dao.updateLike(vo.getTrip_id()); // 추천수 + 1
+		
+		System.out.println("totallike " + vo.getTrip_total_like());
+		int temp = vo.getTrip_total_like()+1;
+		System.out.println("totallike + 1 : " + temp);
+		model.addAttribute("total_like", temp);    
+		
+	}
 }

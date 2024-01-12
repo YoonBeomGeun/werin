@@ -6,7 +6,8 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class TripVO {
-	private Integer trip_id;
+	private int row_no;
+	private int trip_id;
 	private String trip_title;
 	private String trip_content;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
@@ -17,9 +18,17 @@ public class TripVO {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date trip_writedate;
 	private Integer trip_count;
-	private int trip_like;
+	private int trip_total_like;
 	private String trip_img;
 	
+	
+	
+	public int getRow_no() {
+		return row_no;
+	}
+	public void setRow_no(int row_no) {
+		this.row_no = row_no;
+	}
 	public Integer getTrip_id() {
 		return trip_id;
 	}
@@ -62,17 +71,19 @@ public class TripVO {
 	public void setTrip_writedate(Date trip_writedate) {
 		this.trip_writedate = trip_writedate;
 	}
-	public int getTrip_count() {
+	public Integer getTrip_count() {
 		return trip_count;
 	}
 	public void setTrip_count(Integer trip_count) {
 		this.trip_count = trip_count;
 	}
-	public int getTrip_like() {
-		return trip_like;
+	
+
+	public int getTrip_total_like() {
+		return trip_total_like;
 	}
-	public void setTrip_like(int trip_like) {
-		this.trip_like = trip_like;
+	public void setTrip_total_like(int trip_total_like) {
+		this.trip_total_like = trip_total_like;
 	}
 	public String getTrip_img() {
 		return trip_img;
@@ -82,11 +93,12 @@ public class TripVO {
 	}
 	@Override
 	public String toString() {
-		return "TripVO [trip_id=" + trip_id + ", trip_title=" + trip_title + ", trip_content=" + trip_content
-				+ ", trip_start_date=" + trip_start_date + ", trip_end_date=" + trip_end_date + ", trip_writer="
-				+ trip_writer + ", trip_writedate=" + trip_writedate + ", trip_count=" + trip_count + ", trip_like="
-				+ trip_like + ", trip_img=" + trip_img + "]";
+		return "TripVO [row_no=" + row_no + ", trip_id=" + trip_id + ", trip_title=" + trip_title + ", trip_content="
+				+ trip_content + ", trip_start_date=" + trip_start_date + ", trip_end_date=" + trip_end_date
+				+ ", trip_writer=" + trip_writer + ", trip_writedate=" + trip_writedate + ", trip_count=" + trip_count
+				+ ", trip_total_like=" + trip_total_like + ", trip_img=" + trip_img + "]";
 	}
+	
 	
 	
 	

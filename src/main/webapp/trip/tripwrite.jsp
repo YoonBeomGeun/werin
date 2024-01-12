@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
+        body { 
             font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
             margin: 0;
@@ -14,7 +18,7 @@
             box-sizing: border-box;
         }
 
-        .container {
+        .container {  /* 흰색 부분 */
             max-width: 800px;
             margin: 20px auto;
             background-color: #fff;
@@ -22,7 +26,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .form-group {
+        .form-group { 
             margin-bottom: 15px;
             overflow: hidden; /* Add this to clear floats */
         }
@@ -55,8 +59,19 @@
             height: 200px;
             resize: none;
         }
+	  .submit-button {  /* 게시글 작성 버튼 */
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-        
+        .submit-button:hover {
+            background-color: #2980b9;
+        }
     </style>
     <title>게시글 추가</title>
     <%@ include file="../../../header.jsp" %>
@@ -70,9 +85,10 @@
                 <input type="text" id="title" name="trip_title" placeholder="제목을 입력해주세요" required><br>
             </div>
             <div class="form-group">
-                <label for="writer">작성자</label>
-                <input type="text" id="writer" name="trip_writer" placeholder="작성자를 입력해주세요" required><br>
+                <label for="writer">작성자</label> <!-- memberVO에 있는 member_nickname을 작성자 value로 고정 -->
+                <input type="text" id="writer" name = "member_nickname" value = "${member_nickname}" readonly><br>
             </div>
+            <input type= "hidden" name ="trip_writer" value = "${loginId}">
             <div class="form-group date-group">
                 <label for="start_date">출발 날짜</label>
                 <input type="date" name="trip_start_date" required>
@@ -84,7 +100,7 @@
                 <label for="content">내용</label>
                 <textarea id="content" name="trip_content" placeholder="내용을 입력해주세요" required></textarea> 
             </div>
-            <button type="submit">게시글 작성 완료!</button>
+            <button class="submit-button" type="submit">게시글 작성 완료!</button>
         </form>
     </div>
 </body>
