@@ -44,6 +44,7 @@
         </style>
 
 <title>Insert title here</title>
+<%@ include file="../../../header.jsp"%>
 <%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
 <script type="text/javascript">
     $(function() {

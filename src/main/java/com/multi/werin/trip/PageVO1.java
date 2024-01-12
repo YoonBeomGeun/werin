@@ -1,6 +1,6 @@
 package com.multi.werin.trip;
 
-public class PageVO {
+public class PageVO1 {
 	private int start;
 	private int end;
 	private int page;
@@ -9,6 +9,7 @@ public class PageVO {
 		start = 1 + (page - 1) * 10;
 		
 		end = page * 10;
+		
 	}
 
 	public int getStart() {
@@ -37,7 +38,7 @@ public class PageVO {
 
 	@Override
 	public String toString() {
-		return "PageVO [start=" + start + ", end=" + end + ", page=" + page + "]";
+		return "PageVO [start=" + start + ", end=" + end + ", pages=" + page + "]";
 	}
 	
 	
