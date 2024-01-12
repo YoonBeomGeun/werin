@@ -94,6 +94,10 @@
 	%>
 		<a href="insertGowith.jsp"><button>글쓰기</button></a>
 	<%
+		} else {
+	%>
+		<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')"><button>글쓰기</button></a>
+	<%
 		}
 	%>
 	<br><br>
@@ -116,7 +120,7 @@
 					</a>
 				</c:when>
 				<c:otherwise>
-					<a href="../member/login.jsp">
+					<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')">
 						<div class="content">
 							작성자 ${vo.gowith_writer}<br>
 							<p style="font-size: 20px;">${vo.gowith_title}</p><br>
@@ -129,7 +133,6 @@
 						</div>
 					</a>
 				</c:otherwise>
-				
 			</c:choose>
 		</c:forEach>
 	</div>
