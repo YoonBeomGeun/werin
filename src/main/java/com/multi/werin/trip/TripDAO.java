@@ -29,11 +29,19 @@ public class TripDAO {
 		return my.delete("trip.delete", vo);
 	}
 
-	public List<TripVO> list() {
-		return my.selectList("trip.list");
+	public List<TripVO> list(PageVO1 pageVO) {
+		return my.selectList("trip.list", pageVO);
+	}
+	
+	public int count() {
+		return my.selectOne("trip.count");
 	}
 
 	public TripVO one(Integer trip_id) {
 		return my.selectOne("trip.one", trip_id);
+	}
+	
+	public int updateLike(Integer trip_id) {
+		return my.update("trip.updateLike", trip_id);
 	}
 }

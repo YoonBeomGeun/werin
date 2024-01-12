@@ -23,13 +23,13 @@
 	
 	<update id = "updateLike" parameterType="int">
 		update trip 
-		set trip_like = trip_like + 1 
+		set trip_total_like = trip_total_like + 1 
 		where trip_id = #{trip_id}
 	</update>
 	
-	<update id = "updateLikeCancel" parameterType="int">
+	<update id = "updateDislike" parameterType="int">
 		update trip 
-		set trip_like = trip_like - 1 
+		set trip_total_like = trip_total_like - 1 
 		where trip_id = #{trip_id}
 	</update>
 
@@ -44,8 +44,22 @@
 		trip WHERE trip_id = #{trip_id};
 	</select>
 
-	<select id="list" resultType="tripVO">
+	<!-- <select id="list" resultType="tripVO">
 		select * from trip order by trip_id
 		desc
+	</select> -->
+	
+	<select id="list" parameterType="pageVO" resultType="tripVO">
+		select *
+		from (select row_number() over(order by trip_id desc)
+		as row_no, trip_id, trip_title, trip_content, trip_start_date,
+		trip_end_date, trip_writer, trip_writedate, trip_count, trip_total_like,
+		trip_img
+		from trip t) t2
+		where t2.row_no BETWEEN ${start} and ${end}
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from trip
 	</select>
 </mapper>

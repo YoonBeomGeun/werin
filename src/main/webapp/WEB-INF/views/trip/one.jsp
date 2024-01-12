@@ -1,16 +1,15 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.multi.werin.trip.TripVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-    TripVO bag = (TripVO)request.getAttribute("vo");
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	String formattedDate = dateFormat.format(bag.getTrip_writedate());
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
     <title>여행기 상세 정보</title>
     <%@ include file="../../../header.jsp" %>
      <style>
@@ -73,79 +72,100 @@
 
         .like-btn {
             background-color: #27ae60;
+            margin-left: 220px;
+        }
+        .dislike-btn{
+       		 background-color: red;
             margin-right: 220px;
         }
 
     </style>
+    <%
+    TripVO bag = (TripVO)request.getAttribute("vo");
+	//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	//String formattedDate = dateFormat.format(bag.getTrip_writedate());
+%>
+<script>
+$(function() {
+	$('#like').click(function() {
+		alert(${vo.trip_total_like});
+		$.ajax({
+	 		type: 'POST',
+	         url: "updateLike",
+	         data:{
+	         	trip_id : <%=bag.getTrip_id()%>,
+	         	trip_total_like : ${vo.trip_total_like}
+		//증가하
+	         },
+	         success: function(result){
+	        	 console.log(result);
+	         	$('#spTotalLike').html(result)
+	        	 //location.reload();
+	         }
+	 	})
+	})
+})
+	 
+     
+</script>
 </head>
 <body>
     <div class="container">
         <h3>여행기 상세 정보</h3>
         <div>
             <p><strong>제목:</strong> ${vo.trip_title}</p>
-            <p><strong>작성 날짜:</strong> <%= formattedDate %></p>
+            <p><strong>작성 날짜:</strong> </p>
             <p><strong>조회수:</strong> ${vo.trip_count}</p>
-            <p><strong>추천:</strong> ${vo.trip_like}</p>
+            <p><strong>추천:</strong> ${vo.trip_total_like}</p>
             <p><strong>작성자:</strong> ${vo.trip_writer}</p>
             <p><strong>내용:</strong> ${vo.trip_content}</p>
         </div>
-        <button class="remove-btn" onclick="remove()">삭제</button>
-        <button class="update-btn" onclick="update()">수정</button>
-        <button class="like-btn" onclick="like()" id = "like">추천 ${vo.trip_like}</button>
-        <a href="${pageContext.request.contextPath}/trip/list"><button class="return-btn">돌아가기</button></a>
+        <c:choose>
+         <c:when test="${empty loginId}">
+        <!-- 로그인 되어 있지 않은 경우 -->
+        <p> 여행기 삭제 및 수정은 로그인이 필요합니다. </p>
+        <button onclick="window.location.href='../member/login.jsp'">로그인</button>
+    </c:when>
+    <c:otherwise>
+        <!-- 로그인 되어 있는 경우 -->
+        <button class = "remove-btn" onclick="remove()">삭제</button>
+        <button class="update-btn" onclick="update()">수정</button><br>
+        <button class="like-btn"  id = "like">추천 </button></form>
+        <span id="spTotalLike">${vo.trip_total_like}</span>
+        <button class="dislike-btn" onclick="dislike()" id = "dislike">비추천 </button>
+    </c:otherwise>
+	</c:choose>
+        <a href="${pageContext.request.contextPath}/trip/list?page=1"><button class="return-btn">돌아가기</button></a>
         
         
-        <a href = "${pageContext.request.contextPath}/trip/list"><button>돌아가기</button></a>
 
         <script>
+        <%--
             function remove() {
-                if (confirm("게시글을 삭제하시겠습니까?")) {
+            	alert("버튼작동통과")
+            	
+            	 if('${vo.trip_writer}' == '${sessionScope.loginId}'){
+            		alert("본인확인통과")
+                	if (confirm("게시글을 삭제하시겠습니까?")) {
                     location.href = "remove?trip_id=<%=bag.getTrip_id()%>";           
-                } 
+                }  
+            }else{
+            	alert("게시글 삭제는 본인이 작성한 게시글에 대해서만 가능합니다.")
             }
-
+            }
             function update() {
+        		if('${vo.trip_writer}' == '${sessionScope.loginId}'){
                 if (confirm("게시글을 수정하시겠습니까?")) {
                     location.href = "update?trip_id=<%=bag.getTrip_id()%>";           
                 } 
             }
-            
-        /*     function like() {
-                // 추천 동작 처리 (AJAX 등을 사용하여 서버에 전송)
-                $(function()){
-                	$("#like").click(function() {
-                		//1. 로그인 여부 확인
-                		if(){ // 로그인 X일 경우
-                		 alert ("로그인 후 추천할 수 있습니다")
-                		}
-                		else{
-                			
-                    		if(){//2. 추천을 이미 눌렀다면 다시 눌렀을 때 추천 수 -1
-                    			let like = ${vo.trip_like} - 1;
-                    		}
-                    		else{//3. 추천을 누르지 않은 상태라면 추천 + 1
-                    			let like = ${vo.trip_like} + 1;
-                    		}
-                		}
-                		
-                		
-                		
-					})
-                }
-                alert("게시글을 추천했습니다.");
-            } */
-
-           function like(){
-            	$.ajax({
-            		type: 'POST',
-                    url: '${pageContext.request.contextPath}/trip/one',
-                    success: function(result){
-                    	
-                    }
-            	})
+        		else{
+        			alert("게시글 수정은 본인이 작성한 게시글에 대해서만 가능합니다.")
+        		}
             }
-                
-                
+     
+--%>
+          
             
         </script>
     </div>
