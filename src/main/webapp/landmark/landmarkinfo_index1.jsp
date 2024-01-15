@@ -23,7 +23,7 @@
 			
 			$('#nature3').click(function () { 
                 $.ajax({
-                    url: "LandmarkInfo2",
+                    url: "jejulist",
                     success: function (x) {
                         console.log(x);
                         $("#result3").html(x);
