@@ -88,7 +88,6 @@
 <script>
 $(function() {
 	$('#like').click(function() {
-		alert(${vo.trip_total_like});
 		$.ajax({
 	 		type: 'POST',
 	         url: "updateLike",
@@ -99,10 +98,26 @@ $(function() {
 	         },
 	         success: function(result){
 	        	 console.log(result);
-	         	$('#spTotalLike').html(result)
+	         	$('.spTotalLike').text(result)
 	        	 //location.reload();
 	         }
 	 	})
+	})
+	
+	$('#dislike').click(function() {
+		$.ajax({
+			type: 'POST',
+			url : "updateDislike",
+			data :{
+				trip_id : <%=bag.getTrip_id()%>,
+				trip_total_like : ${vo.trip_total_like}
+			},
+			success : function(result) {
+				console.log(result);
+				$('.spTotalLike').text(result)
+			}
+		})
+		
 	})
 })
 	 
@@ -114,9 +129,9 @@ $(function() {
         <h3>여행기 상세 정보</h3>
         <div>
             <p><strong>제목:</strong> ${vo.trip_title}</p>
-            <p><strong>작성 날짜:</strong> </p>
+            <p><strong>작성 날짜:</strong>${vo.trip_writedate} </p>
             <p><strong>조회수:</strong> ${vo.trip_count}</p>
-            <p><strong>추천:</strong> ${vo.trip_total_like}</p>
+            <p><strong>추천:</strong> <span class="spTotalLike">${vo.trip_total_like}</span></p>
             <p><strong>작성자:</strong> ${vo.trip_writer}</p>
             <p><strong>내용:</strong> ${vo.trip_content}</p>
         </div>
@@ -131,8 +146,8 @@ $(function() {
         <button class = "remove-btn" onclick="remove()">삭제</button>
         <button class="update-btn" onclick="update()">수정</button><br>
         <button class="like-btn"  id = "like">추천 </button></form>
-        <span id="spTotalLike">${vo.trip_total_like}</span>
-        <button class="dislike-btn" onclick="dislike()" id = "dislike">비추천 </button>
+        <span class="spTotalLike">${vo.trip_total_like}</span>
+        <button class="dislike-btn" id="dislike" id = "dislike">비추천 </button>
     </c:otherwise>
 	</c:choose>
         <a href="${pageContext.request.contextPath}/trip/list?page=1"><button class="return-btn">돌아가기</button></a>
