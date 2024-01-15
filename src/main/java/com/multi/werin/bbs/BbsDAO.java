@@ -69,4 +69,10 @@ public class BbsDAO{
 	public List<BbsVO> list2(PageVO pageVO) {
 		return my.selectList("bbs.list", pageVO);
 	}//검색기능에서 쓰는거
+	
+	public int updateLike(int bbs_id) {
+		return my.update("bbs.updateLike", bbs_id);
+	}//추천기능
+	
+	
 }

@@ -64,7 +64,7 @@
 		</table>
 		
 		<button class="btn btn-warning">추천하기</button>
-		<%= bag.getBbs_like() %>
+		<span><%= bag.getBbs_like() %></span>
 		<button class="btn btn-warning">비추천하기</button>	
 		
 </body>

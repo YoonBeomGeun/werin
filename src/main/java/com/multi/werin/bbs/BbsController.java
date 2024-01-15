@@ -86,6 +86,8 @@ public class BbsController{
 		model.addAttribute("count", count);
 	}
 	
+	
+	
 	@RequestMapping("bbs/bbs0")
 	public void list0(PageVO pageVO, Model model) {
 		pageVO.setStartEnd();
@@ -104,7 +106,7 @@ public class BbsController{
 	}
 	
 	@RequestMapping("bbs/getSearchList")
-	public String getSearchList(PageVO pageVO, Model model) {
+	public String getSearchList(PageVO pageVO, String bbs_cate, Model model) {
 		pageVO.setStartEnd();
 		
 	    System.out.println("getSerchList");
