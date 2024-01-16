@@ -1,5 +1,8 @@
 package com.multi.werin.plan;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,12 +19,16 @@ public class ScheduleController {
 
 	@PostMapping("schedule/addSchedule")
 	@ResponseBody
-	public String addSchedule(ScheduleVO vo) {
+	public ResponseEntity<Map<String, Object>> addSchedule(ScheduleVO vo) {
+		Map<String, Object> response = new HashMap<>();
 		int result = dao.insert(vo);
 		if (result == 1) {
-			return "redirect:/member/member.jsp";
+			response.put("status", "success");
+			response.put("message", "일정이 성공적으로 추가되었습니다.");
 		} else {
-			return "redirect:/member/insert";
+			response.put("status", "fail");
+			response.put("message", "일정 추가에 실패했습니다.");
 		}
+		return ResponseEntity.ok(response);
 	}
 }
