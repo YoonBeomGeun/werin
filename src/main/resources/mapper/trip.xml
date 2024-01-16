@@ -21,17 +21,49 @@
 		where trip_id = #{trip_id}
 	</update>
 	
-	<update id = "updateLike" parameterType="int">
+	<!-- 게시글 추천수 +1 -->
+	<update id = "updateLike" parameterType="tripVO">
 		update trip 
 		set trip_total_like = trip_total_like + 1 
 		where trip_id = #{trip_id}
+		<selectKey resultType="java.lang.Integer" keyProperty="trip_total_like" order = "AFTER">
+			select trip_total_like from trip where trip_id = #{trip_id}
+		</selectKey>
 	</update>
 	
-	<update id = "updateDislike" parameterType="int">
+	<!-- 추천하면 state값을 0으로 set -->
+	<update id = "updateLike2" parameterType="tripLikeVO">
+		update trip_like
+		set like_state = 0
+		where member_id = #{member_id}
+		<selectKey resultType="java.lang.Integer" keyProperty="like_state" order = "AFTER">
+			select like_state from trip_like where member_id = #{member_id}
+		</selectKey>
+	</update>
+	
+	<!-- 비추천시 게시글 추천수 -1 -->
+	<update id = "updateDislike" parameterType="tripVO">
 		update trip 
 		set trip_total_like = trip_total_like - 1 
 		where trip_id = #{trip_id}
+		<selectKey resultType="java.lang.Integer" keyProperty="trip_total_like" order = "AFTER">
+			select trip_total_like from trip where trip_id = #{trip_id}
+		</selectKey>
 	</update>
+	
+	<!-- 비추천하면 state값을 1로 set -->
+	<update id = "updateDislike2" parameterType="tripLikeVO">
+		update trip_like
+		set like_state = 1, like_check = 1
+		where member_id = #{member_id}
+	</update>
+	
+	<!-- 게시글 추천시 Like테이블에 insert (state 값 0인 채로 insert) -->
+	<insert id = "insertLike" parameterType="tripLikeVO">
+		insert into trip_like values (#{like_id}, #{trip_id}, #{member_id}, 0, 0)
+																	<!-- state, check -->
+	</insert>
+
 
 	<delete id="delete" parameterType="tripVO">
 		delete from trip where
