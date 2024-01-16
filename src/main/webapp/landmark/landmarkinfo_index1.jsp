@@ -43,11 +43,11 @@
 	<div align="center">
 		<button id="nature1">자연</button>
 		<a href="landmarkinfo_index2.jsp"><button class="jeju-button">인문</button></a>
-		<a href="landmarkinfo_index2.jsp"><button class="jeju-button">레포츠</button></a>
-		<a href="landmarkinfo_index2.jsp"><button class="jeju-button">쇼핑</button></a>
-		<a href="landmarkinfo_index2.jsp"><button class="jeju-button">음식</button></a>
-		<a href="landmarkinfo_index2.jsp"><button class="jeju-button">숙박</button></a>
-		<a href="landmarkinfo_index2.jsp"><button class="jeju-button">추천코스</button></a>
+		<a><button class="jeju-button">레포츠</button></a>
+		<a><button class="jeju-button">쇼핑</button></a>
+		<a><button class="jeju-button">음식</button></a>
+		<a><button class="jeju-button">숙박</button></a>
+		<a><button class="jeju-button">추천코스</button></a>
 	</div>
 	<hr>
 	<div id="result1">

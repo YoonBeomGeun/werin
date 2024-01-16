@@ -12,15 +12,16 @@ public class LandmarkInfoController {
 	LandmarkInfoService service;
 	
 	@RequestMapping("landmark/LandmarkInfo")
-	public void insert(String ko, Model model) throws Exception {
-		StringBuilder json = service.insert(ko);
+	public void insert (Model model) throws Exception {
+		System.out.println("-----");
+		service.api();
 		
-		model.addAttribute("json", json);
+		//model.addAttribute("json", json);
 	}
 	
 	@RequestMapping("landmark/jejulist")
 	public void list(String ko, Model model){
 		service.list(ko, model);
 	}
-
+	
 }
