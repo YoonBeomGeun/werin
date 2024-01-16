@@ -120,7 +120,7 @@ button:hover {
 				} else {
 			for (int i = 1; i <= pages; i++) {
 			%>
-			<a href="list?pages=<%=i%>"><button class="pages"><%=i%></button></a>
+			<a href="list?page=<%=i%>"><button class="pages"><%=i%></button></a>
 			<%
 				}
 			}

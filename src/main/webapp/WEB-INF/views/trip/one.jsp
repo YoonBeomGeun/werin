@@ -155,7 +155,7 @@ $(function() {
         
 
         <script>
-        <%--
+        
             function remove() {
             	alert("버튼작동통과")
             	
@@ -179,7 +179,7 @@ $(function() {
         		}
             }
      
---%>
+
           
             
         </script>
