@@ -42,13 +42,19 @@
 	}
 	
 	.write {
-		margin-left: 300px;
-		position: fixed;
-		bottom: 0%;
-		width: 1400px;
-		height: 70px;
-		background: lightgray;
-		border-radius: 15px;
+	    display: flex;
+	    justify-content: space-between; /* 내부 요소 사이의 간격을 벌리기 위해 사용합니다. */
+	    align-items: center;
+	    position: fixed;
+	    bottom: 10px;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    width: calc(100% - 20px); /* 화면 가로 길이에서 여백 20px만큼 빼줍니다. */
+	    max-width: 1200px; /* 최대 너비 설정 */
+	    height: 90px;
+	    background: lightgray;
+	    border-radius: 15px;
+	    padding: 0 10px; /* 내부 여백 설정 */
 	}
 	
 	.write button {
@@ -177,8 +183,47 @@
 			})
 		})
 		
+		$("#b5").click(function() {
+			$.ajax({
+				url: "checkRoom",
+				data: {
+					gowith_id: <%=vo.getGowith_id()%>,
+					room_name: "<%=vo.getGowith_title()%>",
+					room_member: "${sessionScope.loginId}"
+				},
+				success: function(response) {
+                	window.location.href = "checkRoom?gowith_id=" + <%=vo.getGowith_id()%> + "&room_name=" + "<%=vo.getGowith_title()%>" + "&room_member=" + "${sessionScope.loginId}";
+				}
+			})
+		})
+		
 	})
 </script>
+<!-- <script>
+    $(document).ready(function() {
+        $("#b5").click(function() {
+            // 왼쪽으로 이동할 거리 설정
+            var leftDistance = "-200px"; // 예시로 300px로 설정
+
+            // 전체 화면을 왼쪽으로 이동
+            $("body").animate({ marginLeft: leftDistance }, 500);
+
+            // 오른쪽에 채팅창을 표시하는 div를 생성하고 추가
+            var chatDiv = '<div id="chatContainer" style="position: fixed; bottom: 0; right: 0; width: 500px; height: 85%; background: lightgray; padding: 20px; overflow-y: auto;">';
+            chatDiv += '<h2>채팅창</h2>'; // 채팅창 제목 등 추가
+            chatDiv += '<button id="closeChat" style="background: #FF5555; color: white; border-radius: 10px; margin-top: 10px;">닫기</button>';
+            chatDiv += '</div>';
+            $("body").append(chatDiv);
+
+            // 채팅창 닫기 버튼 클릭 시
+            $("#closeChat").click(function() {
+                // 오른쪽에 추가한 채팅창을 제거하고, 왼쪽으로 이동한 화면을 원래 위치로 되돌림
+                $("#chatContainer").remove();
+                $("body").animate({ marginLeft: 0 }, 500);
+            });
+        });
+    });
+</script> -->
 </head>
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
@@ -215,7 +260,8 @@
 			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
 			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
 			<div class="edit" style="text-align: right; margin-right: 300px;">
-				<a href="insertChat.jsp?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>&room_member=${sessionScope.loginId}"><button style="background:#33CC99;">채팅하기</button></a>
+				<%-- <a href="insertChat?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>&room_member=${sessionScope.loginId}"><button id="b5" style="background:#33CC99;">채팅하기</button></a> --%>
+				<button id="b5" style="background:#33CC99;">채팅하기</button>
 			</div>
 		</c:otherwise>
 	</c:choose>

@@ -9,6 +9,18 @@
 		values (null, #{room_name}, #{gowith_id}, #{room_member}, now(), 'a')
 	</insert>
 	
+	<select id="countpick" parameterType="roomVO" resultType="int">
+		select count(*)
+		from room
+		where gowith_id = #{gowith_id} and room_member = #{room_member}
+	</select>
+	
+	<select id="pick" parameterType="roomVO" resultType="roomVO">
+		select *
+		from room
+		where gowith_id = #{gowith_id} and room_member = #{room_member}
+	</select>
+	
 	<select id="one" parameterType="int" resultType="roomVO">
 		select *
 		from
