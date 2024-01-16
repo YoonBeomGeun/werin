@@ -42,4 +42,20 @@ public class MainDAO {
 	public List<MainbbsVO> hotboard(MainbbsVO mainbbsVO) {
 		return my.selectList("main.hotboard", mainbbsVO);
 	}
+	
+	public List<SearchLandmarkVO> morelandmark(SearchVO searchVO){
+		return my.selectList("main.morelandmark",searchVO);
+	}
+
+	public List<SearchTripVO> moretrip(SearchVO searchVO){
+		return my.selectList("main.moretrip",searchVO);
+	}
+	
+	public int landmark_count(SearchVO searchVO) {
+		return my.selectOne("main.landmark_count", searchVO);
+	}
+	
+	public int trip_count(SearchVO searchVO) {
+		return my.selectOne("main.trip_count", searchVO);
+	}
 }

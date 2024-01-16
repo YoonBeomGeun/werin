@@ -5,6 +5,13 @@ public class SearchLandmarkVO {
 	private int landmarkinfo_id;
 	private String landmarkinfo_name;
 	private String landmarkinfo_info;
+	private int row_no;
+	public int getRow_no() {
+		return row_no;
+	}
+	public void setRow_no(int row_no) {
+		this.row_no = row_no;
+	}
 	private String searching;
 	
 	public String getSearching() {
@@ -34,7 +41,6 @@ public class SearchLandmarkVO {
 	@Override
 	public String toString() {
 		return "SearchLandmarkVO [landmarkinfo_id=" + landmarkinfo_id + ", landmarkinfo_name=" + landmarkinfo_name
-				+ ", landmarkinfo_info=" + landmarkinfo_info + ", searching=" + searching + "]";
+				+ ", landmarkinfo_info=" + landmarkinfo_info + ", row_no=" + row_no + ", searching=" + searching + "]";
 	}
-
 }

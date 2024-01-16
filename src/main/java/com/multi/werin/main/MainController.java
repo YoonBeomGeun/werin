@@ -21,6 +21,7 @@ public class MainController {
 		model.addAttribute("recommendlandmark", recommendlandmark);
 	}
 	
+	
 	@RequestMapping("main/search")
 	public void mainsearch(SearchLandmarkVO searchlandmarkVO, SearchBbsVO searchbbsVO, SearchTripVO searchtripVO, Model model) {
 		List<SearchLandmarkVO> searchlandmark = maindao.searchlandmark(searchlandmarkVO);
@@ -35,15 +36,24 @@ public class MainController {
 		 if(result==0) {
 			 model.addAttribute("searchlandmark", searchlandmark);
 			 model.addAttribute("searchbbs", searchbbs);
-			 model.addAttribute("searchtrip", searchtrip);			 
+			 model.addAttribute("searchtrip", searchtrip);	
+			 model.addAttribute("searching", searchtripVO.getSearching());
 		 }
 		 System.out.println(searchlandmark);
 		 System.out.println(searchbbs);
 		 System.out.println(searchtrip);
 		 System.out.println(result);
+		 System.out.println(searchtripVO.getSearching());
 		 model.addAttribute("result", result);
 		//views/main/serarch.jsp
-		
+	}
+	
+	/* search페이지에서 페이징 사용하기 위한 함수 */
+	@RequestMapping("main/searchbbs")
+	public void searchbbs(SearchBbsVO searchbbsVO, Model model) {
+		List<SearchBbsVO> searchbbs = maindao.searchbbs(searchbbsVO);
+		model.addAttribute("searchbbs", searchbbs);
+		System.out.println(searchbbs);
 	}
 	
 	@RequestMapping("main/hottravel")
@@ -62,6 +72,41 @@ public class MainController {
 	public void hotboard(MainbbsVO mainbbsVO, Model model) {
 		List<MainbbsVO> hotboard = maindao.hotboard(mainbbsVO);
 		model.addAttribute("hotboard", hotboard);
+	}
+	
+	@RequestMapping("main/morelandmark")
+	public void morelandmark(SearchVO searchVO, Model model) {
+		searchVO.setStartEnd();
+		System.out.println("searchVO : " + searchVO);
+		List<SearchLandmarkVO> searchlandmark = maindao.morelandmark(searchVO);
+		int count = maindao.landmark_count(searchVO);
+		System.out.println("count : " + count); //1?
+		int pages = count/10; // 1/10  pages = 0
+		if(count%10!=0) { //1 % 10 --->1 
+			pages=count/10+1; //pages = 0/10 + 1 = 1
+		}		
+		model.addAttribute("searchlandmark", searchlandmark);
+		model.addAttribute("pages", pages);
+		model.addAttribute("count", count);
+		model.addAttribute("searching", searchVO.getSearching());
+	}
+	
+	@RequestMapping("main/moretrip")
+	public void moretrip(SearchVO searchVO, Model model) {
+		searchVO.setStartEnd();
+		System.out.println("searchVO : " + searchVO);
+		List<SearchTripVO> searchtrip = maindao.moretrip(searchVO);
+		System.out.println("searchtrip : " + searchtrip.size());
+		int count = maindao.trip_count(searchVO);
+		System.out.println("count: "+count);
+		int pages = count/10;
+		if(count%10!=0) {
+			pages=count/10+1;
+		}
+		model.addAttribute("searchtrip", searchtrip);
+		model.addAttribute("pages", pages);
+		model.addAttribute("count", count);		
+		model.addAttribute("searching", searchVO.getSearching());
 	}
 
 	/*
