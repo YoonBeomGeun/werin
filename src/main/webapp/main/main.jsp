@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="../resources/js/jquery-3.7.1.js"></script>
 <script type="text/javascript"> /* 뭔가 오류가 생긴다면 jquery 경로랑 이름 확인해볼것 */
-var xhr = new XMLHttpRequest();
+
 	$(function(){
 		
 		//관광지추천

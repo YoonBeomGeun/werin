@@ -27,10 +27,9 @@ public class MainController {
 		List<SearchBbsVO> searchbbs = maindao.searchbbs(searchbbsVO);
 		List<SearchTripVO> searchtrip = maindao.searchtrip(searchtripVO);
 		
-		//콘솔창에 0만 찍힘. 위에 어떤 값들이 들어가는지 확인해볼 필요가 있음
-		
+		//위에 어떤 값들이 들어가는지 확인해볼 필요가 있음
 		 int result = 0;
-		 if(searchlandmark == null && searchbbs == null && searchtrip == null) { // 아무런 검색 결과가 없는 경우
+		 if(searchlandmark.isEmpty() && searchbbs.isEmpty() && searchtrip.isEmpty()) { // 아무런 검색 결과가 없는 경우
 			 result = 1;
 		 }
 		 if(result==0) {
@@ -38,6 +37,9 @@ public class MainController {
 			 model.addAttribute("searchbbs", searchbbs);
 			 model.addAttribute("searchtrip", searchtrip);			 
 		 }
+		 System.out.println(searchlandmark);
+		 System.out.println(searchbbs);
+		 System.out.println(searchtrip);
 		 System.out.println(result);
 		 model.addAttribute("result", result);
 		//views/main/serarch.jsp
