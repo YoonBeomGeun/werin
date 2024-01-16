@@ -18,10 +18,19 @@
 		<hr color="blue">
 		<form action="insert">
 			<table border="1"  class="table table-hover">
-				<tr class="table-warning">
+				<!-- <tr class="table-warning">
 					<td width="200">카테고리</td>
 					<td width="300"><input name="bbs_cate"></td>
-				</tr>
+				</tr> -->
+			    <td width="200">카테고리</td>
+			    <td width="300">
+			        <select name="bbs_cate">
+			            <option value="잡담">잡담</option>
+			            <option value="질문">질문</option>
+			            <option value="조언">조언</option>
+			            <!-- 여기에 필요한 다른 카테고리 옵션들을 추가할 수 있습니다. -->
+			        </select>
+			    </td>
 				<tr class="table-warning">
 					<td width="200">제목</td>
 					<td width="300"><input name="bbs_title"></td>

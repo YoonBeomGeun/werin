@@ -5,92 +5,146 @@
 <mapper namespace="bbs">
 
 	<insert id="create" parameterType="bbsVO">
-		insert into bbs values(null, #{bbs_cate}, #{bbs_title}, #{bbs_content}, #{bbs_writer}, now(),0,0,null)
+		insert into bbs values(null,
+		#{bbs_cate}, #{bbs_title}, #{bbs_content}, #{bbs_writer},
+		now(),0,0,null)
 	</insert>
-	
+
 	<update id="update" parameterType="bbsVO">
-		update bbs set bbs_title = #{bbs_title}, bbs_content = #{bbs_content} where bbs_id = #{bbs_id}
+		update bbs set bbs_title =
+		#{bbs_title}, bbs_content = #{bbs_content} where bbs_id = #{bbs_id}
 	</update>
-	
+
 	<delete id="delete" parameterType="int">
-		delete from bbs where bbs_id = #{bbs_id}
+		delete from bbs where bbs_id =
+		#{bbs_id}
 	</delete>
 
-<!-- 전체 페이지개수 계산할 때 전체 게시물 개수가 필요함. 
-	total / 한페이지당개수 = pages -->
+	<!-- 전체 페이지개수 계산할 때 전체 게시물 개수가 필요함. total / 한페이지당개수 = pages -->
 	<select id="count" resultType="int">
 		select count(*) from bbs
 	</select>
-	
+
 	<select id="list" parameterType="pageVO" resultType="bbsVO">
-		select * 
-		from 
-			(select 
-				ROW_NUMBER() over(order by bbs_id desc) as num_id,
-				bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
-			from bbs p
-			) p2
+		select *
+		from
+		(select
+		ROW_NUMBER() over(order by bbs_id desc) as num_id,
+		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
+		from bbs p
+		) p2
 		where p2.num_id BETWEEN ${start} and ${end}
 	</select>
-	
+
 	<select id="one" parameterType="bbsVO" resultType="bbsVO">
 		select *
-		from 
-			(select 
-				ROW_NUMBER() over(order by bbs_id desc) as num_id,
-				bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
-			from bbs p) p2
+		from
+		(select
+		ROW_NUMBER() over(order by bbs_id desc) as num_id,
+		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
+		from bbs p) p2
 		where p2.bbs_id = #{bbs_id}
 	</select>
-	
+
 	<update id="bbs.increaseView">
-    	update bbs set bbs_view = bbs_view + 1 WHERE bbs_id = #{bbs_id}
+		update bbs set bbs_view = bbs_view + 1 WHERE bbs_id = #{bbs_id}
 	</update>
-	
-	<select id="selectSearchList" parameterType="pageVO" resultType="bbsVO">
-	    SELECT * FROM (
-	        SELECT 
-	            ROW_NUMBER() OVER (ORDER BY bbs_id DESC) AS num_id,
-	            bbs.*
-	        FROM bbs
-	        WHERE
-	            <!-- 수정: 작성자로 검색하는 경우 -->
-	            <choose>
-	                <when test="type != null and type != '' and type == 'writer'">
-                         bbs_writer LIKE concat('%', #{keyword}, '%')
-	                </when>
-	                <!-- 다른 검색 조건들 추가 -->
-	                <when test="type != null and type != '' and type == 'title'">
-	                    <!-- 기본적으로 제목으로 검색 -->
-	                    bbs_title LIKE concat('%', #{keyword}, '%') 
-	                </when>
-	                <when test="type != null and type != '' and type == 'content'">
-	                    <!-- 기본적으로 내용으로 검색 -->
-	                    bbs_content LIKE concat('%', #{keyword}, '%')
-	                </when>
-	            </choose>
-	    ) AS temp
-	    WHERE temp.num_id BETWEEN #{start} AND #{end}
-	</select>	
-	
+
+	<select id="selectSearchList" parameterType="pageVO"
+		resultType="bbsVO">
+		SELECT * FROM (
+		SELECT
+		ROW_NUMBER() OVER (ORDER BY bbs_id DESC) AS num_id,
+		bbs.*
+		FROM bbs
+		
+		<!-- 수정: 작성자로 검색하는 경우 -->
+		<choose>
+        <when test="type != null and type != '' and type == 'cate'">
+            WHERE bbs_cate = #{bbs_cate}
+            <choose>
+                <when test="type != null and type != '' and type == 'writer'">
+                    <!-- 기본적으로 제목으로 검색 -->
+                    and bbs_writer LIKE concat('%', #{keyword}, '%')
+                </when>
+                <when test="type != null and type != '' and type == 'title'">
+                    <!--  기본적으로 제목으로 검색 -->
+                    and bbs_title LIKE concat('%', #{keyword}, '%')
+                </when>
+                <when test="type != null and type != '' and type == 'content'">
+                    <!-- 기본적으로 제목으로 검색 -->
+                    and bbs_content LIKE concat('%', #{keyword}, '%')
+                </when>
+            </choose>
+        </when>
+        <otherwise>
+            <choose>
+			<when test="type != null and type != '' and type == 'writer'">
+				where bbs_writer LIKE concat('%', #{keyword}, '%')
+			</when>
+			<!-- 다른 검색 조건들 추가 -->
+			<when test="type != null and type != '' and type == 'title'">
+				<!-- 기본적으로 제목으로 검색 -->
+				where bbs_title LIKE concat('%', #{keyword}, '%')
+			</when>
+			<when test="type != null and type != '' and type == 'content'">
+				<!-- 기본적으로 내용으로 검색 -->
+				where bbs_content LIKE concat('%', #{keyword}, '%')
+			</when>
+			<when test="type != null and type != '' and type == 'cate'">
+				<!-- 기본적으로 내용으로 검색 -->
+				where bbs_cate LIKE concat('%', #{keyword}, '%')
+			</when>
+		</choose>
+        </otherwise>
+    </choose>
+		) AS temp
+		WHERE temp.num_id BETWEEN #{start} AND #{end}
+	</select>
+
 	<select id="count2" parameterType="pageVO" resultType="int">
-    	SELECT COUNT(*) FROM bbs
-        <!-- 수정: 작성자로 검색하는 경우 -->
-        <choose>
-            <!-- 다른 검색 조건들 추가 -->
-            <when test="type != null and type != '' and type == 'title'">
-                <!-- 기본적으로 제목으로 검색 -->
-                WHERE  bbs_writer LIKE concat('%', #{keyword}, '%')
-            </when>
-            <when test="type != null and type != '' and type == 'title'">
-                <!-- 기본적으로 제목으로 검색 -->
-                WHERE  bbs_title LIKE concat('%', #{keyword}, '%')
-            </when>
-            <when test="type != null and type != '' and type == 'title'">
-                <!-- 기본적으로 제목으로 검색 -->
-                WHERE  bbs_content LIKE concat('%', #{keyword}, '%')
-            </when>
-        </choose>
-    
+    SELECT COUNT(*) FROM bbs
+    <!-- 수정: 작성자로 검색하는 경우 -->
+    <choose>
+        <when test="type != null and type != '' and type == 'cate'">
+            WHERE bbs_cate = #{bbs_cate}
+            <choose>
+                <when test="type != null and type != '' and type == 'writer'">
+                    <!-- 기본적으로 제목으로 검색 -->
+                    and bbs_writer LIKE concat('%', #{keyword}, '%')
+                </when>
+                <when test="type != null and type != '' and type == 'title'">
+                    <!--  기본적으로 제목으로 검색 -->
+                    and bbs_title LIKE concat('%', #{keyword}, '%')
+                </when>
+                <when test="type != null and type != '' and type == 'content'">
+                    <!-- 기본적으로 제목으로 검색 -->
+                    and bbs_content LIKE concat('%', #{keyword}, '%')
+                </when>
+            </choose>
+        </when>
+        <otherwise>
+            <choose>
+			<when test="type != null and type != '' and type == 'writer'">
+				where bbs_writer LIKE concat('%', #{keyword}, '%')
+			</when>
+			<!-- 다른 검색 조건들 추가 -->
+			<when test="type != null and type != '' and type == 'title'">
+				<!-- 기본적으로 제목으로 검색 -->
+				where bbs_title LIKE concat('%', #{keyword}, '%')
+			</when>
+			<when test="type != null and type != '' and type == 'content'">
+				<!-- 기본적으로 내용으로 검색 -->
+				where bbs_content LIKE concat('%', #{keyword}, '%')
+			</when>
+			<when test="type != null and type != '' and type == 'cate'">
+				<!-- 기본적으로 내용으로 검색 -->
+				where bbs_cate LIKE concat('%', #{keyword}, '%')
+			</when>
+		</choose>
+        </otherwise>
+    </choose>
 </select>
+
+
 </mapper>

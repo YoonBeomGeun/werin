@@ -15,9 +15,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bbs.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>     
 <script type="text/javascript">
-	$(function() {
+ $(function() {
     $(".pages").click(function() {
-        // 첫 번째 AJAX 호출
+    	
+    	// 첫 번째 AJAX 호출
         $.ajax({
             url: "bbs0",
             data: {
@@ -27,15 +28,17 @@
                 $("#result").html(table);
             }
         });
-        searchData = {
-                page: $(this).text(),
-                type: $("select[name=type]").val(),
-                keyword: $("input[name=keyword]").val()
-            };
+	        searchData = {
+	                page: $(this).text(),
+	                type: $("select[name=type]").val(),
+	                keyword: $("input[name=keyword]").val()
+	            };
+    	});
        
-    });
-});
-	
+    }); 
+
+  
+    
 	function getSearchList() {
 		$.ajax({
 			type: 'GET',
@@ -60,24 +63,26 @@
 				}
 			}
 		});
-	} 
+	}
+	
+	
 	
 	
 </script>
 </head>
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
-	
+	<div id="result">
 	<hr color="red">
 	전체 게시물 수 : ${count}개 <br>
 	전체 페이지 수 : ${pages}개 <br><br>
-	
-	<div id="result">
 		<!-- Check if the user is logged in -->
-        <c:if test="${not empty sessionScope.loginId}">
-            <a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
-        </c:if>
-        
+		<div id="category">
+	        <a href="getSearchList?"></A><button style="background:pink;" class="category-btn" data-category="전체">전체</button></a>&nbsp;
+	        <a href="getSearchList?page=1&bbs_cate=잡담"><button style="background:pink;" class="category-btn" data-category="잡담">잡담</button></a>&nbsp;
+	        <a href="getSearchList?page=1&bbs_cate=질문"><button style="background:pink;" class="category-btn" data-category="질문">질문</button></a>&nbsp;
+	        <a href="getSearchList?page=1&type=${bag.bbs_cate}&keyword=조언"><button style="background:pink;" class="category-btn" data-category="조언">조언</button></a>&nbsp;
+        </div>
 		<table border="1" class="table table-bordered table tabel-hover">
 		    <tr bgcolor="lime">
 		        <td width=70>행번호</td>
