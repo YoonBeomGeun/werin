@@ -31,64 +31,53 @@
             }); // b2
 
             $('#b3').click(function () {
-                // API URL 및 키 정의
-                var apiUrl = "http://apis.data.go.kr/B551011/KorService1/detailCommon1";
+                // API URL 정의
                 var apiKey = "gRjisabrZIfabIjre8qnZIy4ig724PgKzbxWE5KdbOHL4SD%2FneKsnNw2phKHIowgD5NXuBRaTpMEvSAY2uTA1Q%3D%3D";
+                var numOfRows = 10;
+                var pageNo = 1;
 
-                // 파라미터 정의
-                var params = {
-                    ServiceKey: apiKey,
-                    contentTypeId: '39',
-                    contentId: '2850913',
-                    MobileOS: 'ETC',
-                    MobileApp: 'AppTest',
-                    defaultYN: 'Y',
-                    firstImageYN: 'Y',
-                    areacodeYN: 'Y',
-                    catcodeYN: 'Y',
-                    addrinfoYN: 'Y',
-                    mapinfoYN: 'Y',
-                    overviewYN: 'Y'
-                };
+                var apiUrl = "https://apis.data.go.kr/B551011/KorService1/"
+                        + "areaBasedList1?"
+                        + "MobileOS=ETC&MobileApp=Test"
+                        + "&ServiceKey=" + apiKey
+                        + "&listYN=Y&arrange=A&contentTypeId=&areaCode=39&sigunguCode=&cat1=&cat2=&cat3="
+                        + "&_type=json&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
 
+                
+                
+                
                 // AJAX 요청
                 $.ajax({
                     url: apiUrl,
                     method: "GET",
-                    data: params,
-                    dataType: "xml",
+                    dataType: "json",
                     success: function (data) {
-                        // homepage와 overview를 저장할 변수 초기화
-                        var homepage = "";
-                        var overview = "";
+                        console.log(data);
 
-                        // XML 데이터를 탐색하며 필요한 정보 추출
-                        function extractInfo(node) {
-                            if (node.nodeType === 1) {
-                                // Element 노드인 경우
-                                if (node.nodeName === "homepage") {
-                                    homepage = node.textContent.trim();
-                                } else if (node.nodeName === "overview") {
-                                    overview = node.textContent.trim();
-                                } else {
-                                    // 다른 요소들에 대한 처리
-                                    for (var i = 0; i < node.childNodes.length; i++) {
-                                        extractInfo(node.childNodes[i]);
-                                    }
-                                }
-                            }
-                        }
+                        // 테이블 생성
+                        var table = $('<table>').attr('border', '1');
 
-                        // XML 데이터를 브라우저에 표시
-                        extractInfo(data.documentElement);
+                        // 테이블 헤더 생성
+                        var headerRow = $('<tr>');
+                        headerRow.append($('<th>').text('Title'));
+                        headerRow.append($('<th>').text('Image'));
+                        headerRow.append($('<th>').text('MapX'));
+                        headerRow.append($('<th>').text('MapY'));
+                        table.append(headerRow);
 
-                        // homepage와 overview를 출력 또는 활용하도록 코드를 작성
-                        console.log("Homepage:", homepage);
-                        console.log("Overview:", overview);
+                        // 테이블 행 생성
+                        $.each(data.response.body.items.item, function(index, item) {
+                            var row = $('<tr>');
+                            // 필요한 데이터만 표시
+                            row.append($('<td>').text(item.title));
+                            row.append($('<td>').append($('<img>').attr('src', item.firstimage).css('max-width', '100px')));
+                            row.append($('<td>').text(item.mapx));
+                            row.append($('<td>').text(item.mapy));
+                            table.append(row);
+                        });
 
-                        // 아래와 같이 .result에 표시할 수 있습니다.
-                        $(".result").html("<p>Homepage: " + homepage + "</p><p>Overview: " + overview + "</p>");
-
+                        // 결과 div에 테이블 추가
+                        $(".result").html(table);
                     },
                     error: function (xhr, status, error) {
                         console.error("에러:", error);

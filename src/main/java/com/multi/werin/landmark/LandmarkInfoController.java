@@ -18,7 +18,7 @@ public class LandmarkInfoController {
 		model.addAttribute("json", json);
 	}
 	
-	@RequestMapping("landmark/LandmarkInfo2")
+	@RequestMapping("landmark/jejulist")
 	public void list(String ko, Model model){
 		service.list(ko, model);
 	}
