@@ -32,7 +32,7 @@ th {
 
 </head>
 <body>
-	<h2>Landmark Information</h2>
+	<h2>관광지 상세페이지 입니다.</h2>
 	<div class="container">
 		<table>
 			<thead>
@@ -50,7 +50,7 @@ th {
 				<c:forEach var="landmark" items="${list}">
 					<tr>
 						<td>${landmark.landmarkinfo_id}</td>
-						<td> <a href = "jejulist2.jsp">${landmark.landmarkinfo_name}</a></td>
+						<td><a href="jejulist2.jsp">${landmark.landmarkinfo_name}</a></td>
 						<td>${landmark.landmarkinfo_info}</td>
 						<td>${landmark.landmarkinfo_pic}</td>
 						<td>${landmark.landmarkinfo_lat}</td>
