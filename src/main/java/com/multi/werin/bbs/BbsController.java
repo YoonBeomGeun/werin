@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.multi.werin.gowith.GowithcmtVO;
+
 
 
 
@@ -25,8 +27,8 @@ public class BbsController{
 	@Autowired
 	BbsDAO dao;
 	
-//	@Autowired
-//	BbscmtDAO dao2;
+	@Autowired
+	BbscmtDAO bbscmtDAO;
 	
 	@RequestMapping("/bbs/insert")
 	public String insert2(BbsVO bbsVO, Model model) {
@@ -101,12 +103,13 @@ public class BbsController{
 		// System.out.println("post_id : " + post_id);
 		dao.increaseBbsView(bbsVO.getBbs_id());
 		BbsVO bag = dao.one(bbsVO);
+		List<BbscmtVO> list = bbscmtDAO.list(bbsVO.getBbs_id());
 		model.addAttribute("bag", bag);
-		
+		model.addAttribute("list", list);
 	}
 	
 	@RequestMapping("bbs/getSearchList")
-	public String getSearchList(PageVO pageVO, String bbs_cate, Model model) {
+	public String getSearchList(PageVO pageVO, Model model) {
 		pageVO.setStartEnd();
 		
 	    System.out.println("getSerchList");
@@ -125,6 +128,7 @@ public class BbsController{
 	    model.addAttribute("count", count);
 	    model.addAttribute("keyword", pageVO.getKeyword());
 	    model.addAttribute("type", pageVO.getType());
+	    model.addAttribute("kind", pageVO.getKind());
 	    return "bbs/bbs";  
 	
 	}

@@ -37,7 +37,7 @@
 				</tr>
 				<tr class="table-warning">
 					<td width="200">내용</td>
-					<td width="300"><input name="bbs_content"></td>
+					<td width="300"><textarea name="bbs_content" rows="10" cols="40"></textarea></td>
 				</tr>
 				<tr class="table-warning" hidden>
 					<td width="200">작성자</td>
@@ -45,6 +45,13 @@
 						<input name="bbs_writer" value="${sessionScope.loginId}" >
 					</td>
 				</tr>
+				<tr class="table-warning">
+			        <td width="200">이미지 첨부</td>
+			        <td width="300">
+            			<input type="file" name="bbs_image">
+			        </td>
+			    </tr>
+				
 				<tr class="table-primary">
 					<td colspan="2" width="200">
 						<button type="submit" class="btn btn-primary">글쓰기</button>

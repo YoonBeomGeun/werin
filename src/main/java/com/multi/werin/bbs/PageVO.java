@@ -8,6 +8,7 @@ public class PageVO {
 	private String type;
 	private String keyword;
 	private int pages;
+	private String kind;
 	public void setStartEnd() {
 		start = 1 + (page -1) * 10;
 	//			1 + (1 - 1) * 10 = 1
@@ -53,11 +54,19 @@ public class PageVO {
 	public void setPages(int pages) {
 		this.pages = pages;
 	}
+	
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 	@Override
 	public String toString() {
 		return "PageVO [start=" + start + ", end=" + end + ", page=" + page + ", type=" + type + ", keyword=" + keyword
-				+ ", pages=" + pages + "]";
+				+ ", pages=" + pages + ", kind=" + kind + "]";
 	}
+	
 	
 	
 	
