@@ -275,7 +275,7 @@
 							// 선택된 날짜의 일정 업데이트
 							var selectedDay = this.innerText.trim().replace(
 									'Day', '');
-							
+
 							updatePlanList(selectedDay);
 						});
 
@@ -567,9 +567,13 @@
 						contentType : 'application/json',
 						data : JSON.stringify(newPlan),
 						success : function(response) {
-							console.log(response);
-							// 성공적으로 추가되면 화면에 일정을 실시간으로 표시
-							updatePlanList(dateString);
+							if (response.status === "success") {
+								// 성공적으로 추가되면 화면에 일정을 실시간으로 표시
+								updatePlanList(dateString);
+								alert(response.message); // 또는 다른 사용자 피드백 방식
+							} else {
+								alert(response.message);
+							}
 						},
 						error : function(error) {
 							console.error(error);
