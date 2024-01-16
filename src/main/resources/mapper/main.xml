@@ -12,16 +12,16 @@
 		select landmarkinfo_id, landmarkinfo_pic from landmarkinfo where landmarkinfo_id=1
 	</select>
 	
-	<select id="mainsearch_landmark" resultType="mainlandmarkVO"> <!-- 관광지에 대한 검색 -->
-		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info from landmarkinfo where landmarkinfo_name like '%'#{searching}'%' or landmarkinfo_info like '%'#{searching}'%'
+	<select id="mainsearch_landmark" resultType="searchlandmarkVO"> <!-- 관광지에 대한 검색 -->
+		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info from landmarkinfo where landmarkinfo_name like CONCAT('%',#{searching},'%') or landmarkinfo_info like CONCAT('%',#{searching},'%')
 	</select>
 	
-	<select id="mainsearch_trip" resultType="maintripVO"> <!-- 여행기에 대한 검색 -->
-		select trip_id, trip_title from trip where trip_title like '%'#{searching}'%' or trip_content like '%'#{searching}'%'
+	<select id="mainsearch_trip" resultType="searchtripVO"> <!-- 여행기에 대한 검색 -->
+		select trip_id, trip_title from trip where trip_title like CONCAT('%',#{searching},'%') or trip_content like CONCAT('%',#{searching},'%')
 	</select>
 	
-	<select id="mainsearch_bbs" resultType="mainbbsVO"> <!-- 자유게시판에 대한 검색 -->
-		select bbs_id, bbs_title from bbs where bbs_title like '%'#{searching}'%' or bbs_content like '%'#{searching}'%'
+	<select id="mainsearch_bbs" resultType="searchbbsVO"> <!-- 자유게시판에 대한 검색 -->
+		select bbs_id, bbs_title from bbs where bbs_title like CONCAT('%',#{searching},'%') or bbs_content like CONCAT('%',#{searching},'%')
 	</select>
 	
 	<select id="hottravel" resultType="maintripVO"> <!-- 추천수가 높은 여행기 가져오기 -->
@@ -35,5 +35,9 @@
 	<select id="hotboard" resultType="mainbbsVO"> <!-- 추천수가 높은 게시물 가져오기 -->
 		select bbs_title, bbs_id from bbs order by bbs_like limit 5
 	</select>
+	
+<!--  	<select id="paging" parameterType="" resultType="">
+	
+	</select> -->
 	
 </mapper>

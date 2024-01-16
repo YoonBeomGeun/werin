@@ -24,7 +24,7 @@ public class MainDAO {
 	}
 	
 	public List<SearchBbsVO> searchbbs(SearchBbsVO searchbbsVO) {
-		return my.selectList("main.mainsearch_trip", searchbbsVO);
+		return my.selectList("main.mainsearch_bbs", searchbbsVO);
 	}
 	
 	public List<SearchTripVO> searchtrip(SearchTripVO searchtripVO) {
