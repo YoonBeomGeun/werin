@@ -6,7 +6,7 @@
 
     <insert id="insert" parameterType="ScheduleVO">
         <!-- Your SQL query for inserting into schedule table -->
-        INSERT INTO schedule VALUES (#{schedule_title}, #{schedule_map_id}, #{schedule_plan_no})
+        INSERT INTO schedule VALUES (null, #{schedule_title}, #{schedule_map_lat}, #{schedule_map_lon}, #{schedule_day})
     </insert>
 
     <!-- other schedule-related queries -->
