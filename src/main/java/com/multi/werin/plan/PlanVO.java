@@ -9,6 +9,8 @@ public class PlanVO {
 	public Date plan_end_date;
 	public String plan_writer;
 	public String plan_with;
+	public int plan_schedule_no;
+	
 	public int getPlan_no() {
 		return plan_no;
 	}
@@ -45,10 +47,18 @@ public class PlanVO {
 	public void setPlan_with(String plan_with) {
 		this.plan_with = plan_with;
 	}
+	
+	public int getPlan_schedule_no() {
+		return plan_schedule_no;
+	}
+	public void setPlan_schedule_no(int plan_schedule_no) {
+		this.plan_schedule_no = plan_schedule_no;
+	}
 	@Override
 	public String toString() {
 		return "PlanVO [plan_no=" + plan_no + ", plan_title=" + plan_title + ", plan_start_date=" + plan_start_date
 				+ ", plan_end_date=" + plan_end_date + ", plan_writer=" + plan_writer + ", plan_with=" + plan_with
-				+ "]";
+				+ ", plan_schedule_no=" + plan_schedule_no + "]";
 	}
+	
 }

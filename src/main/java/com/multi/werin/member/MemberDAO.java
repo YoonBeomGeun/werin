@@ -10,20 +10,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MemberDAO {
+public class MemberDAO implements MemberDAOInterface {
 	
 	@Autowired
 	SqlSessionTemplate my;
 	
+	@Override
 	public int insert(MemberVO vo) {
 		return my.insert("member.create", vo);
 	}
 	
-	 public MemberVO login(MemberVO vo) {
+	 @Override
+	public MemberVO login(MemberVO vo) {
 	        return my.selectOne("member.login", vo);
 	 }
 	 
-	 public int idChk(MemberVO vo) throws Exception {
+	 @Override
+	public int idChk(MemberVO vo) throws Exception {
 	 	return my.selectOne("member.idChk", vo);
 	 }
 }
