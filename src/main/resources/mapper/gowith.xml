@@ -20,6 +20,12 @@
 		select count(*) from gowith
 	</select>
 	
+	<select id="roomHost" parameterType="int" resultType="String">
+		select gowith_writer
+		from gowith
+		where gowith_id = #{gowith_id}
+	</select>
+	
 	<select id="one" parameterType="gowithVO" resultType="gowithVO">
 		select *
 		from
