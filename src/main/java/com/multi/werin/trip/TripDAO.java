@@ -41,7 +41,23 @@ public class TripDAO {
 		return my.selectOne("trip.one", trip_id);
 	}
 	
-	public int updateLike(Integer trip_id) {
-		return my.update("trip.updateLike", trip_id);
+	public int insertLike(TripLikeVO vo) {
+		return my.insert("trip.insertLike", vo);
 	}
+	
+	public int updateLike(TripVO vo) {
+		return my.update("trip.updateLike", vo);
+	}
+	
+	public int updateLike2(TripLikeVO vo) {
+		return my.update("trip.updateLike2", vo);
+	}
+	
+	public int updateDislike(TripVO vo) {
+		return my.update("trip.updateDislike", vo);
+	}
+	
+	public TripLikeVO likeCheck(TripLikeVO vo) {
+		return my.selectOne("trip.likeCheck", vo);	
+		}
 }

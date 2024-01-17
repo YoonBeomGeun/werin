@@ -5,6 +5,7 @@ public class TripLikeVO {
 	private int trip_id;
 	private String member_id;
 	private int like_state;
+	
 	public int getLike_id() {
 		return like_id;
 	}
@@ -29,12 +30,12 @@ public class TripLikeVO {
 	public void setLike_state(int like_state) {
 		this.like_state = like_state;
 	}
-	
 	@Override
 	public String toString() {
 		return "TripLikeVO [like_id=" + like_id + ", trip_id=" + trip_id + ", member_id=" + member_id + ", like_state="
 				+ like_state + "]";
 	}
-
+	
+	
 	
 }

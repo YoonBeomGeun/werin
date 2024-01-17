@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class TripController {
@@ -98,17 +99,23 @@ public class TripController {
 	}
 	
 	@RequestMapping("trip/one")
-	public String one(int trip_id, Model model) {
+	public String one(int trip_id, Model model, TripLikeVO likeVO) {
 		
 		service.incrementCount(trip_id);
 		
 		TripVO vo = dao.one(trip_id);
+		System.out.println(likeVO);
+		TripLikeVO vo2 = dao.likeCheck(likeVO);
+		//triplike tripstate where trip_id, member_id 
+		//model tripstate save
+		//select tripstate from triplike where 
 		System.out.println("Tripvo =>" + vo);
 		
 		
-		System.out.println("Tripvo =>" + vo);
+		System.out.println("like_state =>" + vo2);
 		
 		model.addAttribute("vo", vo);
+		
 		if(vo.getTrip_id()!= 0) {
 			return "trip/one";
 		}else {
@@ -116,14 +123,25 @@ public class TripController {
 		}
 	}
 	@RequestMapping("trip/updateLike")
-	public void updateLike(TripVO vo, Model model) {
+	@ResponseBody
+	public int updateLike(TripVO vo) { 
+		/*
+		 * dao.updateLike2(vo2); if(vo2.getLike_check()==1) {
+		 * model.addAttribute("alert","이미 추천 혹은 비추천을 눌렀습니다."); }else {
+		 */
+			dao.updateLike(vo);
+			System.out.println("토탈라이크 >> " + vo.getTrip_total_like());
+			return vo.getTrip_total_like();
+			/* } */
 		
-		int result = dao.updateLike(vo.getTrip_id()); // 추천수 + 1
-		
-		System.out.println("totallike " + vo.getTrip_total_like());
-		int temp = vo.getTrip_total_like()+1;
-		System.out.println("totallike + 1 : " + temp);
-		model.addAttribute("total_like", temp);    
-		
+	}
+	
+	@RequestMapping("trip/updateDislike")
+	@ResponseBody
+	public int updateDislike(TripVO vo) {
+		dao.updateDislike(vo);
+		System.out.println("토탈라이크 >> " + vo.getTrip_total_like());
+		//model.addAttribute("total_like", vo.getTrip_total_like());
+		return vo.getTrip_total_like();
 	}
 }
