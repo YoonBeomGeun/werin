@@ -99,19 +99,20 @@ public class TripController {
 	}
 	
 	@RequestMapping("trip/one")
-	public String one(int trip_id, Model model) {
+	public String one(int trip_id, Model model, TripLikeVO likeVO) {
 		
 		service.incrementCount(trip_id);
 		
 		TripVO vo = dao.one(trip_id);
-		
+		System.out.println(likeVO);
+		TripLikeVO vo2 = dao.likeCheck(likeVO);
 		//triplike tripstate where trip_id, member_id 
 		//model tripstate save
 		//select tripstate from triplike where 
 		System.out.println("Tripvo =>" + vo);
 		
 		
-		System.out.println("Tripvo =>" + vo);
+		System.out.println("like_state =>" + vo2);
 		
 		model.addAttribute("vo", vo);
 		

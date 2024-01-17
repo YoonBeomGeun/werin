@@ -94,4 +94,9 @@
 	<select id="count" resultType="int">
 		select count(*) from trip
 	</select>
+	
+	<select id = "likeCheck" parameterType="tripLikeVO" resultType="tripLikeVO">
+		select like_state from trip_like
+		where member_id = #{member_id}
+	</select>
 </mapper>

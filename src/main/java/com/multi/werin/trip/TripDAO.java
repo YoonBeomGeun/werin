@@ -57,5 +57,7 @@ public class TripDAO {
 		return my.update("trip.updateDislike", vo);
 	}
 	
-	
+	public TripLikeVO likeCheck(TripLikeVO vo) {
+		return my.selectOne("trip.likeCheck", vo);	
+		}
 }

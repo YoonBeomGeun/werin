@@ -86,7 +86,7 @@
             </div>
             <div class="form-group">
                 <label for="writer">작성자</label> <!-- memberVO에 있는 member_nickname을 작성자 value로 고정 -->
-                <input type="text" id="writer" name = "member_nickname" value = "${member_nickname}" readonly><br>
+                <input type="text" id="writer" name = "member_id" value = "${loginId}" readonly><br>
             </div>
             <input type= "hidden" name ="trip_writer" value = "${loginId}">
             <div class="form-group date-group">
