@@ -1,15 +1,25 @@
 package com.multi.werin.chat;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.multi.werin.gowith.GowithDAO;
 
 @Controller
 public class RoomController {
 
 	@Autowired
 	RoomDAO roomDAO;
+	
+	@Autowired
+	GowithDAO dao;
+	
+	@Autowired
+	MessageDAO messageDAO;
 	
 	@RequestMapping("gowith/checkRoom")
 	public void insertChat(RoomVO roomVO, int gowith_id, String room_name, String room_member, Model model) {
@@ -24,15 +34,22 @@ public class RoomController {
 	
 	@RequestMapping("gowith/insertRoom")
 	public void insertRoom(RoomVO roomVO, Model model) {
+		
 		if(roomDAO.countPick(roomVO)==1) {
+			List<MessageVO> list = null;
+			list = messageDAO.list(roomVO.getRoom_id());
+			String host = dao.roomHost(roomVO.getGowith_id());
 			RoomVO vo = roomDAO.pick(roomVO);
+			model.addAttribute("host", host);
 			model.addAttribute("vo", vo);
+			model.addAttribute("list", list);
 		} else {
 			int result = roomDAO.insert(roomVO);
+			String host = dao.roomHost(roomVO.getGowith_id());
 			model.addAttribute("result", result);
+			model.addAttribute("host", host);
 			model.addAttribute("roomVO", roomVO);
 		}
-		System.out.println(roomDAO.countPick(roomVO));
 	}
 	
 	@RequestMapping("gowith/oneRoom")

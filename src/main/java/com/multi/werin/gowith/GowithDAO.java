@@ -24,6 +24,10 @@ public class GowithDAO {
 		return my.delete("gowith.delete", gowith_id);
 	}
 	
+	public String roomHost(int gowith_id) {
+		return my.selectOne("gowith.roomHost", gowith_id);
+	}
+	
 	public GowithVO one(GowithVO gowithVO) {
 		return my.selectOne("gowith.one", gowithVO);
 	}
