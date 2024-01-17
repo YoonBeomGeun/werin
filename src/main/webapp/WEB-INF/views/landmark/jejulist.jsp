@@ -52,7 +52,7 @@ th {
 						<td>${landmark.landmarkinfo_id}</td>
 						<td> <a href = "jejulist2.jsp">${landmark.landmarkinfo_name}</a></td>
 						<td>${landmark.landmarkinfo_info}</td>
-						<td>${landmark.landmarkinfo_pic}</td>
+						<td><img src="${landmark.landmarkinfo_pic}" alt="Landmark Image"></td>
 						<td>${landmark.landmarkinfo_lat}</td>
 						<td>${landmark.landmarkinfo_lon}</td>
 					</tr>

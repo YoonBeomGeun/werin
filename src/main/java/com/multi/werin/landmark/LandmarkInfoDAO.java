@@ -12,13 +12,10 @@ public class LandmarkInfoDAO {
 	@Autowired
 	SqlSessionTemplate my;
 	
-	@Autowired
-	LandmarkInfo jeju;
-	
-	public StringBuilder insert(String ko) {
+	public void insert(LandmarkApiVO vo) {
 		//db처리하기 전 전처리/후처리 
 		//db처리 요청 
-		return jeju.jejuinsert(ko);
+		my.insert("landmarkInfo.insert", vo);
 	}
 	
 	public List<LandmarkInfoVO> list(String ko) {
@@ -27,6 +24,7 @@ public class LandmarkInfoDAO {
 		List<LandmarkInfoVO> list = my.selectList("landmarkInfo.list");
 		return list;
 	}
+	
 
 	
 }
