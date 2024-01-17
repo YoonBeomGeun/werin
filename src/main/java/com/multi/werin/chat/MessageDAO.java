@@ -19,4 +19,5 @@ public class MessageDAO {
 	public List<MessageVO> list(int room_id) {
 		return my.selectList("message.list", room_id);
 	}
+	
 }

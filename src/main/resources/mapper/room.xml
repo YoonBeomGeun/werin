@@ -6,7 +6,7 @@
 
 	<insert id="create" parameterType="roomVO">
 		insert into room
-		values (null, #{room_name}, #{gowith_id}, #{room_member}, now(), 'a')
+		values (null, #{room_name}, #{gowith_id}, #{room_host}, #{room_member}, now(), 'a')
 	</insert>
 	
 	<select id="countpick" parameterType="roomVO" resultType="int">
@@ -29,5 +29,11 @@
 				room_id, room_name, gowith_id, room_member, room_created_at, room_flag
 			from room r) r2
 		where r2.room_id = #{room_id}
+	</select>
+	
+	<select id="roomList" parameterType="String" resultType="roomVO">
+		select distinct *
+		from room
+		where room_host = #{room_host} or room_member = #{room_member}
 	</select>
 </mapper>

@@ -8,6 +8,7 @@
 	RoomVO vo = null;
 	String host =(String)request.getAttribute("host");
 	List<MessageVO> list = (List<MessageVO>)request.getAttribute("list");
+	List<RoomVO> roomList = (List<RoomVO>)request.getAttribute("list1");
 	
 	if((Integer)request.getAttribute("result")==null) {
 		vo = (RoomVO)request.getAttribute("vo");
@@ -27,6 +28,29 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/webSocketSendToUserApp.js"></script>
 <style type="text/css">
 
+	.sendTalk {
+		margin-left: 500px;
+		margin-left: relative;
+		width: relative;
+		max-width: 300px;
+		word-wrap: break-word;
+	}
+	
+	.receiveTalk {
+		margin-left: 20px;
+		width: 300px;
+		word-wrap: break-word;
+	}
+	
+	.chatList {
+		margin-left: 20px;
+		width:400px;
+		background:gray;
+		overflow:hidden;
+		flex-direction: column;
+		overflow-y: scroll;
+	}
+
 	#result {
 		background: lightgray;
 		width: 850px;
@@ -34,6 +58,8 @@
 		display: flex;
 		margin: 0 auto;
 		border-radius: 15px;
+		flex-direction: column;
+		overflow-y: scroll;
 	}
 	
 	.write {
@@ -61,16 +87,16 @@
 	}
 </style>
 <script type="text/javascript">
+
 	var stompClient = null;
 	
 	function initialize() {
 	    // disconnect 함수 호출
 	    disconnect();
-
 	    // connect 함수 호출 (disconnect 이후에 실행됨)
 	    connect();
 	}
-	
+
 	function connect() {
 		//1. 전화기역할을 하는 web Socket객체 생성
 		var socket = new SockJS("${pageContext.request.contextPath}/chat")
@@ -84,9 +110,8 @@
 				
 				console.log(JSON.parse(messageOutput.body))
 				json = JSON.parse(messageOutput.body)
-				$('#response').append(	json.from + ": " + 
-										json.text + "(" + json.date + ")" +									
-										"<br>")
+				$('#response').append(	"<div class='sendTalk'>" + json.message_sender + " " + json.message_sent_at + "<br>" + /* 시간 글자크기 줄이기 */
+										json.message_content + "</div>")
 			})
 		})
 		
@@ -101,94 +126,128 @@
 	}
 	
 	function sendMessage() {
+		console.log("sendMessage 호출됨")
 		//누가 
-		var from = document.getElementById("from").value
+		/* var from = document.getElementById("from").value */
 		//var from = $('#from').val()
 		//입력한 내용 
 		var text = document.getElementById("t1").value
+		var room_id= <%=vo.getRoom_id()%>
+		var message_receiver= "<%=host%>"
+		var message_sender= "${sessionScope.loginId}"
+		var message_content= $("#t1").val()
+		
+		
 		//stompClient.send()
 		stompClient.send("/app/chat", {}, JSON.stringify({
-			"from" : from,
-			"text" : text
+			"message_sender" : message_sender,
+			"message_content" : text,
+			"message_receiver" : message_receiver
 		}))
 		$('#t1').val("")
 		$("#t1").attr("placeholder", "댓글을 입력하세요.");
 	}
 	
+	var message_receiver = '<%= vo.getRoom_member().equals(session.getAttribute("loginId")) ? host : vo.getRoom_member() %>'
+	
 	$(function() {
 		$("#b1").click(function() {
+			console.log("b1 click")
+			
+			console.log("ajax 호출전")
 			$.ajax({
 				url: "insertMessage",
 				data: {
 					room_id: <%=vo.getRoom_id()%>,
-					message_receiver: <%= vo.getRoom_member().equals(session.getAttribute("loginId")) ? host : vo.getRoom_member() %>,
+					message_receiver : message_receiver,
 					message_sender: "${sessionScope.loginId}",
 					message_content: $("#t1").val()
 				},
+				dataType: "json",
 				success: function(response) {
 					alert("등록되었습니다.");
+					sendMessage()
 				}
-			})
+			}) 
 		})
+		
 	})
+	
 </script>
 </head>
 <body onload="initialize()">
 	<jsp:include page="/header.jsp"></jsp:include>
 	<br><br>
 	<h3 style="text-align: center; "><%=vo.getRoom_name()%></h3>
-	<button id="disconnect" onclick="disconnect();" style="width:200px;" class="btn btn-danger">뒤로가기</button>
+	<button id="disconnect" onclick="disconnect();" style="width:200px;" class="btn btn-danger">뒤로가기</button><br>
+	<button id="roomList" style="width:200px;" class="btn btn-danger">채팅목록</button>
+	<div style="display: flex; justify-content: space-between;">
+	<div class="chatList">
+		<%
+			if(roomList!=null) {
+            	for (RoomVO vo3 : roomList) {
+        %>
+       			<div class="" id="room_<%=vo3.getRoom_id()%>">
+	            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
+	                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
+	                    <%=vo3.getRoom_name()%>
+	                </div>
+	            </div>
+        <%
+            	}
+			}
+            else {
+        %>
+        		<p style="margin-left: 650px;">채팅을 시작하세요!</p>
+        <%
+            }
+        %>
+	</div>
 	
 	<!-- 채팅 내용 보여지는 부분 -->
-	<div id="result" style="">
-		<input type="hidden" id="from" value="<%=vo.getRoom_member()%>" style="">
-		
+	<div id="result">
+		<%-- <input type="hidden" id="from" value="<%=vo.getRoom_member()%>" style=""> --%>
 		<div id="conversationDiv">
-				
+			<%
+				if(list!=null) {
+	            	for (MessageVO vo2 : list) {
+	            		if(vo2.getMessage_sender().equals(session.getAttribute("loginId"))) {
+	        %>
+	        			<div class="sendTalk" id="talk_<%=vo2.getMessage_id()%>">
+			            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span><br><br>
+			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
+			                    <%=vo2.getMessage_content()%>
+			                </div>
+			            </div>
+	        <%
+	            		} else {
+	        %>
+	        			<div class="receiveTalk" id="talk_<%=vo2.getMessage_id()%>">
+			            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getMessage_sent_at() %></span><br><br>
+			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
+			                    <%=vo2.getMessage_content()%>
+			                </div>
+			            </div>
+	        <%
+	            		}
+	            	}
+				}
+	            else {
+	        %>
+	        		<p style="margin-left: 650px;">채팅을 시작하세요!</p>
+	        <%
+	            }
+	        %>
 			<p id="response" class="alert alert-success">
-				<%
-					if(list!=null) {
-		            	for (MessageVO vo2 : list) {
-		            		if(vo2.getMessage_sender().equals(session.getAttribute("loginId"))) {
-		        %>
-		        			<div class="talk" id="talk_<%=vo2.getMessage_id()%>">
-				            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getMessage_sent_at() %></span><br><br>
-				                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
-				                    <%=vo2.getMessage_content()%>
-				                </div><br>
-				                <div class="talk-actions">
-				                    <button class="b3" data-comment-id="<%=vo2.getMessage_id()%>">삭제</button>
-				                </div>
-				            </div>
-		        <%
-		            		} else {
-		        %>
-		        			<div class="talk" id="talk_<%=vo2.getMessage_id()%>">
-				            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getMessage_sent_at() %></span><br><br>
-				                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
-				                    <%=vo2.getMessage_content()%>
-				                </div>
-				            </div>
-		        <%
-		            		}
-		            	}
-					}
-		            else {
-		        %>
-		        		<p style="margin-left: 650px;">채팅을 시작하세요!</p>
-		        <%
-		            }
-		        %>
-				<p>현준-누누티비 시즌2나온대요(11:15)</p>
 			</p>
 		</div>
 	</div>
-	
+	</div>
 	
 	<div style="height:90px;"></div>
 	<div class="write">
     	<textarea class="form-control" id="t1" rows="4" cols="170" placeholder="메세지를 입력하세요."></textarea>
-    	<button id="b1" onclick="sendMessage();" style="background: #33CC99;">입력</button>
+    	<button id="b1" style="background: #33CC99;">입력</button>
 	</div>
 </body>
 </html>
