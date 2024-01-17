@@ -5,8 +5,15 @@ public class SearchBbsVO {
 	private int bbs_id;
 	private String bbs_title;
 	private String searching;
+	private int row_no;
 	
 	
+	public int getRow_no() {
+		return row_no;
+	}
+	public void setRow_no(int row_no) {
+		this.row_no = row_no;
+	}
 	public String getSearching() {
 		return searching;
 	}
@@ -25,10 +32,10 @@ public class SearchBbsVO {
 	public void setBbs_title(String bbs_title) {
 		this.bbs_title = bbs_title;
 	}
-	
 	@Override
 	public String toString() {
-		return "SearchBbsVO [bbs_id=" + bbs_id + ", bbs_title=" + bbs_title + ", searching=" + searching + "]";
+		return "SearchBbsVO [bbs_id=" + bbs_id + ", bbs_title=" + bbs_title + ", searching=" + searching + ", row_no="
+				+ row_no + "]";
 	}
 	
 }

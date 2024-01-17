@@ -17,11 +17,11 @@
 	</select>
 	
 	<select id="mainsearch_trip" resultType="searchtripVO"> <!-- 여행기에 대한 검색 -->
-		select trip_id, trip_title from trip where trip_title like CONCAT('%',#{searching},'%') or trip_content like CONCAT('%',#{searching},'%')
+		select trip_id, trip_title, trip_content from trip where trip_title like CONCAT('%',#{searching},'%') or trip_content like CONCAT('%',#{searching},'%')
 	</select>
 	
 	<select id="mainsearch_bbs" resultType="searchbbsVO"> <!-- 자유게시판에 대한 검색 -->
-		select bbs_id, bbs_title from bbs where bbs_title like CONCAT('%',#{searching},'%') or bbs_content like CONCAT('%',#{searching},'%')
+		select bbs_id, bbs_title, bbs_content from bbs where bbs_title like CONCAT('%',#{searching},'%') or bbs_content like CONCAT('%',#{searching},'%')
 	</select>
 	
 	<select id="hottravel" resultType="maintripVO"> <!-- 추천수가 높은 여행기 가져오기 -->
@@ -36,8 +36,36 @@
 		select bbs_title, bbs_id from bbs order by bbs_like limit 5
 	</select>
 	
-<!--  	<select id="paging" parameterType="" resultType="">
+  	<select id="morelandmark" parameterType="searchVO" resultType="SearchLandmarkVO">
+		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info
+		from (select row_number() over(order by landmarkinfo_id) as row_no, c.* from landmarkinfo c)c2
+		where 
+		c2.row_no between ${start} and ${end}
+		and landmarkinfo_name like CONCAT('%',#{searching},'%')
+		or landmarkinfo_info like CONCAT('%',#{searching},'%')
+	</select>
+
+  	<select id="moretrip" parameterType="searchVO" resultType="SearchTripVO">
+		select trip_id, trip_title
+		from (select row_number() over(order by trip_id) as row_no, c.* from trip c)c2
+		where
+		c2.row_no between ${start} and ${end}
+		and trip_title like CONCAT('%',#{searching},'%')
+		or trip_content like CONCAT('%',#{searching},'%')
+	</select>
 	
-	</select> -->
+	<select id="landmark_count" parameterType="searchVO" resultType="int">
+		select count(*) as 'count' from landmarkinfo
+		where
+		landmarkinfo_name like CONCAT('%',#{searching},'%')
+		or landmarkinfo_info like CONCAT('%',#{searching},'%')
+	</select>
+	
+	<select id="trip_count" parameterType="searchVO"  resultType="int">
+		select count(*) from trip
+		where
+		trip_title like CONCAT('%',#{searching},'%')
+		or trip_content like CONCAT('%',#{searching},'%')
+	</select>
 	
 </mapper>
