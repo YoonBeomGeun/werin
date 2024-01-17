@@ -10,12 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 public class TripController {
 
 	@Autowired
-	TripDAO dao;
+	TripDAOInterface dao;
 	
 	@Autowired
 	TripService service;
@@ -99,22 +100,28 @@ public class TripController {
 	}
 	
 	@RequestMapping("trip/one")
-	public String one(int trip_id, Model model, TripLikeVO likeVO) {
+	public String one(int trip_id, Model model, TripLikeVO likeVO, @SessionAttribute("loginId") String member_id) {
 		
 		service.incrementCount(trip_id);
 		
+		System.out.println("trip_id : " + trip_id);
 		TripVO vo = dao.one(trip_id);
+		System.out.println("vo :" + vo);
 		System.out.println(likeVO);
+		
+		
+		System.out.println(" member_id  :" +  member_id);
+		
+		likeVO.setMember_id(member_id);
+		System.out.println(" likeVO : " + likeVO);
 		TripLikeVO vo2 = dao.likeCheck(likeVO);
-		//triplike tripstate where trip_id, member_id 
-		//model tripstate save
-		//select tripstate from triplike where 
-		System.out.println("Tripvo =>" + vo);
+		System.out.println("TripLikeVO =>" + vo2);
 		
 		
-		System.out.println("like_state =>" + vo2);
+		System.out.println("like_state =>" + vo2.getLike_state());
 		
 		model.addAttribute("vo", vo);
+		model.addAttribute("vo2", vo2);
 		
 		if(vo.getTrip_id()!= 0) {
 			return "trip/one";

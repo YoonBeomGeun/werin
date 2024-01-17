@@ -1,3 +1,5 @@
+<%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
+<%@page import="com.multi.werin.trip.TripLikeVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.multi.werin.trip.TripVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -78,10 +80,16 @@
        		 background-color: red;
             margin-right: 220px;
         }
+        .login-btn{
+        background-color: #2ecc71;
+        }
 
     </style>
     <%
+    String member_id = (String)session.getAttribute("loginId");
+    session.setAttribute("member_id", member_id);
     TripVO bag = (TripVO)request.getAttribute("vo");
+    TripLikeVO vo2 = (TripLikeVO)request.getAttribute("vo2");
 	//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	//String formattedDate = dateFormat.format(bag.getTrip_writedate());
 %>
@@ -94,7 +102,7 @@ $(function() {
 	         data:{
 	         	trip_id : <%=bag.getTrip_id()%>,
 	         	trip_total_like : ${vo.trip_total_like}
-		//증가하
+		//증가
 	         },
 	         success: function(result){
 	        	 console.log(result);
@@ -139,15 +147,28 @@ $(function() {
          <c:when test="${empty loginId}">
         <!-- 로그인 되어 있지 않은 경우 -->
         <p> 여행기 삭제 및 수정은 로그인이 필요합니다. </p>
-        <button onclick="window.location.href='../member/login.jsp'">로그인</button>
+        <button class = "login-btn" onclick="window.location.href='../member/login.jsp'">로그인</button>
+        <button class="like-btn"  onclick = "notLogin()"> 추천 </button>
+        <span class="spTotalLike">${vo.trip_total_like}</span>
+        <button class="dislike-btn" onclick ="notLogin()"> 비추천 </button>
     </c:when>
+    
     <c:otherwise>
         <!-- 로그인 되어 있는 경우 -->
         <button class = "remove-btn" onclick="remove()">삭제</button>
         <button class="update-btn" onclick="update()">수정</button><br>
-        <button class="like-btn"  id = "like">추천 </button></form>
+        <c:if test = "${vo2.like_state == 0 || vo2.like_state == 1}"> 
+        <!-- 추천,비추천을 이미 눌렀다면 0 추천, 1 비추천-->
+        <button class="like-btn"  onclick = "likeCheck()"> 추천 </button>
         <span class="spTotalLike">${vo.trip_total_like}</span>
-        <button class="dislike-btn" id="dislike" id = "dislike">비추천 </button>
+        <button class="dislike-btn" onclick ="likeCheck()"> 비추천 </button>
+        </c:if>
+        <c:if test = "${empty vo2.like_state}">
+        <!-- 추천, 비추천을 누르지 않은 상태라면 -->
+         <button class="like-btn"  id = "like"> 추천 </button>
+        <span class="spTotalLike">${vo.trip_total_like}</span>
+        <button class="dislike-btn" id="dislike"> 비추천 </button>
+        </c:if>
     </c:otherwise>
 	</c:choose>
         <a href="${pageContext.request.contextPath}/trip/list?page=1"><button class="return-btn">돌아가기</button></a>
@@ -161,23 +182,37 @@ $(function() {
             	
             	 if('${vo.trip_writer}' == '${sessionScope.loginId}'){
             		alert("본인확인통과")
-                	if (confirm("게시글을 삭제하시겠습니까?")) {
+                	if (confirm("여행기를 삭제하시겠습니까?")) {
                     location.href = "remove?trip_id=<%=bag.getTrip_id()%>";           
                 }  
             }else{
-            	alert("게시글 삭제는 본인이 작성한 게시글에 대해서만 가능합니다.")
+            	alert("여행기 삭제는 본인이 작성한 여행기에 대해서만 가능합니다.")
             }
             }
             function update() {
         		if('${vo.trip_writer}' == '${sessionScope.loginId}'){
-                if (confirm("게시글을 수정하시겠습니까?")) {
+                if (confirm("여행기를 수정하시겠습니까?")) {
                     location.href = "update?trip_id=<%=bag.getTrip_id()%>";           
                 } 
             }
         		else{
-        			alert("게시글 수정은 본인이 작성한 게시글에 대해서만 가능합니다.")
+        			alert("여행기 수정은 본인이 작성한 여행기에 대해서만 가능합니다.")
         		}
             }
+            
+            function notLogin(){
+            	alert("해당 기능은 로그인이 필요합니다.")
+            }
+            
+            
+            function likeCheck(){
+            	if("${vo2.like_state}" == 1){
+            		alert("이미 비추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
+            	}else{
+            		alert("이미 추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
+            	}
+            }
+            	
      
 
           
