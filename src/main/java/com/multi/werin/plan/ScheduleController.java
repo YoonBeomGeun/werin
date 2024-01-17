@@ -11,24 +11,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.annotation.RequestScope;
 
 @Controller
 public class ScheduleController {
 	@Autowired
 	ScheduleDAO dao;
 
-	@PostMapping("schedule/addSchedule")
+	@RequestMapping("schedule/addSchedule")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> addSchedule(ScheduleVO vo) {
-		Map<String, Object> response = new HashMap<>();
+	public int addSchedule(ScheduleVO vo) {
+		System.out.println("@Controller addSchedule");
+		System.out.println("ScheduleVO : " + vo);
+		
+		
+		//insert vo.setSchedule_map_id(1번결과)
 		int result = dao.insert(vo);
-		if (result == 1) {
-			response.put("status", "success");
-			response.put("message", "일정이 성공적으로 추가되었습니다.");
-		} else {
-			response.put("status", "fail");
-			response.put("message", "일정 추가에 실패했습니다.");
-		}
-		return ResponseEntity.ok(response);
+		
+		return result;
 	}
 }

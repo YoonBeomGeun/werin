@@ -559,27 +559,43 @@
 			};
 			travelPlans[dateString].push(newPlan);
 
+			console.log(newPlan.placeName + " " + newPlan.latitude + " "
+					+ newPlan.longitude + " " + newPlan.contextPath + " "
+					+ newPlan.phone);
+			//제주공항렌트카 본사 33.5017093152623 126.48931246090318 /werin 064-744-4800
+			var planTitle = newPlan.placeName;
+			var planMap = newPlan.latitude + " " + newPlan.longitude;
+			var schedule_day = selectedDay ? selectedDay.innerText.trim().replace('Day', '') : '';
+			schedule_day = schedule_day.replace(/\d{4}-\d{2}-\d{2}/, '');
+			
+			console.log(planTitle);
+			console.log(planMap);
+			console.log(schedule_day);
+
 			// AJAX 요청을 통해 서버에 일정 추가
-			$
-					.ajax({
-						type : 'POST',
-						url : '${pageContext.request.contextPath}/schedule/addSchedule',
-						contentType : 'application/json',
-						data : JSON.stringify(newPlan),
-						success : function(response) {
-							if (response.status === "success") {
-								// 성공적으로 추가되면 화면에 일정을 실시간으로 표시
-								updatePlanList(dateString);
-								alert(response.message); // 또는 다른 사용자 피드백 방식
-							} else {
-								alert(response.message);
-							}
-						},
-						error : function(error) {
-							console.error(error);
-							alert('일정 추가에 실패했습니다.');
-						}
-					});
+			$.ajax({
+				type : 'POST',
+				url : '../schedule/addSchedule',
+				data : {
+					schedule_title : planTitle,
+					schedule_map_lat : newPlan.latitude,
+					schedule_map_lon : newPlan.longitude,
+					schedule_day : schedule_day
+				},
+				success : function(response) {
+					if (response == 1) {
+						// 성공적으로 추가되면 화면에 일정을 실시간으로 표시
+						updatePlanList(dateString);
+						// 또는 다른 사용자 피드백 방식
+					} else {
+						alert(response.message);
+					}
+				},
+				error : function(error) {
+					console.error(error);
+					alert('일정 추가에 실패했습니다.');
+				}
+			});
 		}
 
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
