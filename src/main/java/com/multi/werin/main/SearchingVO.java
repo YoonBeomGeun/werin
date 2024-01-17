@@ -1,14 +1,13 @@
 package com.multi.werin.main;
 
-public class SearchVO {
+public class SearchingVO {
 
-	//페이징을 위한 VO
-    private int start;
+	private int start;
     private int end;
     private int page;		// 현재 페이지 번호
     private String searching;
     
-    public String getSearching() {
+	public String getSearching() {
 		return searching;
 	}
 
@@ -47,7 +46,7 @@ public class SearchVO {
 
 	@Override
 	public String toString() {
-		return "SearchVO [start=" + start + ", end=" + end + ", page=" + page + ", searching=" + searching + "]";
+		return "SearchingVO [start=" + start + ", end=" + end + ", page=" + page + ", searching=" + searching + "]";
 	}
-
+		
 }
