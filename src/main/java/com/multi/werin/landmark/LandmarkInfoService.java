@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 public class LandmarkInfoService {
 
 	@Autowired
-	LandmarkInfoDAO dao;
+	LandmarkInfoDAOInterface dao;
 	
 	@Autowired
 	Landmarkdb1 db1;
