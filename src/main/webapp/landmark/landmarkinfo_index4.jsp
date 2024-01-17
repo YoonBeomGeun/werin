@@ -43,9 +43,6 @@
                         + "&listYN=Y&arrange=A&contentTypeId=&areaCode=39&sigunguCode=&cat1=&cat2=&cat3="
                         + "&_type=json&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
 
-                
-                
-                
                 // AJAX 요청
                 $.ajax({
                     url: apiUrl,
@@ -63,6 +60,7 @@
                         headerRow.append($('<th>').text('Image'));
                         headerRow.append($('<th>').text('MapX'));
                         headerRow.append($('<th>').text('MapY'));
+                        headerRow.append($('<th>').text('ContentId'));
                         table.append(headerRow);
 
                         // 테이블 행 생성
@@ -73,6 +71,7 @@
                             row.append($('<td>').append($('<img>').attr('src', item.firstimage).css('max-width', '100px')));
                             row.append($('<td>').text(item.mapx));
                             row.append($('<td>').text(item.mapy));
+                            row.append($('<td>').text(item.contentid));
                             table.append(row);
                         });
 

@@ -53,6 +53,11 @@ public class LandmarkInfoVO {
 				+ ", landmarkinfo_lon=" + landmarkinfo_lon + ", landmarkinfo_id=" + landmarkinfo_id + "]";
 	}
 	
+
+
+	
+	
+	
 	
 	
 }
