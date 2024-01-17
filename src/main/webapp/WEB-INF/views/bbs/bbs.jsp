@@ -78,10 +78,10 @@
 	전체 페이지 수 : ${pages}개 <br><br>
 		<!-- Check if the user is logged in -->
 		<div id="category">
-	        <a href="getSearchList?"></A><button style="background:pink;" class="category-btn" data-category="전체">전체</button></a>&nbsp;
-	        <a href="getSearchList?page=1&bbs_cate=잡담"><button style="background:pink;" class="category-btn" data-category="잡담">잡담</button></a>&nbsp;
-	        <a href="getSearchList?page=1&bbs_cate=질문"><button style="background:pink;" class="category-btn" data-category="질문">질문</button></a>&nbsp;
-	        <a href="getSearchList?page=1&type=${bag.bbs_cate}&keyword=조언"><button style="background:pink;" class="category-btn" data-category="조언">조언</button></a>&nbsp;
+	        <a href="bbs?page=1"><button style="background:pink;" class="category-btn" data-category="전체">전체</button></a>&nbsp;
+	        <a href="getSearchList?page=1&kind=잡담"><button style="background:pink;" class="category-btn" data-category="잡담">잡담</button></a>&nbsp;
+	        <a href="getSearchList?page=1&kind=질문"><button style="background:pink;" class="category-btn" data-category="질문">질문</button></a>&nbsp;
+	        <a href="getSearchList?page=1&kind=조언"><button style="background:pink;" class="category-btn" data-category="조언">조언</button></a>&nbsp;
         </div>
 		<table border="1" class="table table-bordered table tabel-hover">
 		    <tr bgcolor="lime">

@@ -1,61 +1,53 @@
 package com.multi.werin.bbs;
 
 public class BbscmtVO {
-	private int comment_id;
-	private int post_id;
-	private String writer;
-	private String content;
-	private String created_at;
-	private String updated_at;
-	private int bbscmt_like;
-	
-	public int getComment_id() {
-		return comment_id;
+	private int bbscmt_id;
+	private int bbs_id;
+	private String bbscmt_writer;
+	private String bbscmt_content;
+	private String bbscmt_created_at;
+	private String bbscmt_updated_at;
+	public int getBbscmt_id() {
+		return bbscmt_id;
 	}
-	public void setComment_id(int comment_id) {
-		this.comment_id = comment_id;
+	public void setBbscmt_id(int bbscmt_id) {
+		this.bbscmt_id = bbscmt_id;
 	}
-	public int getPost_id() {
-		return post_id;
+	public int getBbs_id() {
+		return bbs_id;
 	}
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
+	public void setBbs_id(int bbs_id) {
+		this.bbs_id = bbs_id;
 	}
-	public String getWriter() {
-		return writer;
+	public String getBbscmt_writer() {
+		return bbscmt_writer;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setBbscmt_writer(String bbscmt_writer) {
+		this.bbscmt_writer = bbscmt_writer;
 	}
-	public String getContent() {
-		return content;
+	public String getBbscmt_content() {
+		return bbscmt_content;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setBbscmt_content(String bbscmt_content) {
+		this.bbscmt_content = bbscmt_content;
 	}
-	public String getCreated_at() {
-		return created_at;
+	public String getBbscmt_created_at() {
+		return bbscmt_created_at;
 	}
-	public void setCreated_at(String created_at) {
-		this.created_at = created_at;
+	public void setBbscmt_created_at(String bbscmt_created_at) {
+		this.bbscmt_created_at = bbscmt_created_at;
 	}
-	public String getUpdated_at() {
-		return updated_at;
+	public String getBbscmt_updated_at() {
+		return bbscmt_updated_at;
 	}
-	public void setUpdated_at(String updated_at) {
-		this.updated_at = updated_at;
-	}
-	public int getBbscmt_like() {
-		return bbscmt_like;
-	}
-	public void setBbscmt_like(int bbscmt_like) {
-		this.bbscmt_like = bbscmt_like;
+	public void setBbscmt_updated_at(String bbscmt_updated_at) {
+		this.bbscmt_updated_at = bbscmt_updated_at;
 	}
 	@Override
 	public String toString() {
-		return "BbscmtVO [comment_id=" + comment_id + ", post_id=" + post_id + ", writer=" + writer + ", content="
-				+ content + ", created_at=" + created_at + ", updated_at=" + updated_at + ", bbscmt_like=" + bbscmt_like
-				+ "]";
+		return "BbscmtVO [bbscmt_id=" + bbscmt_id + ", bbs_id=" + bbs_id + ", bbscmt_writer=" + bbscmt_writer
+				+ ", bbscmt_content=" + bbscmt_content + ", bbscmt_created_at=" + bbscmt_created_at
+				+ ", bbscmt_updated_at=" + bbscmt_updated_at + "]";
 	}
 	
 	

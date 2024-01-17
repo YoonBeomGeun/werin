@@ -60,8 +60,8 @@
 		
 		<!-- 수정: 작성자로 검색하는 경우 -->
 		<choose>
-        <when test="type != null and type != '' and type == 'cate'">
-            WHERE bbs_cate = #{bbs_cate}
+        <when test="kind != null and kind != '' ">
+            WHERE bbs_cate = #{kind}
             <choose>
                 <when test="type != null and type != '' and type == 'writer'">
                     <!-- 기본적으로 제목으로 검색 -->
@@ -106,8 +106,8 @@
     SELECT COUNT(*) FROM bbs
     <!-- 수정: 작성자로 검색하는 경우 -->
     <choose>
-        <when test="type != null and type != '' and type == 'cate'">
-            WHERE bbs_cate = #{bbs_cate}
+        <when test="kind != null and kind != '' ">
+            WHERE bbs_cate = #{kind}
             <choose>
                 <when test="type != null and type != '' and type == 'writer'">
                     <!-- 기본적으로 제목으로 검색 -->
