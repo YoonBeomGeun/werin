@@ -6,6 +6,7 @@ public class SearchLandmarkVO {
 	private String landmarkinfo_name;
 	private String landmarkinfo_info;
 	private int row_no;
+	
 	public int getRow_no() {
 		return row_no;
 	}

@@ -4,6 +4,7 @@ public class SearchTripVO {
 	private int trip_id;
 	private String trip_title;
 	private String trip_content;
+	private int row_no;
 	
 	public String getTrip_content() {
 		return trip_content;
@@ -11,7 +12,6 @@ public class SearchTripVO {
 	public void setTrip_content(String trip_content) {
 		this.trip_content = trip_content;
 	}
-	private int row_no;
 	
 	public int getRow_no() {
 		return row_no;
