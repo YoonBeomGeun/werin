@@ -3,5 +3,31 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bbscmt">
-
+	<insert id="create" parameterType="bbscmtVO">
+		insert into bbs_cmt values
+		(null, #{bbs_id}, #{bbscmt_writer}, #{bbscmt_content}, now(), now())
+	</insert>
+	
+	<update id="update" parameterType="bbscmtVO">
+		update bbs_cmt
+		set bbscmt_content = #{bbscmt_content}, bbscmt_updated_at = now()
+		where bbscmt_id = #{bbscmt_id}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from bbs_cmt
+		where bbscmt_id = #{bbscmt_id}
+	</delete>
+	
+	<!-- <select id="one" parameterType="int" resultType="GowithcmtVO">
+		select *
+		from gowithcmt
+		where gowithcmt_id = #{gowithcmt_id}
+	</select> -->
+	
+	<select id="list" parameterType="int" resultType="bbscmtVO">
+		select *
+		from bbs_cmt
+		where bbs_id = #{bbs_id}
+	</select>
 </mapper>
