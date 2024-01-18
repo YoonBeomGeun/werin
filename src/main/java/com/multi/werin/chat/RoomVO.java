@@ -4,6 +4,7 @@ public class RoomVO {
 	private int room_id;
 	private String room_name;
 	private int gowith_id;
+	private String room_host;
 	private String room_member;
 	private String room_created_at;
 	private String room_flag;
@@ -32,6 +33,14 @@ public class RoomVO {
 		this.gowith_id = gowith_id;
 	}
 
+	public String getRoom_host() {
+		return room_host;
+	}
+
+	public void setRoom_host(String room_host) {
+		this.room_host = room_host;
+	}
+
 	public String getRoom_member() {
 		return room_member;
 	}
@@ -58,8 +67,9 @@ public class RoomVO {
 
 	@Override
 	public String toString() {
-		return "RoomVO [room_id=" + room_id + ", room_name=" + room_name + ", gowith_id=" + gowith_id + ", room_member="
-				+ room_member + ", room_created_at=" + room_created_at + ", room_flag=" + room_flag + "]";
+		return "RoomVO [room_id=" + room_id + ", room_name=" + room_name + ", gowith_id=" + gowith_id + ", room_host="
+				+ room_host + ", room_member=" + room_member + ", room_created_at=" + room_created_at + ", room_flag="
+				+ room_flag + "]";
 	}
 
 }

@@ -189,10 +189,11 @@
 				data: {
 					gowith_id: <%=vo.getGowith_id()%>,
 					room_name: "<%=vo.getGowith_title()%>",
+					room_host: "<%=vo.getGowith_writer()%>",
 					room_member: "${sessionScope.loginId}"
 				},
 				success: function(response) {
-                	window.location.href = "checkRoom?gowith_id=" + <%=vo.getGowith_id()%> + "&room_name=" + "<%=vo.getGowith_title()%>" + "&room_member=" + "${sessionScope.loginId}";
+                	window.location.href = "checkRoom?gowith_id=" + <%=vo.getGowith_id()%> + "&room_name=" + "<%=vo.getGowith_title()%>" + "&room_host=" + "<%=vo.getGowith_writer()%>" + "&room_member=" + "${sessionScope.loginId}";
                 	/* 채팅방 팝업화면 넣기 */
 				}
 			})

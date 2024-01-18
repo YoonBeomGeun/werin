@@ -1,5 +1,7 @@
 package com.multi.werin.chat;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,8 +24,8 @@ public class RoomDAO {
 		return my.selectOne("room.pick", roomVO);
 	}
 	
-	public RoomVO one(int room_id) {
-		return my.selectOne("room.one", room_id);
+	public List<RoomVO> roomList(String room_member) {
+		return my.selectList("room.roomList", room_member);
 	}
 	
 }
