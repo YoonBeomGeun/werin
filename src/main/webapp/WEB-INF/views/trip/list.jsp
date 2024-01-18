@@ -101,6 +101,7 @@ button:hover {
     <c:when test="${empty loginId}">
         <!-- 로그인 되어 있지 않은 경우 -->
         <p> 여행기 작성은 로그인이 필요합니다. </p>
+        <% ${loginId} %>
        <!--  <button onclick="window.location.href='../member/login.jsp'">로그인</button> -->
     </c:when>
     <c:otherwise>
