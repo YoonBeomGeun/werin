@@ -9,6 +9,11 @@
 		values (null, #{room_name}, #{gowith_id}, #{room_host}, #{room_member}, now(), 'a')
 	</insert>
 	
+	<delete id="deleteRoom" parameterType="int">
+		delete from room
+		where room_id = #{room_id}
+	</delete>
+	
 	<select id="countpick" parameterType="roomVO" resultType="int">
 		select count(*)
 		from room

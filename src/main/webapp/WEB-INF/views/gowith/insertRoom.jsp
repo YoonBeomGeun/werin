@@ -22,7 +22,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/sockjs-0.3.4.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/stomp.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/webSocketSendToUserApp.js"></script>
@@ -34,6 +34,7 @@
 		width: relative;
 		max-width: 300px;
 		word-wrap: break-word;
+		padding-bottom: 10px;
 	}
 	
 	.receiveTalk {
@@ -44,11 +45,13 @@
 	
 	.chatList {
 		margin-left: 20px;
+		padding: 20px;
 		width:400px;
-		background:gray;
+		background:lightgray;
 		overflow:hidden;
+		border-radius: 15px;
 		flex-direction: column;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 
 	#result {
@@ -59,7 +62,7 @@
 		margin: 0 auto;
 		border-radius: 15px;
 		flex-direction: column;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 	
 	.write {
@@ -111,7 +114,7 @@
 				console.log(JSON.parse(messageOutput.body))
 				json = JSON.parse(messageOutput.body)
 				$('#response').append(	"<div class='sendTalk'>" + json.message_sender + " " + json.message_sent_at + "<br>" + /* 시간 글자크기 줄이기 */
-										json.message_content + "</div>")
+										json.message_content + "</div><br>")
 			})
 		})
 		
@@ -146,15 +149,24 @@
 		}))
 		$('#t1').val("")
 		$("#t1").attr("placeholder", "댓글을 입력하세요.");
+		var chatBox = document.getElementById("result");
+        chatBox.scrollTop = chatBox.scrollHeight;
 	}
 	
 	var message_receiver = '<%= vo.getRoom_member().equals(session.getAttribute("loginId")) ? host : vo.getRoom_member() %>'
 	
 	$(function() {
+		$("#t1").keypress(function(event) {
+	        if (event.which === 13) { // Enter key 코드 == 13
+	            $("#b1").click();
+	        }
+	    });
+		
 		$("#b1").click(function() {
 			console.log("b1 click")
 			
 			console.log("ajax 호출전")
+			
 			$.ajax({
 				url: "insertMessage",
 				data: {
@@ -167,10 +179,40 @@
 				success: function(response) {
 					alert("등록되었습니다.");
 					sendMessage()
+					
 				}
 			}) 
 		})
+	})
+	
+	$(function() {
+		var room_id = $(this).data("room-id");
 		
+		$(".b2").click(function() {
+			$.ajax({
+				url: "selectRoom",
+				data: {
+					room_id: room_id
+				},
+				success: function(response) {
+					alert("방 불러오기");
+					$("#result").empty();
+					$("#result").append(response);
+				}
+			})
+		})
+		
+		/* $("#deleteRoom").click(function() {
+			$.ajax({
+				url: "deleteRoom",
+				data: {
+					room_id: room_id
+				},
+				success: function(response) {
+					alert("삭제");
+				}
+			})
+		} */
 	})
 	
 </script>
@@ -187,12 +229,13 @@
 			if(roomList!=null) {
             	for (RoomVO vo3 : roomList) {
         %>
-       			<div class="" id="room_<%=vo3.getRoom_id()%>">
+       			<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
 	            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
 	                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
 	                    <%=vo3.getRoom_name()%>
 	                </div>
 	            </div>
+	            <hr>
         <%
             	}
 			}
@@ -207,40 +250,39 @@
 	<!-- 채팅 내용 보여지는 부분 -->
 	<div id="result">
 		<%-- <input type="hidden" id="from" value="<%=vo.getRoom_member()%>" style=""> --%>
-		<div id="conversationDiv">
-			<%
-				if(list!=null) {
-	            	for (MessageVO vo2 : list) {
-	            		if(vo2.getMessage_sender().equals(session.getAttribute("loginId"))) {
-	        %>
-	        			<div class="sendTalk" id="talk_<%=vo2.getMessage_id()%>">
-			            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span><br><br>
-			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
-			                    <%=vo2.getMessage_content()%>
-			                </div>
-			            </div>
-	        <%
-	            		} else {
-	        %>
-	        			<div class="receiveTalk" id="talk_<%=vo2.getMessage_id()%>">
-			            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getMessage_sent_at() %></span><br><br>
-			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
-			                    <%=vo2.getMessage_content()%>
-			                </div>
-			            </div>
-	        <%
-	            		}
-	            	}
-				}
-	            else {
-	        %>
-	        		<p style="margin-left: 650px;">채팅을 시작하세요!</p>
-	        <%
-	            }
-	        %>
-			<p id="response" class="alert alert-success">
-			</p>
-		</div>
+		<h3 style="text-align: center; "><%=vo.getRoom_name()%></h3><a href="deleteRoomConfirmed?room_id=<%=vo.getRoom_id()%>&gowith_id=<%=vo.getGowith_id()%>"><button style="background:#FF5555;">나가기</button></a>
+		<%
+			if(list.size()>=1) {
+            	for (MessageVO vo2 : list) {
+            		if(vo2.getMessage_sender().equals(session.getAttribute("loginId"))) {
+        %>
+        			<div class="sendTalk" id="talk_<%=vo2.getMessage_id()%>">
+		            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span><br><br>
+		                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
+		                    <%=vo2.getMessage_content()%>
+		                </div><br>
+		            </div>
+        <%
+            		} else {
+        %>
+        			<div class="receiveTalk" id="talk_<%=vo2.getMessage_id()%>">
+		            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getMessage_sent_at() %></span><br><br>
+		                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
+		                    <%=vo2.getMessage_content()%>
+		                </div>
+		            </div>
+        <%
+            		}
+            	}
+			} else {
+        %>
+        		<p style="margin-left: 650px;">채팅을 시작하세요!</p>
+        <%
+            }
+        %>
+		<p id="response" class="alert alert-success">
+		</p>
+	
 	</div>
 	</div>
 	
