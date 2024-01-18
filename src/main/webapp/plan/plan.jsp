@@ -334,19 +334,19 @@
 	<div id="all">
 		<div id="left">
 			<div id="travel-info">
-				<form action="insert">
+				<form action="addPlan" method="post">
 					<label for="travelTitle"></label> <input type="text"
-						id="travelTitle" placeholder="일정 제목을 입력하세요."> <label
+						id="travelTitle" name="plan_title" placeholder="일정 제목을 입력하세요."> <label
 						for="travelWith"></label> <select class="form-control"
-						id="travelWith">
+						id="travelWith" name="plan_with">
 						<option value="none" disabled selected hidden>누구랑?</option>
 						<option value="alone">혼자</option>
 						<option value="couple">연인과</option>
 						<option value="family">가족과</option>
 						<option value="parents">부모님과</option>
 						<option value="group">단체로</option>
-					</select> <input type="text" id="datepicker1" placeholder="여행시작날짜">
-					~ <input type="text" id="datepicker2" placeholder="여행종료날짜">
+					</select> <input name="plan_start_date" type="text" id="datepicker1" placeholder="여행시작날짜">
+					~ <input type="text" name="plan_end_date" id="datepicker2" placeholder="여행종료날짜">
 					<button id="save" type="submit">저장</button>
 				</form>
 			</div>
@@ -557,6 +557,10 @@
 				contextPath : contextPath,
 				phone : phone
 			};
+
+			addMarker(
+					new kakao.maps.LatLng(newPlan.latitude, newPlan.longitude),
+					markers.length, newPlan.placeName);
 			travelPlans[dateString].push(newPlan);
 
 			console.log(newPlan.placeName + " " + newPlan.latitude + " "
@@ -565,9 +569,10 @@
 			//제주공항렌트카 본사 33.5017093152623 126.48931246090318 /werin 064-744-4800
 			var planTitle = newPlan.placeName;
 			var planMap = newPlan.latitude + " " + newPlan.longitude;
-			var schedule_day = selectedDay ? selectedDay.innerText.trim().replace('Day', '') : '';
+			var schedule_day = selectedDay ? selectedDay.innerText.trim()
+					.replace('Day', '') : '';
 			schedule_day = schedule_day.replace(/\d{4}-\d{2}-\d{2}/, '');
-			
+
 			console.log(planTitle);
 			console.log(planMap);
 			console.log(schedule_day);
@@ -600,33 +605,31 @@
 
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 		function addMarker(position, idx, title) {
-			var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-			imageSize = new kakao.maps.Size(36, 37), // 마커 이미지의 크기
-			imgOptions = {
-				spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
-				spriteOrigin : new kakao.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-				offset : new kakao.maps.Point(13, 37)
-			// 마커 좌표에 일치시킬 이미지 내에서의 좌표
-			}, markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
-					imgOptions), marker = new kakao.maps.Marker({
-				position : position, // 마커의 위치
+			// 기존 마커를 지도에서 제거합니다
+			removeMarker();
+
+			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+			var imageSize = new kakao.maps.Size(24, 35);
+
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+			var marker = new kakao.maps.Marker({
+				position : position,
 				image : markerImage
 			});
 
-			marker.setMap(map); // 지도 위에 마커를 표출합니다
-			markers.push(marker); // 배열에 생성된 마커를 추가합니다
+			marker.setMap(map);
+			markers.push(marker);
 
 			return marker;
 		}
 
-		// 지도 위에 표시되고 있는 마커를 모두 제거합니다
 		function removeMarker() {
-			for (var i = 0; i < markers.length; i++) {
-				markers[i].setMap(null);
-			}
-			markers = [];
+		    for (var i = 0; i < markers.length; i++) {
+		        markers[i].setMap(null);
+		    }
+		    // 마커를 배열에서 제거하되, 배열을 비우지 않습니다.
 		}
-
+		
 		// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 		function displayPagination(pagination) {
 			var paginationEl = document.getElementById('pagination'), fragment = document
