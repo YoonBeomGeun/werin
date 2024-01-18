@@ -30,9 +30,9 @@
 
 <div class="search_trip"> <!-- 여행기 검색 결과 -->
 <!-- 4개만 가져와서 보여주는거로 -->
-<c:forEach begin="0" end="3" items="${searchtrip}" var="vl">
+<c:forEach begin="0" end="3" items="${searchtrip}" var="vo">
 <div>
-<a href="">${vl.trip_title}</a><br> <!-- 여기에 링크 연결해야함 -->
+<a href="">${vo.trip_title}</a><br> <!-- 여기에 링크 연결해야함 -->
 </div>
 </c:forEach>
 </div>
@@ -45,18 +45,31 @@
 <a href="">${vo.bbs_title}</a><br> <!-- 여기에 링크 연결해야함 -->
 </c:forEach>
 </div>
+<div class="more_bbs">
+<a href="morebbs?searching=${searching}&page=1">여행기 검색결과 더보기</a>
+</div>
 
+
+<!-- 복합페이징? 이건 보류(네이버처럼 구현하는거) -->
 <%-- <%
 	int pages = (int)request.getAttribute("pages");
 	for(int p = 1; p <= pages; p++){
+		if(p==1){
 %>
 	<!-- 여기 링크수정해야함 -->
+	<a href="search?searching=${searching}">
+		<button style="background: pink;"><%= p %></button>
+	</a>
+<%
+		}else{
+%>
 	<a href="searchbbs?searching=${searching}?page=<%= p %>">
 		<button style="background: pink;"><%= p %></button>
 	</a>
-<%		
+<%
+		}
 	}
-%>  --%>
+%> --%>
 
 </c:if>
 
