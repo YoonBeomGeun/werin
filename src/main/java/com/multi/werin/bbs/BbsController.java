@@ -15,7 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.multi.werin.gowith.GowithcmtVO;
+
+
 
 
 
@@ -31,7 +32,7 @@ public class BbsController{
 	BbscmtDAO bbscmtDAO;
 	
 	@RequestMapping("/bbs/insert")
-	public String insert2(BbsVO bbsVO, Model model) {
+	public String insert2(BbsVO bbsVO, StoremapVO storemapvo ,Model model) {
 		int result = dao.insertBbs(bbsVO);
 		String str = "";
 		model.addAttribute("result", result);
@@ -164,6 +165,8 @@ public class BbsController{
 		model.addAttribute("list", list);
 		return "bbs/bbs"; 
 	}
+	
+	
 
 	
 }
