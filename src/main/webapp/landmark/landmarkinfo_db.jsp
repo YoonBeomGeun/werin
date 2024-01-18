@@ -11,7 +11,7 @@
 
             $('#b1').click(function () { // api java로 불러서 db에 집어넣고 결과 표시
                 $.ajax({
-                    url: "LandmarkInfo",
+                    url: "LandmarkInsert1",
                     
                     success: function (x) {
                         console.log(x);

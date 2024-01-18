@@ -33,7 +33,7 @@ public class Landmarkdb1 {
                         + "areaBasedList1?"
                         + "MobileOS=ETC&MobileApp=Test"
                         + "&ServiceKey=" + apiKey
-                        + "&listYN=Y&arrange=A&contentTypeId=12&areaCode=39&sigunguCode=&cat1=A01&cat2=A0101&cat3=A01010400"
+                        + "&listYN=Y&arrange=A&contentTypeId=12&areaCode=39&sigunguCode=&cat1=&cat2=&cat3="
                         + "&_type=json&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
 
                 URL url = new URL(apiUrl);

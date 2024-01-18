@@ -11,7 +11,7 @@ public class LandmarkInfoController {
 	@Autowired
 	LandmarkInfoService service;
 	
-	@RequestMapping("landmark/LandmarkInfo")
+	@RequestMapping("landmark/LandmarkInsert1")
 	public void insert (Model model) throws Exception {
 		System.out.println("-----");
 		service.api();
