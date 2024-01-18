@@ -19,8 +19,19 @@
                     } // success
                 }); // ajax
             }); // b1
-
+            
             $('#b2').click(function () { 
+                $.ajax({
+                    url: "jejulist", // 수정 예정
+                    success: function (x) {
+                        console.log(x);
+                        $(".result").html(x);
+                    } // success
+                }); // ajax
+            }); // b2
+            
+
+            $('#b4').click(function () { 
                 $.ajax({
                     url: "jejulist",
                     success: function (x) {
@@ -28,13 +39,13 @@
                         $(".result").html(x);
                     } // success
                 }); // ajax
-            }); // b2
+            }); // b4
 
         });
     </script>
     <style type="text/css">
-        #b1, #b2, #b3 {
-            display: inline-block;
+        #b1, #b2, #b3, #b4 {
+            display: inline-block; 
             padding: 10px 20px;
             font-size: 16px;
             text-align: center;
@@ -55,6 +66,7 @@
        <button id="b1" data="" >db에 집어넣기1</button>
         <a id="b2"><button>db에 집어넣기2</button></a>
         <a id="b3"><button>db삭제하기</button></a>
+        <a id="b4"><button>db 리스트 보기</button></a>
     </div>
     <hr>
     <div class="result"></div>
