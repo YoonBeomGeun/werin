@@ -27,15 +27,15 @@
             success: function(table) {
                 $("#result").html(table);
             }
-        });
+        })
 	        searchData = {
 	                page: $(this).text(),
 	                type: $("select[name=type]").val(),
 	                keyword: $("input[name=keyword]").val()
-	            };
-    	});
+	            }
+    	})
        
-    }); 
+    }) 
 
   
     
@@ -124,15 +124,33 @@
 		</div>
 		
 		=======================
-		<%
+		<%-- <%
 			int pages = (int)request.getAttribute("pages");//int(작) <--- Object(큰)
-			out.write(pages);
+			/* out.write(pages); */
 			for(int p = 1; p <= pages; p++){
 		%>
 			<button style="background:pink;" class="pages"><%=p%></button>&nbsp;
 		<%		
 		}
+		%> --%>
+		<div class="paging">
+		<%
+		int pages = (int)request.getAttribute("pages");
+		if (pages == 0) {
 		%>
+			등록된 게시글이 없습니다.
+			<!-- 꾸며주기 -->
+		<%	
+		} else {
+			for (int p = 1; p <= pages; p++) {
+		%>
+				<button class="pages"><%=p%></button>
+		<%
+			}
+		}
+		%>
+		</div>
+		
 		============================
 	</div>
 	

@@ -10,10 +10,22 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	
 </script>
+<script> 
+//자식 창 열기 버튼 클릭 이벤트
+document.querySelector('#btn_open_child').addEventListener("click", () => {
+  window.open("mappop.jsp", "_blank", `width=1000, height=600, toolbars=no, scrollbars=yes`);
+});
+
+//자식창에서 받아온 데이터 처리
+window.call = function (data) {
+  document.querySelector('#data_from_child').innerHTML += data;
+}
+</script>
+<script defer src="insert.jsp"></script>
 </head>
 <body>
+
 	<%@ include file="../header.jsp"%>
 	<div id="total">
 		<div id="center">
@@ -56,16 +68,7 @@
 					</tr>
 
 
-					<tr class="table-warning">
-						<td colspan="2" width="200">
-							<div class="col-md-4">
-								<button class="w-80 btn btn-success btn-lg"
-									onclick="location.href='bbs.jsp'"
-									th:onclick="window.open('/mappop', 'window_name', 'width=430, height=500, location=no, status=no, scrollbars=yes');"
-									type="button">가게 찾기</button>
-							</div>
-						</td>
-					</tr>
+					
 					<!-- a태그? 팝업태그? -->
 
 
@@ -77,6 +80,14 @@
 					</tr>
 				</table>
 			</form>
+			<form>
+                <tr class="table-warning">
+                    <td colspan="2" width="200">
+                        <button id="btn_open_child">가게찾기</button><br>
+                        <h4 id="data_from_child">받아온 데이터 : </h4>
+                    </td>
+                </tr>
+            </form>
 		</div>
 
 	</div>
