@@ -206,6 +206,47 @@
 		var travelPlans = {}; // 일정 정보를 저장할 전역변수
 
 		$(function() {
+			
+			$(document).ready(function() {
+			    // 저장 버튼 클릭 시
+			    $("#save").click(function() {
+			        // form 엘리먼트 생성
+			        var form = document.createElement("form");
+			        form.method = "POST";
+			        form.action = "schedule/addSchedule";  // 서버 컨트롤러의 URL을 적어주세요.
+
+			        // travelPlans 객체에 저장된 일정들을 폼에 추가
+			        for (var day in travelPlans) {
+			            if (travelPlans.hasOwnProperty(day)) {
+			                var plansForDay = travelPlans[day];
+			                for (var i = 0; i < plansForDay.length; i++) {
+			                    var plan = plansForDay[i];
+			                    appendToForm(form, 'plans[' + day + '][' + i + '].placeName', plan.placeName);
+			                    appendToForm(form, 'plans[' + day + '][' + i + '].latitude', plan.latitude);
+			                    appendToForm(form, 'plans[' + day + '][' + i + '].longitude', plan.longitude);
+			                    appendToForm(form, 'plans[' + day + '][' + i + '].contextPath', plan.contextPath);
+			                    appendToForm(form, 'plans[' + day + '][' + i + '].phone', plan.phone);
+			                }
+			            }
+			        }
+			        appendToForm(form, 'plan_title', $("#travelTitle").val());
+			        appendToForm(form, 'plan_with', $("#travelWith").val());
+			        appendToForm(form, 'plan_start_date', $("#datepicker1").val());
+			        appendToForm(form, 'plan_end_date', $("#datepicker2").val());
+			        // body에 폼 추가 및 전송
+			        document.body.appendChild(form);
+			        form.submit();
+			    });
+
+			    // 폼에 필드 추가하는 함수
+			    function appendToForm(form, name, value) {
+			        var input = document.createElement("input");
+			        input.type = "hidden";
+			        input.name = name;
+			        input.value = value;
+			        form.appendChild(input);
+			    }
+			});
 			// input을 datepicker로 선언
 			$("#datepicker1, #datepicker2")
 					.datepicker(
@@ -276,10 +317,15 @@
 							var selectedDay = this.innerText.trim().replace(
 									'Day', '');
 
+							//console.log(travelPlans['Day1']);
+							
+							//travelPlans.forEach((plan, index) => console.log(plan, index, array));
 							updatePlanList(selectedDay);
+							
 						});
 
 						function updatePlanList(dateString) {
+							//alert(""");
 							// 선택된 날짜에 해당하는 일정만 lb에 표시
 							var lb = document.getElementById('lb');
 							lb.innerHTML = ''; // 기존의 일정을 지우고 새로운 일정을 추가
@@ -328,13 +374,15 @@
 				return yyyy + '-' + mm + '-' + dd;
 			}
 		});
+		
+		
 	</script>
 
 	<%@ include file="../header.jsp"%>
 	<div id="all">
 		<div id="left">
 			<div id="travel-info">
-				<form action="addPlan" method="post">
+				<form action="addPlan" method="post" id="frmPlan">
 					<label for="travelTitle"></label> <input type="text"
 						id="travelTitle" name="plan_title" placeholder="일정 제목을 입력하세요."> <label
 						for="travelWith"></label> <select class="form-control"
@@ -578,7 +626,7 @@
 			console.log(schedule_day);
 
 			// AJAX 요청을 통해 서버에 일정 추가
-			$.ajax({
+			/*$.ajax({
 				type : 'POST',
 				url : '../schedule/addSchedule',
 				data : {
@@ -600,7 +648,7 @@
 					console.error(error);
 					alert('일정 추가에 실패했습니다.');
 				}
-			});
+			});*/
 		}
 
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
