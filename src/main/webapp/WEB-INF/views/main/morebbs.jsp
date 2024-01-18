@@ -28,15 +28,18 @@
 
 <%
 	int pages = (int)request.getAttribute("pages");
-	for(int p = 1; p <= pages; p++){
+%>
+<div class="number_button">
+<% 	for(int p = 1; p <= pages; p++){
 %>
 	<a href="morebbs?searching=${searching}&page=<%= p %>">
 		<button style="background: pink;"><%= p %></button>
-	</a>
-<%		
+	</a>	
+<%
 	}
 %>
 
+</div>
 <%-- <%
 	int pages = (int)request.getAttribute("pages");
 	for(int p = 1; p <= pages; p++){

@@ -33,17 +33,22 @@ public class MainController {
 		 if(searchlandmark.isEmpty() && searchbbs.isEmpty() && searchtrip.isEmpty()) { // 아무런 검색 결과가 없는 경우
 			 result = 1;
 		 }
+		 if(searchtripVO.getSearching().isEmpty()) {
+			 result = 1;
+		 }
 		 if(result==0) {
 			 model.addAttribute("searchlandmark", searchlandmark);
 			 model.addAttribute("searchbbs", searchbbs);
 			 model.addAttribute("searchtrip", searchtrip);	
 			 model.addAttribute("searching", searchtripVO.getSearching());
 		 }
-		/*
-		* System.out.println(searchlandmark); System.out.println(searchbbs);
-		* System.out.println(searchtrip); System.out.println(result);
-		* System.out.println(searchtripVO.getSearching());
-		*/
+		
+		System.out.println(searchlandmark);
+		System.out.println(searchbbs);
+		System.out.println(searchtrip); 
+		System.out.println(result);
+		System.out.println(searchtripVO.getSearching());
+		
 		 model.addAttribute("result", result);
 		//views/main/serarch.jsp
 		 
@@ -88,11 +93,12 @@ public class MainController {
 		searchVO.setStartEnd();
 		System.out.println("searchVO : " + searchVO);
 		List<SearchLandmarkVO> searchlandmark = maindao.morelandmark(searchVO);
+		System.out.println(searchlandmark);
 		int count = maindao.landmark_count(searchVO);
 		System.out.println("count : " + count); //1?
-		int pages = count/10; // 1/10  pages = 0
-		if(count%10!=0) { //1 % 10 --->1 
-			pages=count/10; //pages = 0/10 + 1 = 1
+		int pages = count/2; // 1/10  pages = 0
+		if(count%2!=0) { //1 % 10 --->1 
+			pages=count/2 + 1; //pages = 0/10 + 1 = 1
 		}		
 		model.addAttribute("searchlandmark", searchlandmark);
 		model.addAttribute("pages", pages);

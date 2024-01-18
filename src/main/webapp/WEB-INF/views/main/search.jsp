@@ -11,9 +11,19 @@
 </head>
 <body>
 
+<div id="resultpage_search"> <!-- 검색칸 -->
+	<form action="search">
+		<input name="searching"> <!-- searching으로 검색내용을 받음 -->
+		<button>검색하기</button>
+	</form>
+</div>
+
 <c:if test="${result == 0}">
 
-검색결과입니다<br>
+
+<div class="search_result">
+${searching}에 대한 검색 결과입니다
+</div>
 
 <div class="search_landmark"> <!-- 관광지 검색 결과 -->
 <!-- 4개만 가져와서 보여주는거로 -->
@@ -32,7 +42,7 @@
 <!-- 4개만 가져와서 보여주는거로 -->
 <c:forEach begin="0" end="3" items="${searchtrip}" var="vo">
 <div>
-<a href="">${vo.trip_title}</a><br> <!-- 여기에 링크 연결해야함 -->
+<a href="gowith/trip/one?trip_id=${vo.trip_id}">${vo.trip_title}</a><br> <!-- 여기에 링크 연결해야함 -->
 </div>
 </c:forEach>
 </div>
@@ -42,7 +52,7 @@
 ---------------------------------------------------------<br>
 <div class="search_bbs"> <!-- 자유게시판 검색 결과 -->
 <c:forEach  begin="0" end="3" items="${searchbbs}" var="vo">
-<a href="">${vo.bbs_title}</a><br> <!-- 여기에 링크 연결해야함 -->
+<a href="bbs/bbs2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a><br> <!-- 여기에 링크 연결해야함 -->
 </c:forEach>
 </div>
 <div class="more_bbs">
@@ -74,7 +84,7 @@
 </c:if>
 
 <c:if test="${result == 1}">
-검색 결과가 없습니다
+${searching}에 대한 검색 결과가 없습니다
 </c:if>
 <hr color="yellow">
 
