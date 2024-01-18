@@ -9,16 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	int pages = (int)request.getAttribute("pages");
-	for(int p = 1; p <= pages; p++){
-%>
-	<a href="moretrip?searching=${searching}&page=<%= p %>">
-		<button style="background: pink;"><%= p %></button>
-	</a>
-<%		
-	}
-%>
 
 이 아래부분은 css부분이라 수정하는게 좋을듯<br>
 	<table border="1">
@@ -37,5 +27,16 @@
 			</tr>
 		</c:forEach>
 	</table>
+
+<%
+	int pages = (int)request.getAttribute("pages");
+	for(int p = 1; p <= pages; p++){
+%>
+	<a href="moretrip?searching=${searching}&page=<%= p %>">
+		<button style="background: pink;"><%= p %></button>
+	</a>
+<%		
+	}
+%>
 </body>
 </html>

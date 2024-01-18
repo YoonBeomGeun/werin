@@ -38,20 +38,35 @@
 	
   	<select id="morelandmark" parameterType="searchVO" resultType="SearchLandmarkVO">
 		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info
-		from (select row_number() over(order by landmarkinfo_id) as row_no, c.* from landmarkinfo c)c2
+		from (select row_number() over(order by landmarkinfo_id) as row_no, c.* from landmarkinfo c
+		where
+		landmarkinfo_name like CONCAT('%',#{searching},'%')
+		or landmarkinfo_info like CONCAT('%',#{searching},'%')
+		)c2
 		where 
 		c2.row_no between ${start} and ${end}
-		and landmarkinfo_name like CONCAT('%',#{searching},'%')
-		or landmarkinfo_info like CONCAT('%',#{searching},'%')
 	</select>
 
   	<select id="moretrip" parameterType="searchVO" resultType="SearchTripVO">
-		select trip_id, trip_title
-		from (select row_number() over(order by trip_id) as row_no, c.* from trip c)c2
+		select trip_id, trip_title, trip_content
+		from (select row_number() over(order by trip_id) as row_no, c.* from trip c
+		where
+		trip_title like CONCAT('%',#{searching},'%')
+		or trip_content like CONCAT('%',#{searching},'%')
+		)c2
 		where
 		c2.row_no between ${start} and ${end}
-		and trip_title like CONCAT('%',#{searching},'%')
-		or trip_content like CONCAT('%',#{searching},'%')
+	</select>
+	
+  	<select id="morebbs" parameterType="searchVO" resultType="SearchBbsVO">
+		select bbs_id, bbs_title
+		from (select row_number() over(order by bbs_id) as row_no, c.* from bbs c
+		where
+		bbs_title like CONCAT('%',#{searching},'%')
+		or bbs_content like CONCAT('%',#{searching},'%')		
+		)c2
+		where
+		c2.row_no between ${start} and ${end}
 	</select>
 	
 	<select id="landmark_count" parameterType="searchVO" resultType="int">
@@ -66,6 +81,13 @@
 		where
 		trip_title like CONCAT('%',#{searching},'%')
 		or trip_content like CONCAT('%',#{searching},'%')
+	</select>
+	
+	<select id="bbs_count" parameterType="searchVO"  resultType="int">
+		select count(*) from bbs
+		where
+		bbs_title like CONCAT('%',#{searching},'%')
+		or bbs_content like CONCAT('%',#{searching},'%')
 	</select>
 	
 </mapper>
