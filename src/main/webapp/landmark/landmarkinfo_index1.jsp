@@ -40,6 +40,8 @@
 
 <body>
 
+	<a href = "landmarkinfo_db.jsp"><button id = "db">db관리자용 페이지</button></a> 
+	<hr>
 	<div align="center">
 		<button id="nature1">자연</button>
 		<a href="landmarkinfo_index2.jsp"><button class="jeju-button">인문</button></a>
