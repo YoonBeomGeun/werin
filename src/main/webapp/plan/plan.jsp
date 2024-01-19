@@ -210,11 +210,12 @@
 			$(document).ready(function() {
 			    // 저장 버튼 클릭 시
 			    $("#save").click(function() {
-			        // form 엘리먼트 생성
+			    	/*
+			    	// form 엘리먼트 생성
 			        var form = document.createElement("form");
 			        form.method = "POST";
 			        form.action = "schedule/addSchedule";  // 서버 컨트롤러의 URL을 적어주세요.
-
+						
 			        // travelPlans 객체에 저장된 일정들을 폼에 추가
 			        for (var day in travelPlans) {
 			            if (travelPlans.hasOwnProperty(day)) {
@@ -235,7 +236,14 @@
 			        appendToForm(form, 'plan_end_date', $("#datepicker2").val());
 			        // body에 폼 추가 및 전송
 			        document.body.appendChild(form);
-			        form.submit();
+			        */
+			        $("#jsonEle").val(JSON.stringify(travelPlans));
+			        
+			    	$('#frmPlan').serialize();
+					$("#frmPlan").attr("action", "addPlan"); // attribute setting
+					//document.body.appendChild(form);
+					
+					$("#frmPlan").submit();
 			    });
 
 			    // 폼에 필드 추가하는 함수
@@ -382,7 +390,7 @@
 	<div id="all">
 		<div id="left">
 			<div id="travel-info">
-				<form action="addPlan" method="post" id="frmPlan">
+				<form method="post" id="frmPlan">
 					<label for="travelTitle"></label> <input type="text"
 						id="travelTitle" name="plan_title" placeholder="일정 제목을 입력하세요."> <label
 						for="travelWith"></label> <select class="form-control"
@@ -395,6 +403,7 @@
 						<option value="group">단체로</option>
 					</select> <input name="plan_start_date" type="text" id="datepicker1" placeholder="여행시작날짜">
 					~ <input type="text" name="plan_end_date" id="datepicker2" placeholder="여행종료날짜">
+					<input type = "hidden" id="jsonEle" name="jsonEle">
 					<button id="save" type="submit">저장</button>
 				</form>
 			</div>
@@ -592,6 +601,7 @@
 			}
 
 			var dateString = selectedDay.innerText.trim().replace('Day', '');
+			
 
 			// travelPlans 객체에 해당 날짜의 일정 배열이 없으면 생성
 			if (!travelPlans[dateString]) {
@@ -603,12 +613,16 @@
 				latitude : latitude,
 				longitude : longitude,
 				contextPath : contextPath,
-				phone : phone
+				phone : phone,
+				day: dateString
 			};
 
 			addMarker(
 					new kakao.maps.LatLng(newPlan.latitude, newPlan.longitude),
 					markers.length, newPlan.placeName);
+			
+			updatePlanList(dateString, newPlan);
+			
 			travelPlans[dateString].push(newPlan);
 
 			console.log(newPlan.placeName + " " + newPlan.latitude + " "
@@ -651,6 +665,25 @@
 			});*/
 		}
 
+		// 선택된 날짜에 해당하는 일정을 업데이트하여 화면에 표시하는 함수
+		function updatePlanList(dateString, newPlan) {
+		    var lb = document.getElementById('lb');
+
+		    // 선택된 날짜의 일정을 표시하는 컨테이너를 가져오거나 생성
+		    var planContainer = document.getElementById('plan-container-' + dateString);
+		    if (!planContainer) {
+		        planContainer = document.createElement('div');
+		        planContainer.id = 'plan-container-' + dateString;
+		        lb.appendChild(planContainer);
+		    }
+
+		    // 새로운 일정을 화면에 추가
+		    var newPlanItem = document.createElement('div');
+		    newPlanItem.innerHTML = '<span>' + dateString + ' - ' + newPlan.placeName + '</span>' +
+		        '<span class="tel">' + newPlan.phone + '</span>';
+		    planContainer.appendChild(newPlanItem);
+		}
+		
 		// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 		function addMarker(position, idx, title) {
 			// 기존 마커를 지도에서 제거합니다

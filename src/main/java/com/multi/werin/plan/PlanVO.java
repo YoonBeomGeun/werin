@@ -2,6 +2,8 @@ package com.multi.werin.plan;
 
 import java.sql.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class PlanVO {
 	public int plan_no;
 	public String plan_title;
@@ -10,6 +12,16 @@ public class PlanVO {
 	public String plan_writer;
 	public String plan_with;
 	
+	@Autowired
+    private ScheduleVO scheduleVO;
+
+    public ScheduleVO getScheduleVO() {
+        return scheduleVO;
+    }
+
+    public void setScheduleVO(ScheduleVO scheduleVO) {
+        this.scheduleVO = scheduleVO;
+    }
 	public int getPlan_no() {
 		return plan_no;
 	}
@@ -46,12 +58,13 @@ public class PlanVO {
 	public void setPlan_with(String plan_with) {
 		this.plan_with = plan_with;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "PlanVO [plan_no=" + plan_no + ", plan_title=" + plan_title + ", plan_start_date=" + plan_start_date
 				+ ", plan_end_date=" + plan_end_date + ", plan_writer=" + plan_writer + ", plan_with=" + plan_with
-				+ ", plan_schedule_no="+ "]";
+				+ ", scheduleVO=" + scheduleVO + "]";
 	}
+	
 	
 }

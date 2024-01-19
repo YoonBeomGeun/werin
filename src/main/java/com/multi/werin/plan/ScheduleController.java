@@ -23,11 +23,11 @@ public class ScheduleController {
 	public int addSchedule(@RequestBody ScheduleVO vo) {
 		System.out.println("@Controller addSchedule");
 		System.out.println("ScheduleVO : " + vo);
-		
-		
-		//insert vo.setSchedule_map_id(1번결과)
+
+		vo.setSchedule_plan_no(vo.getSchedule_plan_no());
+
 		int result = dao.insert(vo);
-		
+
 		return result;
 	}
 }
