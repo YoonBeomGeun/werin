@@ -64,11 +64,10 @@
 																	
 	</insert>
 	<!-- 게시글 추천시 Like테이블에 insert (state 값 1인 채로 insert) -->
-	<!-- <insert id = "insertDislike" parameterType="tripLikeVO">
-		insert into trip_like values (#{like_id}, #{trip_id}, #{member_id}, 1)
-																	
+	<insert id = "insertDislike" parameterType="tripLikeVO">
+		insert into trip_like values (#{like_id}, #{trip_id}, #{member_id}, 1)													
 	</insert>
- -->
+ 
 
 	<delete id="delete" parameterType="tripVO">
 		delete from trip where

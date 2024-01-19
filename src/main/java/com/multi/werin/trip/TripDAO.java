@@ -54,6 +54,12 @@ public class TripDAO implements TripDAOInterface {
 	}
 	
 	@Override
+	public int insertDislike(TripLikeVO vo) {
+		return my.insert("trip.insertDislike", vo);
+	}
+	
+	
+	@Override
 	public int updateLike(TripVO vo) {
 		return my.update("trip.updateLike", vo);
 	}

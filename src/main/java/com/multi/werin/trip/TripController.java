@@ -3,6 +3,7 @@ package com.multi.werin.trip;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,25 +101,35 @@ public class TripController {
 	}
 	
 	@RequestMapping("trip/one")
-	public String one(int trip_id, Model model, TripLikeVO likeVO, @SessionAttribute("loginId") String member_id) {
+	public String one(int trip_id, HttpSession session,
+			Model model , TripLikeVO likeVO) {
+		
+		String member_id = "";
+		if(session.getAttribute("loginId") != null) {
+			member_id = (String)session.getAttribute("loginId");
+		}
 		
 		service.incrementCount(trip_id);
 		
 		System.out.println("trip_id : " + trip_id);
 		TripVO vo = dao.one(trip_id);
 		System.out.println("vo :" + vo);
+		
 		System.out.println(likeVO);
-		
-		
-		System.out.println(" member_id  :" +  member_id);
-		
-		likeVO.setMember_id(member_id);
+		  
+		  
+		System.out.println(" member_id  :" + member_id);
+		  
+		likeVO.setMember_id(member_id); 
 		System.out.println(" likeVO : " + likeVO);
 		TripLikeVO vo2 = dao.likeCheck(likeVO);
+		 
+		
 		System.out.println("TripLikeVO =>" + vo2);
-		
-		
-		System.out.println("like_state =>" + vo2.getLike_state());
+		  
+		// null처리하기 (비로그인일떄)  
+		//System.out.println("like_state =>" + vo2.getLike_state());
+		 
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("vo2", vo2);
@@ -131,22 +142,41 @@ public class TripController {
 	}
 	@RequestMapping("trip/updateLike")
 	@ResponseBody
-	public int updateLike(TripVO vo) { 
-		/*
-		 * dao.updateLike2(vo2); if(vo2.getLike_check()==1) {
-		 * model.addAttribute("alert","이미 추천 혹은 비추천을 눌렀습니다."); }else {
-		 */
-			dao.updateLike(vo);
-			System.out.println("토탈라이크 >> " + vo.getTrip_total_like());
-			return vo.getTrip_total_like();
-			/* } */
+	public int updateLike(int trip_id, TripVO vo,TripLikeVO likeVO, 
+			@SessionAttribute("loginId") String member_id) { 
+		 //1. loginId 를 member_id에 넣고, trip_id 받아와서	
+		System.out.println("trip_id >>> " + trip_id);
+		System.out.println(" member_id  :" + member_id);
+		likeVO.setMember_id(member_id);  // 로그인한 유저의 id값 받아와서 likeVO에 set
+		System.out.println(" likeVO : " + likeVO);
+	     //2. dao.likeCheck 실행
+		TripLikeVO vo2 = dao.likeCheck(likeVO); // vo2가 왜 null인지
+		System.out.println(vo2);
+		//3. null 이면 추천, 비추천을 아직 안눌렀다는 것이므로 
+		// null이 뜨는데, 이게 select like state 한 결과가 없다는 건지?
+		if(vo2 == null) {
+			dao.insertLike(likeVO); // like_state가 0인 채로 db에 insert하고
+			dao.updateLike(vo); // 추천수가 1 증가한다.
+		}
+		 // select like_state from trip_like where member_id = #{member_id} and trip_id = #{trip_id}
+		 // 멤버아이디, 트립아이디가 likeVO에 다 들어있는데 왜 null인지
+		 
+		 System.out.println("토탈라이크 >> " + vo.getTrip_total_like());
+		 return vo.getTrip_total_like();
+		
 		
 	}
 	
 	@RequestMapping("trip/updateDislike")
 	@ResponseBody
-	public int updateDislike(TripVO vo) {
-		dao.updateDislike(vo);
+	public int updateDislike(int trip_id, TripVO vo,TripLikeVO likeVO, 
+			@SessionAttribute("loginId") String member_id) {
+		likeVO.setMember_id(member_id);
+		TripLikeVO vo2 = dao.likeCheck(likeVO);
+		if(vo2 == null) {
+			dao.insertDislike(likeVO);
+			dao.updateDislike(vo);
+		}
 		System.out.println("토탈라이크 >> " + vo.getTrip_total_like());
 		//model.addAttribute("total_like", vo.getTrip_total_like());
 		return vo.getTrip_total_like();
