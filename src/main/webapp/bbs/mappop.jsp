@@ -43,9 +43,9 @@
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-<form id="map" action="insert.jsp" method="post">
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -63,7 +63,6 @@
         <div id="pagination"></div>
     </div>
 </div>
-
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d30d1cbf61b8505fada912e11ce71b94&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
@@ -144,9 +143,12 @@ function displayPlaces(places) {
 
         // 마커를 생성하고 지도에 표시합니다
         var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
-            marker = addMarker(placePosition, i), 
+          
+        	marker = addMarker(placePosition, i), 
             itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-
+            console.log(placePosition);//이걸로 좌표땡겨와야됨
+            console.log(marker);//임시로 좌표찾는중@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+            
         // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
         // LatLngBounds 객체에 좌표를 추가합니다
         bounds.extend(placePosition);
@@ -204,7 +206,7 @@ function getListItem(index, places) {
     el.innerHTML = itemStr;
     el.className = 'item';
 
-    return el;
+    return el;//가게명 가게 주소 등등
 }
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
@@ -282,7 +284,7 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
+
 </script>
-</form>
 </body>
 </html>

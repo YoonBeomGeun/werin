@@ -87,13 +87,15 @@ public class BbsController{
 		model.addAttribute("list", list);
 		model.addAttribute("pages", pages);
 		model.addAttribute("count", count);
+		model.addAttribute("pageVO", pageVO);
 	}
 	
 	
 	
 	@RequestMapping("bbs/bbs0")
 	public void list0(PageVO pageVO, Model model) {
-		pageVO.setStartEnd();
+		pageVO.setStartEnd();//page, start, end
+		System.out.println("페이지브오"+ pageVO);
 		List<BbsVO> list = dao.list1(pageVO);
 		model.addAttribute("list", list);
 	}
@@ -118,11 +120,12 @@ public class BbsController{
 	    List<BbsVO> result = dao.getSearchList(pageVO);
 	    System.out.println("result.size()"+ result.size());
 	    
-	    int count=  dao.count2(); // 전체게시물 수 
+	    int count=  dao.count2(pageVO); // 전체게시물 수 
 	    int pages = count / 10;
 		if (count % 10 != 0) {
 			pages = count / 10 + 1;
 		}
+		System.out.println("시작페이지"+pageVO.getStart()+"끝"+pageVO.getEnd());
 		System.out.println("페이지" + pages +"게시물 수" + count);
 	    model.addAttribute("list", result);
 	    model.addAttribute("pages", pages);
