@@ -37,7 +37,7 @@ public class RoomController {
 	
 	@RequestMapping("gowith/insertRoom")
 	public void insertRoom(RoomVO roomVO, Model model) {
-		List<MessageVO> list = null;
+		List<MessageVO> list = new ArrayList<>();
 		String host = "";
 		if(roomDAO.countPick(roomVO)==1) {
 			host = dao.roomHost(roomVO.getGowith_id());
@@ -52,10 +52,32 @@ public class RoomController {
 			model.addAttribute("result", result);
 			model.addAttribute("host", host);
 			model.addAttribute("roomVO", roomVO);
+			model.addAttribute("list", list);
+			System.out.println("list는 null인가? " + list);
 		}
 		List<RoomVO> list1 = roomDAO.roomList(roomVO.getRoom_member());
 		model.addAttribute("list1", list1);
 		
+	}
+	
+	@RequestMapping("gowith/selectRoom")
+	public void selectRoom(int room_id, Model model) {
+		RoomVO vo = roomDAO.one(room_id);
+		List<MessageVO> list = messageDAO.list(room_id);
+		model.addAttribute("vo", vo);
+		model.addAttribute("list", list);
+		System.out.println("vo는 있는가? " + vo);
+	}
+	
+	@RequestMapping("gowith/deleteRoomConfirmed")
+	public void deleteRoomConfirmed(int room_id, Model model) {
+		model.addAttribute("room_id", room_id);
+	}
+	
+	@RequestMapping("gowith/deleteRoom")
+	public void deleteRoom(int room_id, Model model) {
+		int result = roomDAO.deleteRoom(room_id);
+		model.addAttribute("result", result);
 	}
 
 
