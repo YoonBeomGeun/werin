@@ -107,11 +107,12 @@ $(function() {
 	         success: function(result){
 	        	 console.log(result);
 	         	$('.spTotalLike').text(result)
-	        	 //location.reload();
+	        	 location.reload();
 	         }
 	 	})
 	})
 	
+
 	$('#dislike').click(function() {
 		$.ajax({
 			type: 'POST',
@@ -123,6 +124,7 @@ $(function() {
 			success : function(result) {
 				console.log(result);
 				$('.spTotalLike').text(result)
+				location.reload();
 			}
 		})
 		
@@ -163,7 +165,7 @@ $(function() {
         <span class="spTotalLike">${vo.trip_total_like}</span>
         <button class="dislike-btn" onclick ="likeCheck()"> 비추천 </button>
         </c:if>
-        <c:if test = "${empty vo2.like_state}">
+        <c:if test = "${empty vo2}"> <!-- ajax에서 호출받은 vo2.likestate 값 다시 받아오는 방법 찾기 -->
         <!-- 추천, 비추천을 누르지 않은 상태라면 -->
          <button class="like-btn"  id = "like"> 추천 </button>
         <span class="spTotalLike">${vo.trip_total_like}</span>
@@ -172,7 +174,7 @@ $(function() {
     </c:otherwise>
 	</c:choose>
         <a href="${pageContext.request.contextPath}/trip/list?page=1"><button class="return-btn">돌아가기</button></a>
-        
+        <c:set var="item1" value="${item2}"/>
         
 
         <script>
