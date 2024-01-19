@@ -28,4 +28,6 @@ public interface TripDAOInterface {
 
 	public abstract TripLikeVO likeCheck(TripLikeVO vo);
 
+	public abstract int insertDislike(TripLikeVO vo);
+
 }
