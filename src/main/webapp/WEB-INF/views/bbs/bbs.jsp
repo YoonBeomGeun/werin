@@ -22,20 +22,22 @@
         $.ajax({
             url: "bbs0",
             data: {
-                page: $(this).text()
+                page: $(this).text(),
+                type: $("#type option:selected").val(),
+                keyword : $('#keyword').val(),
             },
             success: function(table) {
                 $("#result").html(table);
             }
-        });
+        })
 	        searchData = {
 	                page: $(this).text(),
 	                type: $("select[name=type]").val(),
 	                keyword: $("input[name=keyword]").val()
-	            };
-    	});
+	            }
+    	})
        
-    }); 
+    }) 
 
   
     
@@ -72,7 +74,7 @@
 </head>
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
-	<div id="result">
+	
 	<hr color="red">
 	전체 게시물 수 : ${count}개 <br>
 	전체 페이지 수 : ${pages}개 <br><br>
@@ -82,7 +84,9 @@
 	        <a href="getSearchList?page=1&kind=잡담"><button style="background:pink;" class="category-btn" data-category="잡담">잡담</button></a>&nbsp;
 	        <a href="getSearchList?page=1&kind=질문"><button style="background:pink;" class="category-btn" data-category="질문">질문</button></a>&nbsp;
 	        <a href="getSearchList?page=1&kind=조언"><button style="background:pink;" class="category-btn" data-category="조언">조언</button></a>&nbsp;
+        	<input type="hidden" id="kind" value="${pageVO.kind}">
         </div>
+        <div id="result">
 		<table border="1" class="table table-bordered table tabel-hover">
 		    <tr bgcolor="lime">
 		        <td width=70>행번호</td>
@@ -103,38 +107,51 @@
 		    </tr>
 			</c:forEach>
 		</table>
+		</div>
 		<!-- <a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a> -->	
 		<% 
 				if(session.getAttribute("loginId") != null){
 		%>
         <a href="insert.jsp"><button id="b1" class="btn btn-primary">글쓰기</button></a>
         <% } %>
-		<diV id="result2">
+		
 			<form action="getSearchList" name="search-form" >
-				<select name="type">
+				<select id="type" name="type">
 					<option value="">검색 내용 선택</option>
-					<option value="title">제목</option>
-					<option value="content">내용</option>
-					<option value="writer">작성자</option>
+					<option value="tittle"  <c:if test="${pageVO.type eq 'title'}">selected</c:if>>제목</option>
+					<option value="content"<c:if test="${pageVO.type eq 'content'}">selected</c:if>>내용</option>
+					<option value="writer" <c:if test="${pageVO.type eq 'writer'}">selected</c:if>>작성자</option>
 				</select>
-				<input type="text" name="keyword" value=""></input>
+				<input type="text" id="keyword" name="keyword" value="${pageVO.keyword}"></input>
 				<input type="text" name="page" value="1" hidden></input>
 				<input type="submit" class="btn btn-outline-primary" value="검색" id="boardtable"></input>
 			</form>
-		</div>
 		
-		=======================
+		
+
 		<%
 			int pages = (int)request.getAttribute("pages");//int(작) <--- Object(큰)
-			out.write(pages);
+			/* out.write(pages); */
 			for(int p = 1; p <= pages; p++){
 		%>
 			<button style="background:pink;" class="pages"><%=p%></button>&nbsp;
 		<%		
 		}
 		%>
-		============================
-	</div>
+		<%-- <%
+		int pages = (int)request.getAttribute("pages");//int(작) <--- Object(큰)
+		for(int p = 1; p <= pages; p++){
+		%>
+		<a href="bbs?page=<%= p %>">
+			<button style="background:lime;"><%= p %></button>
+		</a>
+		&nbsp;
+		<%		
+		}
+		%> --%>
+			
+	
+
 	
 </body>
 </html> 
