@@ -7,18 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*Requestmapping에 똑같은게 있는 경우는 어떻게 되는지?*/
-
 @Controller
 public class MainController {
 
 	@Autowired
 	MainDAOInterface maindao;
+	
+	/*
+	 * @Autowired PointService pointService;
+	 */
 
 	@RequestMapping("main/recommendlandmark")
 	public void recommendlandmark(MainlandmarkVO mainlandmarkVO, Model model) {
 		List<MainlandmarkVO> recommendlandmark = maindao.recommendlandmark(mainlandmarkVO);
 		model.addAttribute("recommendlandmark", recommendlandmark);
+		/* pointService.userpoint(5, memberVO-->member_id); */	
 	}
 	
 	
