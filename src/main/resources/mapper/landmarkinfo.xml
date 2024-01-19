@@ -13,4 +13,8 @@
 		select * from landmarkInfo
 	</select>
 	
+	<select id="delete1" parameterType="landmarkInfoVO" resultType="landmarkInfoVO">
+		delete from landmarkInfo
+	</select>
+	
 </mapper>
