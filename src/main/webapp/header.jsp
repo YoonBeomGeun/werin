@@ -30,12 +30,12 @@
 					<c:choose>
 						<c:when test="${empty sessionScope.loginId}">
 							<!-- 로그인 되어 있지 않은 경우 -->
-							<button onclick="window.location.href='../member/member.jsp'">회원가입</button>
-							<button onclick="window.location.href='../member/login.jsp'">로그인</button>
+							<button onclick="window.location.href='${pageContext.request.contextPath}/member/member.jsp'">회원가입</button>
+							<button onclick="window.location.href='${pageContext.request.contextPath}/member/login.jsp'">로그인</button>
 						</c:when>
 						<c:otherwise>
 							<!-- 로그인 되어 있는 경우 -->
-							<button onclick="window.location.href='../member/mypage.jsp'">마이페이지</button>
+							<button onclick="window.location.href='${pageContext.request.contextPath}/member/mypage.jsp'">마이페이지</button>
 							<form action="${pageContext.request.contextPath}/member/logout"
 								method="post">
 								<button type="submit">로그아웃</button>
