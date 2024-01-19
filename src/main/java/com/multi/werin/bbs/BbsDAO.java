@@ -61,8 +61,8 @@ public class BbsDAO{
 	    return my.selectList("bbs.selectSearchList", pageVO);
 	}//검색기능
 	
-	public int count2() {
-		return my.selectOne("bbs.count2");
+	public int count2(PageVO pageVO) {
+		return my.selectOne("bbs.count2", pageVO);
 	}//검색기능에서 쓰는거
 	
 	
