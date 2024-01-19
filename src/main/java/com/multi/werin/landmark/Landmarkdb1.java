@@ -10,9 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class Landmarkdb1 {
@@ -33,7 +31,9 @@ public class Landmarkdb1 {
                         + "areaBasedList1?"
                         + "MobileOS=ETC&MobileApp=Test"
                         + "&ServiceKey=" + apiKey
-                        + "&listYN=Y&arrange=A&contentTypeId=12&areaCode=39&sigunguCode=&cat1=&cat2=&cat3="
+                        + "&listYN=Y&arrange=A&contentTypeId=12&areaCode=39&sigunguCode=" // 39가 제주도
+                        + "&cat1=A02" // 관광지 - 인문
+                        + "&cat2=&cat3="
                         + "&_type=json&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
 
                 URL url = new URL(apiUrl);

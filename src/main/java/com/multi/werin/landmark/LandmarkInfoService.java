@@ -1,5 +1,6 @@
 package com.multi.werin.landmark;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,11 @@ import org.springframework.ui.Model;
 public class LandmarkInfoService {
 
 	@Autowired
-	LandmarkInfoDAOInterface dao;
+	LandmarkInfoDAO dao;
 	
 	@Autowired
 	Landmarkdb1 db1;
-	/*
-	 * public void insert(String ko) { //db처리하기 전 전처리/후처리 //db처리 요청 return
-	 * dao.insert(ko); }
-	 */
+	
     public void api() {
     	//파라메터 배열
     	String[] list = {"국립공원", "군립병원"};
@@ -43,6 +41,10 @@ public class LandmarkInfoService {
 		//model을 이용해서 검색결과인 list를 jejulist.jsp까지 넘기자
 		model.addAttribute("list", list);
 	}
+
+	public void delete1() {
+    	dao.delete1();
+    }
 	
 	
 	

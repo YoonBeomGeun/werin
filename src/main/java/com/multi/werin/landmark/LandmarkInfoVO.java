@@ -7,7 +7,7 @@ public class LandmarkInfoVO {
 	private String landmarkinfo_pic;
 	private double landmarkinfo_lat;
 	private double landmarkinfo_lon;
-	private int landmarkinfo_id;
+	private int landmarkinfo_contentid;
 	
 	public String getLandmarkinfo_name() {
 		return landmarkinfo_name;
@@ -39,19 +39,20 @@ public class LandmarkInfoVO {
 	public void setLandmarkinfo_lon(double landmarkinfo_lon) {
 		this.landmarkinfo_lon = landmarkinfo_lon;
 	}
-	public int getLandmarkinfo_id() {
-		return landmarkinfo_id;
+	public int getLandmarkinfo_contentid() {
+		return landmarkinfo_contentid;
 	}
-	public void setLandmarkinfo_id(int landmarkinfo_id) {
-		this.landmarkinfo_id = landmarkinfo_id;
+	public void setLandmarkinfo_contentid(int landmarkinfo_contentid) {
+		this.landmarkinfo_contentid = landmarkinfo_contentid;
 	}
 	
 	@Override
 	public String toString() {
 		return "LandmarkInfoVO [landmarkinfo_name=" + landmarkinfo_name + ", landmarkinfo_info=" + landmarkinfo_info
 				+ ", landmarkinfo_pic=" + landmarkinfo_pic + ", landmarkinfo_lat=" + landmarkinfo_lat
-				+ ", landmarkinfo_lon=" + landmarkinfo_lon + ", landmarkinfo_id=" + landmarkinfo_id + "]";
+				+ ", landmarkinfo_lon=" + landmarkinfo_lon + ", landmarkinfo_contentid=" + landmarkinfo_contentid + "]";
 	}
+	
 	
 
 
