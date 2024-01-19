@@ -3,8 +3,12 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 
 <c:forEach items="${hotshop}" var="vo">
-	<div class="hotshop-image">${vo.introducestore_img}</div>
-	<div class="hotshop-text">${vo.introducestore_title}</div>
+	<div class="hotshop-image">
+	<a href="">${vo.introducestore_img}</a>
+	</div>
+	<div class="hotshop-text">
+	<a href="">${vo.introducestore_title}</a>
+	</div>
 </c:forEach>
 
 <!-- 얘도 완성됨 -->

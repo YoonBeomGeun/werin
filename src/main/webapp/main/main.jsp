@@ -51,7 +51,11 @@
 			url: 'http://api.openweathermap.org/data/2.5/weather?q=jeju&APPID=ddc5dcd1b8ef74ebe5bf8438a715ab1a&units=metric',
 			success: function(x){
 				console.log(x);
-				$('#weather').append(x)
+/* 				var $temp = Math.floor(data.main.temp)+'º';
+				var city = data.name;
+				
+				$('.temp').prepend($temp);
+				$('.city').append($city); */
 			}
 		})
 	})
@@ -81,8 +85,9 @@
 	HOT 게시글
 	</div>
 	
-	<div id="weather">     
-	날씨정보
+	<div class="weather">
+		<div class="temp"></div>
+		<div class="city"></div>
 	</div>
 </body>
 </html>

@@ -17,4 +17,19 @@
 	WHERE member_id = #{member_id}
 	</select>
 	
+	<select id="pointcheck" resultType="memberVO" parameterType="memberVO">
+	select member_level from member where member_id=#{member_id}
+	</select>
+	
+	<update id="updategrade" parameterType="memberVO">
+	update member set member_grade = #{membergrade}
+	where member_id={#member_id}
+	</update>
+	
+	<!-- 이거 이렇게해도 되나? 변수 한번 확인해보고 member_id 갖고올수 있는지도 확인 -->
+	<update id="updatelevel" parameterType="int">	
+	update member set member_level = member_level + #{variation}
+	where member_id=#{member_id}
+	</update>
+	
 </mapper>

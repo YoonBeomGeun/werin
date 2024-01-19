@@ -7,18 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-/*Requestmapping에 똑같은게 있는 경우는 어떻게 되는지?*/
-
 @Controller
 public class MainController {
 
 	@Autowired
 	MainDAOInterface maindao;
+	
+	/*
+	 * @Autowired PointService pointService;
+	 */
 
 	@RequestMapping("main/recommendlandmark")
 	public void recommendlandmark(MainlandmarkVO mainlandmarkVO, Model model) {
 		List<MainlandmarkVO> recommendlandmark = maindao.recommendlandmark(mainlandmarkVO);
 		model.addAttribute("recommendlandmark", recommendlandmark);
+		/* pointService.userpoint(5, memberVO-->member_id); */	
 	}
 	
 	
@@ -33,17 +36,22 @@ public class MainController {
 		 if(searchlandmark.isEmpty() && searchbbs.isEmpty() && searchtrip.isEmpty()) { // 아무런 검색 결과가 없는 경우
 			 result = 1;
 		 }
+		 if(searchtripVO.getSearching().isEmpty()) {
+			 result = 1;
+		 }
 		 if(result==0) {
 			 model.addAttribute("searchlandmark", searchlandmark);
 			 model.addAttribute("searchbbs", searchbbs);
 			 model.addAttribute("searchtrip", searchtrip);	
 			 model.addAttribute("searching", searchtripVO.getSearching());
 		 }
-		/*
-		* System.out.println(searchlandmark); System.out.println(searchbbs);
-		* System.out.println(searchtrip); System.out.println(result);
-		* System.out.println(searchtripVO.getSearching());
-		*/
+		
+		System.out.println(searchlandmark);
+		System.out.println(searchbbs);
+		System.out.println(searchtrip); 
+		System.out.println(result);
+		System.out.println(searchtripVO.getSearching());
+		
 		 model.addAttribute("result", result);
 		//views/main/serarch.jsp
 		 
@@ -88,11 +96,12 @@ public class MainController {
 		searchVO.setStartEnd();
 		System.out.println("searchVO : " + searchVO);
 		List<SearchLandmarkVO> searchlandmark = maindao.morelandmark(searchVO);
+		System.out.println(searchlandmark);
 		int count = maindao.landmark_count(searchVO);
 		System.out.println("count : " + count); //1?
-		int pages = count/10; // 1/10  pages = 0
-		if(count%10!=0) { //1 % 10 --->1 
-			pages=count/10; //pages = 0/10 + 1 = 1
+		int pages = count/2; // 1/10  pages = 0
+		if(count%2!=0) { //1 % 10 --->1 
+			pages=count/2 + 1; //pages = 0/10 + 1 = 1
 		}		
 		model.addAttribute("searchlandmark", searchlandmark);
 		model.addAttribute("pages", pages);
