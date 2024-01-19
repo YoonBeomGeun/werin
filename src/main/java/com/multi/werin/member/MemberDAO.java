@@ -29,4 +29,16 @@ public class MemberDAO implements MemberDAOInterface {
 	public int idChk(MemberVO vo) throws Exception {
 	 	return my.selectOne("member.idChk", vo);
 	 }
+	 
+	 public MemberVO pointcheck(MemberVO membervo) {
+		 return my.selectOne("member.pointcheck", membervo);
+	 }
+	 
+	 public int updategrade(MemberVO membervo) {
+		 return my.update("member.updategrade", membervo);
+	 }
+	 
+	 public int updatelevel(int variation) {
+		 return my.update("member.updatelevel", variation);
+	 }
 }
