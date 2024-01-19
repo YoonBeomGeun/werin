@@ -6,8 +6,8 @@
 
     <insert id="insert" parameterType="PlanVO">
         <!-- Your SQL query for inserting into plan table -->
-        INSERT INTO plan (null, plan_title, plan_start_date, plan_end_date, plan_writer, plan_with,plan_schedule_no)
-        VALUES (null, #{plan_title}, #{plan_start_date}, #{plan_end_date}, #{plan_writer}, #{plan_with}, #{plan_schedule_no} )
+        INSERT INTO plan (plan_no, plan_title, plan_start_date, plan_end_date, plan_writer, plan_with)
+        VALUES (null, #{plan_title}, #{plan_start_date}, #{plan_end_date}, #{plan_writer}, #{plan_with})
     </insert>
 
     <!-- other plan-related queries -->

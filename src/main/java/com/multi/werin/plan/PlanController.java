@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.werin.member.MemberDAO;
 import com.multi.werin.member.MemberVO;
@@ -23,7 +25,8 @@ public class PlanController {
 	@Autowired
 	PlanDAO dao;
 
-	 @RequestMapping("plan/addPlan")
+	 @RequestMapping(value = "plan/addPlan", method = RequestMethod.POST)
+	 @ResponseBody
 	    public String addPlan(PlanVO vo, HttpSession session, Model model) {
 	        // 로그인한 사용자의 아이디를 세션에서 가져옴
 	        String writer = (String) session.getAttribute("loginId");

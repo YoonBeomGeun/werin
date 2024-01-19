@@ -20,7 +20,7 @@ public class ScheduleController {
 
 	@RequestMapping("schedule/addSchedule")
 	@ResponseBody
-	public int addSchedule(ScheduleVO vo) {
+	public int addSchedule(@RequestBody ScheduleVO vo) {
 		System.out.println("@Controller addSchedule");
 		System.out.println("ScheduleVO : " + vo);
 		
