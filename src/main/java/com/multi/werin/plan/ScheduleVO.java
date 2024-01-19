@@ -9,6 +9,7 @@ public class ScheduleVO {
 	public String schedule_map_lat;
 	public String schedule_map_lon;
 	public String schedule_day;
+	public int schedule_plan_no;
 
 	public String getSchedule_id() {
 		return schedule_id;
@@ -50,10 +51,23 @@ public class ScheduleVO {
 		this.schedule_map_lon = schedule_map_lon;
 	}
 
+	
+	
+	public int getSchedule_plan_no() {
+		return schedule_plan_no;
+	}
+
+	public void setSchedule_plan_no(int schedule_plan_no) {
+		this.schedule_plan_no = schedule_plan_no;
+	}
+
 	@Override
 	public String toString() {
 		return "ScheduleVO [schedule_id=" + schedule_id + ", schedule_title=" + schedule_title + ", schedule_map_lat="
-				+ schedule_map_lat + ", schedule_map_lon=" + schedule_map_lon + ", schedule_day=" + schedule_day + "]";
+				+ schedule_map_lat + ", schedule_map_lon=" + schedule_map_lon + ", schedule_day=" + schedule_day
+				+ ", schedule_plan_no=" + schedule_plan_no + "]";
 	}
+
+	
 
 }
