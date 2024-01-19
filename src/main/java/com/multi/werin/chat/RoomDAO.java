@@ -16,12 +16,20 @@ public class RoomDAO {
 		return my.insert("room.create", roomVO);
 	}
 	
+	public int deleteRoom(int room_id) {
+		return my.delete("room.deleteRoom", room_id);
+	}
+	
 	public int countPick(RoomVO roomVO) {
 		return my.selectOne("room.countpick", roomVO);
 	}
 	
 	public RoomVO pick(RoomVO roomVO) {
 		return my.selectOne("room.pick", roomVO);
+	}
+	
+	public RoomVO one(int room_id) {
+		return my.selectOne("room.one", room_id);
 	}
 	
 	public List<RoomVO> roomList(String room_member) {
