@@ -7,26 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class LandmarkInfoDAO implements LandmarkInfoDAOInterface {
+public class LandmarkInfoDAO {
 
 	@Autowired
 	SqlSessionTemplate my;
 	
-	@Override
 	public void insert(LandmarkApiVO vo) {
-		//db처리하기 전 전처리/후처리 
-		//db처리 요청 
 		my.insert("landmarkInfo.insert", vo);
 	}
 	
-	@Override
 	public List<LandmarkInfoVO> list(String ko) {
-		//db처리하기 전 전처리/후처리 
-		//db처리 요청 
 		List<LandmarkInfoVO> list = my.selectList("landmarkInfo.list");
 		return list;
 	}
 	
-
+	public void delete1 () {
+		my.delete("landmarkInfo.delete1");
+	}
 	
 }

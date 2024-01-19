@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="landmarkPage">
+
+	<select id="delete2" parameterType="LandmarkApiVO2" resultType="LandmarkApiVO2">
+		delete from landmarkInfo2
+	</select>
+	
+	<insert id = "insert2" parameterType="LandmarkApiVO2">
+	insert into landmarkinfo2 values(
+		#{overview}, #{addr1}, #{title}, #{firstImage2}, #{mapx}, #{mapy}, #{tel}, #{homepage}
+	)
+	</insert>
+	
+	<select id="list2" parameterType="LandmarkApiVO2" resultType="LandmarkApiVO2">
+		select * from landmarkInfo2
+	</select>
+	
+</mapper>
