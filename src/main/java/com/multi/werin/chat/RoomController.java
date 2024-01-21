@@ -46,6 +46,7 @@ public class RoomController {
 			model.addAttribute("host", host);
 			model.addAttribute("vo", vo);
 			model.addAttribute("list", list);
+			
 		} else {
 			int result = roomDAO.insert(roomVO);
 			host = dao.roomHost(roomVO.getGowith_id());
@@ -53,6 +54,7 @@ public class RoomController {
 			model.addAttribute("host", host);
 			model.addAttribute("roomVO", roomVO);
 			model.addAttribute("list", list);
+			System.out.println("과연 roomVO에는 뭐가 들어있을까? "+roomVO);
 			System.out.println("list는 null인가? " + list);
 		}
 		List<RoomVO> list1 = roomDAO.roomList(roomVO.getRoom_member());

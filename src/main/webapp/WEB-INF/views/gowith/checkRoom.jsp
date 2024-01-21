@@ -34,15 +34,13 @@
 		if(${result}) {
 			if(confirm("이미 채팅방이 존재합니다. 기존 채팅방으로 이동하시겠습니까??")) {
 				// 기존 채팅방 불러오기
-				alert("기존의 방을 불러옴.");
-				document.getElementById("insertRoomForm").submit();
+				window.location.href = "insertRoom";
 			} else {
 				window.history.back();
 			}
 		} else {
 			if(confirm("방을 생성하시겠습니까?")) {
 				document.getElementById("insertRoomForm").submit();
-				alert("방을 생성합니다.")
 			} else {
 				alert("방 생성을 취소했습니다.")
 				window.history.back();
