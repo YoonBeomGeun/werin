@@ -6,7 +6,7 @@
 %>
 	<script type="text/javascript">
 		alert("삭제가 완료되었습니다.");
-		location.href="list1?page=1";
+		history.go(-2);
 	</script>
 	
 <%
