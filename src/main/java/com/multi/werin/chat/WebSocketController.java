@@ -3,6 +3,7 @@ package com.multi.werin.chat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,9 @@ public class WebSocketController {
 	
 	
 	
-	@MessageMapping("/chat")
-	@SendTo("/topic/messages") //채팅방이름 messages
-	public MessageVO send(MessageVO messageVO) {
+	@MessageMapping("/{roomId}")
+	@SendTo("/topic/{roomId}") //채팅방이름 messages
+	public MessageVO send(@DestinationVariable int roomId, MessageVO messageVO) {
 		//from, text만 messages채팅방에 가입한 브라우저로 그대로 보내고 싶은 경우 
 		Date date = new Date();		
 		

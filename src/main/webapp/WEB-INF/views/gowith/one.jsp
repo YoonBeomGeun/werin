@@ -33,13 +33,6 @@
 		margin: 0 auto;
 	}
 	
-	.edit button {
-		font-size: 17px;
-		border-radius:10px;
-		width: 70px;
-		height: 50px;
-		color:white;
-	}
 	
 	.write {
 	    display: flex;
@@ -113,6 +106,7 @@
 		        },
 		        error: function(error) {
 		            alert("댓글 등록에 실패하였습니다.");
+		            location.reload();
 		        }
 		    })
 	    })
@@ -199,6 +193,33 @@
 			})
 		})
 		
+		/* <!-- 게시글 추천수 + 1 -->
+		$(".like-btn").click(function() {
+			$.ajax({
+				url: "updateLike",
+				data: {
+					gowith_id: ,
+					member_id: 
+				},
+				success: function(result) {
+					$('#likeBtn').text(result); // 이걸 변수에 저장하고 다시 append.
+				}
+			})
+		})
+		
+		<!-- 게시글 추천수 - 1 -->
+		$(".dislike-btn").click(function() {
+			$.ajax({
+				url: "updateDislike",
+				data: {
+					
+				},
+				success: function(result) {
+					$('#dislikeBtn').text(result); // 이걸 변수에 저장하고 다시 append.
+				}
+			})
+		}) */
+		
 	})
 </script>
 <!-- <script>
@@ -243,8 +264,7 @@
 			<td> 0</td>
 		</tr>
 	</table>
-	<button style="margin-right:300px; background:#FF5555; color:white; width:70px; height:50px; border-radius:10px; float:right; font-size: 17px;">좋아요</button>
-	<h3 style="text-align:center; margin-top:50px;">여행 일정</h3>
+	<h3 style="text-align:center;">여행 일정</h3>
 	<div class="schedule">
 		여행 일정 들어오기
 	</div>
@@ -254,20 +274,21 @@
 			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
 			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
 			<div class="edit" style="text-align: right; margin-right: 300px;">
-				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#33CC99;">수정</button></a>
-				<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="background:#FF5555;">삭제</button></a>
+				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="right: 300px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">수정</button></a>
+				<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="right: 300px;margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">삭제</button></a>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
 			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
-			<div class="edit" style="text-align: right; margin-right: 300px;">
+			<div class="edit" style="text-align: center;margin-bottom: 20px;">
+				<button class="like_btn" style="background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn">0</span></button>
+				<button class="dislike-btn" style="margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">비추천<br><span id="dislikeBtn">0</span></button>
 				<%-- <a href="insertChat?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>&room_member=${sessionScope.loginId}"><button id="b5" style="background:#33CC99;">채팅하기</button></a> --%>
-				<button id="b5" style="background:#33CC99;">채팅하기</button>
+				<button id="b5" style="position: absolute; right: 300px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
 			</div>
 		</c:otherwise>
 	</c:choose>
-	<br>
 	<hr color="green">
 	<div style="margin-left:300px; margin-top:30px; height: 100%;">
 		<h2>댓글</h2>
