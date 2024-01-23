@@ -34,7 +34,8 @@
 		if(${result}) {
 			if(confirm("이미 채팅방이 존재합니다. 기존 채팅방으로 이동하시겠습니까??")) {
 				// 기존 채팅방 불러오기
-				window.location.href = "insertRoom";
+				/* window.location.href = "insertRoom"; */
+				document.getElementById("insertRoomForm").submit();
 			} else {
 				window.history.back();
 			}

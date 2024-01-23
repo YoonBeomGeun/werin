@@ -23,6 +23,7 @@
 	.paging button {
 	    background: pink;
 	    margin-right: 5px;
+	    border-radius: 10px;
 	    color: white;
 	    width: 30px;
 	    height: 25px;
@@ -43,8 +44,10 @@
 		padding: 10px;
 		width: 350px;
 		height: 300px;
-		background: lightgray;
 		border-radius: 10px;
+		border: 2px solid lightgray;
+		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
 	}
 	
 	.content p {
@@ -52,13 +55,13 @@
 	}
 	
 	.content mit {
-		position: fixed;	/* 어떻게 수정해야 할지 모르겠음 */
+			/* 어떻게 수정해야 할지 모르겠음 */
 	}
 	
 	.bottom {
 		background: lightgray;
-		height: 300px;
-		margin-top: 50px;
+		height: 100px;
+		margin-top: 30px;
 	}
 </style>
 
@@ -78,29 +81,34 @@
 			})
 		})
 	})
+	
+	
 </script>
 </head>
 
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
 	<h1 style="text-align:center;">동행게시판</h1>
-	<div style="text-align: center;"><input type="text" value="검색어를 입력하세요."></div>
-	<div style="margin-left: 19%;">
+	<!-- <div style="text-align: center;"><input type="text" value="검색어를 입력하세요."></div> -->
+	<!-- <div style="margin-left: 19%;">
 		<button>최신순</button>
 		<button>추천순</button>
 		<button>조회순</button>
+	</div> -->
+	<div style="margin-bottom:35px;">
+		<% 
+			if(session.getAttribute("loginId") != null){	
+		%>
+			<a href="insertGowith.jsp"><button style="position: absolute; right: 350px;margin:auto;background:#33CC99; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
+		<%
+			} else {
+		%>
+			<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')"><button style="position: absolute; right: 350px;margin:auto;background:#33CC99; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
+		<%
+			}
+		%>
 	</div>
-	<% 
-		if(session.getAttribute("loginId") != null){	
-	%>
-		<a href="insertGowith.jsp" style="margin-left: 19%;"><button>글쓰기</button></a>
-	<%
-		} else {
-	%>
-		<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')" style="margin-left: 19%;"><button>글쓰기</button></a>
-	<%
-		}
-	%>
+	
 	<br><br>
 	
 	<div id="result">
@@ -109,13 +117,14 @@
 				<c:when test="${not empty sessionScope.loginId}">
 					<a href="one?gowith_id=${vo.gowith_id}">
 						<div class="content">
-							작성자 ${vo.gowith_writer}<br>
-							<p style="font-size: 20px;">${vo.gowith_title}</p><br>
-							<p>${vo.gowith_content}</p><br>
+							<span style="font-size: 13px;">작성자 ${vo.gowith_writer}</span><br>
+							<span style="font-size: 17px; font-weight: bold;">${vo.gowith_title}</span><br>
+							<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:300px;">${vo.gowith_content}</span><br>
+							<div style="height: 200px;">
+								<img src="${pageContext.request.contextPath}/resources/img/제주도1.jpg" alt="이미지 설명" style="width: 100%; height: 100%; object-fit: cover;">
+							</div>
 							<div class="mit">
-								여행일 수<br>
-								좋아요 ${vo.gowith_like}<br>
-								조회수 ${vo.gowith_view}
+								조회수 ${vo.gowith_view}&nbsp;&nbsp;&nbsp;좋아요 ${vo.gowith_total_like}
 							</div>
 						</div>
 					</a>
@@ -127,9 +136,7 @@
 							<p style="font-size: 20px;">${vo.gowith_title}</p><br>
 							<p>${vo.gowith_content}</p><br>
 							<div class="mit">
-								여행일 수<br>
-								좋아요 ${vo.gowith_like}<br>
-								조회수 ${vo.gowith_view}
+								조회수 ${vo.gowith_view}&nbsp;&nbsp;&nbsp;좋아요 ${vo.gowith_total_like}
 							</div>
 						</div>
 					</a>
@@ -156,7 +163,6 @@
 	</div>
 	
 	<div class="bottom">
-		<h2 style="margin-left:225px;">werin</h2>
 		
 	</div>
 	

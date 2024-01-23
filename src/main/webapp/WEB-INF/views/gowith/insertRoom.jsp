@@ -29,6 +29,7 @@
 <style type="text/css">
 
 	.sendTalk {
+		/* background: ; */
 		margin-left: 650px;
 		margin-left: relative;
 		width: relative;
@@ -138,6 +139,8 @@
 		})
 		
 	}
+	
+	
 	
 	function disconnect() {
 		if(stompClient != null){
@@ -249,7 +252,7 @@
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
 	<br><br>
-	<button id="disconnect" onclick="disconnect();" style="width:200px;" class="btn btn-danger">뒤로가기</button><br>
+	<button id="disconnect" onclick="disconnect();" style="margin-left: 100px;width:70px;background:#FF5555; color:white;height:35px; border-radius:10px; font-size: 15px;">뒤로가기</button><br>
 	
 	<div class="wrap">
 		<div class="chatList">

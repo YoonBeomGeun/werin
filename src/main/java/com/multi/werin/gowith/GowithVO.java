@@ -9,6 +9,8 @@ public class GowithVO {
 	private String gowith_created_at;
 	private int gowith_like;
 	private int gowith_view;
+	private int gowith_total_like;
+	private int gowith_total_dislike;
 	private String gowith_img;
 
 	public int getNum_id() {
@@ -75,6 +77,22 @@ public class GowithVO {
 		this.gowith_view = gowith_view;
 	}
 
+	public int getGowith_total_like() {
+		return gowith_total_like;
+	}
+
+	public void setGowith_total_like(int gowith_total_like) {
+		this.gowith_total_like = gowith_total_like;
+	}
+
+	public int getGowith_total_dislike() {
+		return gowith_total_dislike;
+	}
+
+	public void setGowith_total_dislike(int gowith_total_dislike) {
+		this.gowith_total_dislike = gowith_total_dislike;
+	}
+
 	public String getGowith_img() {
 		return gowith_img;
 	}
@@ -87,8 +105,9 @@ public class GowithVO {
 	public String toString() {
 		return "GowithVO [num_id=" + num_id + ", gowith_id=" + gowith_id + ", gowith_title=" + gowith_title
 				+ ", gowith_content=" + gowith_content + ", gowith_writer=" + gowith_writer + ", gowith_created_at="
-				+ gowith_created_at + ", gowith_like=" + gowith_like + ", gowith_view=" + gowith_view + ", gowith_img="
-				+ gowith_img + "]";
+				+ gowith_created_at + ", gowith_like=" + gowith_like + ", gowith_view=" + gowith_view
+				+ ", gowith_total_like=" + gowith_total_like + ", gowith_total_dislike=" + gowith_total_dislike
+				+ ", gowith_img=" + gowith_img + "]";
 	}
 
 }

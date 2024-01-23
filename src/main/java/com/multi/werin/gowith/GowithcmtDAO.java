@@ -29,6 +29,10 @@ public class GowithcmtDAO {
 		return my.selectOne("gowithcmt.one", gowithcmt_id);
 	}
 	
+	public int countCmt(int gowith_id) {
+		return my.selectOne("gowithcmt.countCmt", gowith_id);
+	}
+	
 	public List<GowithcmtVO> list(int gowith_id) {
 		return my.selectList("gowithcmt.list", gowith_id);
 	}

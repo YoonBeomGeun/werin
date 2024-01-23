@@ -66,7 +66,9 @@ public class RoomController {
 	public void selectRoom(int room_id, Model model) {
 		RoomVO vo = roomDAO.one(room_id);
 		List<MessageVO> list = messageDAO.list(room_id);
+		String host = dao.roomHost(vo.getGowith_id());
 		model.addAttribute("vo", vo);
+		model.addAttribute("host", host);
 		model.addAttribute("list", list);
 		System.out.println("vo는 있는가? " + vo);
 	}
