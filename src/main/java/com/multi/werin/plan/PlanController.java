@@ -2,6 +2,7 @@ package com.multi.werin.plan;
 
 import java.sql.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -107,6 +108,17 @@ public class PlanController {
 		} else {
 			return "redirect:/member/insert";
 		}
+	}
+	
+	@RequestMapping("plan/select")
+	public String select(PlanVO vo, Model model) {
+	    List<PlanVO> result = dao.select(vo);
+	    model.addAttribute("planList", result); // 수정된 부분
+	    if (result.size() > 0) {
+	        return "redirect:/plan/planlist.jsp";
+	    } else {
+	        return "list.jsp";
+	    }
 	}
 
 }

@@ -4,12 +4,19 @@
 
 <mapper namespace="plan">
 
-    <insert id="insert" parameterType="PlanVO" useGeneratedKeys="true" keyProperty="plan_no">
-        <!-- Your SQL query for inserting into plan table -->
-        INSERT INTO plan (plan_no, plan_title, plan_start_date, plan_end_date, plan_writer, plan_with)
-        VALUES (null, #{plan_title}, #{plan_start_date}, #{plan_end_date}, #{plan_writer}, #{plan_with})
-    </insert>
+	<insert id="insert" parameterType="PlanVO"
+		useGeneratedKeys="true" keyProperty="plan_no">
+		<!-- Your SQL query for inserting into plan table -->
+		INSERT INTO plan (plan_no, plan_title, plan_start_date, plan_end_date,
+		plan_writer, plan_with)
+		VALUES (null, #{plan_title}, #{plan_start_date}, #{plan_end_date},
+		#{plan_writer}, #{plan_with})
+	</insert>
 
-    <!-- other plan-related queries -->
+	<select id="select" parameterType="PlanVO"
+		resultType="PlanVO">
+		SELECT * FROM plan WHERE plan_no = #{plan_no};
+	</select>
+	<!-- other plan-related queries -->
 
 </mapper>
