@@ -43,7 +43,7 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-			</div>
+			</div> 
 		</div>
 		<br>
 		<div class="menubar">
