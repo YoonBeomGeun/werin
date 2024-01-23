@@ -5,7 +5,7 @@
 <mapper namespace="gowith">
 
 	<insert id="create" parameterType="gowithVO">
-		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, null)
+		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, null, null)
 	</insert>
 	
 	<update id="update">
@@ -49,4 +49,10 @@
 	<update id="increaseView" parameterType="int">
 		update gowith set gowith_view = gowith_view + 1 where gowith_id=#{gowith_id}
 	</update>
+	
+	<update id="">
+		
+	</update>
+	
+	
 </mapper>
