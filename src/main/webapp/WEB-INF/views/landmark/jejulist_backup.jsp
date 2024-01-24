@@ -1,73 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Landmark Information</title>
-<style>
-.container {
-	display: flex; /* Use flexbox to align items */
-}
+    <meta charset="UTF-8">
+    <title>랜드마크 정보</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
-table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
-}
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-th, td {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
+        .landmark {
+            width: 300px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #dddddd;
+            box-sizing: border-box;
+        }
 
-th {
-	background-color: #f2f2f2;
-}
-</style>
+        .landmark img {
+            max-width: 100%;
+            height: auto;
+        }
 
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        .landmark-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
 
+        .landmark-content-id {
+            color: #555;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ 
+    
+    
 </head>
 <body>
-	<h2>Landmark Information</h2>
-	<div class="container">
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Information</th>
-					<th>Picture</th>
-					<th>Latitude</th>
-					<th>Longitude</th>
-				</tr>
-			</thead>
-			<tbody>
-				<!-- Iterate over the list and display each landmark -->
-				<c:forEach var="landmark" items="${list}">
-					<tr>
-						<td>${landmark.landmarkinfo_contentid}</td>
-						<td><a href="jejulist2.jsp">${landmark.landmarkinfo_name}</a></td>
-						<td>${landmark.landmarkinfo_info}</td>
-						<td>
-							<c:if test="${not empty landmark.landmarkinfo_pic}">
-								<a href="your_condition.jsp?pic=${landmark.landmarkinfo_pic}">
-									<img src="${landmark.landmarkinfo_pic}" alt="Landmark Image">
-								</a>
-							</c:if>
-						</td>
-						<td>${landmark.landmarkinfo_lat}</td>
-						<td>${landmark.landmarkinfo_lon}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
+    <h2>랜드마크 정보</h2>
+    <hr>
+    <div class="container">
+        <!-- 목록을 반복하며 각 랜드마크를 표시합니다. -->
+        <c:forEach var="landmark" items="${list}">
+            <div class="landmark">
+                <div class="landmark-title">
+                    <a href="jejulist2.jsp">${landmark.landmarkinfo_name}</a>
+                </div>
+                <div class="landmark-image">
+                    <c:if test="${not empty landmark.landmarkinfo_pic}">
+                        <a href="your_condition.jsp?pic=${landmark.landmarkinfo_pic}">
+                            <img src="${landmark.landmarkinfo_pic}" alt="랜드마크 이미지">
+                        </a>
+                    </c:if>
+                </div>
+                <div class="landmark-content-id">
+                    ID: ${landmark.landmarkinfo_contentid}
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+    ${pages}
 
-	<hr>
-	불러오기 성공
+    <hr>
+    불러오기 성공
 </body>
 </html>
