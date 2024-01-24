@@ -29,5 +29,11 @@ public class BbslikeVO {
 	public void setLike_state(int like_state) {
 		this.like_state = like_state;
 	}
+	@Override
+	public String toString() {
+		return "BbslikeVO [like_id=" + like_id + ", bbs_id=" + bbs_id + ", member_id=" + member_id + ", like_state="
+				+ like_state + "]";
+	}
+	
 	
 }

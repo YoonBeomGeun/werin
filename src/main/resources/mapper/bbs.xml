@@ -30,7 +30,7 @@
 		from
 		(select
 		ROW_NUMBER() over(order by bbs_id desc) as num_id,
-		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
+		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at, bbs_total_like
 		from bbs p
 		) p2
 		where p2.num_id BETWEEN ${start} and ${end}
@@ -41,7 +41,7 @@
 		from
 		(select
 		ROW_NUMBER() over(order by bbs_id desc) as num_id,
-		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at
+		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at, bbs_total_like
 		from bbs p) p2
 		where p2.bbs_id = #{bbs_id}
 	</select>
@@ -50,6 +50,59 @@
 		update bbs set bbs_view = bbs_view + 1 WHERE bbs_id = #{bbs_id}
 	</update>
 
+	<select id="list1" parameterType="pageVO" resultType="bbsVO">
+		select *
+		from
+		(select
+		ROW_NUMBER() over(order by bbs_id desc) as num_id,
+		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at,
+		bbs_total_like
+		from bbs p
+		<!-- 수정: 작성자로 검색하는 경우 -->
+		<choose>
+        <when test="kind != null and kind != '' ">
+            WHERE bbs_cate = #{kind}
+            <choose>
+                <when test="type != null and type != '' and type == 'writer'">
+                    <!-- 기본적으로 제목으로 검색 -->
+                    and bbs_writer LIKE concat('%', #{keyword}, '%')
+                </when>
+                <when test="type != null and type != '' and type == 'title'">
+                    <!--  기본적으로 제목으로 검색 -->
+                    and bbs_title LIKE concat('%', #{keyword}, '%')
+                </when>
+                <when test="type != null and type != '' and type == 'content'">
+                    <!-- 기본적으로 제목으로 검색 -->
+                    and bbs_content LIKE concat('%', #{keyword}, '%')
+                </when>
+            </choose>
+        </when>
+        <otherwise>
+            <choose>
+			<when test="type != null and type != '' and type == 'writer'">
+				where bbs_writer LIKE concat('%', #{keyword}, '%')
+			</when>
+			<!-- 다른 검색 조건들 추가 -->
+			<when test="type != null and type != '' and type == 'title'">
+				<!-- 기본적으로 제목으로 검색 -->
+				where bbs_title LIKE concat('%', #{keyword}, '%')
+			</when>
+			<when test="type != null and type != '' and type == 'content'">
+				<!-- 기본적으로 내용으로 검색 -->
+				where bbs_content LIKE concat('%', #{keyword}, '%')
+			</when>
+			<when test="type != null and type != '' and type == 'cate'">
+				<!-- 기본적으로 내용으로 검색 -->
+				where bbs_cate LIKE concat('%', #{keyword}, '%')
+			</when>
+		</choose>
+        </otherwise>
+    </choose>
+		
+		) p2
+		where p2.num_id BETWEEN ${start} and ${end}
+	</select>
+	
 	<select id="selectSearchList" parameterType="pageVO"
 		resultType="bbsVO">
 		SELECT * FROM (
@@ -71,6 +124,7 @@
                     <!--  기본적으로 제목으로 검색 -->
                     and bbs_title LIKE concat('%', #{keyword}, '%')
                 </when>
+       
                 <when test="type != null and type != '' and type == 'content'">
                     <!-- 기본적으로 제목으로 검색 -->
                     and bbs_content LIKE concat('%', #{keyword}, '%')
@@ -146,5 +200,55 @@
     </choose>
 </select>
 
+<!-- 게시글 추천수 +1 -->
+	<update id = "updateLike" parameterType="bbsVO">
+		update bbs 
+		set bbs_total_like = bbs_total_like + 1 
+		where bbs_id = #{bbs_id}
+		<selectKey resultType="java.lang.Integer" keyProperty="bbs_total_like" order = "AFTER">
+			select bbs_total_like from bbs where bbs_id = #{bbs_id}
+		</selectKey>
+	</update>
+	
+	<!-- 추천하면 state값을 0으로 set -->
+	<update id = "updateLike2" parameterType="bbslikeVO">
+		update bbs_like
+		set like_state = 0
+		where member_id = #{member_id}
+		<selectKey resultType="java.lang.Integer" keyProperty="like_state" order = "AFTER">
+			select like_state from bbs_like where member_id = #{member_id}
+		</selectKey>
+	</update>
+	
+	<!-- 비추천시 게시글 추천수 -1 -->
+	<update id = "updateDislike" parameterType="bbsVO">
+		update bbs 
+		set bbs_total_like = bbs_total_like - 1 
+		where bbs_id = #{bbs_id}
+		<selectKey resultType="java.lang.Integer" keyProperty="bbs_total_like" order = "AFTER">
+			select bbs_total_like from bbs where bbs_id = #{bbs_id}
+		</selectKey>
+	</update>
+	
+	<!-- 비추천하면 state값을 1로 set -->
+	<update id = "updateDislike2" parameterType="bbslikeVO">
+		update bbs_like
+		set like_state = 1, like_check = 1
+		where member_id = #{member_id}
+	</update>
+	
+	<!-- 게시글 추천시 Like테이블에 insert (state 값 0인 채로 insert) -->
+	<insert id = "insertLike" parameterType="bbslikeVO">
+		insert into bbs_like values (#{like_id}, #{bbs_id}, #{member_id}, 0)
+																	
+	</insert>
+	<!-- 게시글 추천시 Like테이블에 insert (state 값 1인 채로 insert) -->
+	<insert id = "insertDislike" parameterType="bbslikeVO">
+		insert into bbs_like values (#{like_id}, #{bbs_id}, #{member_id}, 1)													
+	</insert>
 
+	<select id = "likeCheck" parameterType="bbslikeVO" resultType="bbslikeVO">
+		select like_state from bbs_like
+		where member_id = #{member_id} and bbs_id = #{bbs_id}
+	</select>
 </mapper>
