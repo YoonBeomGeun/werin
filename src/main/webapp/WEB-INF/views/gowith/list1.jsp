@@ -84,19 +84,20 @@
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
 	<h1 style="text-align:center;">동행게시판</h1>
-	<div><input type="text" value="검색어를 입력하세요."></div>
-	<div>최신순</div>
-	<div>추천순</div>
-	<div>조회순</div>
-	<div>조회기간</div>
+	<div style="text-align: center;"><input type="text" value="검색어를 입력하세요."></div>
+	<div style="margin-left: 19%;">
+		<button>최신순</button>
+		<button>추천순</button>
+		<button>조회순</button>
+	</div>
 	<% 
 		if(session.getAttribute("loginId") != null){	
 	%>
-		<a href="insertGowith.jsp"><button>글쓰기</button></a>
+		<a href="insertGowith.jsp" style="margin-left: 19%;"><button>글쓰기</button></a>
 	<%
 		} else {
 	%>
-		<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')"><button>글쓰기</button></a>
+		<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')" style="margin-left: 19%;"><button>글쓰기</button></a>
 	<%
 		}
 	%>

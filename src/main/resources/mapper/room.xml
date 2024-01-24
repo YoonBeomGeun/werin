@@ -4,7 +4,7 @@
 
 <mapper namespace="room">
 
-	<insert id="create" parameterType="roomVO">
+	<insert id="create" parameterType="roomVO" useGeneratedKeys="true" keyProperty="room_id" keyColumn="room_id">
 		insert into room
 		values (null, #{room_name}, #{gowith_id}, #{room_host}, #{room_member}, now(), 'a')
 	</insert>
