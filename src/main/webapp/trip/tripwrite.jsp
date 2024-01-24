@@ -72,7 +72,9 @@
         .submit-button:hover {
             background-color: #2980b9;
         }
+        
     </style>
+    
     <title>게시글 추가</title>
     <%@ include file="../../../header.jsp" %>
 </head>
