@@ -10,6 +10,17 @@
 </head>
 <body>
 
+<div id="resultpage_search"> <!-- 검색칸 -->
+	<form action="search">
+		<input name="searching"> <!-- searching으로 검색내용을 받음 -->
+		<button>검색하기</button>
+	</form>
+</div><br>
+
+<div id="return_searchpage">
+	<a href="search?searching=${searching}">${searching} 검색결과 페이지로 돌아가기</a>
+</div>
+
 이 아래부분은 css부분이라 수정하는게 좋을듯<br>
 	<table border="1">
 		<tr bgcolor="lime">

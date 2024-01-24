@@ -16,20 +16,31 @@
 	SELECT COUNT(*) FROM member
 	WHERE member_id = #{member_id}
 	</select>
-	
-	<!-- <select id="pointcheck" resultType="memberVO" parameterType="memberVO">
+
+	<select id="pointcheck" resultType="memberVO" parameterType="memberVO">
 	select member_level from member where member_id=#{member_id}
 	</select>
 	
 	<update id="updategrade" parameterType="memberVO">
-	update member set member_grade = #{membergrade}
-	where member_id={#member_id}
+	<![CDATA[
+	update member set member_grade =
+	case
+		when member_level < 10 then 'bronze'
+		when member_level >= 10 and member_level <20 then 'silver'
+		when member_level >= 20 then 'gold'
+	end
+	where member_id=#{member_id}
+	]]>
 	</update>
 	
-	이거 이렇게해도 되나? 변수 한번 확인해보고 member_id 갖고올수 있는지도 확인
-	<update id="updatelevel" parameterType="int">	
+	<!-- 이거 이렇게해도 되나? 변수 한번 확인해보고 member_id 갖고올수 있는지도 확인 -->
+	<update id="updatelevel" parameterType="memberVO">	
 	update member set member_level = member_level + #{variation}
 	where member_id=#{member_id}
-	</update> -->
+	</update>
+	
+	<select id="callgrade" resultType="memberVO" parameterType="memberVO">
+	select member_grade from member where member_id=#{member_id}
+	</select>
 	
 </mapper>
