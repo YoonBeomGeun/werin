@@ -18,4 +18,13 @@
 		select * from landmarkInfo2
 	</select>
 	
+	<select id="page" parameterType="String" resultType="LandmarkApiVO2">
+		select * from landmarkInfo2
+		where title = #{landmarkName}
+	</select>
+	
+	<update id="resetAutoIncrement2" parameterType="landmarkInfoVO">
+        ALTER TABLE landmarkInfo2 AUTO_INCREMENT = 1;
+    </update>
+	
 </mapper>

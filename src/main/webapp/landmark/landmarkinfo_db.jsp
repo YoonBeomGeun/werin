@@ -63,7 +63,7 @@
 		
 		$('#b6').click(function() { // 상세정보 리스트 전체보기
 			$.ajax({
-				url : "jejupage",
+				url : "jejupagelist",
 				success : function(x) {
 					console.log(x);
 					$(".result").html(x);
