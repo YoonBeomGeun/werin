@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 public class TripController {
-
+	
 	@Autowired
 	TripDAOInterface dao;
 	
@@ -75,7 +75,7 @@ public class TripController {
 	}
 
 	@RequestMapping("trip/list")
-	public void list(PageVO1 pageVO, Model model) {
+	public void list(TripPageVO pageVO, Model model) {
 		System.out.println();
 		pageVO.setStartEnd();
 		System.out.println(pageVO);
