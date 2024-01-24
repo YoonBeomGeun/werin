@@ -28,7 +28,6 @@ th {
 }
 </style>
 
-<%@ include file="../../../header.jsp" %>
 </head>
 <body>
 	<h2>Landmark Information</h2>

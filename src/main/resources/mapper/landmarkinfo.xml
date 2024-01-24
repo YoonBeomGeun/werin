@@ -5,7 +5,7 @@
 <mapper namespace="landmarkInfo">
 	<insert id = "insert" parameterType="LandmarkApiVO">
 	insert into landmarkinfo values(
-		#{title}, null, #{firstimage}, #{mapx}, #{mapx}, #{contentid}
+		null, #{title}, #{firstimage}, #{mapx}, #{mapx}, #{contentid}
 	)
 	</insert>
 	
@@ -13,8 +13,39 @@
 		select * from landmarkInfo
 	</select>
 	
+	<select id="pagelist1" parameterType="landmarkInfoVO" resultType="landmarkInfoVO">
+		select * from landmarkInfo
+		where landmarkinfo_id BETWEEN ${start} and ${end}
+	</select>
+	
+	<select id="pagelist2" parameterType="landmarkpageVO" resultType="landmarkInfoVO">
+		select *
+		from
+		(select
+		ROW_NUMBER() over(order by landmarkinfo_id desc) as num_id,
+		landmarkinfo_id, landmarkinfo_name, landmarkinfo_pic
+		, landmarkinfo_lat, landmarkinfo_lon, landmarkinfo_contentid
+		from landmarkinfo l	
+		where l.landmarkinfo_id BETWEEN 1 and 55
+		) l2
+		where l2.num_id BETWEEN ${start} and ${end}
+	</select>
+	
+	<select id="count1" parameterType="landmarkpageVO" resultType="int">
+		select count(*) from landmarkInfo
+		where landmarkinfo_id BETWEEN ${start} and ${end}
+	</select>
+	
+	<select id="count2" parameterType="landmarkpageVO" resultType="int">
+		select count(*) from landmarkInfo
+	</select>
+	
 	<select id="delete1" parameterType="landmarkInfoVO" resultType="landmarkInfoVO">
 		delete from landmarkInfo
 	</select>
+	
+	<update id="resetAutoIncrement" parameterType="landmarkInfoVO">
+        ALTER TABLE landmarkInfo AUTO_INCREMENT = 1;
+    </update>
 	
 </mapper>

@@ -17,7 +17,7 @@ public class Landmarkdb1 {
     
     // LandmarkItemVO 클래스 정의 필요
 	
-    public List<LandmarkApiVO> getLandmarkItems() {
+    public List<LandmarkApiVO> getLandmarkItems(String s) {
         List<LandmarkApiVO> landmarkItemList = new ArrayList<>();
 
         try {
@@ -25,6 +25,7 @@ public class Landmarkdb1 {
             int numOfRows = 10;
             int pageNo = 1;
             int totalPages = 1;
+            String condition = s;
 
             do {
                 String apiUrl = "http://apis.data.go.kr/B551011/KorService1/"
@@ -32,8 +33,7 @@ public class Landmarkdb1 {
                         + "MobileOS=ETC&MobileApp=Test"
                         + "&ServiceKey=" + apiKey
                         + "&listYN=Y&arrange=A&contentTypeId=12&areaCode=39&sigunguCode=" // 39가 제주도
-                        + "&cat1=A02" // 관광지 - 인문
-                        + "&cat2=&cat3="
+                        + "&cat1=A02&cat2=" + condition + "&cat3="
                         + "&_type=json&pageNo=" + pageNo + "&numOfRows=" + numOfRows;
 
                 URL url = new URL(apiUrl);

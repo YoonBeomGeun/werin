@@ -14,6 +14,7 @@ public class LandmarkPageDAO {
 	
 	public void delete2 () {
 		my.delete("landmarkPage.delete2");
+		my.update("landmarkPage.resetAutoIncrement2");
 	}
 	
 	public void insert2(LandmarkApiVO2 vo) {
@@ -22,6 +23,11 @@ public class LandmarkPageDAO {
 	
 	public List<LandmarkApiVO2> list2(String ko) {
 		List<LandmarkApiVO2> list = my.selectList("landmarkPage.list2");
+		return list;
+	}
+	
+	public List<LandmarkApiVO2> page(String landmarkName) {
+		List<LandmarkApiVO2> list = my.selectList("landmarkPage.page", landmarkName);
 		return list;
 	}
 	
