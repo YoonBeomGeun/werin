@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+#resultpage_search { /* 검색창 위치 */
+	width: 1000px;
+	height: 60px;
+	background-color: yellow;
+	top: 40px;
+	left: 460px;
+	position: relative;
+}
+
+#searching{
+	font-size: 20px;
+	width: 850px;
+	height: 60px;
+	padding: 10px;
+	outline: none;
+}
+
+#search_button{
+	font-size: 20px;
+	width: 150px;
+	height: 60px;
+	border: 0px;
+	background: gold;
+	outline: none;
+	float: right;
+	color: #ffffff;
+}
+
+#return_searchpage{
+	font-size: 20px;
+	width: 400px;
+	height: 60px;
+	background-color: gold;
+	padding: 15px;
+	top: -20px;
+	left: 20px;
+	position: relative;
+}
+
+#landmark_info{
+	font-size: 20px;
+	width: 1200px;
+	background-color: gold;
+	padding: 20px;
+	top: 100px;
+	left: 300px;
+	position: relative;
+}
+
+#trip_info{
+	font-size: 20px;
+	width: 1200px;
+	background-color: gold;
+	padding: 20px;
+	top: 100px;
+	left: 300px;
+	position: relative;
+}
+
+#number{
+	width: 30px;
+	height: 30px;
+	font-size: 15px;
+	background-color: gold;
+	padding: 8px;
+	position: relative;
+}
