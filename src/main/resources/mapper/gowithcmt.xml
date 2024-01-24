@@ -20,6 +20,12 @@
 		where gowithcmt_id = #{gowithcmt_id}
 	</delete>
 	
+	<select id="countCmt" parameterType="int" resultType="int">
+		select count(*)
+		from gowithcmt
+		where gowith_id = #{gowith_id}
+	</select>
+	
 	<!-- <select id="one" parameterType="int" resultType="GowithcmtVO">
 		select *
 		from gowithcmt
