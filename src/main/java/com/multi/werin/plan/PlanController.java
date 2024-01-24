@@ -27,7 +27,7 @@ import com.multi.werin.member.MemberDAO;
 import com.multi.werin.member.MemberVO;
 
 @Controller
-public class PlanController2 {
+public class PlanController {
 	@Autowired
 	PlanDAO dao;
 	
