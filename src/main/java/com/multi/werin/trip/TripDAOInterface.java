@@ -12,7 +12,7 @@ public interface TripDAOInterface {
 
 	public abstract int delete(TripVO vo);
 
-	public abstract List<TripVO> list(PageVO1 pageVO);
+	public abstract List<TripVO> list(TripPageVO pageVO);
 
 	public abstract int count();
 

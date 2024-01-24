@@ -83,6 +83,30 @@
         .login-btn{
         background-color: #2ecc71;
         }
+        
+         .remove-btn:hover {
+            background-color: #c0392b; /* Hover 색상 변경 */
+        }
+
+        .update-btn:hover {
+            background-color: #2980b9; /* Hover 색상 변경 */
+        }
+
+        .return-btn:hover {
+            background-color: #27ae60; /* Hover 색상 변경 */
+        }
+
+        .like-btn:hover {
+            background-color: #218c74; /* Hover 색상 변경 */
+        }
+
+        .dislike-btn:hover {
+            background-color: #c0392b; /* Hover 색상 변경 */
+        }
+
+        .login-btn:hover {
+            background-color: #27ae60; /* Hover 색상 변경 */
+        }
 
     </style>
     <%
@@ -90,8 +114,8 @@
     session.setAttribute("member_id", member_id);
     TripVO bag = (TripVO)request.getAttribute("vo");
     TripLikeVO vo2 = (TripLikeVO)request.getAttribute("vo2");
-	//SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	//String formattedDate = dateFormat.format(bag.getTrip_writedate());
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	String formattedDate = dateFormat.format(bag.getTrip_writedate());
 %>
 <script>
 $(function() {
@@ -139,7 +163,8 @@ $(function() {
         <h3>여행기 상세 정보</h3>
         <div>
             <p><strong>제목:</strong> ${vo.trip_title}</p>
-            <p><strong>작성 날짜:</strong>${vo.trip_writedate} </p>
+            <%-- <p><strong>작성 날짜:</strong>${vo.trip_writedate} </p> --%>
+            <p><strong>작성 날짜:</strong><%=formattedDate %> </p>
             <p><strong>조회수:</strong> ${vo.trip_count}</p>
             <p><strong>추천:</strong> <span class="spTotalLike">${vo.trip_total_like}</span></p>
             <p><strong>작성자:</strong> ${vo.trip_writer}</p>
@@ -156,11 +181,14 @@ $(function() {
     </c:when>
     
     <c:otherwise>
-        <!-- 로그인 되어 있는 경우 -->
+        <!-- 로그인 id == 작성자 id 인 경우 -->
+        <c:if test = "${vo.trip_writer == sessionScope.loginId}">
         <button class = "remove-btn" onclick="remove()">삭제</button>
         <button class="update-btn" onclick="update()">수정</button><br>
-        <c:if test = "${vo2.like_state == 0 || vo2.like_state == 1}"> 
+        </c:if>
+        
         <!-- 추천,비추천을 이미 눌렀다면 0 추천, 1 비추천-->
+        <c:if test = "${vo2.like_state == 0 || vo2.like_state == 1}"> 
         <button class="like-btn"  onclick = "likeCheck()"> 추천 </button>
         <span class="spTotalLike">${vo.trip_total_like}</span>
         <button class="dislike-btn" onclick ="likeCheck()"> 비추천 </button>

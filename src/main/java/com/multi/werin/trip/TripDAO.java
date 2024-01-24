@@ -34,7 +34,7 @@ public class TripDAO implements TripDAOInterface {
 	}
 
 	@Override
-	public List<TripVO> list(PageVO1 pageVO) {
+	public List<TripVO> list(TripPageVO pageVO) {
 		return my.selectList("trip.list", pageVO);
 	}
 	

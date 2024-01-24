@@ -85,7 +85,7 @@
 		desc
 	</select> -->
 	
-	<select id="list" parameterType="pageVO" resultType="tripVO">
+	<select id="list" parameterType="TripPageVO" resultType="tripVO">
 		select *
 		from (select row_number() over(order by trip_id desc)
 		as row_no, trip_id, trip_title, trip_content, trip_start_date,

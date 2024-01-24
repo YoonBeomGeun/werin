@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 public class TripController {
-
+	
 	@Autowired
 	TripDAOInterface dao;
 	
@@ -75,7 +75,7 @@ public class TripController {
 	}
 
 	@RequestMapping("trip/list")
-	public void list(PageVO1 pageVO, Model model) {
+	public void list(TripPageVO pageVO, Model model) {
 		System.out.println();
 		pageVO.setStartEnd();
 		System.out.println(pageVO);
@@ -159,7 +159,6 @@ public class TripController {
 			dao.updateLike(vo); // 추천수가 1 증가한다.
 		}
 		 // select like_state from trip_like where member_id = #{member_id} and trip_id = #{trip_id}
-		 // 멤버아이디, 트립아이디가 likeVO에 다 들어있는데 왜 null인지
 		 
 		 System.out.println("토탈라이크 >> " + vo.getTrip_total_like());
 		 return vo.getTrip_total_like();
@@ -173,7 +172,7 @@ public class TripController {
 			@SessionAttribute("loginId") String member_id) {
 		likeVO.setMember_id(member_id);
 		TripLikeVO vo2 = dao.likeCheck(likeVO);
-		if(vo2 == null) {
+		if(vo2 == null) { // like_state가 0,1 값 둘중 아무것도 가지지 않아서 --> 추천, 비추천을 누른 기록이 없다.
 			dao.insertDislike(likeVO);
 			dao.updateDislike(vo);
 		}

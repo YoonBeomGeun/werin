@@ -1,6 +1,6 @@
 package com.multi.werin.trip;
 
-public class PageVO1 {
+public class TripPageVO {
 	private int start;
 	private int end;
 	private int page;

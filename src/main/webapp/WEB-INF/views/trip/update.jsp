@@ -41,41 +41,31 @@
             height: 200px;
             resize: none;
         }
+        
+          /* 버튼 스타일 */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .update-btn {
+            background-color: #3498db;
+            margin-right: 150px;
+        }
+
+        .return-btn {
+            background-color: #2ecc71;
+        }
         </style>
 
 <title>Insert title here</title>
 <%@ include file="../../../header.jsp"%>
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.js"></script>
-<script type="text/javascript">
-    $(function() {
-        $('#update').click(function() {
-            // FormData 객체를 사용하여 폼 데이터를 가져옴
-            var formData = new FormData($('form')[0]);
 
-            $.ajax({
-                type: 'POST',
-                url: "${pageContext.request.contextPath}/trip/update2",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    alert("게시글이 수정되었습니다.");
-                    // 서버에서 받은 응답(response)을 사용하여 필요한 작업 수행
-                    // 예를 들어, 필요한 DOM 업데이트 등
-                    $("#d1").html(response);
-                },
-                error: function(xhr, status, error) {
-                    // 에러 처리
-                    console.error(xhr.responseText);
-                    alert("게시글 수정에 실패했습니다. 에러 메시지: " + xhr.responseText);
-                }
-            });
-
-            // 기본 폼 제출 동작 방지
-            return false;
-        }); // update
-    });
-</script> --%>
  </head>
 <body>
 <div class="container">
@@ -91,9 +81,9 @@
             <textarea id = "trip_content" name = trip_content>${vo.trip_content}</textarea>
          </div>
             <input type = "hidden" name = "trip_id" value = ${vo.trip_id}>
-        <button id = "update">수정</button>
+        <button class="update-btn">수정</button>
         </form>
-        <a href = "${pageContext.request.contextPath}/trip/list"><button>돌아가기</button></a>
+        <a href = "${pageContext.request.contextPath}/trip/list?page=1"><button class = "return-btn">돌아가기</button></a>
         </div>
 </div>
 </body>
