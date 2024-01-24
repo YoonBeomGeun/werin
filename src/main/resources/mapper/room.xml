@@ -20,6 +20,12 @@
 		where gowith_id = #{gowith_id} and room_member = #{room_member}
 	</select>
 	
+	<select id="countRoom" parameterType="int" resultType="int">
+		select count(*)
+		from room
+		where gowith_id = #{gowith_id}
+	</select>
+	
 	<select id="pick" parameterType="roomVO" resultType="roomVO">
 		select *
 		from room

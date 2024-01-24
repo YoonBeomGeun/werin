@@ -24,6 +24,10 @@ public class RoomDAO {
 		return my.selectOne("room.countpick", roomVO);
 	}
 	
+	public int countRoom(int gowith_id) {
+		return my.selectOne("room.countRoom", gowith_id);
+	}
+	
 	public RoomVO pick(RoomVO roomVO) {
 		return my.selectOne("room.pick", roomVO);
 	}

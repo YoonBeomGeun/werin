@@ -5,7 +5,7 @@
 <mapper namespace="gowith">
 
 	<insert id="create" parameterType="gowithVO">
-		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, null, null)
+		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, 0, null)
 	</insert>
 	
 	<update id="update">
@@ -31,7 +31,7 @@
 		from
 			(select 
 				ROW_NUMBER() over(order by gowith_id desc) as num_id,
-				gowith_id, gowith_title, gowith_content, gowith_writer, gowith_created_at, gowith_like, gowith_view, gowith_img
+				gowith_id, gowith_title, gowith_content, gowith_writer, gowith_created_at, gowith_view, gowith_total_like, gowith_total_dislike, gowith_img
 			from gowith g) g2
 		where g2.gowith_id = #{gowith_id}
 	</select>
@@ -41,7 +41,7 @@
 		from 
 			(select 
 				ROW_NUMBER() over(order by gowith_id desc) as num_id,
-				gowith_id, gowith_title, gowith_content, gowith_writer, gowith_created_at, gowith_like, gowith_view, gowith_img
+				gowith_id, gowith_title, gowith_content, gowith_writer, gowith_created_at, gowith_view, gowith_total_like, gowith_total_dislike, gowith_img
 			from gowith g) g2
 		where g2.num_id BETWEEN ${start} and ${end}
 	</select>
@@ -50,9 +50,68 @@
 		update gowith set gowith_view = gowith_view + 1 where gowith_id=#{gowith_id}
 	</update>
 	
-	<update id="">
-		
+	<!-- 추천 기능 -->
+	
+	<insert id="createLike" parameterType="gowithLikeVO">
+		insert into gowith_total_like values(null, #{gowith_id}, #{member_id}, 1)
+	</insert>
+	
+	<insert id="createDislike" parameterType="gowithLikeVO">
+		insert into gowith_total_like values(null, #{gowith_id}, #{member_id}, 2)
+	</insert>
+	
+	<delete id="deleteLike" parameterType="gowithLikeVO">
+		delete from gowith_total_like
+		where gowith_id = #{gowith_id} and member_id = #{member_id}
+	</delete>
+	
+	<select id="stateIn" parameterType="gowithLikeVO" resultType="int">
+		select count(*)
+		from gowith_total_like
+		where gowith_id = #{gowith_id} and member_id = #{member_id}
+	</select>
+	
+	<select id="checkState" parameterType="gowithLikeVO" resultType="int">
+		select like_state
+		from gowith_total_like
+		where gowith_id = #{gowith_id} and member_id = #{member_id}
+	</select>
+	
+	<update id="updateLike1" parameterType="int">
+		update gowith
+		set gowith_total_like = gowith_total_like + 1
+		where gowith_id = #{gowith_id}
 	</update>
+	
+	<update id="updateLike2" parameterType="int">
+		update gowith
+		set gowith_total_like = gowith_total_like - 1
+		where gowith_id = #{gowith_id}
+	</update>
+	
+	<update id="updateDislike1" parameterType="int">
+		update gowith
+		set gowith_total_dislike = gowith_total_dislike + 1
+		where gowith_id = #{gowith_id}
+	</update>
+	
+	<update id="updateDislike2" parameterType="int">
+		update gowith
+		set gowith_total_dislike = gowith_total_dislike - 1
+		where gowith_id = #{gowith_id}
+	</update>
+
+	<select id="totalLike" parameterType="int" resultType="int">
+		select gowith_total_like
+		from gowith
+		where gowith_id = #{gowith_id}
+	</select>
+	
+	<select id="totalDislike" parameterType="int" resultType="int">
+		select gowith_total_dislike
+		from gowith
+		where gowith_id = #{gowith_id}
+	</select>
 	
 	
 </mapper>

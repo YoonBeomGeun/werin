@@ -43,4 +43,52 @@ public class GowithDAO {
 	public int increaseView(int gowith_id) {
 		return my.update("gowith.increaseView", gowith_id);
 	}
+	
+	public int insertLike(GowithLikeVO gowithLikeVO) {
+		return my.insert("gowith.createLike", gowithLikeVO);
+	}
+	
+	public int insertDislike(GowithLikeVO gowithLikeVO) {
+		return my.insert("gowith.createDislike", gowithLikeVO);
+	}
+	
+	public int deleteLike(GowithLikeVO gowithLikeVO) {
+		return my.delete("gowith.deleteLike", gowithLikeVO);
+	}
+	
+	public int stateIn(GowithLikeVO gowithLikeVO) {
+		return my.selectOne("gowith.stateIn", gowithLikeVO);
+	}
+	
+	public int checkState(GowithLikeVO gowithLikeVO) {
+		return my.selectOne("gowith.checkState", gowithLikeVO);
+	}
+	
+//	public int changeState1(GowithLikeVO gowithLikeVO) {
+//		return my.update("gowith.changeState1", gowithLikeVO);
+//	}
+	
+	public int updateLike1(int gowith_id) {
+		return my.update("gowith.updateLike1", gowith_id);
+	}
+	
+	public int updateLike2(int gowith_id) {
+		return my.update("gowith.updateLike2", gowith_id);
+	}
+	
+	public int updateDislike1(int gowith_id) {
+		return my.update("gowith.updateDislike1", gowith_id);
+	}
+	
+	public int updateDislike2(int gowith_id) {
+		return my.update("gowith.updateDislike2", gowith_id);
+	}
+	
+	public int totalLike(int gowith_id) {
+		return my.selectOne("gowith.totalLike", gowith_id);
+	}
+	
+	public int totalDislike(int gowith_id) {
+		return my.selectOne("gowith.totalDislike", gowith_id);
+	}
 }
