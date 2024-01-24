@@ -14,6 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import com.multi.werin.trip.TripLikeVO;
+import com.multi.werin.trip.TripVO;
 
 
 
@@ -31,8 +35,10 @@ public class BbsController{
 	@Autowired
 	BbscmtDAO bbscmtDAO;
 	
+	
+	
 	@RequestMapping("/bbs/insert")
-	public String insert2(BbsVO bbsVO, StoremapVO storemapvo ,Model model) {
+	public String insert2(BbsVO bbsVO,Model model) {
 		int result = dao.insertBbs(bbsVO);
 		String str = "";
 		model.addAttribute("result", result);
@@ -91,23 +97,34 @@ public class BbsController{
 	}
 	
 	
+
+	
+	
+	@RequestMapping("bbs/bbs2")
+	public void one(BbsVO bbsVO,int bbs_id, HttpSession session, Model model, BbslikeVO likeVO) {
+		// System.out.println("post_id : " + post_id);
+		dao.increaseBbsView(bbsVO.getBbs_id());
+		String member_id = "";
+		if(session.getAttribute("loginId") != null) {
+			member_id = (String)session.getAttribute("loginId");
+		}
+		likeVO.setMember_id(member_id);
+		System.out.println(" likeVO : " + likeVO);
+		BbslikeVO vo2= dao.likeCheck(likeVO);
+		BbsVO bag = dao.one(bbsVO);
+		List<BbscmtVO> list = bbscmtDAO.list(bbsVO.getBbs_id());
+		model.addAttribute("bag", bag);
+		model.addAttribute("list", list);
+		model.addAttribute("vo2", vo2);
+	}
+	
 	
 	@RequestMapping("bbs/bbs0")
 	public void list0(PageVO pageVO, Model model) {
 		pageVO.setStartEnd();//page, start, end
 		System.out.println("페이지브오"+ pageVO);
 		List<BbsVO> list = dao.list1(pageVO);
-		model.addAttribute("list", list);
-	}
-	
-	
-	@RequestMapping("bbs/bbs2")
-	public void one(BbsVO bbsVO, Model model) {
-		// System.out.println("post_id : " + post_id);
-		dao.increaseBbsView(bbsVO.getBbs_id());
-		BbsVO bag = dao.one(bbsVO);
-		List<BbscmtVO> list = bbscmtDAO.list(bbsVO.getBbs_id());
-		model.addAttribute("bag", bag);
+		System.out.println("게시물 리스트" + list);
 		model.addAttribute("list", list);
 	}
 	
@@ -169,7 +186,47 @@ public class BbsController{
 		return "bbs/bbs"; 
 	}
 	
+	@RequestMapping("bbs/updateLike")
+	@ResponseBody
+	public int updateLike(int bbs_id, BbsVO vo, BbslikeVO likeVO, 
+			@SessionAttribute("loginId") String member_id) { 
+		 //1. loginId 를 member_id에 넣고, trip_id 받아와서	
+		System.out.println("bbs_id >>> " + bbs_id);
+		System.out.println(" member_id  :" + member_id);
+		likeVO.setMember_id(member_id);  // 로그인한 유저의 id값 받아와서 likeVO에 set
+		System.out.println(" likeVO : " + likeVO);
+	     //2. dao.likeCheck 실행
+		BbslikeVO bag2 = dao.likeCheck(likeVO); // vo2가 왜 null인지
+		System.out.println(bag2);
+		//3. null 이면 추천, 비추천을 아직 안눌렀다는 것이므로 
+		// null이 뜨는데, 이게 select like state 한 결과가 없다는 건지?
+		if(bag2 == null) {
+			dao.insertLike(likeVO); // like_state가 0인 채로 db에 insert하고
+			dao.updateLike(vo); // 추천수가 1 증가한다.
+		}
+		 // select like_state from trip_like where member_id = #{member_id} and trip_id = #{trip_id}
+		 // 멤버아이디, 트립아이디가 likeVO에 다 들어있는데 왜 null인지
+		 
+		 System.out.println("토탈라이크 >> " + vo.getBbs_total_like());
+		 return vo.getBbs_total_like();
+		
+		
+	}
 	
+	@RequestMapping("bbs/updateDislike")
+	@ResponseBody
+	public int updateDislike(int bbs_id, BbsVO vo,BbslikeVO likeVO, 
+			@SessionAttribute("loginId") String member_id) {
+		likeVO.setMember_id(member_id);
+		BbslikeVO bag2 = dao.likeCheck(likeVO);
+		if(bag2 == null) {
+			dao.insertDislike(likeVO);
+			dao.updateDislike(vo);
+		}
+		System.out.println("토탈라이크 >> " + vo.getBbs_total_like());
+		//model.addAttribute("total_like", vo.getTrip_total_like());
+		return vo.getBbs_total_like();
+	}
 
 	
 }

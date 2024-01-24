@@ -8,7 +8,7 @@ public class BbsVO {
 	private String bbs_content;
 	private String bbs_writer;
 	private String bbs_created_at;
-	private int bbs_like;
+	private int bbs_total_like;
 	private int bbs_view;
 	private String bbs_img;
 	private String type;
@@ -55,12 +55,7 @@ public class BbsVO {
 	public void setBbs_created_at(String bbs_created_at) {
 		this.bbs_created_at = bbs_created_at;
 	}
-	public int  getBbs_like() {
-		return bbs_like;
-	}
-	public void setBbs_like(int  bbs_like) {
-		this.bbs_like = bbs_like;
-	}
+	
 	public int getBbs_view() {
 		return bbs_view;
 	}
@@ -86,14 +81,20 @@ public class BbsVO {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	public int getBbs_total_like() {
+		return bbs_total_like;
+	}
+	public void setBbs_total_like(int bbs_total_like) {
+		this.bbs_total_like = bbs_total_like;
+	}
 	@Override
 	public String toString() {
 		return "BbsVO [num_id=" + num_id + ", bbs_id=" + bbs_id + ", bbs_cate=" + bbs_cate + ", bbs_title=" + bbs_title
 				+ ", bbs_content=" + bbs_content + ", bbs_writer=" + bbs_writer + ", bbs_created_at=" + bbs_created_at
-				+ ", bbs_like=" + bbs_like + ", bbs_view=" + bbs_view + ", bbs_img=" + bbs_img + ", type=" + type
-				+ ", keyword=" + keyword + "]";
+				+ ", bbs_total_like=" + bbs_total_like + ", bbs_view=" + bbs_view + ", bbs_img=" + bbs_img + ", type="
+				+ type + ", keyword=" + keyword + "]";
 	}
-
+	
 	
 	
 	
