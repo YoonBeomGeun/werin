@@ -27,7 +27,7 @@ import com.multi.werin.member.MemberDAO;
 import com.multi.werin.member.MemberVO;
 
 @Controller
-public class PlanController {
+public class PlanController2 {
 	@Autowired
 	PlanDAO dao;
 	
@@ -110,14 +110,15 @@ public class PlanController {
 		}
 	}
 	
-	@RequestMapping("plan/select")
-	public String select(PlanVO vo, Model model) {
-	    List<PlanVO> result = dao.select(vo);
+	@RequestMapping("plan/planlist")
+	public String select(HttpSession session, Model model) {
+	    List<PlanVO> result = dao.select((String) session.getAttribute("loginId"));
 	    model.addAttribute("planList", result); // 수정된 부분
+	    System.out.print(result.size());
 	    if (result.size() > 0) {
-	        return "redirect:/plan/planlist.jsp";
+	        return "plan/planlist";
 	    } else {
-	        return "list.jsp";
+	        return "plan/planlist";
 	    }
 	}
 

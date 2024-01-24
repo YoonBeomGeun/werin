@@ -15,7 +15,7 @@ public class PlanDAO {
 		return my.insert("plan.insert", vo);
 	}
 
-	public List<PlanVO> select(PlanVO vo) {
-		return my.selectList("plan.select",vo); 
+	public List<PlanVO> select(String plan_writer) {
+		return my.selectList("plan.select",plan_writer); 
 	}
 }
