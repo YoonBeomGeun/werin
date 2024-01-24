@@ -13,9 +13,9 @@
 		#{plan_writer}, #{plan_with})
 	</insert>
 
-	<select id="select" parameterType="PlanVO"
+	<select id="select" parameterType="String"
 		resultType="PlanVO">
-		SELECT * FROM plan WHERE plan_no = #{plan_no};
+		SELECT * FROM plan WHERE plan_writer = #{plan_writer};
 	</select>
 	<!-- other plan-related queries -->
 
