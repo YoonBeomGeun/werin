@@ -1,3 +1,4 @@
+<%@page import="com.multi.werin.bbs.BbslikeVO"%>
 <%@page import="org.springframework.web.context.annotation.SessionScope"%>
 <%@page import="com.multi.werin.bbs.BbscmtVO"%>
 <%@page import="com.multi.werin.bbs.BbsVO"%>
@@ -12,6 +13,7 @@
     <%
     BbsVO bag = (BbsVO)request.getAttribute("bag");
     List<BbscmtVO> list = (List<BbscmtVO>)request.getAttribute("list");
+    BbslikeVO bag2 = (BbslikeVO)request.getAttribute("bag2");
     %>
     
     
@@ -25,7 +27,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
         body {
-            background-color: #f5f5f5;
+            
             font-family: Arial, sans-serif;
         }
 
@@ -78,9 +80,10 @@
             padding: 10px;
             border-radius: 20px;
             background: lightgray;
+            margin: 0 auto; /* 가운데 정렬을 위한 margin 속성(의미없음) */
             margin-bottom: 15px;
         }
-         
+        
 
     .container {
         max-width: 800px;
@@ -93,9 +96,13 @@
         border-collapse: collapse;
         margin-top: 20px;
         background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
     }
-
+	
+	.table-content{
+	width: 300px;
+	height: 300px;
+	}
     .table th, .table td {
         border: 1px solid #ddd;
         padding: 10px;
@@ -133,6 +140,9 @@
     .btn:hover {
         background-color: #0056b3;
     }
+    .button {
+    text-align: center;
+}
     .center-buttons {
         display: flex;
         justify-content: center;
@@ -143,6 +153,14 @@
     .center-buttons .btn {
         margin: 0 auto;
     }
+    .like-btn {
+            background-color: #27ae60;
+            margin-left: 220px;
+     }
+        .dislike-btn{
+       		 background-color: red;
+            margin-right: 220px;
+     }
     </style>
 <script type="text/javascript">
 	$(function() {
@@ -252,14 +270,52 @@
 		})
 		
 	})
+	
+	
+$(function() {
+	$('#like').click(function() {
+		$.ajax({
+	 		type: 'POST',
+	         url: "updateLike",
+	         data:{
+	         	bbs_id : <%=bag.getBbs_id()%>,
+	         	
+	         	bbs_total_like : ${bag.bbs_total_like}
+	
+				},	
+				
+	         success: function(result){
+	        	 console.log(result);
+	         	$('.spTotalLike').text(result)
+	        	 location.reload();
+	         }
+	 	})
+	})
+		
+	$('#dislike').click(function() {
+		$.ajax({
+			type: 'POST',
+			url : "updateDislike",
+			data :{
+				bbs_id : <%=bag.getBbs_id()%>,
+				bbs_total_like : ${bag.bbs_total_like}
+			},
+			success : function(result) {
+				console.log(result);
+				$('.spTotalLike').text(result)
+				location.reload();
+			}
+		})
+		
+	})
+})	
+
+
 </script>
 </head>
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
-		<% if(session.getAttribute("loginId") != null ) { %>
-			<%= session.getAttribute("loginId") %>님 환영합니다.
-		<% } %>
-		<!-- 임시로 넣어둔거 -->
+		
 	<div class="container">
 	<table class="table">
 			<tr class="table-success">
@@ -270,7 +326,7 @@
 				<td>작성자</td>
 				<td><%= bag.getBbs_writer() %></td>
 			</tr>
-			<tr>
+			<tr class="table-content">
 				<td>내용</td>
 				<td><%= bag.getBbs_content() %></td>
 			</tr>
@@ -297,13 +353,53 @@
    			<% }} %>
 		</tr>
 		</table>
-		
-			<div class="center-buttons">
-				<button class="btn btn-warning">추천하기</button>
-				<span><%= bag.getBbs_like() %></span>
-				<button class="btn btn-warning">비추천하기</button>	
-			</div>
+	<div class=button>
+	<c:choose>
+        <c:when test="${empty loginId}">
+	        <!-- 로그인 되어 있지 않은 경우 -->
+	        <p> 여행기 삭제 및 수정은 로그인이 필요합니다. </p>
+	        <button class = "login-btn" onclick="window.location.href='../member/login.jsp'">로그인</button>
+	        <button class="like-btn"  onclick = "notLogin()"> 추천 </button>
+	        <span class="spTotalLike">${bag.bbs_total_like}</span>
+	        <button class="dislike-btn" onclick ="notLogin()"> 비추천 </button>
+    	</c:when>
+    
+	    <c:otherwise>
+	        <!-- 로그인 되어 있는 경우 -->
+	       
+	        <c:if test = "${bag2.like_state == 0 || bag2.like_state == 1}"> 
+	        <!-- 추천,비추천을 이미 눌렀다면 0 추천, 1 비추천-->
+	        <button class="like-btn"  onclick = "likeCheck()"> 추천 </button>
+	        <span class="spTotalLike">${bag.bbs_total_like}</span>
+	        <button class="dislike-btn" onclick ="likeCheck()"> 비추천 </button>
+	        </c:if>
+	        <c:if test = "${empty bag2}"> <!-- ajax에서 호출받은 vo2.likestate 값 다시 받아오는 방법 찾기 -->
+	        <!-- 추천, 비추천을 누르지 않은 상태라면 -->
+	         <button class="like-btn"  id = "like"> 추천 </button>
+	        <span class="spTotalLike">${bag.bbs_total_like}</span>
+	        <button class="dislike-btn" id="dislike"> 비추천 </button>
+	        </c:if>
+	    </c:otherwise>
+	</c:choose>
 		</div>
+		</div>
+		<script>
+        
+          
+            
+            function likeCheck(){
+            	if("${vo2.like_state}" == 1){
+            		alert("이미 비추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
+            	}else{
+            		alert("이미 추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
+            	}
+            }
+            	
+     
+
+          
+            
+        </script>
 		<br>
 	<hr color="green">
 	<div style="margin-left:300px; margin-top:30px; height: 100%;">
@@ -344,6 +440,7 @@
 	        <%
 	            }
 	        %>
+	        
 		</div>
 	</div>
 	<div style="height:100px;"></div>

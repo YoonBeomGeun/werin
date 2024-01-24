@@ -5,32 +5,60 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 작성</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/bbs.css">
+
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-</script>
-<script> 
-//자식 창 열기 버튼 클릭 이벤트
-document.querySelector('#btn_open_child').addEventListener("click", () => {
-  window.open("mappop.jsp", "_blank", `width=1000, height=600, toolbars=no, scrollbars=yes`);
-});
-
-//자식창에서 받아온 데이터 처리
-window.call = function (data) {
-  document.querySelector('#data_from_child').innerHTML += data;
+<style type="text/css">
+	body{
+	font-family: 'Arial', sans-serif;
+	
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
-</script>
-<script defer src="insert.jsp"></script>
+#total{
+	max-width: 1100px;
+	margin: 20px auto;
+	background-color: #fff;
+	padding: 20px;
+	
+}
+table {
+    width: 100%; /* 테이블 전체 너비를 100%로 설정 */
+    border-collapse: collapse; /* 테이블 셀 사이의 간격을 없앰 */
+    margin-bottom: 20px; /* 테이블 아래쪽에 여백을 추가 */
+   
+}
+th, td {
+    padding: 10px; /* 셀 안의 내용과 테두리 사이의 간격을 조절 */
+    border: 1px solid #ddd;
+    /* 텍스트를 가운데 정렬 */
+}
+
+th {
+    background-color: green; /* 헤더 셀 배경색을 lime으로 설정 */
+    
+}
+#b1  {
+    background-color: #4CAF50; /* 초록색 */
+    color: white; /* 텍스트 색상을 흰색으로 설정 */
+    padding: 10px 20px; /* 내부 여백 설정 */
+    font-size: 16px; /* 폰트 크기 설정 */
+    border: none; /* 테두리 없앰 */
+    cursor: pointer; /* 커서를 손가락으로 변경 */
+    border-radius: 5px; /* 둥근 테두리 설정 */
+}
+
+</style>
+<script type="text/javascript"></script>
 </head>
 <body>
-
+	
 	<%@ include file="../header.jsp"%>
 	<div id="total">
 		<div id="center">
 			<br> <br>
-			<hr color="blue">
+			<hr color="green">
 			<form action="insert">
 				<table border="1" class="table table-hover">
 					<!-- <tr class="table-warning">
@@ -75,19 +103,12 @@ window.call = function (data) {
 
 					<tr class="table-primary">
 						<td colspan="2" width="200">
-							<button type="submit" class="btn btn-primary">글쓰기</button>
+							<button type="submit" class="btn btn-primary" id="b1">글쓰기</button>
 						</td>
 					</tr>
 				</table>
 			</form>
-			<form>
-                <tr class="table-warning">
-                    <td colspan="2" width="200">
-                        <button id="btn_open_child">가게찾기</button><br>
-                        <h4 id="data_from_child">받아온 데이터 : </h4>
-                    </td>
-                </tr>
-            </form>
+			
 		</div>
 
 	</div>
