@@ -29,19 +29,25 @@
 <style type="text/css">
 
 	.sendTalk {
-		/* background: ; */
+		background: #ffa74f;
 		margin-left: 650px;
 		margin-left: relative;
 		width: relative;
 		max-width: 300px;
 		word-wrap: break-word;
-		padding-bottom: 10px;
+		border-radius: 10px;
+		padding: 5px;
 	}
 	
 	.receiveTalk {
 		margin-left: 20px;
-		width: 300px;
 		word-wrap: break-word;
+		background: #ffa74f;
+		margin-left: relative;
+		width: relative;
+		max-width: 300px;
+		border-radius: 10px;
+		padding: 5px;
 	}
 	
 	.wrap {
@@ -49,6 +55,12 @@
 		justify-content: space-between;
 		width: 1500px;
 		margin: 0 auto;
+		position: relative;
+	}
+	
+	#roomName {
+    position: absolute;
+    left: 50%;
 	}
 	
 	.chatList {
@@ -60,9 +72,13 @@
     flex-direction: column;
     overflow-y: auto;
     flex: 0.5; /* 수정된 부분: 나란히 나타나도록 flex 설정 */
+    position: relative;
+    margin-top:100px;
 	}
 	
 	#result {
+		padding: 10px;
+		padding-bottom: 20px;
 		border: 5px solid lightgray;
 		width: 800px;
 		height: 80vh;
@@ -73,14 +89,19 @@
 		flex-direction: column;
 		overflow-y: auto;
 		flex: 2;
+		position: relative;
+    margin-top:100px;
 	}
 	
 	.btnExit {
 		font-size: 17px;
-		border-radius:10px;
-		width: 70px;
-		height: 50px;
-		color:white;
+	    border-radius: 10px;
+	    width: 70px;
+	    height: 50px;
+	    color: white;
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
 	}
 	
 	.write {
@@ -88,6 +109,7 @@
 	    justify-content: space-between; /* 내부 요소 사이의 간격을 벌리기 위해 사용합니다. */
 	    align-items: center;
 	    position: fixed;
+	    margin-top: 70px;
 	    bottom: 10px;
 	    left: 50%;
 	    transform: translateX(-50%);
@@ -227,8 +249,8 @@
 					room_id: room_id
 				},
 				success: function(response) {
-					$("#result").empty();
-					$("#result").append(response);
+					$(".wrap").empty();
+					$(".wrap").append(response);
 				}
 			})
 		})
@@ -255,6 +277,11 @@
 	<button id="disconnect" onclick="disconnect();" style="margin-left: 100px;width:70px;background:#FF5555; color:white;height:35px; border-radius:10px; font-size: 15px;">뒤로가기</button><br>
 	
 	<div class="wrap">
+		<div>
+			<h2 id="roomName" style="text-align: center;"><%=vo.getRoom_name()%></h2>
+			<a href="deleteRoomConfirmed?room_id=<%=vo.getRoom_id()%>&gowith_id=<%=vo.getGowith_id()%>"><button class="btnExit" style="background:#FF5555;">나가기</button></a>
+		</div>
+		<br>
 		<div class="chatList">
 		<h4 id="roomList" style="text-align:center;" class="btnList">채팅목록</h4>
 		<hr>
@@ -283,30 +310,27 @@
 		<!-- 채팅 내용 보여지는 부분 -->
 		<div id="result">
 			<%-- <input type="hidden" id="from" value="<%=vo.getRoom_member()%>" style=""> --%>
-			<div>
-				<h3 id="roomName" style="text-align: center;"><%=vo.getRoom_name()%></h3>
-				<a href="deleteRoomConfirmed?room_id=<%=vo.getRoom_id()%>&gowith_id=<%=vo.getGowith_id()%>"><button class="btnExit" style="background:#FF5555;">나가기</button></a>
-			</div>
+			
 			<%
 				if(list.size()>=1) {
 	            	for (MessageVO vo2 : list) {
 	            		if(vo2.getMessage_sender().equals(session.getAttribute("loginId"))) {
 	        %>
 	        			<div class="sendTalk" id="talk_<%=vo2.getMessage_id()%>">
-			            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span><br>
+			            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span>&nbsp;<%=vo2.getMessage_sent_at() %><br><br>
 			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
 			                    <%=vo2.getMessage_content()%>
-			                </div><br>
-			            </div>
+			                </div>
+			            </div><br>
 	        <%
 	            		} else {
 	        %>
 	        			<div class="receiveTalk" id="talk_<%=vo2.getMessage_id()%>">
-			            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getMessage_sent_at() %></span><br><br>
+			            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span>&nbsp;<%=vo2.getMessage_sent_at() %><br><br>
 			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
 			                    <%=vo2.getMessage_content()%>
 			                </div>
-			            </div>
+			            </div><br>
 	        <%
 	            		}
 	            	}
@@ -320,14 +344,13 @@
 			</p>
 		
 		</div>
+		<div class="write">
+	    	<textarea class="form-control" id="t1" rows="4" cols="170" name="text" 
+	        oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
+	        style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px;" placeholder="메세지를 입력하세요."></textarea>
+	    	<button id="b1" style="background: #33CC99;">입력</button>
+		</div>
 	</div>
-	
-	<div style="height:110px;"></div>
-	<div class="write">
-    	<textarea class="form-control" id="t1" rows="4" cols="170" name="text" 
-        oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
-        style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px;" placeholder="메세지를 입력하세요."></textarea>
-    	<button id="b1" style="background: #33CC99;">입력</button>
-	</div>
+	<div style="height:120px;"></div>
 </body>
 </html>

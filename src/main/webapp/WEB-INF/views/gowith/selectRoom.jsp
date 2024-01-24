@@ -65,8 +65,7 @@
 		//var from = $('#from').val()
 		//입력한 내용 
 
-		var text = "selectRoomText";
-			//document.getElementById("t1").value
+		var text = document.getElementById("t1").value;
 		var room_id= <%=vo.getRoom_id()%>
 		var message_receiver= "<%=host%>"
 		var message_sender= "${sessionScope.loginId}"
@@ -112,7 +111,6 @@
 				},
 				dataType: "json",
 				success: function(response) {
-					alert("등록되었습니다.");
 					sendMessage()
 					
 				}
@@ -121,7 +119,22 @@
 	})
 	
     // 방목록에서 방 선택
-	$(function() {		
+	$(function() {
+		
+		$(".b2").click(function() {
+			var room_id = $(this).data("room-id");
+			$.ajax({
+				url: "selectRoom",
+				data: {
+					room_id: room_id
+				},
+				success: function(response) {
+					$(".wrap").empty();
+					$(".wrap").append(response);
+				}
+			})
+		})
+		
 		$("#deleteRoom").click(function() {
 			var room_id = $(this).data("room-id");
 			$.ajax({
@@ -139,44 +152,78 @@
 </script>
 </head>
 <body>
-	<h3 id="roomName" style="text-align: center;"><%=vo.getRoom_name()%></h3>
-	<a href="deleteRoomConfirmed?room_id=<%=vo.getRoom_id()%>&gowith_id=<%=vo.getGowith_id()%>"><button class="btnExit" style="background:#FF5555;">나가기</button></a>
-	<%
-		if(list.size()>=1) {
-           	for (MessageVO vo2 : list) {
-           		if(vo2.getMessage_sender().equals(session.getAttribute("loginId"))) {
-    %>
-       			<div class="sendTalk" id="talk_<%=vo2.getMessage_id()%>">
-	            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span><br><br>
-	                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
-	                    <%=vo2.getMessage_content()%>
-	                </div><br>
-	            </div>
-    <%
-           		} else {
-    %>
-       			<div class="receiveTalk" id="talk_<%=vo2.getMessage_id()%>">
-	            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span><br><span style="font-weight: bold;" id="time"><%= vo2.getMessage_sent_at() %></span><br><br>
-	                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
-	                    <%=vo2.getMessage_content()%>
-	                </div>
-	            </div>
-    <%
-           		}
-           	}
-		} else {
-    %>
-       		<p style="text-align: center;">채팅을 시작하세요!</p>
-    <%
-        }
-    %>
-	<p id="response" class="alert alert-success"></p>
-	
-	<div class="write">
-	  	<textarea class="form-control" id="t1" rows="4" cols="170" name="text" 
-	      oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
-	      style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px;" placeholder="메세지를 입력하세요."></textarea>
-	  	<button id="b1" style="background: #33CC99;">입력</button>
-	</div>
+	<div>
+			<h2 id="roomName" style="text-align: center;"><%=vo.getRoom_name()%></h2>
+			<a href="deleteRoomConfirmed?room_id=<%=vo.getRoom_id()%>&gowith_id=<%=vo.getGowith_id()%>"><button class="btnExit" style="background:#FF5555;">나가기</button></a>
+		</div>
+		<br>
+		<div class="chatList">
+		<h4 id="roomList" style="text-align:center;" class="btnList">채팅목록</h4>
+		<hr>
+			<%
+				if(roomList!=null) {
+	            	for (RoomVO vo3 : roomList) {
+	        %>
+	       			<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
+		            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
+		                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
+		                    <%=vo3.getRoom_name()%>
+		                </div>
+		            </div>
+		            <hr>
+	        <%
+	            	}
+				}
+	            else {
+	        %>
+	        		<p style="margin-left: 650px;">채팅을 시작하세요!</p>
+	        <%
+	            }
+	        %>
+		</div>
+		
+		<!-- 채팅 내용 보여지는 부분 -->
+		<div id="result">
+			<%-- <input type="hidden" id="from" value="<%=vo.getRoom_member()%>" style=""> --%>
+			
+			<%
+				if(list.size()>=1) {
+	            	for (MessageVO vo2 : list) {
+	            		if(vo2.getMessage_sender().equals(session.getAttribute("loginId"))) {
+	        %>
+	        			<div class="sendTalk" id="talk_<%=vo2.getMessage_id()%>">
+			            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span>&nbsp;<%=vo2.getMessage_sent_at() %><br><br>
+			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
+			                    <%=vo2.getMessage_content()%>
+			                </div>
+			            </div><br>
+	        <%
+	            		} else {
+	        %>
+	        			<div class="receiveTalk" id="talk_<%=vo2.getMessage_id()%>">
+			            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span>&nbsp;<%=vo2.getMessage_sent_at() %><br><br>
+			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
+			                    <%=vo2.getMessage_content()%>
+			                </div>
+			            </div><br>
+	        <%
+	            		}
+	            	}
+				} else {
+	        %>
+	        		<p style="text-align: center;">채팅을 시작하세요!</p>
+	        <%
+	            }
+	        %>
+			<p id="response" class="alert alert-success">
+			</p>
+		
+		</div>
+		<div class="write">
+	    	<textarea class="form-control" id="t1" rows="4" cols="170" name="text" 
+	        oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
+	        style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px;" placeholder="메세지를 입력하세요."></textarea>
+	    	<button id="b1" style="background: #33CC99;">입력</button>
+		</div>
 </body>
 </html>
