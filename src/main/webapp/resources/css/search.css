@@ -1,128 +1,127 @@
 @charset "UTF-8";
 
-* {
-    box-sizing: border-box;
+
+body { /* body에 일괄적으로 적용시킬 내용 */
+	
 }
 
-button {
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: inline-block;
-}
-
-body {
-	width: 100%;
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-}
-
-header {
-    background-color: white;
-    width: 100%;
-    color: #fff;
-    padding: 10px 20px;
-}
-
-.all img{
-    width: 250px; 
-    height: auto;
-    margin-right: 10px;
-}
-
-.all {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	margin: 5px;
-	margin-top:-20px;
-}
-
-.title img{
-	width: 350px;
-	margin-right:70px;
-}
-
-.title{
-	margin:0 auto;
-}
-
-.right {
-	display: flex;
-	align-items: center;
-}
-
-.but button{
-	background: lightgray;
-	display: block;
-	margin-top: 10px;
-	width:180px;
-	height:50px;	
-	font: 18px 궁서 bold;
-	border-radius: 10px;
-	margin-left: 20px
-
-}
-
-.logo{
-	margin-top: 25px;
-}
-
-a {
-	text-decoration: none;
-}
-
-#menu {
-	color: white;
-	font: 20px 궁서 bold;
-}
-
-.menubar {
-	width: 100%;
-	height: 70px;
-	background: #285D45;
-	margin-top: -20px;
-	justify-content: center;
-	align-items: center;
-	display: flex;
-	gap: 30px;
+#resultpage_search { /* 검색창 위치 */
+	width: 1000px;
+	height: 60px;
+	background-color: yellow;
+	top: 40px;
+	left: 460px;
 	position: relative;
 }
 
-.button-container {
+ #searching{
+	font-size: 20px;
+	width: 850px;
+	height: 60px;
+	padding: 10px;
+	outline: none;
+}
+
+#search_button{
+	font-size: 20px;
+	width: 150px;
+	height: 60px;
+	border: 0px;
+	background: gold;
+	outline: none;
 	float: right;
-	margin-right: 150px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	color: #ffffff;
 }
 
-.button-container a {
-    margin: 5px 0; /* 각 버튼 위아래 여백 설정 */
+.search_result { /* ${searching}에 대한 검색 결과입니다 */
+	font-size: 25px;
+	width: 400px;
+	height: 35px;
+	top: 80px;
+	left: 200px;
+	position: relative;
 }
 
-
-.menubar button {
-    background-color: rgb(251, 176,18); /* 노란색으로 변경 */
-    color: black; /* 텍스트 색상은 필요에 따라 설정 */
-    padding: 10px 20px; /* 버튼 패딩 설정 */
-    border-radius: 5px; /* 버튼 모서리를 둥글게 만들기 */
-    border: none;
-    cursor: pointer;
-    font-size: 16px; /* 텍스트 크기 설정 */
-}
-
-.menubar button:hover {
-    background-color: gold; /* 마우스 오버 시 색상 변경 */
-}
-
-#mainserch{ /* 통합검색이 들어올 곳 */
-	width: 700px;
-	height: 70px;
+.search_landmark { 
+	width: 1500px;
+	height: 300px;
 	background-color: yellow;
-	top:300px;
-	left:600px;
-	position: absolute;
+	top: 120px;
+	left: 200px;
+	position: relative;
+}
+
+#landmark_search_info { /* 랜드마크 검색결과 */
+	width: 1400px;
+	height: 220px;
+	background-color: gold;
+	top: 10px;
+	left: 30px;
+	position: absolute;	
+}
+
+#more_landmark {
+	font-size: 20px;
+	width: 280px;
+	height: 50px;
+	background-color: gold;
+	top: 240px;
+	left: 30px;
+	position: absolute;	
+}
+
+.search_trip {
+	width: 1500px;
+	height: 300px;
+	background-color: yellow;
+	top: 150px;
+	left: 200px;
+	position: relative;
+}
+
+#trip_search_info { /* 랜드마크 검색결과 */
+	width: 1400px;
+	height: 220px;
+	background-color: gold;
+	top: 10px;
+	left: 30px;
+	position: absolute;	
+}
+
+#more_trip {
+	font-size: 20px;
+	width: 280px;
+	height: 50px;
+	background-color: gold;
+	top: 240px;
+	left: 30px;
+	position: absolute;	
+}
+
+.search_bbs {
+	width: 1500px;
+	height: 300px;
+	background-color: yellow;
+	top: 180px;
+	left: 200px;
+	position: relative;
+}
+
+#bbs_search_info { /* 랜드마크 검색결과 */
+	width: 1400px;
+	height: 220px;
+	background-color: gold;
+	top: 10px;
+	left: 30px;
+	position: absolute;	
+}
+
+#more_bbs {
+	font-size: 20px;
+	width: 280px;
+	height: 50px;
+	background-color: gold;
+	top: 240px;
+	left: 30px;
+	position: absolute;	
 }

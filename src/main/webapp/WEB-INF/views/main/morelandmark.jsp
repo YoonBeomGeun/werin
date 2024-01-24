@@ -6,12 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <%@ include file="../../../header.jsp" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/moresearch.css">
 <title>Insert title here</title>
 </head>
 <body>
 
-이 아래부분은 css부분이라 수정하는게 좋을듯<br>
-	<table border="1">
+<div id="resultpage_search"> <!-- 검색칸 -->
+	<form action="search">
+		<input id="searching" name="searching" type="text" placeholder="검색어 입력"> <!-- searching으로 검색내용을 받음 -->
+		<button id="search_button">검색하기</button>
+	</form>
+</div>
+
+<div id="return_searchpage" style=" cursor: pointer;" onclick="location.href='search?searching=${searching}';">
+${searching} 검색결과 페이지로 돌아가기
+</div>
+
+<%-- 	<table border="1">
 		<tr bgcolor="lime">
 			<td>행번호</td>
 			<td>id</td>
@@ -26,7 +37,14 @@
 				<td>${vo.landmarkinfo_info}</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table> --%>
+	
+ 	<div id=landmark_info>
+		<c:forEach items="${searchlandmark}" var="vo">
+		${vo.landmarkinfo_name} <br>
+		${vo.landmarkinfo_info}
+		</c:forEach>
+	</div>
 	
 <div class="number_button">
 <%
@@ -34,7 +52,7 @@
 	for(int p = 1; p <= pages; p++){
 %>
 	<a href="morelandmark?searching=${searching}&page=<%= p %>">
-		<button style="background: pink;"><%= p %></button>
+		<button id="number"><%= p %></button>
 	</a>
 <%		
 	}

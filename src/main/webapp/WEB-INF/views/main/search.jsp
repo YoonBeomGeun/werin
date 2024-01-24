@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/search.css">
 <%@ include file="../../../header.jsp" %>
 <title>Insert title here</title>
 
@@ -13,8 +14,8 @@
 
 <div id="resultpage_search"> <!-- 검색칸 -->
 	<form action="search">
-		<input name="searching"> <!-- searching으로 검색내용을 받음 -->
-		<button>검색하기</button>
+		<input id="searching" name="searching" type="text" placeholder="검색어 입력"> <!-- searching으로 검색내용을 받음 -->
+		<button id="search_button">검색하기</button>
 	</form>
 </div>
 
@@ -27,36 +28,38 @@ ${searching}에 대한 검색 결과입니다
 
 <div class="search_landmark"> <!-- 관광지 검색 결과 -->
 <!-- 4개만 가져와서 보여주는거로 -->
+<div id="landmark_search_info">
 <c:forEach begin="0" end="3" items="${searchlandmark}" var="vo">
-<div>
 <a href="">${vo.landmarkinfo_name}</a><br> <!-- 여기에 링크 연결해야함 -->
-</div>
 </c:forEach>
 </div>
-<div class="more_landmark">
-<a href="morelandmark?searching=${searching}&page=1">랜드마크 검색결과 더보기</a>
+<div id="more_landmark" style=" cursor: pointer;" onclick="location.href='morelandmark?searching=${searching}&page=1';">
+랜드마크 검색결과 더보기
 </div>
----------------------------------------------------------<br>
+</div>
+
 
 <div class="search_trip"> <!-- 여행기 검색 결과 -->
 <!-- 4개만 가져와서 보여주는거로 -->
+<div id="trip_search_info">
 <c:forEach begin="0" end="3" items="${searchtrip}" var="vo">
-<div>
 <a href="gowith/trip/one?trip_id=${vo.trip_id}">${vo.trip_title}</a><br> <!-- 여기에 링크 연결해야함 -->
-</div>
 </c:forEach>
 </div>
-<div class="more_trip">
-<a href="moretrip?searching=${searching}&page=1">여행기 검색결과 더보기</a>
+<div id="more_trip" style=" cursor: pointer;" onclick="location.href='moretrip?searching=${searching}&page=1';">
+여행기 검색결과 더보기
 </div>
----------------------------------------------------------<br>
+</div>
+
 <div class="search_bbs"> <!-- 자유게시판 검색 결과 -->
+<div id="bbs_search_info">
 <c:forEach  begin="0" end="3" items="${searchbbs}" var="vo">
 <a href="bbs/bbs2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a><br> <!-- 여기에 링크 연결해야함 -->
 </c:forEach>
 </div>
-<div class="more_bbs">
-<a href="morebbs?searching=${searching}&page=1">여행기 검색결과 더보기</a>
+<div id="more_bbs" style=" cursor: pointer;" onclick="location.href='morebbs?searching=${searching}&page=1';">
+자유게시판 검색결과 더보기
+</div>
 </div>
 
 
@@ -86,7 +89,6 @@ ${searching}에 대한 검색 결과입니다
 <c:if test="${result == 1}">
 ${searching}에 대한 검색 결과가 없습니다
 </c:if>
-<hr color="yellow">
 
 </body>
 </html>
