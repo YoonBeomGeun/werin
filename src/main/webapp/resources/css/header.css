@@ -1,34 +1,34 @@
 @charset "UTF-8";
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 button {
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: inline-block;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: none;
+	cursor: pointer;
+	display: inline-block;
 }
 
 body {
 	width: 100%;
-    margin: 0;
-    font-family: 'Arial', sans-serif;
+	margin: 0;
+	font-family: 'Arial', sans-serif;
 }
 
 header {
-    background-color: white;
-    width: 100%;
-    color: #fff;
-    padding: 10px 20px;
+	background-color: white;
+	width: 100%;
+	color: #fff;
+	padding: 10px 20px;
 }
 
-.all img{
-    width: 250px; 
-    height: auto;
+.all img {
+	width: 250px;
+	height: auto;
 }
 
 .all {
@@ -36,16 +36,16 @@ header {
 	display: flex;
 	justify-content: space-between;
 	margin: 5px;
-	margin-top:-20px;
+	margin-top: -20px;
 }
 
-.title img{
+.title img {
 	width: 350px;
-	margin-right:70px;
+	margin-right: 70px;
 }
 
-.title{
-	margin:0 auto;
+.title {
+	margin: 0 auto;
 }
 
 .right {
@@ -53,23 +53,22 @@ header {
 	align-items: center;
 }
 
-.but button{
+.but button {
 	background: lightgray;
 	display: block;
 	margin-top: 10px;
-	width:180px;
-	height:50px;	
+	width: 180px;
+	height: 50px;
 	font: 18px 궁서 bold;
 	border-radius: 10px;
 	margin-left: 20px
-
 }
 
-.logo{
+.logo {
 	margin-top: 25px;
 }
 
-a {
+/* a {
 	text-decoration: none;
 }
 
@@ -87,7 +86,87 @@ a {
 	align-items: center;
 	display: flex;
 	gap: 30px;
+} */
+
+/* .menubar button {
+    background-color: rgb(251, 176,18); 노란색으로 변경
+    color: black; 텍스트 색상은 필요에 따라 설정
+    padding: 10px 20px; 버튼 패딩 설정
+    border-radius: 5px; 버튼 모서리를 둥글게 만들기
+    border: none;
+    cursor: pointer;
+    font-size: 16px; 텍스트 크기 설정
 }
+
+.menubar button:hover {
+    background-color: gold; 마우스 오버 시 색상 변경
+} */
+
+/* =======메뉴바 설정======= */
+
+.menubar {
+	width: 100%;
+	height: 70px;
+	background: #285D45;
+	margin-top: -20px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	gap: 15px;
+}
+
+.menubar>li {
+	
+	list-style: none;
+	width: 12%; /*20*5=100%*/
+	float: center;
+	text-align: center;
+	line-height: 45px;
+	background-color: rgb(251, 176, 18);
+	border-radius: 5px;
+}
+
+.menubar a {
+	color: #fff;
+	text-decoration: none;
+	font: 20px 궁서 bold;
+}
+
+.menu>li {
+	line-height: 45px;
+	background-color: rgb(251, 176, 18);
+}
+
+.menu {
+	height: 0;
+	overflow: hidden;
+	font: 20px 궁서 bold;
+	border-radius: 5px;
+	padding: 0;
+	margin: 0;
+}
+
+.menubar>li:hover {
+	background-color: rgb(251, 176, 18);
+	transition-duration: 0.5s;
+	background: gold;
+}
+
+.menubar>.community:hover {
+	background-color: rgb(251, 176, 18);
+	transition-duration: 0.5s;
+}
+
+.menubar>li:hover .menu {
+	height: 90px;
+	transition-duration: 0.5s;
+	
+}
+
+.menu>li:hover {
+	background: gold;
+}
+/* ============== */
 
 .button-container {
 	float: right;
@@ -98,42 +177,23 @@ a {
 }
 
 .button-container a {
-    margin: 5px 0; /* 각 버튼 위아래 여백 설정 */
-}
-
-
-.menubar button {
-    background-color: rgb(251, 176,18); /* 노란색으로 변경 */
-    color: black; /* 텍스트 색상은 필요에 따라 설정 */
-    padding: 10px 20px; /* 버튼 패딩 설정 */
-    border-radius: 5px; /* 버튼 모서리를 둥글게 만들기 */
-    border: none;
-    cursor: pointer;
-    font-size: 16px; /* 텍스트 크기 설정 */
-}
-
-.menubar button:hover {
-    background-color: gold; /* 마우스 오버 시 색상 변경 */
+	margin: 5px 0; /* 각 버튼 위아래 여백 설정 */
 }
 
 /* 로그인 상태일 때의 스타일 */
-.logged-in .but button.login,
-.logged-in .but button.signup {
-    display: none;
+.logged-in .but button.login, .logged-in .but button.signup {
+	display: none;
 }
 
-.logged-in .but button.mypage,
-.logged-in .but button.logout {
-    display: block;
+.logged-in .but button.mypage, .logged-in .but button.logout {
+	display: block;
 }
 
 /* 로그인되지 않은 상태일 때의 스타일 */
-.not-logged-in .but button.mypage,
-.not-logged-in .but button.logout {
-    display: none;
+.not-logged-in .but button.mypage, .not-logged-in .but button.logout {
+	display: none;
 }
 
-.not-logged-in .but button.login,
-.not-logged-in .but button.signup {
-    display: block;
+.not-logged-in .but button.login, .not-logged-in .but button.signup {
+	display: block;
 }

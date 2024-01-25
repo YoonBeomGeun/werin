@@ -15,11 +15,11 @@
 		class="<c:if test='${not empty sessionScope.loginId}'>logged-in</c:if><c:if test='${empty sessionScope.loginId}'>not-logged-in</c:if>">
 		<div class="all">
 			<div class="logo">
-				<a href=""><img
+				<a href="${pageContext.request.contextPath}/main/main.jsp"><img
 					src="${pageContext.request.contextPath}/resources/img/로고.png"></a>
 			</div>
 			<div class="title">
-				<a href=""><img
+				<a href="${pageContext.request.contextPath}/main/main.jsp"><img
 					src="${pageContext.request.contextPath}/resources/img/제목.png"></a>
 			</div>
 			<div class="right">
@@ -43,17 +43,43 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
-			</div> 
+			</div>
 		</div>
 		<br>
-		<div class="menubar">
+		<%-- <div class="menubar">
 			<a href="${pageContext.request.contextPath}/landmark/landmarkinfo_index1.jsp"><button id="menu">관광지 소개</button></a>
-			<a href="${pageContext.request.contextPath}/plan/planlist"><button id="menu">나의 일정</button></a>
+			<a href="${pageContext.request.contextPath}/plan/plan.jsp"><button id="menu">일정 만들기</button></a>
 			<a href="${pageContext.request.contextPath}/trip/list?page=1"><button id="menu">여행기 작성</button></a>
 			<a href="${pageContext.request.contextPath}/gowith/gowith.jsp"><button id="menu">커뮤니티</button></a>
 			<a href=""><button id="menu">나의 여행</button></a>
 			<a href=""><button id="menu">공지 / 건의</button></a>
-		</div>
+		</div> --%>
+		<ul class="menubar">
+	      <li>
+	        <a href="${pageContext.request.contextPath}/landmark/landmarkinfo_index1.jsp">관광지 소개</a>
+	      </li>
+	      <li>
+	        <a href="${pageContext.request.contextPath}/plan/plan.jsp">일정 만들기</a>
+	      </li>
+	      <li>
+	        <a href="${pageContext.request.contextPath}/trip/list?page=1">여행기 작성</a>
+	      </li>
+	      <li class="community">
+	        <a href="">커뮤니티</a>
+	        <ul class="menu">
+	          <li><a href="${pageContext.request.contextPath}/gowith/list1?page=1">동행게시판</a></li>
+	          <li><a href="${pageContext.request.contextPath}/bbs/bbs?page=1">자유게시판</a></li>
+	        </ul>
+	      </li>
+	      <li>
+	        <a href="">나의 여행</a>
+	      </li>
+	      <li>
+	        <a href="">공지 / 건의</a>
+	      </li>
+	    </ul>
 	</header>
+	
+	
 </body>
 </html>
