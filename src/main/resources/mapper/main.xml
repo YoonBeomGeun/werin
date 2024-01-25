@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="mainsearch_landmark" resultType="searchlandmarkVO"> <!-- 관광지에 대한 검색 -->
-		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info from landmarkinfo where landmarkinfo_name like CONCAT('%',#{searching},'%') or landmarkinfo_info like CONCAT('%',#{searching},'%')
+		select landmarkinfo_id, landmarkinfo_name<!-- , landmarkinfo_info --> from landmarkinfo where landmarkinfo_name like CONCAT('%',#{searching},'%') <!-- or landmarkinfo_info like CONCAT('%',#{searching},'%') -->
 	</select>
 	
 	<select id="mainsearch_trip" resultType="searchtripVO"> <!-- 여행기에 대한 검색 -->
@@ -37,11 +37,11 @@
 	</select>
 	
   	<select id="morelandmark" parameterType="searchVO" resultType="SearchLandmarkVO">
-		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info
+		select landmarkinfo_id, landmarkinfo_name<!-- , landmarkinfo_info -->
 		from (select row_number() over(order by landmarkinfo_id) as row_no, c.* from landmarkinfo c
 		where
 		landmarkinfo_name like CONCAT('%',#{searching},'%')
-		or landmarkinfo_info like CONCAT('%',#{searching},'%')
+		<!-- or landmarkinfo_info like CONCAT('%',#{searching},'%') -->
 		)c2
 		where 
 		c2.row_no between ${start} and ${end}
@@ -73,7 +73,7 @@
 		select count(*) as 'count' from landmarkinfo
 		where
 		landmarkinfo_name like CONCAT('%',#{searching},'%')
-		or landmarkinfo_info like CONCAT('%',#{searching},'%')
+		<!-- or landmarkinfo_info like CONCAT('%',#{searching},'%') -->
 	</select>
 	
 	<select id="trip_count" parameterType="searchVO"  resultType="int">

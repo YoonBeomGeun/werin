@@ -25,7 +25,7 @@
 		select count(*) from bbs
 	</select>
 
-	<select id="list" parameterType="pageVO" resultType="bbsVO">
+	<select id="list" parameterType="pageVO1" resultType="bbsVO">
 		select *
 		from
 		(select
@@ -50,7 +50,7 @@
 		update bbs set bbs_view = bbs_view + 1 WHERE bbs_id = #{bbs_id}
 	</update>
 
-	<select id="list1" parameterType="pageVO" resultType="bbsVO">
+	<select id="list1" parameterType="pageVO1" resultType="bbsVO">
 		select *
 		from
 		(select
@@ -103,7 +103,7 @@
 		where p2.num_id BETWEEN ${start} and ${end}
 	</select>
 	
-	<select id="selectSearchList" parameterType="pageVO"
+	<select id="selectSearchList" parameterType="pageVO1"
 		resultType="bbsVO">
 		SELECT * FROM (
 		SELECT
@@ -156,7 +156,7 @@
 		WHERE temp.num_id BETWEEN #{start} AND #{end}
 	</select>
 
-	<select id="count2" parameterType="pageVO" resultType="int">
+	<select id="count2" parameterType="pageVO1" resultType="int">
     SELECT COUNT(*) FROM bbs
     <!-- 수정: 작성자로 검색하는 경우 -->
     <choose>
