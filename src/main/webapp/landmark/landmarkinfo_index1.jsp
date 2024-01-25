@@ -53,6 +53,34 @@
 	border-radius: 5px;
 	transition: background-color 0.3s, color 0.3s;
 }
+#result3 {
+    text-align: center; /* 결과 영역의 텍스트를 중앙 정렬 */
+}
+
+.paging {
+    text-align: center; /* 페이징 버튼을 중앙 정렬 */
+    margin-top: 20px; /* 위쪽 여백 추가 */
+}
+
+.pages {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 4px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #3498db;
+    color: #3498db;
+    background-color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pages:hover {
+    background-color: #3498db;
+    color: white;
+}
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>

@@ -15,9 +15,9 @@
     <title>여행기 상세 정보</title>
     <%@ include file="../../../header.jsp" %>
      <style>
-        body {
+       body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            background-color: #ffffff;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -32,7 +32,7 @@
         }
 
         h3 {
-            color: #3498db;
+            color: #000000;
         }
 
         div {
@@ -77,14 +77,14 @@
             margin-left: 220px;
         }
         .dislike-btn{
-       		 background-color: red;
+            background-color: red;
             margin-right: 220px;
         }
         .login-btn{
-        background-color: #2ecc71;
+            background-color: #2ecc71;
         }
-        
-         .remove-btn:hover {
+
+        .remove-btn:hover {
             background-color: #c0392b; /* Hover 색상 변경 */
         }
 
