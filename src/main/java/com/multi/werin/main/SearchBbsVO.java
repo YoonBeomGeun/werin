@@ -4,6 +4,7 @@ public class SearchBbsVO {
 	
 	private int bbs_id;
 	private String bbs_title;
+	private String bbs_content;
 	private String searching;
 	private int row_no;
 	
@@ -32,10 +33,15 @@ public class SearchBbsVO {
 	public void setBbs_title(String bbs_title) {
 		this.bbs_title = bbs_title;
 	}
+	public String getBbs_content() {
+		return bbs_content;
+	}
+	public void setBbs_content(String bbs_content) {
+		this.bbs_content = bbs_content;
+	}
 	@Override
 	public String toString() {
-		return "SearchBbsVO [bbs_id=" + bbs_id + ", bbs_title=" + bbs_title + ", searching=" + searching + ", row_no="
-				+ row_no + "]";
+		return "SearchBbsVO [bbs_id=" + bbs_id + ", bbs_title=" + bbs_title + ", bbs_content=" + bbs_content
+				+ ", searching=" + searching + ", row_no=" + row_no + "]";
 	}
-	
 }
