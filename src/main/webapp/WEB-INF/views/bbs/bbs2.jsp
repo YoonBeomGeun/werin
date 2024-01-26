@@ -1,3 +1,4 @@
+
 <%@page import="com.multi.werin.bbs.BbslikeVO"%>
 <%@page import="org.springframework.web.context.annotation.SessionScope"%>
 <%@page import="com.multi.werin.bbs.BbscmtVO"%>
@@ -13,7 +14,7 @@
     <%
     BbsVO bag = (BbsVO)request.getAttribute("bag");
     List<BbscmtVO> list = (List<BbscmtVO>)request.getAttribute("list");
-    BbslikeVO bag2 = (BbslikeVO)request.getAttribute("bag2");
+    BbslikeVO bag2 = (BbslikeVO)request.getAttribute("vo2");
     %>
     
     
@@ -312,6 +313,32 @@ $(function() {
 
 
 </script>
+<script>
+        
+        
+/* $('#notLogin').click(function(){
+	alert("해당 기능은 로그인이 필요합니다.")
+} */
+            
+		 function notLogin(){
+        	alert("해당 기능은 로그인이 필요합니다.")
+        }
+        
+        
+        function likeCheck(){
+        	console.log("likeCheck??????????");
+        	if("${bag2.like_state}" == 1){
+        		alert("이미 비추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
+        	}else{
+        		alert("이미 추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
+        	}
+        } 
+            	
+     
+
+          
+            
+</script>
 </head>
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
@@ -319,8 +346,8 @@ $(function() {
 	<div class="container">
 	<table class="table">
 			<tr class="table-success">
-				<td>제목</td>
-				<td><%= bag.getBbs_title() %></td>
+				<td width = "10%">제목</td>
+				<td><%= bag.getBbs_title() %> </td>
 			</tr>
 			<tr>
 				<td>작성자</td>
@@ -357,8 +384,7 @@ $(function() {
 	<c:choose>
         <c:when test="${empty loginId}">
 	        <!-- 로그인 되어 있지 않은 경우 -->
-	        <p> 여행기 삭제 및 수정은 로그인이 필요합니다. </p>
-	        <button class = "login-btn" onclick="window.location.href='../member/login.jsp'">로그인</button>
+	       
 	        <button class="like-btn"  onclick = "notLogin()"> 추천 </button>
 	        <span class="spTotalLike">${bag.bbs_total_like}</span>
 	        <button class="dislike-btn" onclick ="notLogin()"> 비추천 </button>
@@ -368,38 +394,24 @@ $(function() {
 	        <!-- 로그인 되어 있는 경우 -->
 	       
 	        <c:if test = "${bag2.like_state == 0 || bag2.like_state == 1}"> 
+	        <%-- <button>${bag2.like_state}</button> --%>
 	        <!-- 추천,비추천을 이미 눌렀다면 0 추천, 1 비추천-->
-	        <button class="like-btn"  onclick = "likeCheck()"> 추천 </button>
+	        <button class="like-btn"  onclick = "likeCheck()"> 추천1 </button>
 	        <span class="spTotalLike">${bag.bbs_total_like}</span>
-	        <button class="dislike-btn" onclick ="likeCheck()"> 비추천 </button>
+	        <button class="dislike-btn" onclick = "likeCheck()"> 비추천1 </button>
 	        </c:if>
 	        <c:if test = "${empty bag2}"> <!-- ajax에서 호출받은 vo2.likestate 값 다시 받아오는 방법 찾기 -->
 	        <!-- 추천, 비추천을 누르지 않은 상태라면 -->
-	         <button class="like-btn"  id = "like"> 추천 </button>
+	         <button class="like-btn"  id = "like"> 추천2 </button>
 	        <span class="spTotalLike">${bag.bbs_total_like}</span>
-	        <button class="dislike-btn" id="dislike"> 비추천 </button>
+	        <button class="dislike-btn" id="dislike"> 비추천 2</button>
 	        </c:if>
 	    </c:otherwise>
 	</c:choose>
+	
 		</div>
 		</div>
-		<script>
-        
-          
-            
-            function likeCheck(){
-            	if("${vo2.like_state}" == 1){
-            		alert("이미 비추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
-            	}else{
-            		alert("이미 추천을 누른 여행기입니다. 추천 시스템은 한 번만 가능합니다.")
-            	}
-            }
-            	
-     
-
-          
-            
-        </script>
+		
 		<br>
 	<hr color="green">
 	<div style="margin-left:300px; margin-top:30px; height: 100%;">
