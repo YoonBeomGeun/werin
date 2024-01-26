@@ -12,18 +12,18 @@
     <style>
         body { 
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            background-color: #fff;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         .container {  /* 흰색 부분 */
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px #fbb012;
         }
 
         .form-group { 
@@ -60,17 +60,19 @@
             resize: none;
         }
 	  .submit-button {  /* 게시글 작성 버튼 */
-            background-color: #3498db;
+            background-color: #fbb012;
             color: #fff;
             padding: 10px 20px;
             font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+         margin-left: auto; /* submit 버튼을 오른쪽에 배치 */
+            display: block; /* display: block; 추가 */
         }
 
         .submit-button:hover {
-            background-color: #2980b9;
+            background-color: gold;
         }
         
     </style>
@@ -102,7 +104,7 @@
                 <label for="content">내용</label>
                 <textarea id="content" name="trip_content" placeholder="내용을 입력해주세요" required></textarea> 
             </div>
-            <button class="submit-button" type="submit">게시글 작성 완료!</button>
+            <button class="submit-button" type="submit">게시</button>
         </form>
     </div>
 </body>

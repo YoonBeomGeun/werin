@@ -22,17 +22,23 @@
             padding: 0;
             box-sizing: border-box;
         }
+        
+        .info {
+		color: #000000;
+		text-align : center;
+	}
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        h3 {
+        h1 {
             color: #000000;
+            text-align : center;
         }
 
         div {
@@ -74,11 +80,11 @@
 
         .like-btn {
             background-color: #27ae60;
-            margin-left: 220px;
+            margin-left: 480px;
         }
         .dislike-btn{
             background-color: red;
-            margin-right: 220px;
+            margin-right: 480px;
         }
         .login-btn{
             background-color: #2ecc71;
@@ -160,15 +166,24 @@ $(function() {
 </head>
 <body>
     <div class="container">
-        <h3>여행기 상세 정보</h3>
+        <h1>${vo.trip_title}</h1>
         <div>
-            <p><strong>제목:</strong> ${vo.trip_title}</p>
-            <%-- <p><strong>작성 날짜:</strong>${vo.trip_writedate} </p> --%>
             <p><strong>작성 날짜:</strong><%=formattedDate %> </p>
-            <p><strong>조회수:</strong> ${vo.trip_count}</p>
-            <p><strong>추천:</strong> <span class="spTotalLike">${vo.trip_total_like}</span></p>
-            <p><strong>작성자:</strong> ${vo.trip_writer}</p>
-            <p><strong>내용:</strong> ${vo.trip_content}</p>
+            <p><strong>작성자 </strong> ${vo.trip_writer}</p>
+            
+            <table class="info">
+		<tr>
+			<td>조회수</td>
+			<td>I 추천</td>
+		</tr>
+		<tr>
+			<td>${vo.trip_count}</td>
+			<td>&nbsp;<span class="spTotalLike">${vo.trip_total_like}</span></td>
+		</tr>
+	</table>
+            <%-- <p><strong>조회수 </strong> ${vo.trip_count}</p>
+            <p><strong>추천 </strong> <span class="spTotalLike">${vo.trip_total_like}</span></p>
+             --%><p><strong>내용:</strong> ${vo.trip_content}</p>
         </div>
         <c:choose>
          <c:when test="${empty loginId}">
@@ -188,7 +203,7 @@ $(function() {
         </c:if>
         
         <!-- 추천,비추천을 이미 눌렀다면 0 추천, 1 비추천-->
-        <c:if test = "${vo2.like_state == 0 || vo2.like_state == 1}"> 
+        <c:if test = "${vo2.like_state == 0 || vo2.like_state == 1}">       
         <button class="like-btn"  onclick = "likeCheck()"> 추천 </button>
         <span class="spTotalLike">${vo.trip_total_like}</span>
         <button class="dislike-btn" onclick ="likeCheck()"> 비추천 </button>

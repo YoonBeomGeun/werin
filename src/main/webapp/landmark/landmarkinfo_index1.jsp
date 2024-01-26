@@ -23,7 +23,7 @@
 }
 
 .culture:hover { /* 호버 시 배경색과 글자색 변경 */
-	background-color: #000000;
+	background-color: rgb(251, 176, 18);
 	color: white;
 }
 

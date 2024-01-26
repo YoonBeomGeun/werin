@@ -15,7 +15,7 @@
             box-sizing: border-box;
         }
 
-         .container {
+        .container {
             max-width: 1200px;
             display: flex; /* Flexbox를 사용하여 아이템을 가로 중앙에 배치 */
             justify-content: center; /* 가로 중앙 정렬 */
@@ -25,10 +25,10 @@
         }
 
         .landmark {
-            border: 2px solid #fbb012;
+             box-shadow: 0 0 10px #fbb012;
             margin: 10px;
             padding: 10px;
-            text-align: center;
+            text-align: left;
             width: 1000px; /* 예시로 너비를 설정 */
         }
 
@@ -42,6 +42,20 @@
             margin: 20px 0;
             border: 0;
             border-top: 1px solid #ddd;
+        }
+
+        .info-table {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .info-table p {
+            margin: 5px 0;
+            box-shadow: 0 0 5px #fbb012;
+            padding: 8px;
         }
     </style>
 
@@ -57,10 +71,13 @@
                 <object data = "${landmark.firstImage2}" type = "image/jpg" width = "400" height ="300">
                 <img src="${landmark.firstImage2}" alt="Landmark Image">
                 </object></div>
-                <p class = "addr"><strong>주소:</strong> ${landmark.addr1}</p>
-                <p><strong>홈페이지:</strong> ${landmark.homepage}</p>
-                <p><strong>전화번호:</strong> ${landmark.tel}</p>
-                <p><strong>소개:</strong> ${landmark.overview}</p>
+
+                <!-- 주소, 홈페이지, 전화번호를 테이블로 표시 -->
+                <div class="info-table">
+                    <p><strong>주소:</strong> ${landmark.addr1}</p>
+                    <p><strong>홈페이지:</strong> ${landmark.homepage}</p>
+                </div>
+                <p class="overview">${landmark.overview}</p>
             </div>
         </c:forEach>
     </div>
