@@ -66,7 +66,7 @@
 		height: relative;
 		padding: 10px;
 		border-radius: 20px;
-		border: 2px solid lightgray;
+		border: 2px solid #3a8966;
 		margin-bottom: 15px;
 		margin: 0 auto;
 	}
@@ -191,8 +191,15 @@
 					room_member: "${sessionScope.loginId}"
 				},
 				success: function(response) {
-                	window.location.href = "checkRoom?gowith_id=" + <%=vo.getGowith_id()%> + "&room_name=" + "<%=vo.getGowith_title()%>" + "&room_host=" + "<%=vo.getGowith_writer()%>" + "&room_member=" + "${sessionScope.loginId}";
+                	console.log("response===============" + response);
                 	/* 채팅방 팝업화면 넣기 */
+                	if(response) {
+						if(confirm("채팅을 시작하시겠습니까??")) {
+							// 기존 채팅방 불러오기
+							/* window.location.href = "insertRoom"; */
+							window.location.href = "checkRoom?gowith_id=" + <%=vo.getGowith_id()%> + "&room_name=" + "<%=vo.getGowith_title()%>" + "&room_host=" + "<%=vo.getGowith_writer()%>" + "&room_member=" + "${sessionScope.loginId}";
+						}
+					}
 				}
 			})
 		})
@@ -287,7 +294,7 @@
 			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
 			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
 			<div class="edit" style="text-align: center;margin-bottom: 20px;">
-				<button class="like_btn" style="background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
+				<button class="like_btn" style="background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
 				<button class="dislike-btn" style="margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
 				<button id="b5" style="position: absolute; right: 460px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
 				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="position: absolute; right: 380px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">수정</button></a>
@@ -298,7 +305,7 @@
 			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
 			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
 			<div class="edit" style="text-align: center;margin-bottom: 20px;">
-				<button class="like_btn" style="background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
+				<button class="like_btn" style="background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
 				<button class="dislike-btn" style="margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
 				<%-- <a href="insertChat?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>&room_member=${sessionScope.loginId}"><button id="b5" style="background:#33CC99;">채팅하기</button></a> --%>
 				<button id="b5" style="position: absolute; right: 300px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>

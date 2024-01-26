@@ -27,27 +27,23 @@
 		<input type="hidden" name="room_name" value=<%=roomName%>>
 		<input type="hidden" name="room_host" value=<%=roomHost%>>
 		<input type="hidden" name="room_member" value="${sessionScope.loginId}">
-		<!-- <button type="submit" id="btnSubmit" >전송</button> -->
 	</form>
 	
 	<script type="text/javascript">
-		if(${result}) {
-			if(confirm("이미 채팅방이 존재합니다. 기존 채팅방으로 이동하시겠습니까??")) {
-				// 기존 채팅방 불러오기
-				/* window.location.href = "insertRoom"; */
-				document.getElementById("insertRoomForm").submit();
-			} else {
-				window.history.back();
-			}
-		} else {
-			if(confirm("방을 생성하시겠습니까?")) {
-				document.getElementById("insertRoomForm").submit();
-			} else {
-				alert("방 생성을 취소했습니다.")
-				window.history.back();
-			}
-		}
+		if ("<%=roomHost%>" === "${sessionScope.loginId}") {
+	        history.back();
+	    } else {
+	        if (${result}) {
+	            // 기존 채팅방 불러오기
+	            // window.location.href = "insertRoom";
+	            document.getElementById("insertRoomForm").submit();
+	        } else {
+	            alert("채팅방이 새로 개설되었습니다.");
+	            document.getElementById("insertRoomForm").submit();
+	        }
+	    }
 	</script>
+
 	
 	
 </body>

@@ -45,7 +45,7 @@
 		width: 350px;
 		height: 300px;
 		border-radius: 10px;
-		border: 2px solid lightgray;
+		border: 2px solid #3a8966;
 		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 		overflow: hidden;
 	}
@@ -99,11 +99,11 @@
 		<% 
 			if(session.getAttribute("loginId") != null){	
 		%>
-			<a href="insertGowith.jsp"><button style="position: absolute; right: 350px;margin:auto;background:#33CC99; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
+			<a href="insertGowith.jsp"><button style="position: absolute; right: 350px;margin:auto;background:#3a8966; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
 		<%
 			} else {
 		%>
-			<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')"><button style="position: absolute; right: 350px;margin:auto;background:#33CC99; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
+			<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')"><button style="position: absolute; right: 350px;margin:auto;background:#3a8966; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
 		<%
 			}
 		%>
