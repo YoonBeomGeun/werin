@@ -99,10 +99,13 @@ public class MainController {
 		System.out.println(searchlandmark);
 		int count = maindao.landmark_count(searchVO);
 		System.out.println("count : " + count); //1?
-		int pages = count/2; // 1/10  pages = 0
-		if(count%2!=0) { //1 % 10 --->1 
-			pages=count/2 + 1; //pages = 0/10 + 1 = 1
-		}		
+		int pages = count/5; // 1/10  pages = 0
+		if(count%5!=0) { //1 % 10 --->1 
+			pages=count/5 + 1; //pages = 0/10 + 1 = 1
+		}
+		if(pages==0) {
+			pages=1;
+		}
 		model.addAttribute("searchlandmark", searchlandmark);
 		model.addAttribute("pages", pages);
 		model.addAttribute("count", count);
@@ -118,10 +121,18 @@ public class MainController {
 		System.out.println(searchtrip);
 		int count = maindao.trip_count(searchVO);
 		System.out.println("count: "+count);
-		int pages = count/2; //2
-		if(count%2!=0) {
-			pages=count/2 + 1;
+		int pages = count/5; //2
+/*		if(count%5!=0 && count%5==0) {
+			pages=count/5;
+		}*/
+		if(count%5!=0) {
+			pages=count/5 + 1;			
 		}
+		if(pages==0) {
+			pages=1;
+		}
+		System.out.println("pages: "+pages);
+		
 		model.addAttribute("searchtrip", searchtrip);
 		model.addAttribute("pages", pages);
 		model.addAttribute("count", count);		
@@ -135,10 +146,14 @@ public class MainController {
 		List<SearchBbsVO> searchbbs = maindao.morebbs(searchVO);
 		System.out.println("searchbbs : " + searchbbs.size());
 		int count = maindao.bbs_count(searchVO);
+		System.out.println(searchbbs);
 		System.out.println("count: "+count);
-		int pages = count/2;
-		if(count%2!=0) {
-			pages=count/2;
+		int pages = count/5;
+		if(count%5!=0) {
+			pages=count/5;
+		}
+		if(pages==0) {
+			pages=1;
 		}
 		model.addAttribute("searchbbs", searchbbs);
 		model.addAttribute("pages", pages);

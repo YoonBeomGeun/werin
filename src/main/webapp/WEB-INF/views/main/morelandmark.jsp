@@ -22,27 +22,25 @@
 ${searching} 검색결과 페이지로 돌아가기
 </div>
 
-<%-- 	<table border="1">
-		<tr bgcolor="lime">
-			<td>행번호</td>
-			<td>id</td>
+<%--  	<table>
+		<tr>
 			<td>관광지이름</td>
 			<td>관광지설명</td>
 		</tr>
 		<c:forEach items="${searchlandmark}" var="vo">
 			<tr>
-				<td>${vo.row_no}</td>
-				<td>${vo.landmarkinfo_id}</td>
 				<td>${vo.landmarkinfo_name}</td>
 				<td>${vo.landmarkinfo_info}</td>
 			</tr>
 		</c:forEach>
 	</table> --%>
 	
- 	<div id=landmark_info>
+  	<div id=search_info>
 		<c:forEach items="${searchlandmark}" var="vo">
-		${vo.landmarkinfo_name} <br>
-		${vo.landmarkinfo_info}
+		  	<div id=search_loop>
+		  	<a href="../jejupage?landmarkName=${vo.landmarkinfo_name}">${vo.landmarkinfo_name} <br></a>
+		  	<a href="../jejupage?landmarkName=${vo.landmarkinfo_name}">${vo.overview} <br></a>
+  			</div>
 		</c:forEach>
 	</div>
 	
@@ -57,6 +55,8 @@ ${searching} 검색결과 페이지로 돌아가기
 <%		
 	}
 %>
+</div>
+<div id="blank">
 </div>
 </body>
 </html>
