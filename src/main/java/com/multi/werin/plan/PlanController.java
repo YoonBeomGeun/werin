@@ -104,7 +104,7 @@ public class PlanController {
 			}
 		}
 		if (result == 1) {
-			return "redirect:/member/member.jsp";
+			return "redirect:/plan/planlist";
 		} else {
 			return "redirect:/member/insert";
 		}
@@ -121,5 +121,26 @@ public class PlanController {
 	        return "plan/planlist";
 	    }
 	}
+	
+	@RequestMapping("plan/planalllist")
+	public String select(PlanVO vo, Model model) {
+		List<PlanVO> result = dao.select2(vo);
+		System.out.print(result.size());
+		model.addAttribute("planlist", result);
+		if (result.size() > 0) {
+            return "plan/planalllist";
+        } else {
+            return "plan/planalllist";
+        }
+	}
+	
+	/*
+	 * @RequestMapping("plan/plan_detail") public String select1(HttpSession
+	 * session, Model model) { List<PlanVO> result =
+	 * dao.selectWithSchedules((String) session.getAttribute("loginId"));
+	 * model.addAttribute("planlist", result); System.out.print(result.size()); if
+	 * (result.size() > 0) { return "plan/plan_detail"; } else { return
+	 * "plan/plan_detail"; } }
+	 */
 
 }

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 public class PlanDAO {
 	@Autowired
@@ -18,4 +19,14 @@ public class PlanDAO {
 	public List<PlanVO> select(String plan_writer) {
 		return my.selectList("plan.select",plan_writer); 
 	}
+	
+	public List<PlanVO> select2(PlanVO vo) {
+		return my.selectList("plan.select2", vo); 
+		
+	}
+	
+	/*
+	 * public List<PlanVO> selectWithSchedules(String plan_writer) { return
+	 * my.selectList("plan.selectWithSchedules", plan_writer); }
+	 */
 }

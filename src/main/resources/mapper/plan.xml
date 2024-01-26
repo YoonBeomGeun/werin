@@ -9,14 +9,27 @@
 		<!-- Your SQL query for inserting into plan table -->
 		INSERT INTO plan (plan_no, plan_title, plan_start_date, plan_end_date,
 		plan_writer, plan_with)
-		VALUES (null, #{plan_title}, #{plan_start_date}, #{plan_end_date},
+		VALUES (null, #{plan_title},
+		#{plan_start_date}, #{plan_end_date},
 		#{plan_writer}, #{plan_with})
 	</insert>
 
-	<select id="select" parameterType="String"
-		resultType="PlanVO">
-		SELECT * FROM plan WHERE plan_writer = #{plan_writer};
+	<select id="select" parameterType="String" resultType="PlanVO">
+		SELECT *
+		FROM plan WHERE plan_writer = #{plan_writer};
 	</select>
+
+	<select id="select2" resultType="PlanVO">
+		SELECT *
+		FROM plan
+	</select>
+
+	<!-- <select id="selectWithSchedules" parameterType="String"
+		resultType="PlanVO">
+		SELECT *
+		FROM plan
+		WHERE plan_writer = #{plan_writer}
+	</select> -->
 	<!-- other plan-related queries -->
 
 </mapper>
