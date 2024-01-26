@@ -30,7 +30,9 @@ ${searching}에 대한 검색 결과입니다
 <!-- 4개만 가져와서 보여주는거로 -->
 <div id="landmark_search_info">
 <c:forEach begin="0" end="3" items="${searchlandmark}" var="vo">
-<a href="">${vo.landmarkinfo_name}</a><br> <!-- 여기에 링크 연결해야함 -->
+<div id="loop_info">
+<a href="../jejupage?landmarkName=${vo.landmarkinfo_name}">${vo.landmarkinfo_name}</a><br>
+</div>
 </c:forEach>
 </div>
 <div id="more_landmark" style=" cursor: pointer;" onclick="location.href='morelandmark?searching=${searching}&page=1';">
@@ -43,7 +45,9 @@ ${searching}에 대한 검색 결과입니다
 <!-- 4개만 가져와서 보여주는거로 -->
 <div id="trip_search_info">
 <c:forEach begin="0" end="3" items="${searchtrip}" var="vo">
-<a href="gowith/trip/one?trip_id=${vo.trip_id}">${vo.trip_title}</a><br> <!-- 여기에 링크 연결해야함 -->
+<div id="loop_info">
+<a href="../trip/one?trip_id=${vo.trip_id}">${vo.trip_title}</a><br>
+</div>
 </c:forEach>
 </div>
 <div id="more_trip" style=" cursor: pointer;" onclick="location.href='moretrip?searching=${searching}&page=1';">
@@ -54,14 +58,18 @@ ${searching}에 대한 검색 결과입니다
 <div class="search_bbs"> <!-- 자유게시판 검색 결과 -->
 <div id="bbs_search_info">
 <c:forEach  begin="0" end="3" items="${searchbbs}" var="vo">
-<a href="bbs/bbs2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a><br> <!-- 여기에 링크 연결해야함 -->
+<div id="loop_info">
+<a href="../bbs/bbs2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a><br>
+</div>
 </c:forEach>
 </div>
 <div id="more_bbs" style=" cursor: pointer;" onclick="location.href='morebbs?searching=${searching}&page=1';">
 자유게시판 검색결과 더보기
 </div>
 </div>
+<div id="blank">
 
+</div>
 
 <!-- 복합페이징? 이건 보류(네이버처럼 구현하는거) -->
 <%-- <%
@@ -87,7 +95,9 @@ ${searching}에 대한 검색 결과입니다
 </c:if>
 
 <c:if test="${result == 1}">
+<div id="result_none">
 ${searching}에 대한 검색 결과가 없습니다
+</div>
 </c:if>
 
 </body>

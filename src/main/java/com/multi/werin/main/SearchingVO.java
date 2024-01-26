@@ -16,8 +16,8 @@ public class SearchingVO {
 	}
 
 	public void setStartEnd() {
-    	start = 1+(page-1)*10;
-    	end = page*10;
+    	start = 1+(page-1)*5;
+    	end = page*5;
     }
 
 	public int getStart() {

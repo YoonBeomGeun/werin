@@ -9,7 +9,7 @@
 <mapper namespace="main">
 	
 	<select id="hotlandmark" resultType="mainlandmarkVO"> <!-- 랜드마크 추천을 가져오는 sql -->
-		select landmarkinfo_id, landmarkinfo_pic from landmarkinfo where landmarkinfo_id=1
+		select landmarkinfo_id, landmarkinfo_pic, landmarkinfo_name from landmarkinfo where landmarkinfo_id=1
 	</select>
 	
 	<select id="mainsearch_landmark" resultType="searchlandmarkVO"> <!-- 관광지에 대한 검색 -->
@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="hottravel" resultType="maintripVO"> <!-- 추천수가 높은 여행기 가져오기 -->
-		select trip_img, trip_title, trip_id from trip order by trip_like desc limit 4
+		select trip_img, trip_title, trip_id from trip order by trip_total_like desc limit 4
 	</select>
 	
 	<select id="hotshop" resultType="mainintroducestoreVO"> <!-- 추천수가 높은 가게 가져오기 -->
@@ -33,18 +33,31 @@
 	</select>
 	
 	<select id="hotboard" resultType="mainbbsVO"> <!-- 추천수가 높은 게시물 가져오기 -->
-		select bbs_title, bbs_id from bbs order by bbs_like limit 5
+		select bbs_title, bbs_id from bbs order by bbs_total_like desc limit 5
 	</select>
 	
-  	<select id="morelandmark" parameterType="searchVO" resultType="SearchLandmarkVO">
-		select landmarkinfo_id, landmarkinfo_name<!-- , landmarkinfo_info -->
+<!--   	<select id="morelandmark" parameterType="searchVO" resultType="SearchLandmarkVO">
+		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info
 		from (select row_number() over(order by landmarkinfo_id) as row_no, c.* from landmarkinfo c
 		where
 		landmarkinfo_name like CONCAT('%',#{searching},'%')
-		<!-- or landmarkinfo_info like CONCAT('%',#{searching},'%') -->
+		or landmarkinfo_info like CONCAT('%',#{searching},'%')
 		)c2
 		where 
 		c2.row_no between ${start} and ${end}
+	</select> -->
+
+	<select id="morelandmark" parameterType="searchVO"
+		resultType="SearchLandmarkVO">
+		select l.landmarkinfo_id, l.landmarkinfo_name, l2.overview
+		from(
+			select landmarkinfo_id, landmarkinfo_name,
+			row_number() over(order by landmarkinfo_id) as row_no
+			from landmarkinfo
+			where landmarkinfo_name like concat('%',#{searching},'%')
+		)l
+		inner join landmarkinfo2 l2 on l.landmarkinfo_name=l2.title
+		where l.row_no between ${start} and ${end}
 	</select>
 
   	<select id="moretrip" parameterType="searchVO" resultType="SearchTripVO">
@@ -59,7 +72,7 @@
 	</select>
 	
   	<select id="morebbs" parameterType="searchVO" resultType="SearchBbsVO">
-		select bbs_id, bbs_title
+		select bbs_id, bbs_title, bbs_content
 		from (select row_number() over(order by bbs_id) as row_no, c.* from bbs c
 		where
 		bbs_title like CONCAT('%',#{searching},'%')

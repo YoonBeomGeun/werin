@@ -54,10 +54,15 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 #landmark_search_info { /* 랜드마크 검색결과 */
 	width: 1400px;
 	height: 220px;
-	background-color: gold;
 	top: 10px;
 	left: 30px;
-	position: absolute;	
+	position: relative;	
+}
+
+#loop_info{
+	width: 100%;
+	height: 25%;
+	font-size: 20px;
 }
 
 #more_landmark {
@@ -82,7 +87,6 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 #trip_search_info { /* 랜드마크 검색결과 */
 	width: 1400px;
 	height: 220px;
-	background-color: gold;
 	top: 10px;
 	left: 30px;
 	position: absolute;	
@@ -110,7 +114,6 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 #bbs_search_info { /* 랜드마크 검색결과 */
 	width: 1400px;
 	height: 220px;
-	background-color: gold;
 	top: 10px;
 	left: 30px;
 	position: absolute;	
@@ -124,4 +127,18 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 	top: 240px;
 	left: 30px;
 	position: absolute;	
+}
+
+#result_none{
+	font-size: 30px;
+	top: 100px;
+	left: 200px;
+	position:relative;
+}
+
+#blank{
+	width: 100%;
+	height: 100px;
+	top: 50px;
+	position: relative;
 }

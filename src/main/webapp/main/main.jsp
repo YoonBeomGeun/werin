@@ -5,7 +5,6 @@
 <head>
 	<%@ include file="../../header.jsp" %>
 <meta charset="UTF-8">
-<%-- <%@ include file="../header.jsp" %> --%>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 <title>Insert title here</title>
@@ -31,12 +30,12 @@
 		})
 		
 		//착한가게소개해요
-		$.ajax({
+/* 		$.ajax({
 			url: 'hotshop',
 			success: function(x){
 				$('.hotshop').append(x) 
 			}
-		})
+		}) */
 		
 		//자유게시판
 		$.ajax({
@@ -49,13 +48,24 @@
 		//날씨 api
 		$.ajax({
 			url: 'http://api.openweathermap.org/data/2.5/weather?q=jeju&APPID=ddc5dcd1b8ef74ebe5bf8438a715ab1a&units=metric',
+			dataType: "json",
+			type: "GET",
 			success: function(x){
-				console.log(x);
-/* 				var $temp = Math.floor(data.main.temp)+'º';
-				var city = data.name;
-				
-				$('.temp').prepend($temp);
-				$('.city').append($city); */
+                console.log("현재온도: "+ (x.main.temp));
+                console.log("현재습도: "+ x.main.humidity);
+                console.log("날씨: "+ x.weather[0].main);
+                console.log("상세날씨설명: "+ x.weather[0].description);
+                console.log("날씨 이미지: "+ x.weather[0].icon);
+                console.log("바람: "+ x.wind.speed);
+                console.log("나라: "+ x.sys.country);
+                console.log("도시이름: "+ x.name);
+                console.log("구름: "+ (x.clouds.all)+"%");
+                $('.weather').append("현재온도: "+ (x.main.temp)+"<br />")
+                $('.weather').append("현재습도: "+ x.main.humidity+"<br />")
+                $('.weather').append("날씨: "+ x.weather[0].main+"<br />")
+                $('.weather').append("날씨 이미지: "+ x.weather[0].icon+"<br />")
+                $('.weather').append("도시이름: "+ x.name+"<br />")
+                $('.weather').append("구름: "+ (x.clouds.all)+"%"+"<br />")
 			}
 		})
 	})
@@ -63,31 +73,39 @@
 </head>
 <body>
 	<div id="recommendlandmark"> <!-- 일단은 한개만 넣어놔서 id를 썻지만 필요시 class로 변경 -->
-		관광지 추천
+	
 	</div>
 	
-	<div id="mainserch"> <!-- 검색칸 -->
+	<div id="mainsearch"> <!-- 검색칸 -->
 		<form action="search">
-			<input name="searching"> <!-- searching으로 검색내용을 받음 -->
-			<button>검색하기</button>
+			<input id="searching" name="searching" type="text" placeholder="검색어 입력"> <!-- searching으로 검색내용을 받음 -->
+			<button id="search_button">검색하기</button>
 		</form>
 	</div>
 	
 	<div class="hottravel">
+	<div id="hottravel_title">
 	HOT 여행기
 	</div>
-	
-	<div class="hotshop">
-	착한가게 소개해요	
 	</div>
 	
+<!-- 	<div class="hotshop">
+	착한가게 소개해요	
+	</div> -->
+	
 	<div id="hotboard">
-	HOT 게시글
+	인기게시글
+	<div id="hotboard_title">
+	</div>
 	</div>
 	
 	<div class="weather">
+	제주도 날씨
 		<div class="temp"></div>
 		<div class="city"></div>
+	</div>
+	
+	<div id="blank">
 	</div>
 </body>
 </html>

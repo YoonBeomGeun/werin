@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css">
 
 <c:forEach items="${hotboard}" var="vo">
-	<div class="hotboard-text">
-	<a href="bbs/bbs2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a>
+	<div id="hotboard-text">
+	<a href="../bbs/bbs2?bbs_id=${vo.bbs_id}">${vo.bbs_title}</a>
 	</div>
 </c:forEach>
