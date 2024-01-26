@@ -1,15 +1,14 @@
 @charset "UTF-8";
 
-
 #map {
 	position: relative;
-    width: auto;
-    height: 500px;
-    margin-left:20px;
+	width: auto;
+	height: 500px;
+	margin-left: 20px;
 }
 
 #all {
-	display:flex;
+	display: flex;
 }
 
 #left {
@@ -17,15 +16,15 @@
 }
 
 #travel-info {
-    display: flex;
-    justify-content: space-between; /* 요소 사이에 공간을 균등하게 배치 */
-    align-items: center; /* 세로 중앙 정렬 */
+	display: flex;
+	justify-content: space-between; /* 요소 사이에 공간을 균등하게 배치 */
+	align-items: center; /* 세로 중앙 정렬 */
 }
 
 #travel-info #travelTitle {
 	width: 30%;
 	margin-bottom: 15px;
-	margin-left:20px;
+	margin-left: 20px;
 	padding: 10px;
 }
 
@@ -48,45 +47,66 @@
 }
 
 #dayButtons button {
-    background-color: #000054;
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    display: block;
+	background-color: #000054;
+	margin: 10px;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: white;
+	display: block;
 }
 
 #dayButtons {
-	overflow : auto;
+	overflow: auto;
 	height: 500px;
-    align-items: center;
-    margin-top: 50px;
+	align-items: center;
+	margin-top: 50px;
 }
 
+#save {
+	position: fixed;
+	top: 260px;
+	right: 30px;
+	background-color: #fbb012;
+	color: #fff;
+	padding: 10px 20px;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+}
+
+#save:hover {
+	background-color: gold;
+}
 
 #menuwrap {
 	position: absolute;
-	height:500px;
+	height: 500px;
 }
 
- #placesList {
-    max-height: 500px; /* 필요에 따라 최대 높이를 조정하세요 */
-    overflow-y: auto;
-  }
+#placesList {
+	max-height: 500px; /* 필요에 따라 최대 높이를 조정하세요 */
+	overflow-y: auto;
+}
 
 #lb {
-	 margin-top: 50px;
-    background-color:lightgrey; /* 원하는 회색 색상 코드를 사용하세요 */
-    width: 450px;
-    margin-left:10px;
+	margin-top: 50px;
+	background-color: white; /* 원하는 회색 색상 코드를 사용하세요 */
+	width: 450px;
+	margin-left: 10px;
 }
 
+#lb.plan-added {
+    background-color: #ccc; /* 원하는 회색 배경색으로 변경하세요. */
+  }
+  
 .day-div {
-    display: none;
+	display: none;
 }
 
 #dayButtons button.selected {
-    background-color: #yellow !important; /* 회색 배경색으로 변경 */
-    color: white; /* 텍스트 색상을 검은색으로 변경 */
-    font-weight: bold; /* 선택된 상태를 강조하기 위해 글씨를 굵게 설정 */
+	background-color: #yellow !important; /* 회색 배경색으로 변경 */
+	color: white; /* 텍스트 색상을 검은색으로 변경 */
+	font-weight: bold; /* 선택된 상태를 강조하기 위해 글씨를 굵게 설정 */
 }

@@ -30,9 +30,9 @@ import com.multi.werin.member.MemberVO;
 public class PlanController {
 	@Autowired
 	PlanDAO dao;
-	
+
 	@Autowired
-    ScheduleDAO scheduleDao;
+	ScheduleDAO scheduleDao;
 
 	@RequestMapping(value = "plan/addPlan", method = RequestMethod.POST)
 	@ResponseBody
@@ -89,18 +89,18 @@ public class PlanController {
 				String contextPath = String.valueOf(listKey.get("contextPath"));
 				String phone = String.valueOf(listKey.get("phone"));
 				String day = String.valueOf(listKey.get("day"));
-				System.out.println("travelPlans : " + placeName + "/" + latitude + "/" + contextPath + "/" + phone + "/" + day);
-				
-				ScheduleVO scheduleVO = new ScheduleVO(); 
-			    scheduleVO.setSchedule_map_lat(latitude);
-			    scheduleVO.setSchedule_map_lon(longitude); 
-			    scheduleVO.setSchedule_title(placeName);
-			    scheduleVO.setSchedule_day(day);
-			    scheduleVO.setSchedule_plan_no(vo.getPlan_no());
-			    
-			    int scheduleResult = scheduleDao.insert(scheduleVO);
+				System.out.println(
+						"travelPlans : " + placeName + "/" + latitude + "/" + contextPath + "/" + phone + "/" + day);
 
-				
+				ScheduleVO scheduleVO = new ScheduleVO();
+				scheduleVO.setSchedule_map_lat(latitude);
+				scheduleVO.setSchedule_map_lon(longitude);
+				scheduleVO.setSchedule_title(placeName);
+				scheduleVO.setSchedule_day(day);
+				scheduleVO.setSchedule_plan_no(vo.getPlan_no());
+
+				int scheduleResult = scheduleDao.insert(scheduleVO);
+
 			}
 		}
 		if (result == 1) {
@@ -109,38 +109,45 @@ public class PlanController {
 			return "redirect:/member/insert";
 		}
 	}
-	
+
 	@RequestMapping("plan/planlist")
 	public String select(HttpSession session, Model model) {
-	    List<PlanVO> result = dao.select((String) session.getAttribute("loginId"));
-	    model.addAttribute("planList", result); // 수정된 부분
-	    System.out.print(result.size());
-	    if (result.size() > 0) {
-	        return "plan/planlist";
-	    } else {
-	        return "plan/planlist";
-	    }
+		List<PlanVO> result = dao.select((String) session.getAttribute("loginId"));
+		model.addAttribute("plan", result); // 수정된 부분
+		System.out.print(result.size());
+		if (result.size() > 0) {
+			return "plan/planlist";
+		} else {
+			return "plan/planlist";
+		}
 	}
-	
+
 	@RequestMapping("plan/planalllist")
 	public String select(PlanVO vo, Model model) {
 		List<PlanVO> result = dao.select2(vo);
 		System.out.print(result.size());
 		model.addAttribute("planlist", result);
 		if (result.size() > 0) {
-            return "plan/planalllist";
-        } else {
-            return "plan/planalllist";
-        }
+			return "plan/planalllist";
+		} else {
+			return "plan/planalllist";
+		}
 	}
-	
-	/*
-	 * @RequestMapping("plan/plan_detail") public String select1(HttpSession
-	 * session, Model model) { List<PlanVO> result =
-	 * dao.selectWithSchedules((String) session.getAttribute("loginId"));
-	 * model.addAttribute("planlist", result); System.out.print(result.size()); if
-	 * (result.size() > 0) { return "plan/plan_detail"; } else { return
-	 * "plan/plan_detail"; } }
-	 */
+
+	@RequestMapping("plan/plan_detail")
+	public String select1(PlanVO vo, HttpSession session, Model model) {
+		System.out.print("vo =" + vo);
+		PlanVO result = dao.selectWithSchedules(vo);
+		List<PlanVO> list= dao.selectchedule(vo);
+		System.out.print("result =" + result);
+		model.addAttribute("plan", result);
+		model.addAttribute("schedules", list);
+		System.out.print("plan_detail" + result);
+		if (result == null) {
+			return "plan/plan_detail";
+		} else {
+			return "plan/plan_detail";
+		}
+	}
 
 }

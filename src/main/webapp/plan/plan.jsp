@@ -15,9 +15,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 
-#save {
-	position: rigth;
-}
 .map_wrap, .map_wrap * {
 	margin: 0;
 	padding: 0;
@@ -673,6 +670,7 @@
 		function updatePlanList(dateString, newPlan) {
 		    var lb = document.getElementById('lb');
 
+		    lb.classList.add('plan-added');
 		    // 선택된 날짜의 일정을 표시하는 컨테이너를 가져오거나 생성
 		    var planContainer = document.getElementById('plan-container-' + dateString);
 		    if (!planContainer) {
