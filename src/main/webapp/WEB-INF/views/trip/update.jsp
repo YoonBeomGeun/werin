@@ -16,11 +16,11 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px #fbb012;
         }
 
         .form-group {
@@ -69,15 +69,14 @@
  </head>
 <body>
 <div class="container">
-        <h3>여행기 상세 정보</h3>
         <div>
         <form action = "${pageContext.request.contextPath}/trip/update2">
          <div class="form-group" id = "d1">
-            <label for="trip_title">제목</label> 
+            <label for="trip_title"><strong>제목</strong></label> 
             <input name = trip_title id = "trip_title" value = ${vo.trip_title}><br>
          </div>
          <div class="form-group">
-            <label for="trip_content">내용</label>
+            <label for="trip_content"><strong>내용</strong></label>
             <textarea id = "trip_content" name = trip_content>${vo.trip_content}</textarea>
          </div>
             <input type = "hidden" name = "trip_id" value = ${vo.trip_id}>

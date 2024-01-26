@@ -37,6 +37,7 @@ public class TripController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(3);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
 		if (result == 1) {
 			return "forward:/trip/list?page=1"; // 
 		} else {
@@ -82,6 +83,7 @@ public class TripController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(-3);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
 		
 		if(result == 1) {
 			return "forward:/trip/list?page=1";
