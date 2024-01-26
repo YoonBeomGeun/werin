@@ -15,12 +15,18 @@
 	text-align: center;
 	text-decoration: none;
 	cursor: pointer;
-	border: 2px solid #3498db;
-	color: #3498db;
+	border: 3px solid #000000;
+	color: #000000;
 	background-color: white;
-	border-radius: 5px;
+	border-radius: 15px;
 	transition: background-color 0.3s, color 0.3s;
 }
+
+.culture:hover { /* 호버 시 배경색과 글자색 변경 */
+	background-color: #000000;
+	color: white;
+}
+
 
 #page {
 	display: inline-block;

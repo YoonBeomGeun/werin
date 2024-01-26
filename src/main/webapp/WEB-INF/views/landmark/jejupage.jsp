@@ -16,7 +16,7 @@
         }
 
          .container {
-            max-width: 1600px;
+            max-width: 1200px;
             display: flex; /* Flexbox를 사용하여 아이템을 가로 중앙에 배치 */
             justify-content: center; /* 가로 중앙 정렬 */
             align-items: center; /* 세로 중앙 정렬 */
@@ -25,11 +25,11 @@
         }
 
         .landmark {
-            border: 1px solid #dddddd;
+            border: 2px solid #fbb012;
             margin: 10px;
             padding: 10px;
-            text-align: left;
-            width: 1600px; /* 예시로 너비를 설정 */
+            text-align: center;
+            width: 1000px; /* 예시로 너비를 설정 */
         }
 
         img {
@@ -48,21 +48,19 @@
     <%@ include file="../../../header.jsp" %>
 </head>
 <body>
-    <h2 style="text-align: center;">Landmark Information</h2>
+    <h1 align="center" style="color: orange;">제주도의 관광지를 만나보세요!</h1>
     <div class="container">
         <c:forEach var="landmark" items="${list2}">
             <div class="landmark">
-                <h3 style="text-align: center;">${landmark.title}</h3>
+                <h2 style="text-align: center;">${landmark.title}</h3>
                 <div style="text-align: center;">
                 <object data = "${landmark.firstImage2}" type = "image/jpg" width = "400" height ="300">
                 <img src="${landmark.firstImage2}" alt="Landmark Image">
                 </object></div>
                 <p class = "addr"><strong>주소:</strong> ${landmark.addr1}</p>
-                <p><strong>개요:</strong> ${landmark.overview}</p>
-                <p><strong>전화번호:</strong> ${landmark.tel}</p>
                 <p><strong>홈페이지:</strong> ${landmark.homepage}</p>
-                <p><strong>지도 X:</strong> ${landmark.mapx}</p>
-                <p><strong>지도 Y:</strong> ${landmark.mapy}</p>
+                <p><strong>전화번호:</strong> ${landmark.tel}</p>
+                <p><strong>소개:</strong> ${landmark.overview}</p>
             </div>
         </c:forEach>
     </div>

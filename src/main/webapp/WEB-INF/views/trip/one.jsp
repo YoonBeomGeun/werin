@@ -208,10 +208,8 @@ $(function() {
         <script>
         
             function remove() {
-            	alert("버튼작동통과")
             	
             	 if('${vo.trip_writer}' == '${sessionScope.loginId}'){
-            		alert("본인확인통과")
                 	if (confirm("여행기를 삭제하시겠습니까?")) {
                     location.href = "remove?trip_id=<%=bag.getTrip_id()%>";           
                 }  
