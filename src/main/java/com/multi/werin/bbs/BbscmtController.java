@@ -33,6 +33,7 @@ public class BbscmtController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(1);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
 		System.out.println("comment insert 결과 >>" + result);
 	}
 	
@@ -52,5 +53,6 @@ public class BbscmtController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(-1);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
 	}
 }

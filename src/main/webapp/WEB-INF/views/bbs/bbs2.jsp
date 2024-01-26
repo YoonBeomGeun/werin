@@ -393,18 +393,18 @@ $(function() {
 	    <c:otherwise>
 	        <!-- 로그인 되어 있는 경우 -->
 	       
-	        <c:if test = "${bag2.like_state == 0 || bag2.like_state == 1}"> 
+	        <c:if test = "${vo2.like_state == 0 || vo2.like_state == 1}"> 
 	        <%-- <button>${bag2.like_state}</button> --%>
 	        <!-- 추천,비추천을 이미 눌렀다면 0 추천, 1 비추천-->
-	        <button class="like-btn"  onclick = "likeCheck()"> 추천1 </button>
+	        <button class="like-btn"  onclick = "likeCheck()">추천</button>
 	        <span class="spTotalLike">${bag.bbs_total_like}</span>
-	        <button class="dislike-btn" onclick = "likeCheck()"> 비추천1 </button>
+	        <button class="dislike-btn" onclick = "likeCheck()">비추천</button>
 	        </c:if>
-	        <c:if test = "${empty bag2}"> <!-- ajax에서 호출받은 vo2.likestate 값 다시 받아오는 방법 찾기 -->
+	        <c:if test = "${empty vo2}"> <!-- ajax에서 호출받은 vo2.likestate 값 다시 받아오는 방법 찾기 -->
 	        <!-- 추천, 비추천을 누르지 않은 상태라면 -->
-	         <button class="like-btn"  id = "like"> 추천2 </button>
+	         <button class="like-btn"  id = "like">추천2</button>
 	        <span class="spTotalLike">${bag.bbs_total_like}</span>
-	        <button class="dislike-btn" id="dislike"> 비추천 2</button>
+	        <button class="dislike-btn" id="dislike">비추천</button>
 	        </c:if>
 	    </c:otherwise>
 	</c:choose>
