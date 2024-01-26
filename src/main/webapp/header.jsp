@@ -35,7 +35,7 @@
 						</c:when>
 						<c:otherwise>
 							<!-- 로그인 되어 있는 경우 -->
-							<button onclick="window.location.href='${pageContext.request.contextPath}/member/mypage.jsp'">마이페이지</button>
+							<div id="user_info">${sessionScope.nickname}님 어서오세요!<br>회원등급: ${sessionScope.grade}</div>
 							<form action="${pageContext.request.contextPath}/member/logout"
 								method="post">
 								<button type="submit">로그아웃</button>
@@ -59,28 +59,20 @@
 	        <a href="${pageContext.request.contextPath}/landmark/landmarkinfo_index1.jsp">관광지 소개</a>
 	      </li>
 	      <li class="community">
-	        <a href="${pageContext.request.contextPath}/plan/plan.jsp">여행 일정</a>
+	        <a href="${pageContext.request.contextPath}/plan/plan.jsp">일정 만들기</a>
 	        <ul class="menu">
 	          <li><a href="${pageContext.request.contextPath}/plan/planlist">나의 일정</a></li>
 	          <li><a href="">일정 둘러보기</a></li>
 	        </ul>
 	      </li>
-	      <li class="community">
-	        <a href="${pageContext.request.contextPath}/trip/list?page=1">여행기</a>
-	        <ul class="menu">
-	          <li><a href="${pageContext.request.contextPath}/trip/tripwrite.jsp">여행기 작성</a></li>
-	          <li><a href="${pageContext.request.contextPath}/trip/list?page=1">여행기 보기</a></li>
-	        </ul>
-	      </li>
-	      <li class="community">
-	        <a href="">커뮤니티</a>
-	        <ul class="menu">
-	          <li><a href="${pageContext.request.contextPath}/gowith/list1?page=1">동행게시판</a></li>
-	          <li><a href="${pageContext.request.contextPath}/bbs/bbs?page=1">자유게시판</a></li>
-	        </ul>
+	      <li>
+	        <a href="${pageContext.request.contextPath}/trip/list?page=1">여행기 보기</a>
 	      </li>
 	      <li>
-	        <a href="">나의 여행</a>
+	        <a href="${pageContext.request.contextPath}/gowith/list1?page=1">동행게시판</a>
+	      </li>
+	      <li>
+	        <a href="${pageContext.request.contextPath}/bbs/bbs?page=1">자유게시판</a>
 	      </li>
 	      <li>
 	        <a href="">공지 / 건의</a>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.werin.chat.RoomDAO;
 import com.multi.werin.member.MemberVO;
+import com.multi.werin.member.PointService;
 
 @Controller
 public class GowithController {
@@ -26,6 +27,8 @@ public class GowithController {
 	@Autowired
 	RoomDAO roomDAO;
 	
+	@Autowired
+	PointService pointService;
 	
 	@RequestMapping("gowith/insert")
 	public String insert(GowithVO gowithVO, HttpSession session) {
@@ -34,6 +37,10 @@ public class GowithController {
 		if(result==1) {
 			str = "redirect:list1?page=1";
 		}
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMember_id((String)session.getAttribute("loginId"));
+		memberVO.setVariation(3);
+		pointService.pointvariation(memberVO);
 		return str;
 	}
 	
@@ -61,6 +68,10 @@ public class GowithController {
 	public void delete(int gowith_id, HttpSession session, Model model) {
 		int result = dao.delete(gowith_id);
 		model.addAttribute("result", result);
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMember_id((String)session.getAttribute("loginId"));
+		memberVO.setVariation(-3);
+		pointService.pointvariation(memberVO);
 	}
 	
 	@RequestMapping("gowith/one")

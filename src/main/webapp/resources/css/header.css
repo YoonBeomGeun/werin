@@ -64,6 +64,15 @@ header {
 	margin-left: 20px
 }
 
+#user_info{
+	color: #000000;
+	font: 18px 궁서 bold;
+	margin-left: 20px;
+	padding: 5px;
+	background-color: lightgray;
+	border-radius: 10px;
+}
+
 .logo {
 	margin-top: 25px;
 }
@@ -126,7 +135,7 @@ header {
 	border-radius: 5px;
 }
 
-.menubar>a {
+.menubar a {
 	color: #fff;
 	text-decoration: none;
 	font: 20px 궁서 bold;

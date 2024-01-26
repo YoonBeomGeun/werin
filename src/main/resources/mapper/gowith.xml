@@ -5,7 +5,7 @@
 <mapper namespace="gowith">
 
 	<insert id="create" parameterType="gowithVO">
-		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, 0, null)
+		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, 0, COALESCE(#{gowith_img}, '제주도1.jpg'))
 	</insert>
 	
 	<update id="update">
