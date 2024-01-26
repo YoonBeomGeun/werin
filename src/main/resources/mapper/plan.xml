@@ -24,12 +24,17 @@
 		FROM plan
 	</select>
 
-	<!-- <select id="selectWithSchedules" parameterType="String"
-		resultType="PlanVO">
+	<select id="selectWithSchedules" resultType="PlanVO">
 		SELECT *
 		FROM plan
-		WHERE plan_writer = #{plan_writer}
-	</select> -->
+		WHERE plan_no = #{plan_no}
+	</select>
+	
+	<select id="selectchedule" resultType="scheduleVO" parameterType="PlanVO">
+		SELECT * FROM schedule WHERE schedule_plan_no = #{plan_no}
+	</select>
+	
+	
 	<!-- other plan-related queries -->
 
 </mapper>

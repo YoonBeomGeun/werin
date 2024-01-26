@@ -8,13 +8,13 @@
 
 <mapper namespace="main">
 	
-	<select id="hotlandmark" resultType="mainlandmarkVO"> <!-- 랜드마크 추천을 가져오는 sql -->
+	<!-- <select id="hotlandmark" resultType="mainlandmarkVO"> 랜드마크 추천을 가져오는 sql
 		select landmarkinfo_id, landmarkinfo_pic, landmarkinfo_name from landmarkinfo where landmarkinfo_id=1
 	</select>
 	
-	<select id="mainsearch_landmark" resultType="searchlandmarkVO"> <!-- 관광지에 대한 검색 -->
-		select landmarkinfo_id, landmarkinfo_name<!-- , landmarkinfo_info --> from landmarkinfo where landmarkinfo_name like CONCAT('%',#{searching},'%') <!-- or landmarkinfo_info like CONCAT('%',#{searching},'%') -->
-	</select>
+	<select id="mainsearch_landmark" resultType="searchlandmarkVO"> 관광지에 대한 검색
+		select landmarkinfo_id, landmarkinfo_name, landmarkinfo_info from landmarkinfo where landmarkinfo_name like CONCAT('%',#{searching},'%') or landmarkinfo_info like CONCAT('%',#{searching},'%')
+	</select> -->
 	
 	<select id="mainsearch_trip" resultType="searchtripVO"> <!-- 여행기에 대한 검색 -->
 		select trip_id, trip_title, trip_content from trip where trip_title like CONCAT('%',#{searching},'%') or trip_content like CONCAT('%',#{searching},'%')
