@@ -45,7 +45,7 @@
 <body>
     <%@ include file="../../../header.jsp"%>
 
-    <div id="planList">
+    <div id="select">
         <div>
             <h1 style="display: inline-block;">나의 일정 모아보기</h1>
             <div style="text-align:center;">
@@ -70,9 +70,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${planList}" var="plan">
+                    <c:forEach items="${plan}" var="plan">
                         <tr>
-                            <td><a href="${pageContext.request.contextPath}/plan/plan_detail?planNo=${plan.plan_no}">${plan.plan_title}</a></td>
+                            <td><a href="${pageContext.request.contextPath}/plan/plan_detail?plan_no=${plan.plan_no}">${plan.plan_title}</a></td>
                             <td>${plan.plan_start_date}~${plan.plan_start_date}</td>
                             <td>${plan.plan_with}</td>
                         </tr>

@@ -134,9 +134,9 @@
                 <tbody>
                     <c:forEach items="${planlist}" var="plan">
                         <tr class="plan-row" data-type="${plan.plan_with}">
-                            <td><a href="${pageContext.request.contextPath}/plan/plan_detail?planNo=${plan.plan_no}">${plan.plan_title}</a></td>
+                            <td><a href="${pageContext.request.contextPath}/plan/plan_detail?plan_no=${plan.plan_no}">${plan.plan_title}</a></td>
                             <td>${plan.plan_writer}</td>
-                            <td>${plan.plan_start_date}~${plan.plan_start_date}</td>
+                            <td>${plan.plan_start_date}~${plan.plan_end_date}</td>
                             <td>${plan.plan_with}</td>
                         </tr>
                     </c:forEach>

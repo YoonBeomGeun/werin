@@ -25,8 +25,12 @@ public class PlanDAO {
 		
 	}
 	
-	/*
-	 * public List<PlanVO> selectWithSchedules(String plan_writer) { return
-	 * my.selectList("plan.selectWithSchedules", plan_writer); }
-	 */
+	//details
+	public PlanVO selectWithSchedules(PlanVO vo) { 
+		return my.selectOne("plan.selectWithSchedules", vo); }
+
+	public List<PlanVO> selectchedule(PlanVO vo) {
+		return my.selectList("plan.selectchedule", vo); 
+		
+	}
 }
