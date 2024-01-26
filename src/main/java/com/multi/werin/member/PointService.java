@@ -23,8 +23,9 @@ public class PointService{
 	}
 	
 	// 이런식으로 해도 괜찮은지?
-	public String callgrade() {
+	public String callgrade(String userid) {
 		MemberVO memberVO = new MemberVO();
+		memberVO.setMember_id(userid);
 		MemberVO getgrade = dao.callgrade(memberVO);
 		String grade = getgrade.getMember_grade();
 		return grade;

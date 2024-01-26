@@ -16,6 +16,9 @@ public class MemberController {
 	@Autowired
 	MemberDAO dao;
 	
+	@Autowired
+	PointService pointService;
+	
 	//요청하나당 함수하나!!!
 	@PostMapping("member/idChk") // 아이디 중복확인 체크
 	//@RequestMapping("idChk")
@@ -41,11 +44,16 @@ public class MemberController {
 	 @RequestMapping(value = "member/loginProcess", method = RequestMethod.POST)
 	    public String loginProcess(MemberVO vo, HttpSession session, Model model) {
 	        MemberVO member = dao.login(vo); // dao로 로그인 정보 확인하고 vo를 통해 membervo객체로 반환
+	        System.out.println(member);
 	        if (member != null) { // 로그인 성공 여부 판단
 	            // 로그인 성공시
 	            session.setAttribute("loginId", member.getMember_id()); // 사용자 아이디 저장
 	            session.setAttribute("loggedInUser", member);  // 사용자 객체 저장
-	            return "redirect:/main/main.jsp"; // 로그인 후 이동할 페이지 경로
+				String grade = pointService.callgrade(member.getMember_id());
+	            System.out.println("id: "+member.getMember_id()+" 등급: "+grade);
+	            session.setAttribute("grade", grade);
+	            session.setAttribute("nickname", member.getMember_nickname());
+				return "redirect:/main/main.jsp"; // 로그인 후 이동할 페이지 경로
 	        } else {
 	            // 로그인 실패시
 	        	model.addAttribute("state", 0); // state값 0
