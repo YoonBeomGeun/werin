@@ -58,11 +58,19 @@
 	      <li>
 	        <a href="${pageContext.request.contextPath}/landmark/landmarkinfo_index1.jsp">관광지 소개</a>
 	      </li>
-	      <li>
-	        <a href="${pageContext.request.contextPath}/plan/plan.jsp">일정 만들기</a>
+	      <li class="community">
+	        <a href="${pageContext.request.contextPath}/plan/plan.jsp">여행 일정</a>
+	        <ul class="menu">
+	          <li><a href="${pageContext.request.contextPath}/plan/planlist">나의 일정</a></li>
+	          <li><a href="">일정 둘러보기</a></li>
+	        </ul>
 	      </li>
-	      <li>
-	        <a href="${pageContext.request.contextPath}/trip/list?page=1">여행기 작성</a>
+	      <li class="community">
+	        <a href="${pageContext.request.contextPath}/trip/list?page=1">여행기</a>
+	        <ul class="menu">
+	          <li><a href="${pageContext.request.contextPath}/trip/tripwrite.jsp">여행기 작성</a></li>
+	          <li><a href="${pageContext.request.contextPath}/trip/list?page=1">여행기 보기</a></li>
+	        </ul>
 	      </li>
 	      <li class="community">
 	        <a href="">커뮤니티</a>
