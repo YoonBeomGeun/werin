@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.multi.werin.member.MemberVO;
+import com.multi.werin.member.PointService;
 import com.multi.werin.trip.TripLikeVO;
 import com.multi.werin.trip.TripVO;
 
@@ -35,16 +37,21 @@ public class BbsController{
 	@Autowired
 	BbscmtDAO bbscmtDAO;
 	
-	
+	@Autowired
+	PointService pointService;
 	
 	@RequestMapping("/bbs/insert")
-	public String insert2(BbsVO bbsVO,Model model) {
+	public String insert2(BbsVO bbsVO,Model model, HttpSession session) {
 		int result = dao.insertBbs(bbsVO);
 		String str = "";
 		model.addAttribute("result", result);
 		if (result == 1) {
 			str = "redirect:bbs?page=1";
 		}
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMember_id((String)session.getAttribute("loginId"));
+		memberVO.setVariation(3);
+		pointService.pointvariation(memberVO);
 		return str;
 	}
 	
@@ -66,9 +73,13 @@ public class BbsController{
 	}
 	
 	@RequestMapping("bbs/delete")
-	public void delete(int bbs_id, Model model) {
+	public void delete(int bbs_id, Model model, HttpSession session) {
 		//System.out.println("post_id >> " + post_id);
 		int result = dao.deleteBbs(bbs_id);
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMember_id((String)session.getAttribute("loginId"));
+		memberVO.setVariation(-3);
+		pointService.pointvariation(memberVO);
 		model.addAttribute("result", result);
 	}
 	
@@ -111,6 +122,7 @@ public class BbsController{
 		likeVO.setMember_id(member_id);
 		System.out.println(" likeVO : " + likeVO);
 		BbslikeVO vo2= dao.likeCheck(likeVO);
+		System.out.println("추천 상태"+vo2);
 		BbsVO bag = dao.one(bbsVO);
 		List<BbscmtVO> list = bbscmtDAO.list(bbsVO.getBbs_id());
 		model.addAttribute("bag", bag);
