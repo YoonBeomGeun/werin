@@ -33,7 +33,7 @@
             margin: 20px auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px #fbb012;
         }
 
         h1 {
@@ -49,6 +49,7 @@
             font-size: 16px;
             margin-bottom: 10px;
         }
+        
 
         strong {
             font-weight: bold;
@@ -66,16 +67,16 @@
 
         /* 버튼에 대한 클래스 스타일 지정 */
         .remove-btn {
-            background-color: #e74c3c;
+            background-color: #FBB012;
         }
 
         .update-btn {
-            background-color: #3498db;
+            background-color: #FBB012;
             margin-right: 150px;
         }
 
         .return-btn {
-            background-color: #2ecc71;
+            background-color: #FBB012;
         }
 
         .like-btn {
@@ -87,19 +88,19 @@
             margin-right: 480px;
         }
         .login-btn{
-            background-color: #2ecc71;
+            background-color: #FBB012;
         }
 
         .remove-btn:hover {
-            background-color: #c0392b; /* Hover 색상 변경 */
+            background-color: gold; /* Hover 색상 변경 */
         }
 
         .update-btn:hover {
-            background-color: #2980b9; /* Hover 색상 변경 */
+            background-color: gold; /* Hover 색상 변경 */
         }
 
         .return-btn:hover {
-            background-color: #27ae60; /* Hover 색상 변경 */
+            background-color: gold; /* Hover 색상 변경 */
         }
 
         .like-btn:hover {
@@ -111,7 +112,7 @@
         }
 
         .login-btn:hover {
-            background-color: #27ae60; /* Hover 색상 변경 */
+            background-color: gold; /* Hover 색상 변경 */
         }
 
     </style>
@@ -168,28 +169,29 @@ $(function() {
     <div class="container">
         <h1>${vo.trip_title}</h1>
         <div>
-            <p><strong>작성 날짜:</strong><%=formattedDate %> </p>
+        	<hr>
+            <p class="written-date"><strong>작성 날짜 :</strong><%=formattedDate %> </p>
+            <hr>
             <p><strong>작성자 </strong> ${vo.trip_writer}</p>
+            <hr>
             
             <table class="info">
 		<tr>
-			<td>조회수</td>
-			<td>I 추천</td>
+			<td><strong>조회수</strong></td>
+                <td><strong>I 추천</strong></td>
 		</tr>
 		<tr>
-			<td>${vo.trip_count}</td>
-			<td>&nbsp;<span class="spTotalLike">${vo.trip_total_like}</span></td>
+			<td><strong>${vo.trip_count}</strong></td>
+			<td><strong>&nbsp;<span class="spTotalLike">${vo.trip_total_like}</span></strong></td>
 		</tr>
 	</table>
-            <%-- <p><strong>조회수 </strong> ${vo.trip_count}</p>
-            <p><strong>추천 </strong> <span class="spTotalLike">${vo.trip_total_like}</span></p>
-             --%><p><strong>내용:</strong> ${vo.trip_content}</p>
+	<hr><br><br>
+        <p><strong>내용:</strong> ${vo.trip_content}</p>
         </div>
         <c:choose>
          <c:when test="${empty loginId}">
         <!-- 로그인 되어 있지 않은 경우 -->
-        <p> 여행기 삭제 및 수정은 로그인이 필요합니다. </p>
-        <button class = "login-btn" onclick="window.location.href='../member/login.jsp'">로그인</button>
+        <button class = "login-btn" onclick="window.location.href='../member/login.jsp'">로그인</button><br>
         <button class="like-btn"  onclick = "notLogin()"> 추천 </button>
         <span class="spTotalLike">${vo.trip_total_like}</span>
         <button class="dislike-btn" onclick ="notLogin()"> 비추천 </button>
