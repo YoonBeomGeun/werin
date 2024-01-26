@@ -13,8 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.multi.werin.member.MemberVO;
+import com.multi.werin.member.PointService;
+
 @Controller
 public class TripController {
+	
+	@Autowired
+	PointService pointService;
 	
 	@Autowired
 	TripDAOInterface dao;
@@ -23,10 +29,14 @@ public class TripController {
 	TripService service;
 
 	@RequestMapping("trip/insert")
-	public String insert(TripVO vo) {
+	public String insert(TripVO vo, HttpSession session) {
 		System.out.println("tripvo =>" + vo);
 				
 		int result = dao.insert(vo);
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMember_id((String)session.getAttribute("loginId"));
+		memberVO.setVariation(3);
+		pointService.pointvariation(memberVO);
 		if (result == 1) {
 			return "forward:/trip/list?page=1"; // 
 		} else {
@@ -63,10 +73,16 @@ public class TripController {
 	
 	
 	@RequestMapping("trip/remove")
-	public String delete(TripVO vo) {
+	public String delete(TripVO vo, HttpSession session) {
 		System.out.println("remove vo 값>>>"+ vo);
 		int result = dao.delete(vo);
 		System.out.println(result);
+		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setMember_id((String)session.getAttribute("loginId"));
+		memberVO.setVariation(-3);
+		pointService.pointvariation(memberVO);
+		
 		if(result == 1) {
 			return "forward:/trip/list?page=1";
 		}else { // 삭제X 일때 돌아갈 페이지

@@ -11,63 +11,68 @@
 <%@ include file="../../../header.jsp"%>
 <style>
 body {
-	font-family: 'Arial', sans-serif;
-	background-color: #f0f0f0;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .container {
-	max-width: 800px;
-	margin: 20px auto;
-	background-color: #fff;
-	padding: 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border: none;
 }
 
 h3 {
-	color: #3498db;
+    color: #000000;
 }
 
 table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
 th, td {
-	padding: 10px;
-	border: 1px solid #ddd;
-	text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
 }
 
 th {
-	background-color: #3498db;
-	color: #fff;
-}
-
-tr:hover {
-	background-color: #f5f5f5;
+    background-color: #fbb012;
+    color: #fff;
 }
 
 a {
-	text-decoration: none;
-	color: #3498db;
+    text-decoration: none;
+    color: #000000; /* 링크의 기본 색상 변경 */
+}
+
+a:hover {
+    color: #d18000; /* 호버 시 링크 색상 변경 */
 }
 
 button {
-	background-color: #3498db;
-	color: #fff;
-	padding: 10px 20px;
-	font-size: 16px;
-	border: none;
-	cursor: pointer;
-	margin-top: 20px;
+    background-color: #fbb012;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-	background-color: #2980b9;
+    background-color: #e19400; /* 호버 시 배경 색상 변경 */
+}
+
+body, .container, h3, table, th, td, a, button {
+    white-space: nowrap;
 }
 </style>
 </head>
