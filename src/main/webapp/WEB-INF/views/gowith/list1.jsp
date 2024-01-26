@@ -21,7 +21,7 @@
 	}
 	
 	.paging button {
-	    background: pink;
+	    background: rgb(251, 176, 18);
 	    margin-right: 5px;
 	    border-radius: 10px;
 	    color: white;
@@ -59,8 +59,8 @@
 	}
 	
 	.bottom {
-		background: lightgray;
-		height: 100px;
+		background: #285D45;
+		height: 80px;
 		margin-top: 30px;
 	}
 </style>
@@ -88,7 +88,7 @@
 
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
-	<h1 style="text-align:center;">동행게시판</h1>
+	<h1 style="text-align:center; color:rgb(251, 176, 18);">동행게시판<br><span style="text-align:center; color:rgb(251, 176, 18);font-size: 25px;">마음이 맞는 분과 함께 여행을 떠나봐요! </span></h1>
 	<!-- <div style="text-align: center;"><input type="text" value="검색어를 입력하세요."></div> -->
 	<!-- <div style="margin-left: 19%;">
 		<button>최신순</button>
@@ -120,11 +120,11 @@
 							<span style="font-size: 13px;">작성자 ${vo.gowith_writer}</span><br>
 							<span style="font-size: 17px; font-weight: bold;">${vo.gowith_title}</span><br>
 							<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:300px;">${vo.gowith_content}</span><br>
-							<div style="height: 200px;">
-								<img src="${pageContext.request.contextPath}/resources/img/제주도1.jpg" alt="이미지 설명" style="width: 100%; height: 100%; object-fit: cover;">
+							<div style="height: 200px; margin-left: -10px;">
+								<img src="${pageContext.request.contextPath}/resources/img/${vo.gowith_img}" alt="이미지 설명" style="width: 103%; height: 100%; object-fit: cover; border-radius: 10px;">
 							</div>
 							<div class="mit">
-								조회수 ${vo.gowith_view}&nbsp;&nbsp;&nbsp;좋아요 ${vo.gowith_total_like}
+								👀 ${vo.gowith_view}&nbsp;&nbsp;&nbsp;❤️ ${vo.gowith_total_like}
 							</div>
 						</div>
 					</a>
@@ -135,11 +135,11 @@
 							<span style="font-size: 13px;">작성자 ${vo.gowith_writer}</span><br>
 							<span style="font-size: 17px; font-weight: bold;">${vo.gowith_title}</span><br>
 							<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:300px;">${vo.gowith_content}</span><br>
-							<div style="height: 200px;">
-								<img src="${pageContext.request.contextPath}/resources/img/제주도1.jpg" alt="이미지 설명" style="width: 100%; height: 100%; object-fit: cover;">
+							<div style="height: 200px; margin-left: -10px;">
+								<img src="${pageContext.request.contextPath}/resources/img/${vo.gowith_img}" alt="이미지 설명" style="width: 103%; height: 100%; object-fit: cover; border-radius: 10px;">
 							</div>
 							<div class="mit">
-								조회수 ${vo.gowith_view}&nbsp;&nbsp;&nbsp;좋아요 ${vo.gowith_total_like}
+								👀 ${vo.gowith_view}&nbsp;&nbsp;&nbsp;❤️ ${vo.gowith_total_like}
 							</div>
 						</div>
 					</a>

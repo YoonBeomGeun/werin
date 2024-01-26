@@ -7,12 +7,24 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.kan {
-		margin-left: 30%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+		width: 50%;
+		height:700px;
         padding: 20px;
+        color:#285D45;
+        box-shadow: 0 0 10px #fbb012;
 	}
 	
-	.in {
-		text-align: ;
+	input {
+		width: 100%;
+		height: 30px;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
 	}
 	
 	.btn {
@@ -21,39 +33,26 @@
 		width: 70px;
 		height: 50px;
 		color:white;
-		background:#00CC66;
+		background: rgb(251, 176, 18);
 	}
 </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<div class="kan">
-		<form action="insert" class="in">
-			<!-- <h3>몇 사람과 함께 할까요?</h3>
-			<select id="dropdown" name="">
-		      <option value="1">1 명</option>
-		      <option value="2">2 명</option>
-		      <option value="3">3 명</option>
-		      <option value="4">4 명</option>
-		      <option value="5">5 명</option>
-		      <option value="6">6 명</option>
-		      <option value="7">7 명</option>
-		      <option value="8">8 명</option>
-		      <option value="9">9 명</option>
-		      <option value="10">10 명</option>
-		    </select>
-			
-			<h3>여행 날짜를 선택해 주세요.</h3>
-			<input type="date"> ~ <input type="date"> -->
-			<h3>작성자</h3>
+		<form action="insert">
+			<h2>작성자</h2>
 			<input type="text" name="gowith_writer" value="${sessionScope.loginId}" readonly>
-			<h3>제목 입력</h3>
-			<input type="text" name="gowith_title">
-			<h3>내용</h3>
-			<textarea rows="15" cols="100" name="gowith_content"></textarea><br>
+			<h2>제목 입력</h2>
+			<input type="text" name="gowith_title" placeholder="제목을 입력해 주세요.">
+			<h2>내용</h2>
+			<textarea rows="15" cols="100" name="gowith_content" style="resize: none;"></textarea><br>
+			<input type="file" name="gowith_img" style="height:40px;"><br><br>
 			<button type="submit" class="btn">등록하기</button>
 		</form>
 	</div>
-	
+	<div class="bottom" style="height: 50px;">
+		
+	</div>
 </body>
 </html>
