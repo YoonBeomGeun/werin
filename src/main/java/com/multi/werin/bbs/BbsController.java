@@ -52,6 +52,7 @@ public class BbsController{
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(3);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
 		return str;
 	}
 	
@@ -80,6 +81,7 @@ public class BbsController{
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(-3);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
 		model.addAttribute("result", result);
 	}
 	
