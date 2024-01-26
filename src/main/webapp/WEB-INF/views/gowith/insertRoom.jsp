@@ -155,7 +155,7 @@
 				
 				console.log(JSON.parse(messageOutput.body))
 				json = JSON.parse(messageOutput.body)
-				$('#response').append(	"<div class='sendTalk'><span style='font-weight: bold;'>" + json.message_sender + "</span>&nbsp;" + json.message_sent_at + "<br>" + /* 시간 글자크기 줄이기 */
+				$('#response').append(	"<div class='sendTalk'><span style='font-weight: bold;'>" + json.message_sender + "</span>&nbsp;" + json.message_sent_at + "<br><br>" + /* 시간 글자크기 줄이기 */
 										json.message_content + "</div><br>")
 			})
 		})
@@ -283,20 +283,32 @@
 		</div>
 		<br>
 		<div class="chatList">
-		<h4 id="roomList" style="text-align:center;" class="btnList">채팅목록</h4>
+		<a href=""><h4 id="roomList" style="text-align:center;" class="btnList">채팅목록</h4></a>              <!-- 채팅 목록 보기 -->
 		<hr>
 			<%
 				if(roomList!=null) {
 	            	for (RoomVO vo3 : roomList) {
+	            		if(vo3.getRoom_host().equals(session.getAttribute("loginId"))) {
 	        %>
-	       			<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
-		            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
-		                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
-		                    <%=vo3.getRoom_name()%>
-		                </div>
-		            </div>
-		            <hr>
+		       			<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
+			            	<span style="font-weight: bold;"><%= vo3.getRoom_member() %></span><br><br>
+			                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
+			                    <%=vo3.getRoom_name()%>
+			                </div>
+			            </div>
+			            <hr>
 	        <%
+	            		} else {
+	        %>
+		        		<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
+			            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
+			                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
+			                    <%=vo3.getRoom_name()%>
+			                </div>
+			            </div>
+			            <hr>
+		    <%
+	            		}
 	            	}
 				}
 	            else {

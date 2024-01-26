@@ -32,7 +32,6 @@ public class RoomController {
 		
 		int result = roomDAO.countPick(roomVO);
 		model.addAttribute("result", result);
-		System.out.println(result);
 	}
 	
 	@RequestMapping("gowith/insertRoom")

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.multi.werin.chat.RoomDAO;
+import com.multi.werin.member.MemberVO;
 
 @Controller
 public class GowithController {
@@ -25,8 +26,9 @@ public class GowithController {
 	@Autowired
 	RoomDAO roomDAO;
 	
+	
 	@RequestMapping("gowith/insert")
-	public String insert(GowithVO gowithVO) {
+	public String insert(GowithVO gowithVO, HttpSession session) {
 		int result = dao.insert(gowithVO);
 		String str = "";
 		if(result==1) {
@@ -56,7 +58,7 @@ public class GowithController {
 	}
 	
 	@RequestMapping("gowith/delete")
-	public void delete(int gowith_id, Model model) {
+	public void delete(int gowith_id, HttpSession session, Model model) {
 		int result = dao.delete(gowith_id);
 		model.addAttribute("result", result);
 	}

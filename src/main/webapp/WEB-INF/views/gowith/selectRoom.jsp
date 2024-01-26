@@ -27,15 +27,13 @@
 
 	var stompClient = null;
 	
-
-
-	
 	$(function() {
 		 disconnect();
 		    // connect 함수 호출 (disconnect 이후에 실행됨)
 		    console.log("onload")
 		    connect();
 	})
+	
 	function connect() {
 		//1. 전화기역할을 하는 web Socket객체 생성
 		var socket = new SockJS("${pageContext.request.contextPath}/chat");
@@ -55,8 +53,7 @@
 										json.message_content + "</div><br>")
 			})
 		})
-		
-}
+	}
     
     function sendMessage() {
 		console.log("sendMessage 호출됨")
@@ -163,15 +160,27 @@
 			<%
 				if(roomList!=null) {
 	            	for (RoomVO vo3 : roomList) {
+	            		if(vo3.getRoom_host().equals(session.getAttribute("loginId"))) {
 	        %>
-	       			<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
-		            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
-		                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
-		                    <%=vo3.getRoom_name()%>
-		                </div>
-		            </div>
-		            <hr>
+		       			<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
+			            	<span style="font-weight: bold;"><%= vo3.getRoom_member() %></span><br><br>
+			                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
+			                    <%=vo3.getRoom_name()%>
+			                </div>
+			            </div>
+			            <hr>
 	        <%
+	            		} else {
+	        %>
+		        		<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
+			            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
+			                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
+			                    <%=vo3.getRoom_name()%>
+			                </div>
+			            </div>
+			            <hr>
+		    <%
+	            		}
 	            	}
 				}
 	            else {

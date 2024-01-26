@@ -5,7 +5,6 @@
 	if(result == 1) {
 %>
 	<script type="text/javascript">
-		alert("삭제가 완료되었습니다.");
 		history.go(-2);
 	</script>
 	
