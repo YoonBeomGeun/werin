@@ -14,6 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
+
+#save {
+	position: rigth;
+}
 .map_wrap, .map_wrap * {
 	margin: 0;
 	padding: 0;
