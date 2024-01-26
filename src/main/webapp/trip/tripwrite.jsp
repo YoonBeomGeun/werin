@@ -74,11 +74,13 @@
         .submit-button:hover {
             background-color: gold;
         }
-        
+        #writer {
+   		 width: 50%; /* 작성자 입력란의 너비를 50%로 설정 */
+			}
     </style>
     
     <title>게시글 추가</title>
-    <%@ include file="../../../header.jsp" %>
+    <%@ include file="../header.jsp" %>
 </head>
 <body>
     <div class="container">
