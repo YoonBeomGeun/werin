@@ -19,12 +19,11 @@ public class MainDAO implements MainDAOInterface {
 	 * @Override public List<MainlandmarkVO> recommendlandmark(MainlandmarkVO
 	 * mainlandmarkVO) { return my.selectList("main.hotlandmark", mainlandmarkVO); }
 	 */
-	
-	/*
-	 * @Override public List<SearchLandmarkVO> searchlandmark(SearchLandmarkVO
-	 * searchlandmarkVO) { return my.selectList("main.mainsearch_landmark",
-	 * searchlandmarkVO); }
-	 */
+
+	@Override
+	public List<SearchLandmarkVO> searchlandmark(SearchLandmarkVO searchlandmarkVO) {
+		return my.selectList("main.mainsearch_landmark", searchlandmarkVO);
+	}
 	
 	@Override
 	public List<SearchBbsVO> searchbbs(SearchBbsVO searchbbsVO) {
@@ -83,12 +82,6 @@ public class MainDAO implements MainDAOInterface {
 
 	@Override
 	public List<MainlandmarkVO> recommendlandmark(MainlandmarkVO mainlandmarkVO) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<SearchLandmarkVO> searchlandmark(SearchLandmarkVO searchlandmarkVO) {
 		// TODO Auto-generated method stub
 		return null;
 	}

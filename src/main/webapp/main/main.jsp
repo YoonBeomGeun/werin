@@ -36,7 +36,7 @@
 		});
 
 		// 자유게시판
-		$.ajax({
+ 		$.ajax({
 			url : 'hotboard',
 			success : function(x) {
 				$('#hotboard').append(x);
@@ -131,31 +131,16 @@
 		<div id="hottravel_title">HOT 여행기</div>
 	</div>
 
-	<div id="middle">
-		<div id="hotboard">
-			HOT 게시글
-			<div id="hotboard_title">
-				<div class="hot-line">
-					<div class="hot-circle">1</div>
-					첫 번째 줄
-				</div>
-				<div class="hot-line">
-					<div class="hot-circle">2</div>
-					두 번째 줄
-				</div>
-				<div class="hot-line">
-					<div class="hot-circle">3</div>
-					세 번째 줄
-				</div>
-			</div>
-		</div>
-
-		<div class="weather">
-			<div class="today">오늘의 제주 날씨</div>
-			<div class="temp"></div>
-			<div class="city"></div>
-		</div>
+	<div id="hotboard">
+		HOT 게시글
 	</div>
+	<div class="today">
+		오늘의 제주 날씨
+	</div>
+
+<!-- 	<div class="middle">
+
+	</div> -->
 
 	<div id="blank"></div>
 </body>

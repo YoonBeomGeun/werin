@@ -7,7 +7,8 @@
 	
 	<div class="show_hottravel">
 	<div id="hottravel-image">
-	<a href="../trip/one?trip_id=${vo.trip_id}">${vo.trip_img}</a>
+	<%-- <a href="../trip/one?trip_id=${vo.trip_id}">${vo.trip_img}</a> --%>
+	<img src="${pageContext.request.contextPath}/resources/img/${vo.trip_img}.jpg">
 	</div>
 	
 	<div id="hottravel-text">
