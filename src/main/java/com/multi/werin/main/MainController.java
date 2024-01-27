@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
+	/*
+	 * @Autowired MainDAOInterface maindao;
+	 */
+	
 	@Autowired
-	MainDAOInterface maindao;
+	MainDAO maindao;
 
 	/*
 	 * @Autowired PointService pointService;
@@ -27,32 +31,28 @@ public class MainController {
 	 */
 
 	@RequestMapping("main/search")
-	public void mainsearch(
-			/* SearchLandmarkVO searchlandmarkVO, */SearchBbsVO searchbbsVO, SearchTripVO searchtripVO,
-			SearchVO searchVO, Model model) {
-		/*
-		 * List<SearchLandmarkVO> searchlandmark =
-		 * maindao.searchlandmark(searchlandmarkVO);
-		 */
+	public void mainsearch(SearchLandmarkVO searchlandmarkVO, SearchBbsVO searchbbsVO, SearchTripVO searchtripVO, SearchVO searchVO, Model model) {
+		
+		List<SearchLandmarkVO> searchlandmark = maindao.searchlandmark(searchlandmarkVO); 
 		List<SearchBbsVO> searchbbs = maindao.searchbbs(searchbbsVO);
 		List<SearchTripVO> searchtrip = maindao.searchtrip(searchtripVO);
 
 		// 위에 어떤 값들이 들어가는지 확인해볼 필요가 있음
 		int result = 0;
-		if (/*searchlandmark.isEmpty() && */ searchbbs.isEmpty() && searchtrip.isEmpty()) { // 아무런 검색 결과가 없는 경우
+		if (searchlandmark.isEmpty() && searchbbs.isEmpty() && searchtrip.isEmpty()) { // 아무런 검색 결과가 없는 경우
 			result = 1;
 		}
 		if (searchtripVO.getSearching().isEmpty()) {
 			result = 1;
 		}
 		if (result == 0) {
-			/*model.addAttribute("searchlandmark", searchlandmark);*/
+			model.addAttribute("searchlandmark", searchlandmark);
 			model.addAttribute("searchbbs", searchbbs);
 			model.addAttribute("searchtrip", searchtrip);
 			model.addAttribute("searching", searchtripVO.getSearching());
 		}
 
-		/*System.out.println(searchlandmark);*/
+		System.out.println(searchlandmark);
 		System.out.println(searchbbs);
 		System.out.println(searchtrip);
 		System.out.println(result);
