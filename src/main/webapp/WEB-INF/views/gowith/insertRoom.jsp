@@ -64,9 +64,11 @@
 	}
 	
 	.chatList {
+	color: white;
+	font-size: 18px;
     padding: 20px;
     width: 400px;
-    background: lightgray;
+    background: #3a8966;
     overflow: hidden;
     border-radius: 15px;
     flex-direction: column;
@@ -76,10 +78,17 @@
     margin-top:100px;
 	}
 	
+	.b2 {
+		background: white;
+		border-radius: 10px;
+		color: black;
+		padding: 5px;
+	}
+	
 	#result {
 		padding: 10px;
 		padding-bottom: 20px;
-		border: 5px solid lightgray;
+		border: 6px solid #3a8966;
 		width: 800px;
 		height: 80vh;
 		display: flex;
@@ -115,16 +124,22 @@
 	    transform: translateX(-50%);
 	    width: calc(100% - 20px); /* 화면 가로 길이에서 여백 20px만큼 빼줍니다. */
 	    max-width: 850px; /* 최대 너비 설정 */
-	    height: 100px;
-	    background: lightgray;
+	    height: 90px;
 	    border-radius: 15px;
+	    border: 3px solid #3a8966;
+	    background: white;
 	    padding: 0 10px; /* 내부 여백 설정 */
 	}
+	
+	.write textarea:focus {
+        outline: none; /* 클릭 시 포커스 효과 제거 */
+        border: 0; /* 클릭 시 테두리 제거 */
+    }
 	
 	.write button {
 		font-size: 17px;
 		border-radius:10px;
-		width: 70px;
+		width: 90px;
 		height: 50px;
 		color:white;
 	}
@@ -195,6 +210,7 @@
 		$("#t1").attr("placeholder", "댓글을 입력하세요.");
 		var chatBox = document.getElementById("result");
         chatBox.scrollTop = chatBox.scrollHeight;
+        document.getElementById("t1").focus();
 	}
 	
 	var message_receiver = '<%= vo.getRoom_member().equals(session.getAttribute("loginId")) ? host : vo.getRoom_member() %>'
@@ -283,7 +299,7 @@
 		</div>
 		<br>
 		<div class="chatList">
-		<a href=""><h4 id="roomList" style="text-align:center;" class="btnList">채팅목록</h4></a>              <!-- 채팅 목록 보기 -->
+		<h4 id="roomList" style="text-align:center;" class="btnList">채팅목록</h4>            <!-- 채팅 목록 보기 -->
 		<hr>
 			<%
 				if(roomList!=null) {
@@ -291,7 +307,7 @@
 	            		if(vo3.getRoom_host().equals(session.getAttribute("loginId"))) {
 	        %>
 		       			<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
-			            	<span style="font-weight: bold;"><%= vo3.getRoom_member() %></span><br><br>
+			            	<span style="font-weight: bold;"><%= vo3.getRoom_member() %> 님</span><br><br>
 			                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
 			                    <%=vo3.getRoom_name()%>
 			                </div>
@@ -301,7 +317,7 @@
 	            		} else {
 	        %>
 		        		<div class="b2" id="room_<%=vo3.getRoom_id()%>" data-room-id="<%=vo3.getRoom_id()%>">
-			            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %></span><br><br>
+			            	<span style="font-weight: bold;"><%= vo3.getRoom_host() %> 님</span><br><br>
 			                <div class="talk-content" id="name_<%=vo3.getRoom_name()%>">
 			                    <%=vo3.getRoom_name()%>
 			                </div>
@@ -338,7 +354,7 @@
 	            		} else {
 	        %>
 	        			<div class="receiveTalk" id="talk_<%=vo2.getMessage_id()%>">
-			            	<span style="font-weight: bold;"><%= vo2.getMessage_receiver() %></span>&nbsp;<%=vo2.getMessage_sent_at() %><br><br>
+			            	<span style="font-weight: bold;"><%= vo2.getMessage_sender() %></span>&nbsp;<%=vo2.getMessage_sent_at() %><br><br>
 			                <div class="talk-content" id="content_<%=vo2.getMessage_id()%>">
 			                    <%=vo2.getMessage_content()%>
 			                </div>
@@ -357,10 +373,10 @@
 		
 		</div>
 		<div class="write">
-	    	<textarea class="form-control" id="t1" rows="4" cols="170" name="text" 
+	    	<textarea class="form-control" id="t1" rows="3" cols="170" name="text" 
 	        oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"' 
-	        style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px;" placeholder="메세지를 입력하세요."></textarea>
-	    	<button id="b1" style="background: #33CC99;">입력</button>
+	        style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px; border: 0;" placeholder="메세지를 입력하세요."></textarea>
+	    	<button id="b1" style="background: #3a8966;">입력</button>
 		</div>
 	</div>
 	<div style="height:120px;"></div>

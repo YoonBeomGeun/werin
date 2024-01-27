@@ -20,7 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <style type="text/css">
 	h1 {
-		margin-left: 300px;
+		margin-left: 450px;
 		margin-top: 112px;
 	}
 	
@@ -47,11 +47,17 @@
 	    transform: translateX(-50%);
 	    width: calc(100% - 20px); /* 화면 가로 길이에서 여백 20px만큼 빼줍니다. */
 	    max-width: 1200px; /* 최대 너비 설정 */
-	    height: 90px;
-	    background: lightgray;
+	    height: 70px;
 	    border-radius: 15px;
+	    border: 3px solid #3a8966;
+	    background: white;
 	    padding: 0 10px; /* 내부 여백 설정 */
 	}
+	
+	.write textarea:focus {
+        outline: none; /* 클릭 시 포커스 효과 제거 */
+        border: 0; /* 클릭 시 테두리 제거 */
+    }
 	
 	.write button {
 		font-size: 17px;
@@ -126,8 +132,8 @@
                 var currentContent = $("#content_" + commentId).text().trim();
 
                 // 동적으로 수정 폼 생성
-                var editForm = '<input type="text" id="editComment_' + commentId + '" value="' + currentContent + '">';
-                editForm += '<button class="editBtn" data-comment-id="' + commentId + '">수정 완료</button>';
+                var editForm = '<input type="text" id="editComment_' + commentId + '" value="' + currentContent + '"style="width:500px;">';
+                editForm += '&nbsp;<button class="editBtn" data-comment-id="' + commentId + '"style="background:#3a8966;border-radius:5px;width:65px;height: 30px;color:white;">수정 완료</button>';
 
                 // 수정 폼 삽입
                 $("#content_" + commentId).html(editForm);
@@ -271,8 +277,8 @@
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
 	<h1 style="margin-top:50px;"><%= vo.getGowith_title()%></h1>
-	<p style="margin-left:300px; font-weight: bold;">작성자: <%= vo.getGowith_writer()%></p>
-	<table class="info" style="margin-left:300px; text-align: center;">
+	<p style="margin-left:450px; font-weight: bold;">작성자: <%= vo.getGowith_writer()%></p>
+	<table class="info" style="margin-left:450px; text-align: center;">
 		<tr>
 			<td>조회수</td>
 			<td>I 메세지</td>
@@ -291,30 +297,30 @@
 	
 	<c:choose>
 		<c:when test="${vo.gowith_writer eq sessionScope.loginId}">
-			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
-			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
+			<h2 style="margin-left:450px; margin-top:30px;">여행 소개</h2>
+			<p style="margin-left:450px; width: 1150px;"><%= vo.getGowith_content()%></p><br>
 			<div class="edit" style="text-align: center;margin-bottom: 20px;">
-				<button class="like_btn" style="background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
+				<button class="like_btn" style="background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
 				<button class="dislike-btn" style="margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
-				<button id="b5" style="position: absolute; right: 460px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
-				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="position: absolute; right: 380px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">수정</button></a>
-				<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="position: absolute; right: 300px;margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">삭제</button></a>
+				<button id="b5" style="position: absolute; right: 560px;margin:auto;background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
+				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="position: absolute; right: 480px;margin:auto;background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">수정</button></a>
+				<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="position: absolute; right: 400px;margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">삭제</button></a>
 			</div>
 		</c:when>
 		<c:otherwise>
-			<h2 style="margin-left:300px; margin-top:30px;">내용</h2>
-			<p style="margin-left:300px;"><%= vo.getGowith_content()%></p>
+			<h2 style="margin-left:450px; margin-top:30px;">여행 소개</h2>
+			<p style="margin-left:450px; width: 1150px;"><%= vo.getGowith_content()%></p><br>
 			<div class="edit" style="text-align: center;margin-bottom: 20px;">
-				<button class="like_btn" style="background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
+				<button class="like_btn" style="background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
 				<button class="dislike-btn" style="margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
 				<%-- <a href="insertChat?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>&room_member=${sessionScope.loginId}"><button id="b5" style="background:#33CC99;">채팅하기</button></a> --%>
-				<button id="b5" style="position: absolute; right: 300px;margin:auto;background:#33CC99; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
+				<button id="b5" style="position: absolute; right: 400px; margin:auto;background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
 			</div>
 		</c:otherwise>
 	</c:choose>
 	<hr color="green">
 	<div style="margin-top:30px; height: 100%;">
-		<h2 style="margin-left:300px;">댓글</h2>
+		<h2 style="margin-left:450px;">댓글</h2>
 		<!-- if문 추가 -->
 		<div id="result">
 			<%
@@ -331,7 +337,7 @@
 			                    <button class="b2" data-comment-id="<%=vo2.getGowithcmt_id()%>" style="color:#285D45;">수정</button>
 			                    <button class="b3" data-comment-id="<%=vo2.getGowithcmt_id()%>" style="color:red;">삭제</button>
 			                </div>
-			            </div>
+			            </div><br>
 	        <%
 	            		} else {
 	        %>
@@ -340,7 +346,7 @@
 			                <div class="comment-content" id="content_<%=vo2.getGowithcmt_id()%>">
 			                    <%=vo2.getGowithcmt_content()%>
 			                </div>
-			            </div>
+			            </div><br>
 			            
 	        		<%-- <c:choose>
 	        			<c:when test="${vo2.gowithcmt_writer eq sessionScope.loginId}">
@@ -370,7 +376,7 @@
 				}
 	            else {
 	        %>
-	        		<p style="margin-left: 650px;">등록된 댓글이 없습니다.</p>
+	        		<p style="text-align: center;">등록된 댓글이 없습니다.</p>
 	        <%
 	            }
 	        %>
@@ -378,8 +384,8 @@
 	</div>
 	<div style="height:100px;"></div>
 	<div class="write">
-    	<textarea id="comment" rows="4" cols="170" style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px;" placeholder="댓글을 입력하세요."></textarea>
-    	<button id="b1" style="background: #33CC99;">입력</button>
+    	<textarea id="comment" rows="2" cols="170" style="resize: none; padding: 8px; max-height: 80px; margin-right: 10px; border: 0;" placeholder="댓글을 입력하세요."></textarea>
+    	<button id="b1" style="background: #3a8966;">입력</button>
 	</div>
 </body>
 </html>
