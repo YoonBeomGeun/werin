@@ -41,6 +41,9 @@ public class GowithController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(3);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 		return str;
 	}
 	
@@ -72,6 +75,9 @@ public class GowithController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(-3);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 	}
 	
 	@RequestMapping("gowith/one")
