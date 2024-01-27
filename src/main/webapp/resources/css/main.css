@@ -103,7 +103,7 @@ form {
 #hottravel-text { /* 첫번째 여행기의 제목 */
 	width: 210px;
 	height: 50px;
-	background-color: lime;
+	font-size: 20px;
 	top: 225px;
 	left: 10px;
 	position: absolute;
@@ -114,7 +114,7 @@ form {
 }
 
 #hotboard { /* 자유게시판에서 추천수 높은 것들이 들어올 곳 */
-	width: 1550px;
+	width: 800px;
 	height: 350px;
 	font-size: 30px;
 	font-weight: bold;
@@ -167,8 +167,8 @@ form {
 	font-weight: bold;
 	width: 700px;
 	height: 350px;
-	top: 30px;
-	left: 120px;
+	top: -283px;
+	left: 1200px;
 	position: relative;
 	font-size: 30px;
 }
