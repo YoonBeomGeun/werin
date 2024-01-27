@@ -53,6 +53,8 @@ public class BbsController{
 		memberVO.setVariation(3);
 		pointService.pointvariation(memberVO);
 		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 		return str;
 	}
 	
@@ -82,6 +84,8 @@ public class BbsController{
 		memberVO.setVariation(-3);
 		pointService.pointvariation(memberVO);
 		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 		model.addAttribute("result", result);
 	}
 	

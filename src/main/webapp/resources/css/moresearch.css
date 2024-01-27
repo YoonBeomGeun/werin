@@ -55,7 +55,8 @@
 	overflow: hidden;
   	text-overflow: ellipsis;
   	white-space: nowrap;
-	background-color: #EAEAEA;
+	background: lightgray;
+	border-radius: 10px;
 }
 
 /* table{
@@ -72,7 +73,6 @@
 	width: 1000px;
 	height: 50px;
 	font-size: 15px;
-	background-color: gold;
 	padding: 10px;
 	top: 50px;
 	left: 460px;
@@ -82,7 +82,7 @@
 #number{
 	width: 30px;
 	height: 30px;
-	background-color: lime;
+	background-color: gold;
 	position: relative;
 }
 
