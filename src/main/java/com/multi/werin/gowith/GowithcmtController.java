@@ -32,6 +32,9 @@ public class GowithcmtController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(1);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 		System.out.println("comment insert 결과 >>" + result);
 	}
 	
@@ -51,5 +54,8 @@ public class GowithcmtController {
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(-1);
 		pointService.pointvariation(memberVO);
+		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 	}
 }

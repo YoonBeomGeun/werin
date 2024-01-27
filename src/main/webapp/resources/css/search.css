@@ -45,7 +45,8 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 .search_landmark { 
 	width: 1500px;
 	height: 300px;
-	background-color: yellow;
+	background-color: gold;
+	border-radius: 20px;
 	top: 120px;
 	left: 200px;
 	position: relative;
@@ -69,7 +70,9 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 	font-size: 20px;
 	width: 280px;
 	height: 50px;
-	background-color: gold;
+	background-color: rgb(251, 176, 18);
+	border-radius: 5px;
+	padding: 10px;
 	top: 240px;
 	left: 30px;
 	position: absolute;	
@@ -78,7 +81,8 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 .search_trip {
 	width: 1500px;
 	height: 300px;
-	background-color: yellow;
+	background-color: gold;
+	border-radius: 20px;
 	top: 150px;
 	left: 200px;
 	position: relative;
@@ -96,7 +100,9 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 	font-size: 20px;
 	width: 280px;
 	height: 50px;
-	background-color: gold;
+	background-color: rgb(251, 176, 18);
+	border-radius: 5px;
+	padding: 10px;
 	top: 240px;
 	left: 30px;
 	position: absolute;	
@@ -105,7 +111,8 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 .search_bbs {
 	width: 1500px;
 	height: 300px;
-	background-color: yellow;
+	background-color: gold;
+	border-radius: 20px;
 	top: 180px;
 	left: 200px;
 	position: relative;
@@ -123,7 +130,9 @@ body { /* body에 일괄적으로 적용시킬 내용 */
 	font-size: 20px;
 	width: 280px;
 	height: 50px;
-	background-color: gold;
+	background-color: rgb(251, 176, 18);
+	border-radius: 5px;
+	padding: 10px;
 	top: 240px;
 	left: 30px;
 	position: absolute;	

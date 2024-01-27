@@ -34,6 +34,8 @@ public class BbscmtController {
 		memberVO.setVariation(1);
 		pointService.pointvariation(memberVO);
 		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 		System.out.println("comment insert 결과 >>" + result);
 	}
 	
@@ -54,5 +56,7 @@ public class BbscmtController {
 		memberVO.setVariation(-1);
 		pointService.pointvariation(memberVO);
 		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 	}
 }
