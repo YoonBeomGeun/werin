@@ -290,10 +290,10 @@
 			<td>&nbsp;<%=cmt%></td>
 		</tr>
 	</table>
-	<h3 style="text-align:center;">여행 일정</h3>
+	<!-- <h3 style="text-align:center;">여행 일정</h3>
 	<div class="schedule">
 		여행 일정 들어오기
-	</div>
+	</div> -->
 	
 	<c:choose>
 		<c:when test="${vo.gowith_writer eq sessionScope.loginId}">
