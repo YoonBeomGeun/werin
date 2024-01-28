@@ -15,7 +15,7 @@
 	} else {
 		vo = (RoomVO)request.getAttribute("roomVO");
 	}
-	System.out.println("size" + vo);
+	System.out.println("vo의 방 이름" + vo.getRoom_name());
 %>
 <!DOCTYPE html>
 <html>

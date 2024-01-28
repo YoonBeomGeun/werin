@@ -8,12 +8,7 @@ public class PageVO {
 	
 	public void setStartEnd() {
 		start = 1 + (page -1) * 9;
-	//			1 + (1 - 1) * 10 = 1
-	//			1 + (2 - 1) * 10 = 11
-	//			1 + (3 - 1) * 10 = 21
 		end = page * 9;
-	//        1 * 10 = 10
-	//		  2 * 10 = 20
 	}
 	
 	public void setPage(int page) {

@@ -5,7 +5,8 @@
 <mapper namespace="gowith">
 
 	<insert id="create" parameterType="gowithVO">
-		insert into gowith values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, 0, COALESCE(#{gowith_img}, '제주도1.jpg'))
+		insert into gowith
+		values(null, #{gowith_title}, #{gowith_content}, #{gowith_writer}, now(), 0, 0, 0, COALESCE(#{gowith_img}, '제주도1.jpg'))
 	</insert>
 	
 	<update id="update">
@@ -53,11 +54,11 @@
 	<!-- 추천 기능 -->
 	
 	<insert id="createLike" parameterType="gowithLikeVO">
-		insert into gowith_total_like values(null, #{gowith_id}, #{member_id}, 1)
+		insert into gowith_total_like values(null, #{gowith_id}, #{member_id}, 0)
 	</insert>
 	
 	<insert id="createDislike" parameterType="gowithLikeVO">
-		insert into gowith_total_like values(null, #{gowith_id}, #{member_id}, 2)
+		insert into gowith_total_like values(null, #{gowith_id}, #{member_id}, 1)
 	</insert>
 	
 	<delete id="deleteLike" parameterType="gowithLikeVO">

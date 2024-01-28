@@ -20,14 +20,32 @@
 		text-align: ;
 	}
 	
+	input {
+		width: 50%;
+		height: 30px;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border-radius:5px;
+	}
+	
+	textarea {
+		resize: none;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 16px;
+	}
+	
 	.btn {
 		font-size: 17px;
 		border-radius:10px;
 		width: 70px;
 		height: 50px;
 		color:white;
-		background:#00CC66;
+		background:#3a8966;
 	}
+	
 </style>
 </head>
 <body>
@@ -53,7 +71,7 @@
 			<h3>제목 입력</h3>
 			<input type="text" name="gowith_title" value="<%=vo.getGowith_title()%>">
 			<h3>내용</h3>
-			<textarea rows="15" cols="100" name="gowith_content"><%=vo.getGowith_content()%></textarea><br>
+			<textarea rows="15" cols="100" name="gowith_content"><%=vo.getGowith_content()%></textarea><br><br>
 			<button type="submit" class="btn">수정하기</button>
 		</form>
 	</div>
