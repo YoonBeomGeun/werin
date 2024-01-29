@@ -15,6 +15,7 @@
     BbsVO bag = (BbsVO)request.getAttribute("bag");
     List<BbscmtVO> list = (List<BbscmtVO>)request.getAttribute("list");
     BbslikeVO bag2 = (BbslikeVO)request.getAttribute("vo2");
+   	int cmt= (int)request.getAttribute("cmt");
     %>
     
     
@@ -27,142 +28,129 @@
 <!-- <script type="text/javascript" src="resources/js/jquery-3.7.1.js"></script> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
-        body {
-            
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            margin-left: 300px;
-            margin-top: 112px;
-        }
-
-        .info {
-            color: #007700;
-        }
-
-        .schedule {
-            background: lightgray;
-            width: 500px;
-            height: 300px;
-            display: flex;
-            margin: 0 auto;
-        }
-
-        .edit button {
-            font-size: 17px;
-            border-radius: 10px;
-            width: 70px;
-            height: 50px;
-            color: white;
-        }
-
-        .write {
-            margin-left: 300px;
-            position: fixed;
-            bottom: 0%;
-            width: 1400px;
-            height: 70px;
-            background: lightgray;
-            border-radius: 15px;
-        }
-
-        .write button {
-            font-size: 17px;
-            border-radius: 10px;
-            width: 70px;
-            height: 50px;
-            color: white;
-        }
-
-        .comment {
-            width: 1000px;
-            height: relative;
-            padding: 10px;
-            border-radius: 20px;
-            background: lightgray;
-            margin: 0 auto; /* 가운데 정렬을 위한 margin 속성(의미없음) */
-            margin-bottom: 15px;
-        }
-        
-
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        background-color: #fff;
-        
+	h1 {
+		margin-left: 450px;
+		margin-top: 112px;
+	}
+	
+	.info {
+		color: #007700;
+	}
+	
+	.editGowith {
+		position: absolute;
+		right: 480px;
+		margin:auto;
+		background:#3a8966;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
+	
+	.deleteGowith {
+		position: absolute;
+		right: 400px;
+		margin:auto;
+		background:#FF5555;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
+	
+	.plan {
+		background: #bfe3d3;
+		border-radius:15px;
+		padding:15px;
+		width: 500px;
+		height: relative;
+		max-height: 300px;
+		display: flex;
+		margin: 0 auto;
+		overflow-y: auto;
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	.plan a {
+		text-decoration: none;
+		color: inherit;
+	}
+	
+	.schedule {
+		padding: 15px;
+		background: white;
+		border-radius: 15px;
+		border: 2px solid #285D45;
+		width: 450px;
+		height: relative;
+		font-size: 15px;
+		margin: 0 auto;
+	}
+	
+	.like-btn {
+		background:#3a8966;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
+	
+	.dislike-btn {
+		margin:auto;
+		background:#FF5555;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
+	
+	.write {
+	    display: flex;
+	    justify-content: space-between; /* 내부 요소 사이의 간격을 벌리기 위해 사용합니다. */
+	    align-items: center;
+	    position: fixed;
+	    bottom: 10px;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    width: calc(100% - 20px); /* 화면 가로 길이에서 여백 20px만큼 빼줍니다. */
+	    max-width: 1200px; /* 최대 너비 설정 */
+	    height: 70px;
+	    border-radius: 15px;
+	    border: 3px solid #3a8966;
+	    background: white;
+	    padding: 0 10px; /* 내부 여백 설정 */
+	}
+	
+	.write textarea:focus {
+        outline: none; /* 클릭 시 포커스 효과 제거 */
+        border: 0; /* 클릭 시 테두리 제거 */
     }
 	
-	.table-content{
-	width: 300px;
-	height: 300px;
+	.write button {
+		font-size: 17px;
+		border-radius:10px;
+		width: 70px;
+		height: 50px;
+		color:white;
 	}
-    .table th, .table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-    }
-
-    .table th {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    .table tr:hover {
-        background-color: #f5f5f5;
-    }
-
-    .text-center {
-        text-align: center;
-    }
-
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        outline: none;
-        color: #fff;
-        background-color: #007BFF;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0 4px #0056b3;
-    }
-
-    .btn:hover {
-        background-color: #0056b3;
-    }
-    .button {
-    text-align: center;
-}
-    .center-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-    }
-
-    .center-buttons .btn {
-        margin: 0 auto;
-    }
-    .like-btn {
-            background-color: #27ae60;
-            margin-left: 220px;
-     }
-        .dislike-btn{
-       		 background-color: red;
-            margin-right: 220px;
-     }
-    </style>
+	
+	.comment {
+		width: 1000px;
+		height: relative;
+		padding: 10px;
+		border-radius: 20px;
+		border: 2px solid #3a8966;
+		margin-bottom: 15px;
+		margin: 0 auto;
+	}
+	
+</style>
 <script type="text/javascript">
 	$(function() {
 	    // 댓글 달기
@@ -342,45 +330,29 @@ $(function() {
 </head>
 <body>
 	<jsp:include page="/header.jsp"></jsp:include>
-		
-	<div class="container">
-	<table class="table">
-			<tr class="table-success">
-				<td width = "10%">제목</td>
-				<td><%= bag.getBbs_title() %> </td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td><%= bag.getBbs_writer() %></td>
-			</tr>
-			<tr class="table-content">
-				<td>내용</td>
-				<td><%= bag.getBbs_content() %></td>
-			</tr>
+	<h1 style="margin-top:50px;">제목: <%= bag.getBbs_title()%></h1>
+	<h5 style="margin-left:450px;">___________________________</h3>
+	<p style="margin-left:450px; font-weight: bold;">작성자: <%= bag.getBbs_writer()%></p>
+	<h5 style="margin-left:450px;">___________________________</h3>
+	<table class="info" style="margin-left:450px; text-align: center;">
+		<tr>
+			<td>조회수</td>
 			
-			<tr>
-			
-			<%-- <td colspan="2" class="text-center">
-			 	<a href="update?bbs_id=<%=bag.getBbs_id()%>" ><button class="btn btn-primary">게시글 수정</button></a>
-				<a href="delete2?bbs_id=<%=bag.getBbs_id()%>" ><button class="btn btn-danger">게시글 삭제</button></a>
-			</td> --%>
-			<% 
-				if(session.getAttribute("loginId") != null){
-				if(session.getAttribute("loginId").equals(bag.getBbs_writer())){
-			%>
-        		<!-- 현재 로그인한 사용자와 게시글 작성자가 일치하는 경우에만 버튼 표시 -->
-        		<td colspan="2" class="text-center">
-            		<a href="update?bbs_id=<%=bag.getBbs_id()%>" >
-            			<button class="btn btn-primary">게시글 수정</button>
-            		</a>
-            		<a href="delete2?bbs_id=<%=bag.getBbs_id()%>" >
-            			<button class="btn btn-danger">게시글 삭제</button>
-            		</a>
-        		</td>
-   			<% }} %>
+			<td>I 댓글</td>
 		</tr>
-		</table>
-	<div class=button>
+		<tr>
+			<td><%=bag.getBbs_view()%></td>
+			<td><%=cmt %></td>
+		</tr>
+	</table>
+			
+			<p style="margin-left:450px; width: 1150px;"><%= bag.getBbs_content()%></p><br>
+			
+			
+			
+						
+			
+	<div class="edit" style="text-align: center;margin-bottom: 20px;">
 	<c:choose>
         <c:when test="${empty loginId}">
 	        <!-- 로그인 되어 있지 않은 경우 -->
@@ -402,20 +374,34 @@ $(function() {
 	        </c:if>
 	        <c:if test = "${empty vo2}"> <!-- ajax에서 호출받은 vo2.likestate 값 다시 받아오는 방법 찾기 -->
 	        <!-- 추천, 비추천을 누르지 않은 상태라면 -->
-	         <button class="like-btn"  id = "like">추천2</button>
+	         <button class="like-btn"  id = "like">추천</button>
 	        <span class="spTotalLike">${bag.bbs_total_like}</span>
 	        <button class="dislike-btn" id="dislike">비추천</button>
 	        </c:if>
 	    </c:otherwise>
 	</c:choose>
 	
-		</div>
-		</div>
 		
+			<% 
+				if(session.getAttribute("loginId") != null){
+				if(session.getAttribute("loginId").equals(bag.getBbs_writer())){
+			%>
+        		<!-- 현재 로그인한 사용자와 게시글 작성자가 일치하는 경우에만 버튼 표시 -->
+        		
+            		<a href="update?bbs_id=<%=bag.getBbs_id()%>" >
+            			<button class="editGowith">수정</button>
+            		</a>
+            		<a href="delete2?bbs_id=<%=bag.getBbs_id()%>" >
+            			<button class="deleteGowith">삭제</button>
+            		</a>
+        		
+   			<% }} %>
+   				
+	</div>	
 		<br>
 	<hr color="green">
-	<div style="margin-left:300px; margin-top:30px; height: 100%;">
-		<h2>댓글</h2>
+	<div style=" margin-top:30px; height: 100%;">
+		<h2 style="margin-left:300px;">댓글</h2>
 		<!-- if문 추가 -->
 		<div id="result">
 			<%

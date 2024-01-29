@@ -30,7 +30,7 @@
 		from
 		(select
 		ROW_NUMBER() over(order by bbs_id desc) as num_id,
-		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at, bbs_total_like
+		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at, bbs_total_like, bbs_view
 		from bbs p
 		) p2
 		where p2.num_id BETWEEN ${start} and ${end}
@@ -41,7 +41,7 @@
 		from
 		(select
 		ROW_NUMBER() over(order by bbs_id desc) as num_id,
-		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at, bbs_total_like
+		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at, bbs_total_like, bbs_view
 		from bbs p) p2
 		where p2.bbs_id = #{bbs_id}
 	</select>
@@ -56,7 +56,7 @@
 		(select
 		ROW_NUMBER() over(order by bbs_id desc) as num_id,
 		bbs_id, bbs_cate, bbs_title, bbs_content, bbs_writer, bbs_created_at,
-		bbs_total_like
+		bbs_total_like, bbs_view
 		from bbs p
 		<!-- 수정: 작성자로 검색하는 경우 -->
 		<choose>
