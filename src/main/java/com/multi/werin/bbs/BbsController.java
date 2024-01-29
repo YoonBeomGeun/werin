@@ -126,6 +126,7 @@ public class BbsController{
 			member_id = (String)session.getAttribute("loginId");
 		}
 		likeVO.setMember_id(member_id);
+		int cmt = bbscmtDAO.countCmt(bbsVO.getBbs_id());
 		System.out.println(" likeVO : " + likeVO);
 		BbslikeVO vo2= dao.likeCheck(likeVO);
 		System.out.println("추천 상태"+vo2);
@@ -134,6 +135,7 @@ public class BbsController{
 		model.addAttribute("bag", bag);
 		model.addAttribute("list", list);
 		model.addAttribute("vo2", vo2);
+		model.addAttribute("cmt", cmt);
 	}
 	
 	
@@ -153,6 +155,7 @@ public class BbsController{
 	    System.out.println("getSerchList");
 	    System.out.println("pageVO  "+ pageVO);
 	    List<BbsVO> result = dao.getSearchList(pageVO);
+	    System.out.println("bbsvo 리스트"+result);
 	    System.out.println("result.size()"+ result.size());
 	    
 	    int count=  dao.count2(pageVO); // 전체게시물 수 
