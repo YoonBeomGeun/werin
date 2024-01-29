@@ -171,7 +171,7 @@ $(function() {
         	<hr>
             <p class="written-date"><strong>작성 날짜 :</strong><%=formattedDate %> </p>
             <hr>
-            <p><strong>작성자 </strong> ${sessionScope.nickname}</p>
+            <p><strong>작성자 </strong>${vo.trip_writer}</p>
             <hr>
             
             <table class="info">
