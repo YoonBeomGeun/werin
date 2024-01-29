@@ -30,4 +30,10 @@
 		from bbs_cmt
 		where bbs_id = #{bbs_id}
 	</select>
+	
+	<select id="countcmt" parameterType="int" resultType="int">
+	select count(*)
+		from bbs_cmt
+		where bbs_id = #{bbs_id}
+	</select>
 </mapper>
