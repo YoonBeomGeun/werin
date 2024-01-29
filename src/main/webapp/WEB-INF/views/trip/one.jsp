@@ -209,7 +209,7 @@ $(function() {
         <span class="spTotalLike">${vo.trip_total_like}</span>
         <button class="dislike-btn" onclick ="likeCheck()"> 비추천 </button>
         </c:if>
-        <c:if test = "${empty vo2}"> <!-- ajax에서 호출받은 vo2.likestate 값 다시 받아오는 방법 찾기 -->
+        <c:if test = "${empty vo2}"> 
         <!-- 로그인 O // 추천, 비추천을 아직 누르지 않은 상태라면 -->
          <button class="like-btn"  id = "like"> 추천 </button>
         <span class="spTotalLike">${vo.trip_total_like}</span>
