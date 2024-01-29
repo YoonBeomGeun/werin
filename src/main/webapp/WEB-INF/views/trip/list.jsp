@@ -1,6 +1,8 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -78,7 +80,7 @@ body, .container, h3, table, th, td, a, button {
 </head>
 <body>
 	<div class="container">
-		<h3>여행게시글 목록</h3>
+		<h1>우리들의 제주도 여행기</h1>
 		<table>
 			<thead>
 				<tr>
@@ -95,7 +97,7 @@ body, .container, h3, table, th, td, a, button {
 					<tr>
 						<td><a href="one?trip_id=${post.trip_id}">${post.trip_title}</a></td>
 						<td>${post.trip_writer}</td>
-						<td>${post.trip_writedate}</td>
+						<td> <fmt:formatDate value="${post.trip_writedate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						<td>${post.trip_count}</td>
 						<td>${post.trip_total_like}</td>
 					</tr>
@@ -106,12 +108,11 @@ body, .container, h3, table, th, td, a, button {
     <c:when test="${empty loginId}">
         <!-- 로그인 되어 있지 않은 경우 -->
         <p> 여행기 작성은 로그인이 필요합니다. </p>
-        ${loginId}
-       <!--  <button onclick="window.location.href='../member/login.jsp'">로그인</button> -->
+       <button onclick="window.location.href='../member/login.jsp'">로그인</button>
     </c:when>
     <c:otherwise>
         <!-- 로그인 되어 있는 경우 -->
-        <button onclick="window.location.href='../trip/tripwrite.jsp'">게시글 작성</button>
+        <button onclick="window.location.href='../trip/tripwrite.jsp'">여행기 작성</button>
     </c:otherwise>
 </c:choose>
 

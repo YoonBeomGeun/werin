@@ -33,6 +33,7 @@ public class TripController {
 		System.out.println("tripvo =>" + vo);
 				
 		int result = dao.insert(vo);
+		
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMember_id((String)session.getAttribute("loginId"));
 		memberVO.setVariation(3);
@@ -41,10 +42,10 @@ public class TripController {
 		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
 		session.setAttribute("grade", memberVO.getMember_grade());
 		if (result == 1) {
-			return "forward:/trip/list?page=1"; // 
+			return "forward:/trip/list?page=1";
 		} else {
 
-			return "redirect:insert.jsp"; // 여행글 게시판 목록
+			return "redirect:insert.jsp"; 
 
 		}
 	}
@@ -97,12 +98,9 @@ public class TripController {
 
 	@RequestMapping("trip/list")
 	public void list(TripPageVO pageVO, Model model) {
-		System.out.println();
 		pageVO.setStartEnd();
-		System.out.println(pageVO);
 		List<TripVO> list = dao.list(pageVO);
 		int count = dao.count();
-		System.out.println("전체 게시물의 수 >>" + count);
 		int pages = count / 10;
 		if(count % 10 !=0) {
 			pages = count / 10 + 1;
@@ -114,12 +112,12 @@ public class TripController {
 		model.addAttribute("pages", pages);
 		model.addAttribute("count", count);
 		
-		
+		}
 		/*
 		 * if(count > 0) { return "trip/list?page=1"; }else { return
 		 * "redirect:main.jsp"; // 게시된 글이 없을때 }
 		 */		 
-	}
+	
 	
 	@RequestMapping("trip/one")
 	public String one(int trip_id, HttpSession session,
@@ -174,13 +172,10 @@ public class TripController {
 		TripLikeVO vo2 = dao.likeCheck(likeVO); // vo2가 왜 null인지
 		System.out.println(vo2);
 		//3. null 이면 추천, 비추천을 아직 안눌렀다는 것이므로 
-		// null이 뜨는데, 이게 select like state 한 결과가 없다는 건지?
 		if(vo2 == null) {
 			dao.insertLike(likeVO); // like_state가 0인 채로 db에 insert하고
 			dao.updateLike(vo); // 추천수가 1 증가한다.
 		}
-		 // select like_state from trip_like where member_id = #{member_id} and trip_id = #{trip_id}
-		 
 		 System.out.println("토탈라이크 >> " + vo.getTrip_total_like());
 		 return vo.getTrip_total_like();
 		

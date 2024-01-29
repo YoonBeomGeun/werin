@@ -91,8 +91,8 @@
                 <input type="text" id="title" name="trip_title" placeholder="제목을 입력해주세요" required><br>
             </div>
             <div class="form-group">
-                <label for="writer">작성자</label> <!-- memberVO에 있는 member_nickname을 작성자 value로 고정 -->
-                <input type="text" id="writer" name = "member_id" value = "${loginId}" readonly><br>
+                <label for="writer">닉네임</label> <!-- memberVO에 있는 member_nickname을 작성자 value로 고정 -->
+                <input type="text" id="nickname" name = "member_nickname" value = "${sessionScope.nickname}" readonly><br>
             </div>
             <input type= "hidden" name ="trip_writer" value = "${loginId}">
             <div class="form-group date-group">
