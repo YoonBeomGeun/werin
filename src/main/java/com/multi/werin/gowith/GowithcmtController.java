@@ -23,7 +23,6 @@ public class GowithcmtController {
 	
 	@RequestMapping("gowith/insertCmt")
 	public void insertCmt(GowithcmtVO gowithcmtVO, GowithVO gowithVO, HttpSession session, Model model) {
-		System.out.println(gowithcmtVO);
 		int result = gowithcmtDAO.insert(gowithcmtVO);
 		List<GowithcmtVO> list = gowithcmtDAO.list(gowithVO.getGowith_id());
 		model.addAttribute("result", result);

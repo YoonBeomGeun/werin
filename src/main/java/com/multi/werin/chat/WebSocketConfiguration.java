@@ -14,14 +14,14 @@ public class WebSocketConfiguration extends AbstractWebSocketMessageBrokerConfig
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		config.enableSimpleBroker("/topic");
-		//채팅방만들때 topic/java, topic/python, topic/c++
+		//채팅방 만들 때 topic/app, topic/room
 		config.setApplicationDestinationPrefixes("/app");
-		//웹소켓 프로그램 이름을 무엇으로 할까요?? app
+		//웹소켓 프로그램 이름 설정?? app
 	}
 	
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		//실시간 채팅 요청할 때 주소를 지정 /chat
+		//실시간 채팅 요청할 때 주소 지정 /chat
 		registry.addEndpoint("/chat");//자바 웹소켓 통신 주소 
 		registry.addEndpoint("/chat").withSockJS();//자바 스크립트 웹소켓 통신 주소
 	}
