@@ -38,6 +38,8 @@ public class TripController {
 		memberVO.setVariation(3);
 		pointService.pointvariation(memberVO);
 		pointService.updategrade(memberVO);
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 		if (result == 1) {
 			return "forward:/trip/list?page=1"; // 
 		} else {
@@ -84,7 +86,8 @@ public class TripController {
 		memberVO.setVariation(-3);
 		pointService.pointvariation(memberVO);
 		pointService.updategrade(memberVO);
-		
+		memberVO.setMember_grade(pointService.callgrade(memberVO.getMember_id()));
+		session.setAttribute("grade", memberVO.getMember_grade());
 		if(result == 1) {
 			return "forward:/trip/list?page=1";
 		}else { // 삭제X 일때 돌아갈 페이지

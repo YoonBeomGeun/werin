@@ -59,10 +59,20 @@
 	        <a href="${pageContext.request.contextPath}/landmark/landmarkinfo_index1.jsp">관광지 소개</a>
 	      </li>
 	      <li class="community">
-	        <a href="${pageContext.request.contextPath}/plan/plan.jsp">일정 만들기</a>
+	        <a href="">여행 일정</a>
 	        <ul class="menu">
-	          <li><a href="${pageContext.request.contextPath}/plan/planlist">나의 일정</a></li>
-	          <li><a href="">일정 둘러보기</a></li>
+	        	<c:choose>
+					<c:when test="${empty sessionScope.loginId}">
+						<!-- 로그인 되어 있지 않은 경우 -->
+						<li><a onclick="alert('로그인이 필요합니다.'); window.location.href='${pageContext.request.contextPath}/member/login.jsp'" style="cursor: pointer;">일정 만들기</a></li>
+	          			<li><a href="${pageContext.request.contextPath}/plan/planalllist">일정 둘러보기</a></li>
+					</c:when>
+					<c:otherwise>
+						<!-- 로그인 되어 있는 경우 -->
+						<li><a href="${pageContext.request.contextPath}/plan/plan.jsp">일정 만들기</a></li>
+	          			<li><a href="${pageContext.request.contextPath}/plan/planalllist">일정 둘러보기</a></li>
+					</c:otherwise>
+				</c:choose>
 	        </ul>
 	      </li>
 	      <li>
@@ -75,7 +85,7 @@
 	        <a href="${pageContext.request.contextPath}/bbs/bbs?page=1">자유게시판</a>
 	      </li>
 	      <li>
-	        <a href="">공지 / 건의</a>
+	        <a href="${pageContext.request.contextPath}/plan/planlist">나의 일정</a>
 	      </li>
 	    </ul>
 	</header>
