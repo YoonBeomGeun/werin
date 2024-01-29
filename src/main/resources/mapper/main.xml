@@ -47,17 +47,17 @@
 		c2.row_no between ${start} and ${end}
 	</select> -->
 
-	<select id="morelandmark" parameterType="searchVO"
-		resultType="SearchLandmarkVO">
+	<select id="morelandmark" parameterType="searchVO" resultType="SearchLandmarkVO">
 		select l.landmarkinfo_id, l.landmarkinfo_name, l2.overview
-		from(
-			select landmarkinfo_id, landmarkinfo_name,
-			row_number() over(order by landmarkinfo_id) as row_no
-			from landmarkinfo
-			where landmarkinfo_name like concat('%',#{searching},'%')
-		)l
-		inner join landmarkinfo2 l2 on l.landmarkinfo_name=l2.title
-		where l.row_no between ${start} and ${end}
+		from (
+			select l1.landmarkinfo_id, l1.landmarkinfo_name, l2.title, 
+			row_number() over(order by l1.landmarkinfo_id) as row_no
+			from landmarkinfo l1 left join landmarkinfo2 l2 on l1.landmarkinfo_name = l2.title
+			where l1.landmarkinfo_name like CONCAT('%',#{searching},'%')
+			or l2.overview like CONCAT('%',#{searching},'%')
+		)as l
+		inner join landmarkinfo2 as l2 on l.landmarkinfo_name = l2.title
+		where l.row_no between ${start} and ${end};
 	</select>
 
   	<select id="moretrip" parameterType="searchVO" resultType="SearchTripVO">
