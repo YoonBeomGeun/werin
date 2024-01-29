@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.multi.werin.chat.RoomDAO;
 import com.multi.werin.member.MemberVO;
 import com.multi.werin.member.PointService;
+import com.multi.werin.plan.PlanDAO;
+import com.multi.werin.plan.PlanVO;
 
 @Controller
 public class GowithController {
@@ -26,6 +28,9 @@ public class GowithController {
 	
 	@Autowired
 	RoomDAO roomDAO;
+	
+	@Autowired
+	PlanDAO planDAO;
 	
 	@Autowired
 	PointService pointService;
@@ -87,10 +92,12 @@ public class GowithController {
 		int cmt = gowithcmtDAO.countCmt(gowithVO.getGowith_id());
 		GowithVO vo = dao.one(gowithVO);
 		List<GowithcmtVO> list = gowithcmtDAO.list(gowithVO.getGowith_id());
+		List<PlanVO> list2 = planDAO.select(vo.getGowith_writer());
 		model.addAttribute("vo", vo);
 		model.addAttribute("room", room);
 		model.addAttribute("cmt", cmt);
 		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
 	}
 	
 	@RequestMapping("gowith/list1")
@@ -117,34 +124,12 @@ public class GowithController {
 		model.addAttribute("list", list);
 	}
 	
-//	@RequestMapping("gowith/updateLike")
-//	@ResponseBody
-//	public int updateLike(int gowith_id, String member_id, GowithLikeVO gowithLikeVO) {
-//		int k = dao.totalLike(gowith_id);
-//		if(dao.stateIn(gowithLikeVO)==1) {
-//			if(dao.checkState(gowithLikeVO)==2) {
-//				k=-1;
-//				// alert
-//			} else {
-//				dao.changeState1(gowithLikeVO);
-//				System.out.println(dao.checkState(gowithLikeVO));
-//				k = dao.checkState(gowithLikeVO) == 1 ? dao.updateLike1(gowith_id) : dao.updateLike(gowith_id) - 1;//전체 +1 : //-1
-//				if(dao.checkState(gowithLikeVO)==0) {k = 0;}
-//			}
-//		} else {
-//			dao.insertLike(gowithLikeVO);
-//			dao.changeState1(gowithLikeVO);
-//			k = dao.totalLike(gowith_id) + 1;
-//		}
-//		return k;
-//	}
-	
 	@RequestMapping("gowith/updateLike")
 	@ResponseBody
 	public int updateLike(int gowith_id, String member_id, GowithLikeVO gowithLikeVO) {
 		int k1 = dao.totalLike(gowith_id);
 		if(dao.stateIn(gowithLikeVO)==1) {
-			if(dao.checkState(gowithLikeVO) == 1) {
+			if(dao.checkState(gowithLikeVO) == 0) {
 				dao.deleteLike(gowithLikeVO);
 				dao.updateLike2(gowith_id);
 				k1 = dao.totalLike(gowith_id);
@@ -164,7 +149,7 @@ public class GowithController {
 	public int updateDislike(int gowith_id, String member_id, GowithLikeVO gowithLikeVO) {
 		int k2 = dao.totalDislike(gowith_id);
 		if(dao.stateIn(gowithLikeVO)==1) {
-			if(dao.checkState(gowithLikeVO) == 2) {
+			if(dao.checkState(gowithLikeVO) == 1) {
 				dao.deleteLike(gowithLikeVO);
 				dao.updateDislike2(gowith_id);
 				k2 = dao.totalDislike(gowith_id);

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +12,7 @@
 		align-items: center;
 		margin: 0 auto;
 		width: 50%;
-		height:700px;
+		height:800px;
         padding: 20px;
         color:#285D45;
         box-shadow: 0 0 10px #fbb012;
@@ -21,10 +21,10 @@
 	input {
 		width: 100%;
 		height: 30px;
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
 	}
 	
 	.btn {
@@ -46,8 +46,9 @@
 			<h2>제목 입력</h2>
 			<input type="text" name="gowith_title" placeholder="제목을 입력해 주세요.">
 			<h2>내용</h2>
-			<textarea rows="15" cols="100" name="gowith_content" style="resize: none;"></textarea><br>
-			<input type="file" name="gowith_img" style="height:40px;"><br><br>
+			<textarea rows="15" cols="100" name="gowith_content" style="resize: none; font-size: 16px; padding: 10px;" placeholder="내용을 입력해 주세요."></textarea><br>
+			<h3>목록 배경사진</h3>
+			<input type="file" name="gowith_img" style="height:40px; margin-left: -10px; margin-top: -10px;"><br><br>
 			<button type="submit" class="btn">등록하기</button>
 		</form>
 	</div>
