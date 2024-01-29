@@ -17,7 +17,7 @@
     String roomName = (String)request.getAttribute("room_name");
     String roomHost = (String)request.getAttribute("room_host");
     int result = (int)request.getAttribute("result");
-    //System.out.print(result==1);
+    System.out.println("roomName============11" + roomName);
 %>
 <jsp:include page="/header.jsp"></jsp:include>
 	<h2>방 생성하기</h2>
@@ -35,7 +35,6 @@
 	    } else {
 	        if (${result}) {
 	            // 기존 채팅방 불러오기
-	            // window.location.href = "insertRoom";
 	            document.getElementById("insertRoomForm").submit();
 	        } else {
 	            alert("채팅방이 새로 개설되었습니다.");
