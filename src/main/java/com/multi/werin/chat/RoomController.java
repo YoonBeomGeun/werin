@@ -36,6 +36,7 @@ public class RoomController {
 	
 	@RequestMapping("gowith/insertRoom")
 	public void insertRoom(RoomVO roomVO, Model model) {
+		System.out.println("room_name=======2" + roomVO.getRoom_name());
 		List<MessageVO> list = new ArrayList<>();
 		String host = "";
 		if(roomDAO.countPick(roomVO)==1) {

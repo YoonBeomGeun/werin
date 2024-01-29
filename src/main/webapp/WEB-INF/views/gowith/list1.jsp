@@ -81,8 +81,6 @@
 			})
 		})
 	})
-	
-	
 </script>
 </head>
 
@@ -96,17 +94,18 @@
 		<button>조회순</button>
 	</div> -->
 	<div style="margin-bottom:35px;">
-		<% 
-			if(session.getAttribute("loginId") != null){	
-		%>
-			<a href="insertGowith.jsp"><button style="position: absolute; right: 350px;margin:auto;background:#3a8966; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
-		<%
-			} else {
-		%>
-			<a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')"><button style="position: absolute; right: 350px;margin:auto;background:#3a8966; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button></a>
-		<%
-			}
-		%>
+		<c:choose>
+		    <c:when test="${not empty sessionScope.loginId}">
+		        <a href="insertGowith.jsp">
+		            <button style="position: absolute; right: 350px; margin:auto; background:#3a8966; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button>
+		        </a>
+		    </c:when>
+		    <c:otherwise>
+		        <a href="../member/login.jsp" onclick="alert('로그인이 필요합니다.')">
+		            <button style="position: absolute; right: 350px; margin:auto; background:#3a8966; text-align:center; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">글쓰기</button>
+		        </a>
+		    </c:otherwise>
+		</c:choose>
 	</div>
 	
 	<br><br>
@@ -152,8 +151,9 @@
 		int pages = (int)request.getAttribute("pages");
 		if (pages == 0) {
 		%>
-			등록된 게시글이 없습니다.
-			<!-- 꾸며주기 -->
+			<div class="content">
+				등록된 게시글이 없습니다.
+			</div>
 		<%	
 		} else {
 			for (int p = 1; p <= pages; p++) {

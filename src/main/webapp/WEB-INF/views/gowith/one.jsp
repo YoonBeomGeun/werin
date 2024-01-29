@@ -1,3 +1,4 @@
+<%@page import="com.multi.werin.plan.PlanVO"%>
 <%@page import="org.apache.ibatis.reflection.SystemMetaObject"%>
 <%@page import="org.springframework.web.context.annotation.SessionScope"%>
 <%@page import="java.util.List"%>
@@ -11,7 +12,9 @@
 	List<GowithcmtVO> list = (List<GowithcmtVO>)request.getAttribute("list");
 	int room = (int)request.getAttribute("room");
 	int cmt = (int)request.getAttribute("cmt");
+	List<PlanVO> list2 = (List<PlanVO>)request.getAttribute("list2");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +31,78 @@
 		color: #007700;
 	}
 	
-	.schedule {
-		background: lightgray;
+	.editGowith {
+		position: absolute;
+		right: 480px;
+		margin:auto;
+		background:#3a8966;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
+	
+	.deleteGowith {
+		position: absolute;
+		right: 400px;
+		margin:auto;
+		background:#FF5555;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
+	
+	.plan {
+		background: #bfe3d3;
+		border-radius:15px;
+		padding:15px;
 		width: 500px;
-		height: 300px;
+		height: relative;
+		max-height: 300px;
 		display: flex;
+		margin: 0 auto;
+		overflow-y: auto;
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	.plan a {
+		text-decoration: none;
+		color: inherit;
+	}
+	
+	.schedule {
+		padding: 15px;
+		background: white;
+		border-radius: 15px;
+		border: 2px solid #285D45;
+		width: 450px;
+		height: relative;
+		font-size: 15px;
 		margin: 0 auto;
 	}
 	
+	.like_btn {
+		background:#3a8966;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
+	
+	.dislike_btn {
+		margin:auto;
+		background:#FF5555;
+		color:white;
+		width:75px;
+		height:50px;
+		border-radius:10px;
+		font-size: 17px;
+	}
 	
 	.write {
 	    display: flex;
@@ -229,7 +296,7 @@
 		})
 		
 		<!-- 게시글 추천수 - 1 -->
-		$(".dislike-btn").click(function() {
+		$(".dislike_btn").click(function() {
 			$.ajax({
 				url: "updateDislike",
 				data: {
@@ -290,30 +357,49 @@
 			<td>&nbsp;<%=cmt%></td>
 		</tr>
 	</table>
-	<!-- <h3 style="text-align:center;">여행 일정</h3>
-	<div class="schedule">
-		여행 일정 들어오기
-	</div> -->
+	
+	<h2 style="text-align:center;">여행 일정</h2>
+	<div class="plan">
+		 <c:if test="${vo.getGowith_writer().equals(sessionScope.loginId)}">
+		    <button onclick="window.location.href='${pageContext.request.contextPath}/plan/plan.jsp'" style="margin: 0 auto;background:#3a8966; color:white; width:90px; height:50px; border-radius:5px; font-size: 13px;">일정 추가하기</button>
+		</c:if>
+		<c:choose>
+		    <c:when test="${not empty list2}">
+		        <c:forEach items="${list2}" var="vo3" varStatus="loop">
+		            <a href="${pageContext.request.contextPath}/plan/plan_detail?plan_no=${vo3.plan_no}">
+		                <div class="schedule" id="schedule_${vo3.plan_no}">
+		                    <span style="font-weight: bold;">${vo3.plan_writer} 님의 여행일정</span>&nbsp;-&nbsp;${vo3.plan_with}<br>
+		                    <hr>
+		                    <span style="font-weight: bold; font-size: 18px; font-family: 'YourChosenFont', sans-serif;">${vo3.plan_title}</span><br>
+		                    <span style="color:#285D45;" id="time">${vo3.plan_start_date} 부터 ${vo3.plan_end_date} 까지</span>
+		                </div>
+		            </a>
+		        </c:forEach>
+		    </c:when>
+		    <c:otherwise>
+		        <span style="margin: 0 auto; font-weight: bold;">아직 등록된 일정이 없습니다.</span>
+		    </c:otherwise>
+		</c:choose>
+	</div>
 	
 	<c:choose>
 		<c:when test="${vo.gowith_writer eq sessionScope.loginId}">
 			<h2 style="margin-left:450px; margin-top:30px;">여행 소개</h2>
 			<p style="margin-left:450px; width: 1150px;"><%= vo.getGowith_content()%></p><br>
 			<div class="edit" style="text-align: center;margin-bottom: 20px;">
-				<button class="like_btn" style="background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
-				<button class="dislike-btn" style="margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
+				<button class="like_btn">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
+				<button class="dislike_btn">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
 				<button id="b5" style="position: absolute; right: 560px;margin:auto;background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
-				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button style="position: absolute; right: 480px;margin:auto;background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">수정</button></a>
-				<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button style="position: absolute; right: 400px;margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">삭제</button></a>
+				<a href="update?gowith_id=<%=vo.getGowith_id()%>"><button class="editGowith">수정</button></a>
+				<a href="deleteConfirmed?gowith_id=<%=vo.getGowith_id()%>"><button class="deleteGowith">삭제</button></a>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<h2 style="margin-left:450px; margin-top:30px;">여행 소개</h2>
 			<p style="margin-left:450px; width: 1150px;"><%= vo.getGowith_content()%></p><br>
 			<div class="edit" style="text-align: center;margin-bottom: 20px;">
-				<button class="like_btn" style="background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
-				<button class="dislike-btn" style="margin:auto;background:#FF5555; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
-				<%-- <a href="insertChat?gowith_id=<%=vo.getGowith_id()%>&room_name=<%=vo.getGowith_title()%>&room_member=${sessionScope.loginId}"><button id="b5" style="background:#33CC99;">채팅하기</button></a> --%>
+				<button class="like_btn">추천<br><span id="likeBtn"><%=vo.getGowith_total_like() %></span></button>
+				<button class="dislike_btn">비추천<br><span id="dislikeBtn"><%=vo.getGowith_total_dislike() %></span></button>
 				<button id="b5" style="position: absolute; right: 400px; margin:auto;background:#3a8966; color:white; width:75px; height:50px; border-radius:10px; font-size: 17px;">채팅하기</button>
 			</div>
 		</c:otherwise>
