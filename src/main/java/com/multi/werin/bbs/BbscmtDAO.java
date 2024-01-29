@@ -33,5 +33,7 @@ public class BbscmtDAO {
 	public List<BbscmtVO> list(int bbs_id) {
 		return my.selectList("bbscmt.list", bbs_id);
 	}
-	
+	public int countCmt(int bbs_id) {
+		return my.selectOne("bbscmt.countcmt", bbs_id);
+	}
 }
