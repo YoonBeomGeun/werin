@@ -35,7 +35,6 @@ public class PlanController {
 	ScheduleDAO scheduleDao;
 
 	@RequestMapping(value = "plan/addPlan", method = RequestMethod.POST)
-	@ResponseBody
 	public String addPlan(PlanVO vo, String jsonEle, HttpSession session, Model model) {
 
 		System.out.println("jsonEle : " + jsonEle);
@@ -104,9 +103,9 @@ public class PlanController {
 			}
 		}
 		if (result == 1) {
-			return "redirect:/plan/planlist";
+			return "redirect:/main/main.jsp";
 		} else {
-			return "redirect:/member/insert";
+			return "plan/planlist";
 		}
 	}
 
