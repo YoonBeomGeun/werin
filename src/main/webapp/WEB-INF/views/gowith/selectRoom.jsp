@@ -53,6 +53,7 @@
 			})
 			var chatBox = document.getElementById("result");
 	        chatBox.scrollTop = chatBox.scrollHeight;
+	        location.reload()
 		})
 	}
     
