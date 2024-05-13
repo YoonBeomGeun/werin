@@ -2,7 +2,6 @@ package com.multi.werin.gowith;
 
 import java.util.List;
 
-
 import javax.security.auth.callback.ConfirmationCallback;
 import javax.servlet.http.HttpSession;
 

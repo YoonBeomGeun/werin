@@ -12,15 +12,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 	.kan {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin: 0 auto;
-		width: 50%;
-		height:800px;
+		margin-left: 30%;
         padding: 20px;
-        color:#285D45;
-        box-shadow: 0 0 10px #fbb012;
 	}
 	
 	.in {
@@ -50,7 +43,7 @@
 		width: 70px;
 		height: 50px;
 		color:white;
-		background: rgb(251, 176, 18);
+		background:#3a8966;
 	}
 	
 </style>
@@ -81,9 +74,6 @@
 			<textarea rows="15" cols="100" name="gowith_content"><%=vo.getGowith_content()%></textarea><br><br>
 			<button type="submit" class="btn">수정하기</button>
 		</form>
-	</div>
-	<div class="bottom" style="height: 50px;">
-		
 	</div>
 	
 </body>

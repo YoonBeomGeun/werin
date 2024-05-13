@@ -268,6 +268,8 @@
                 	/* 채팅방 팝업화면 넣기 */
                 	if(response) {
 						if(confirm("채팅을 시작하시겠습니까??")) {
+							// 기존 채팅방 불러오기
+							/* window.location.href = "insertRoom"; */
 							window.location.href = "checkRoom?gowith_id=" + <%=vo.getGowith_id()%> + "&room_name=" + "<%=vo.getGowith_title()%>" + "&room_host=" + "<%=vo.getGowith_writer()%>" + "&room_member=" + "${sessionScope.loginId}";
 						}
 					}

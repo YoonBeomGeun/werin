@@ -170,14 +170,8 @@
 				
 				console.log(JSON.parse(messageOutput.body))
 				json = JSON.parse(messageOutput.body)
-				if("<%=vo.getRoom_member()%>"==="${sessionScope.loginId}") {
-					$('#response').append(	"<div class='sendTalk'><span style='font-weight: bold;'>" + json.message_sender + "</span>&nbsp;" + json.message_sent_at + "<br><br>" + /* 시간 글자크기 줄이기 */
+				$('#response').append(	"<div class='sendTalk'><span style='font-weight: bold;'>" + json.message_sender + "</span>&nbsp;" + json.message_sent_at + "<br><br>" + /* 시간 글자크기 줄이기 */
 										json.message_content + "</div><br>")
-				} else {
-					$('#response').append(	"<div class='receiveTalk'><span style='font-weight: bold;'>" + json.message_receiver + "</span>&nbsp;" + json.message_sent_at + "<br><br>" + /* 시간 글자크기 줄이기 */
-							json.message_content + "</div><br>")
-				}
-				
 			})
 		})
 		
