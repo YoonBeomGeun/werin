@@ -58,6 +58,26 @@
 ### ERD
 
 
+### WBS
+
+<img src="https://github.com/YoonBeomGeun/werin/assets/145637270/16cea6c8-0cfd-4e5d-b3c7-ba66d282c228" alt="WBS" width="800" height="250">
+
+
+### 요구사항 정의서
+
+[요구사항정의서](https://github.com/user-attachments/files/15815105/7._.xlsx)
+
+
+### 테이블 정의서
+
+[테이블정의서](https://github.com/user-attachments/files/15815114/7._.-18.xlsx)
+
+
+### 프로젝트 정의서
+
+[프로젝트정의서](https://github.com/user-attachments/files/15815118/7._.xlsx)
+
+
 ### 프로젝트 설명
 
 [프로젝트 상세 설명](https://github.com/user-attachments/files/15814969/default.pptx)
