@@ -49,6 +49,16 @@
 - **회원 레벨링 시스템**
     - 게시물 및 댓글 등록 시 사용자에게 포인트를 부여하는 레벨링 로직 구현
 
+
+### 아키텍처
+
+<img src="https://github.com/YoonBeomGeun/werin/assets/145637270/33c1deaa-bd94-41c0-9f6b-95f60a867499" alt="werin" width="800" height="500">
+
+
 ### ERD
 
+
+### 프로젝트 설명
+
+[프로젝트 상세 설명](https://github.com/user-attachments/files/15814969/default.pptx)
 
