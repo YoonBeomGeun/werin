@@ -57,6 +57,7 @@
 
 ### ERD
 
+<img src="https://github.com/YoonBeomGeun/werin/assets/145637270/79fdea16-314d-4e2d-9ea8-6bc205e224c3" alt="ERD" width="800" height="500">
 
 
 ### WBS
